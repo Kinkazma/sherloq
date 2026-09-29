@@ -76,16 +76,37 @@ The screenshots below come from [Guido Bartoli’s original repository](https://
 
 These inherited captures illustrate the original interface, not this fork's complete feature set. They are retained from [Guido Bartoli's project](https://github.com/GuidoBartoli/sherloq#screenshots).
 
-| Area | Original capture |
-| --- | --- |
-| General | [Original image, hex editor, digest and similarity search](screenshots/0_general.png) |
-| Metadata | [EXIF and header structure](screenshots/1_metadata.png) |
-| Inspection | [Magnifier, histogram and comparison](screenshots/2_inspection.png) |
-| Detail | [Gradient, echo, wavelet and frequency tools](screenshots/3_detail.png) |
-| Colors | [Plots, conversion, PCA and statistics](screenshots/4_colors.png) |
-| Noise | [Signal, min/max, bit planes and wavelet tools](screenshots/5_noise.png) |
-| JPEG | [Quality estimation and ELA](screenshots/6_jpeg.png) |
-| Tampering | [Contrast, copy-move, splicing and median filtering](screenshots/7_tampering.png) |
+### General
+
+![Original image, hex editor, digest and similarity search](screenshots/0_general.png)
+
+### Metadata
+
+![EXIF and header structure](screenshots/1_metadata.png)
+
+### Inspection
+
+![Magnifier, histogram and comparison](screenshots/2_inspection.png)
+
+### Detail
+
+![Gradient, echo, wavelet and frequency tools](screenshots/3_detail.png)
+
+### Colors
+
+![Plots, conversion, PCA and statistics](screenshots/4_colors.png)
+
+### Noise
+
+![Signal, min/max, bit planes and wavelet tools](screenshots/5_noise.png)
+
+### JPEG
+
+![Quality estimation and ELA](screenshots/6_jpeg.png)
+
+### Tampering
+
+![Contrast, copy-move, splicing and median filtering](screenshots/7_tampering.png)
 
 </details>
 
