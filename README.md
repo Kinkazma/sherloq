@@ -126,6 +126,172 @@ Bit 5 of the luminance channel, alongside the original texture.
 </details>
 
 <details>
+<summary>My examples — Clone searches</summary>
+
+Actual SHERLOQ results. [Input images, settings and reproduction](examples/advanced/README.md).
+
+### Copy-Move Forgery 2
+
+PatchMatch Zernike groups matching regions on the photograph with a duplicated spoon.
+
+![Copy-Move Forgery 2 — actual SHERLOQ output](screenshots/fork/advanced/cloning2.png)
+
+### Automatic Clone Search
+
+The combined search runs its Extended and Forgeryscope branches. Here, the Extended branch supplies the matches; Forgeryscope returns no geometrically supported pair.
+
+![Automatic Clone Search — actual SHERLOQ output](screenshots/fork/advanced/automatic_clones.png)
+
+### Copy-Move Forgery 2 on my edited texture
+
+The TIFF is analysed without the coloured annotations from my earlier export. Matching areas are displayed as coloured groups.
+
+![Copy-Move Forgery 2 on my edited texture — actual SHERLOQ output](screenshots/fork/advanced/cloning2-texture.png)
+
+### Automatic Clone Search on my edited texture
+
+A second view of the same edited texture, using the combined workflow.
+
+![Automatic Clone Search on my edited texture — actual SHERLOQ output](screenshots/fork/advanced/automatic_clones-texture.png)
+
+</details>
+
+<details>
+<summary>My examples — ELA, layers and multiple compression</summary>
+
+Actual SHERLOQ results. [Input images, settings and reproduction](examples/advanced/README.md).
+
+### Error Level Analysis
+
+Classic recompression differences on the edited photograph: quality 75, scale 50%, contrast 20%.
+
+![Error Level Analysis — actual SHERLOQ output](screenshots/fork/advanced/ela.png)
+
+### ELA layers
+
+Energy and cell layers displayed over the photograph. Several regions have unusual profiles, including regions outside the duplicated patch.
+
+![ELA layers — actual SHERLOQ output](screenshots/fork/advanced/ela-layers.png)
+
+### ELA on my edited texture
+
+Classic ELA on the unannotated texture decoded from my TIFF.
+
+![ELA on my edited texture — actual SHERLOQ output](screenshots/fork/advanced/ela-texture.png)
+
+### ELA layers on my edited texture
+
+The layered view makes local differences easier to compare with the edited texture.
+
+![ELA layers on my edited texture — actual SHERLOQ output](screenshots/fork/advanced/ela-texture-layers.png)
+
+### Multiple Compression — recompression curve
+
+The input was saved at JPEG quality 65, decoded, then saved at quality 95. The curve shows errors across recompression qualities.
+
+![Multiple Compression — recompression curve — actual SHERLOQ output](screenshots/fork/advanced/multiple.png)
+
+### Multiple Compression — double-JPEG analysis
+
+The separate detector finds compatible traces in 8 of 9 frequencies on this aligned double-compression example.
+
+![Multiple Compression — double-JPEG analysis — actual SHERLOQ output](screenshots/fork/advanced/multiple-double-jpeg.png)
+
+</details>
+
+<details>
+<summary>My examples — Illuminant, pixels, noise, JPEG grids and CFA</summary>
+
+Actual SHERLOQ results. [Input images, settings and reproduction](examples/advanced/README.md).
+
+### Illuminant Map
+
+Shades of Gray, p=6, with 32-pixel cells on the original photograph. This estimates local illuminant colour; coloured surfaces influence the result.
+
+![Illuminant Map — actual SHERLOQ output](screenshots/fork/advanced/illuminant.png)
+
+### Dead / Hot Pixels — overlay
+
+I inserted ten isolated white or black pixels into the original photograph. The tool returns 28 candidates, including other isolated image details.
+
+![Dead / Hot Pixels — overlay — actual SHERLOQ output](screenshots/fork/advanced/defect_pixels.png)
+
+### Dead / Hot Pixels — candidate mask
+
+The same candidates without the photograph underneath: red for hot, blue for dead pixels.
+
+![Dead / Hot Pixels — candidate mask — actual SHERLOQ output](screenshots/fork/advanced/defect_pixels-mask.png)
+
+### Noisesniffer
+
+On this example the method highlights areas around the cup and plate, rather than clearly isolating the copied spoon. I include that result to show how the methods differ.
+
+![Noisesniffer — actual SHERLOQ output](screenshots/fork/advanced/noisesniffer.png)
+
+### ZERO JPEG Grids — regions
+
+The displaced copy carries a different JPEG grid alignment. ZERO highlights one region around the duplicated spoon.
+
+![ZERO JPEG Grids — regions — actual SHERLOQ output](screenshots/fork/advanced/zero.png)
+
+### ZERO JPEG Grids — grid votes
+
+The grid-vote view complements the region overlay on the same input.
+
+![ZERO JPEG Grids — grid votes — actual SHERLOQ output](screenshots/fork/advanced/zero-grids.png)
+
+### Adaptive CFA
+
+The CFA inconsistency map on the edited photograph. This broad response does not cleanly isolate the copied spoon.
+
+![Adaptive CFA — actual SHERLOQ output](screenshots/fork/advanced/adaptive_cfa.png)
+
+</details>
+
+<details>
+<summary>My examples — TruFor, CAT-Net, SAFIRE, FOCAL and AdaIFL</summary>
+
+Actual SHERLOQ results. [Input images, settings and reproduction](examples/advanced/README.md).
+
+### TruFor — anomaly map
+
+The anomaly map highlights the copied patch at the lower right; the displayed image score is 0.998 for this run.
+
+![TruFor — anomaly map — actual SHERLOQ output](screenshots/fork/advanced/trufor.png)
+
+### TruFor — confidence map
+
+The separate confidence view for the same inference. White indicates higher model confidence, not an unaltered region.
+
+![TruFor — confidence map — actual SHERLOQ output](screenshots/fork/advanced/trufor-confidence.png)
+
+### CAT-Net v2
+
+The heatmap responds to the copied patch and also to some details in the original scene.
+
+![CAT-Net v2 — actual SHERLOQ output](screenshots/fork/advanced/catnet.png)
+
+### SAFIRE
+
+Three source-consistency clusters are displayed with different colours. One small cluster covers the copied spoon. Cluster colours are group labels.
+
+![SAFIRE — actual SHERLOQ output](screenshots/fork/advanced/safire.png)
+
+### FOCAL
+
+The selected cluster highlights a region around the copied patch.
+
+![FOCAL — actual SHERLOQ output](screenshots/fork/advanced/focal.png)
+
+### AdaIFL
+
+The resulting heatmap highlights the copied area on the right.
+
+![AdaIFL — actual SHERLOQ output](screenshots/fork/advanced/adaifl.png)
+
+</details>
+
+<details>
 <summary>Original SHERLOQ screenshots — credited to the upstream project</summary>
 
 These inherited captures illustrate the original interface, not this fork's complete feature set. They are retained from [Guido Bartoli's project](https://github.com/GuidoBartoli/sherloq#screenshots).

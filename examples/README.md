@@ -30,6 +30,13 @@ dependencies and run `python examples/render_examples.py` from the repository
 root. The script uses the repository's actual tool code and writes PNGs into
 `screenshots/fork/`. Font rendering and timing labels can vary by machine.
 
+## Fourteen additional tools
+
+The [extended examples](advanced/README.md) cover clone searches, ELA and its layers,
+multiple compression, illuminant colour, isolated pixels, Noisesniffer, ZERO,
+Adaptive CFA, TruFor, CAT-Net, SAFIRE, FOCAL and AdaIFL. They include the
+input images, recorded settings and a script that runs the actual tools.
+
 ## Microscopy source and credits
 
 `bbbc039-00809.png` is the unchanged `srcDataset/00809.png` file from the

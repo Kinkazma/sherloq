@@ -1,0 +1,1726 @@
+[
+  {
+    "tool": "adaifl",
+    "title": "AdaIFL",
+    "input": "coffee-copy.png",
+    "input_sha256": "7c18855f471da252c50aba5bdbc24926edde852e231bbebb9e1f22e42cc43456",
+    "module_sha256": "3a445555e811ddae7754f2ed9ab5909bd0ba3e2c8c8d9a3fdede3f7542195b12",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "AdaIFL v0"
+      },
+      {
+        "type": "choice",
+        "value": "Superposition"
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": true
+      }
+    ],
+    "labels": [
+      "Mod\u00e8le",
+      "Analyse termin\u00e9e \u2014 4.12 s.",
+      "Carte : noir = 0 \u00b7 jaune = 1",
+      "Zoom:",
+      "192.79%",
+      "[400x600 px]"
+    ],
+    "screenshot": "adaifl.png",
+    "result_metadata": {
+      "image_shape": [
+        400,
+        600
+      ],
+      "analysis_shape": [
+        1024,
+        1024
+      ],
+      "native_shape": [
+        64,
+        64
+      ],
+      "seed": 1701,
+      "threshold": 0.5,
+      "method": "adaifl",
+      "params": {
+        "variant": "AdaIFL v0"
+      },
+      "device": "cpu",
+      "model_reused": false,
+      "weights": {
+        "AdaIFL_v0.pth": "da0a1e24a254ab4ce908e4fde8b00fb66c852796625cf2a85d4154cd39ee7b56"
+      },
+      "model_seconds": 1.0565162080456503,
+      "inference_seconds": 3.0649292079615407,
+      "seconds": 4.12144558300497,
+      "image_sha256": "92d0bf9296df4866b9183de44024adfb2d2625e9cb9266827882e8adc5443166",
+      "arrays": {
+        "map": {
+          "shape": [
+            64,
+            64
+          ],
+          "dtype": "float32"
+        },
+        "mask": {
+          "shape": [
+            64,
+            64
+          ],
+          "dtype": "uint8"
+        }
+      }
+    }
+  },
+  {
+    "tool": "adaptive_cfa",
+    "title": "Adaptive CFA",
+    "input": "coffee-copy.png",
+    "input_sha256": "7c18855f471da252c50aba5bdbc24926edde852e231bbebb9e1f22e42cc43456",
+    "module_sha256": "a79c634c19b837838cda271824d7e8bd8f0ab000d38b5b5e3b993abfc0eb0c89",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Original"
+      },
+      {
+        "type": "choice",
+        "value": "Superposition"
+      },
+      {
+        "type": "number",
+        "value": 32
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": true
+      }
+    ],
+    "labels": [
+      "Mod\u00e8le",
+      "Bloc",
+      "Analyse termin\u00e9e \u2014 0.39 s. Les bords non analys\u00e9s conservent l\u2019image originale.",
+      "Carte : noir = 0 \u00b7 jaune = 1   |   Grilles : violet 00 \u00b7 orange 01 \u00b7 bleu 10 \u00b7 vert 11",
+      "Zoom:",
+      "192.55%",
+      "[400x600 px]"
+    ],
+    "screenshot": "adaptive_cfa.png",
+    "result_metadata": {
+      "best_grid": 0,
+      "block": 32,
+      "origin": [
+        4,
+        4
+      ],
+      "valid_shape": [
+        384,
+        576
+      ],
+      "image_shape": [
+        400,
+        600
+      ],
+      "tile": 0,
+      "method": "adaptive_cfa",
+      "params": {
+        "variant": "Original",
+        "block": 32
+      },
+      "device": "cpu",
+      "model_reused": false,
+      "weights": {
+        "pretrained.pt": "992dade71b8682a617f63e5a92e46292cd34e391f8b46dd050ce4c0f86e7745d"
+      },
+      "model_seconds": 0.05224162503145635,
+      "inference_seconds": 0.33900162496138364,
+      "seconds": 0.39124333299696445,
+      "image_sha256": "92d0bf9296df4866b9183de44024adfb2d2625e9cb9266827882e8adc5443166",
+      "arrays": {
+        "probabilities": {
+          "shape": [
+            4,
+            4,
+            12,
+            18
+          ],
+          "dtype": "float32"
+        },
+        "grids": {
+          "shape": [
+            4,
+            12,
+            18
+          ],
+          "dtype": "float32"
+        },
+        "local_grid": {
+          "shape": [
+            12,
+            18
+          ],
+          "dtype": "uint8"
+        },
+        "suspicion": {
+          "shape": [
+            12,
+            18
+          ],
+          "dtype": "float32"
+        }
+      }
+    }
+  },
+  {
+    "tool": "automatic_clones",
+    "title": "Automatic Clone Search",
+    "input": "texture-edited.png",
+    "input_sha256": "8553df70ebaa7c5dfc2757fc5fa01ef2b2b7d2b8e521489f237f65bc596a664f",
+    "module_sha256": "3094e48aebcdb79296fea4c09059c62aee680ce96aa460047c1e8d4bf76c719e",
+    "controls": [
+      {
+        "type": "number",
+        "value": 10.0
+      },
+      {
+        "type": "number",
+        "value": 1774.0
+      },
+      {
+        "type": "number",
+        "value": 80.0
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Search zones",
+        "value": true
+      }
+    ],
+    "labels": [
+      "Displayed length \u2014 minimum",
+      "maximum",
+      "Exclude overlap \u2265",
+      "Zoom:",
+      "63.72%",
+      "[1254x1254 px]",
+      "Extended: PatchMatch Zernike + PatchMatch SIFT + Mirror: Complete | Forgeryscope microscopy: Complete | 22 biomes",
+      "Forgeryscope: 0 geometrically supported pairs / 0 candidate pairs."
+    ],
+    "screenshot": "automatic_clones-texture.png",
+    "states": {
+      "patchmatch": "Complete",
+      "forgeryscope": "Complete"
+    },
+    "errors": {},
+    "biomes": 22
+  },
+  {
+    "tool": "automatic_clones",
+    "title": "Automatic Clone Search",
+    "input": "coffee-copy.png",
+    "input_sha256": "7c18855f471da252c50aba5bdbc24926edde852e231bbebb9e1f22e42cc43456",
+    "module_sha256": "3094e48aebcdb79296fea4c09059c62aee680ce96aa460047c1e8d4bf76c719e",
+    "controls": [
+      {
+        "type": "number",
+        "value": 10.0
+      },
+      {
+        "type": "number",
+        "value": 722.0
+      },
+      {
+        "type": "number",
+        "value": 80.0
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Search zones",
+        "value": true
+      }
+    ],
+    "labels": [
+      "Displayed length \u2014 minimum",
+      "maximum",
+      "Exclude overlap \u2265",
+      "Zoom:",
+      "194.73%",
+      "[400x600 px]",
+      "Extended: PatchMatch Zernike + PatchMatch SIFT + Mirror: Complete | Forgeryscope microscopy: Complete | 11 biomes",
+      "Forgeryscope: 0 geometrically supported pairs / 0 candidate pairs."
+    ],
+    "screenshot": "automatic_clones.png",
+    "states": {
+      "patchmatch": "Complete",
+      "forgeryscope": "Complete"
+    },
+    "errors": {},
+    "biomes": 11
+  },
+  {
+    "tool": "catnet",
+    "title": "CAT-Net v2",
+    "input": "coffee-copy.jpg",
+    "input_sha256": "4305b615792412807cb87ccdf8ad52cb343d2b3b4d665d613ef7da930b6d203f",
+    "module_sha256": "214d520d2bf8a262e39bae2cf285b7a097eb6761527e24fa9da6682afb274fa5",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "CAT-Net v2"
+      },
+      {
+        "type": "choice",
+        "value": "Superposition"
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      }
+    ],
+    "labels": [
+      "Mod\u00e8le",
+      "Analyse termin\u00e9e \u2014 3.01 s.",
+      "Carte : noir = 0 \u00b7 jaune = 1",
+      "Zoom:",
+      "192.79%",
+      "[400x600 px]"
+    ],
+    "screenshot": "catnet.png",
+    "result_metadata": {
+      "source_shape": [
+        400,
+        600
+      ],
+      "padded_shape": [
+        400,
+        600
+      ],
+      "orientation": 1,
+      "memory_bounded": false,
+      "jpeg_source": "original",
+      "jpeg_sha256": "4305b615792412807cb87ccdf8ad52cb343d2b3b4d665d613ef7da930b6d203f",
+      "method": "catnet",
+      "params": {
+        "variant": "CAT-Net v2"
+      },
+      "device": "mps",
+      "model_reused": false,
+      "weights": {
+        "CAT_full_v2.pth.tar": "f82aaafdd1142775231feedcea0bb7027f7370561d9e8d107465454001865989"
+      },
+      "model_seconds": 2.3382472500088625,
+      "inference_seconds": 0.6708001249935478,
+      "seconds": 3.0090475420001894,
+      "image_sha256": "97a42e80c502c8c1315132d411ea4874b79e25fddae287e56a2bd9469b8cb39b",
+      "arrays": {
+        "map": {
+          "shape": [
+            400,
+            600
+          ],
+          "dtype": "float32"
+        },
+        "native_map": {
+          "shape": [
+            100,
+            150
+          ],
+          "dtype": "float32"
+        }
+      }
+    }
+  },
+  {
+    "tool": "cloning2",
+    "title": "Copy-Move Forgery 2",
+    "input": "texture-edited.png",
+    "input_sha256": "8553df70ebaa7c5dfc2757fc5fa01ef2b2b7d2b8e521489f237f65bc596a664f",
+    "module_sha256": "869f7de90df58ac5bad8f6362a66ebaa15ad2c5d3f43b9b69a269c8a3a112669",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "PatchMatch Zernike"
+      },
+      {
+        "type": "choice",
+        "value": "px"
+      },
+      {
+        "type": "choice",
+        "value": "Similitude"
+      },
+      {
+        "type": "choice",
+        "value": "D\u00e9placer"
+      },
+      {
+        "type": "number",
+        "value": 6000
+      },
+      {
+        "type": "number",
+        "value": 6
+      },
+      {
+        "type": "number",
+        "value": 8
+      },
+      {
+        "type": "number",
+        "value": 8
+      },
+      {
+        "type": "number",
+        "value": 3
+      },
+      {
+        "type": "number",
+        "value": 600.0
+      },
+      {
+        "type": "number",
+        "value": 5.0
+      },
+      {
+        "type": "number",
+        "value": 0.3
+      },
+      {
+        "type": "number",
+        "value": 50.0
+      },
+      {
+        "type": "number",
+        "value": 3.0
+      },
+      {
+        "type": "number",
+        "value": 2.0
+      },
+      {
+        "type": "number",
+        "value": 5.0
+      },
+      {
+        "type": "number",
+        "value": 1774.0
+      },
+      {
+        "type": "check",
+        "label": "Miroir dense",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Per-zone SIFT",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Automatique par zone",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Ignorer les intervalles entre zones",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Cercles",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Lignes",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Points centraux",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Biomes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Zones de recherche",
+        "value": true
+      }
+    ],
+    "labels": [
+      "D\u00e9tecteur",
+      "Points / links",
+      "\u00c9cartement maximum",
+      "S\u00e9paration minimum",
+      "Tol\u00e9rance descripteur",
+      "Proximit\u00e9 des biomes",
+      "G\u00e9om\u00e9trie",
+      "Erreur maximum",
+      "T\u00e9moins minimum",
+      "Rayon / bin dense",
+      "It\u00e9rations denses",
+      "Texture minimum",
+      "Points minimum / c\u00f4t\u00e9",
+      "Image enti\u00e8re",
+      "Longueur affich\u00e9e minimum",
+      "maximum",
+      "Une famille de teintes par biome ; une nuance par lien, partag\u00e9e par ses deux extr\u00e9mit\u00e9s. Plus sombre : descripteurs plus proches. Les enveloppes sont indicatives.",
+      "Zoom:",
+      "42.98%",
+      "[1254x1254 px]",
+      "Champ dense : 1,571,978 liens, 9,461 coh\u00e9rents ; aper\u00e7u 6,000. 11780/11780 points \u00b7 223,821,997 comparaisons locales \u00b7 6,000 liens candidats \u00b7 9 biomes affich\u00e9s (5996 liens). Analyse 5.94 s ; affichage 0.036 s."
+    ],
+    "screenshot": "cloning2-texture.png",
+    "result_metadata": {}
+  },
+  {
+    "tool": "cloning2",
+    "title": "Copy-Move Forgery 2",
+    "input": "coffee-copy.png",
+    "input_sha256": "7c18855f471da252c50aba5bdbc24926edde852e231bbebb9e1f22e42cc43456",
+    "module_sha256": "869f7de90df58ac5bad8f6362a66ebaa15ad2c5d3f43b9b69a269c8a3a112669",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "PatchMatch Zernike"
+      },
+      {
+        "type": "choice",
+        "value": "px"
+      },
+      {
+        "type": "choice",
+        "value": "Similitude"
+      },
+      {
+        "type": "choice",
+        "value": "D\u00e9placer"
+      },
+      {
+        "type": "number",
+        "value": 6000
+      },
+      {
+        "type": "number",
+        "value": 6
+      },
+      {
+        "type": "number",
+        "value": 8
+      },
+      {
+        "type": "number",
+        "value": 8
+      },
+      {
+        "type": "number",
+        "value": 3
+      },
+      {
+        "type": "number",
+        "value": 600.0
+      },
+      {
+        "type": "number",
+        "value": 5.0
+      },
+      {
+        "type": "number",
+        "value": 0.3
+      },
+      {
+        "type": "number",
+        "value": 50.0
+      },
+      {
+        "type": "number",
+        "value": 3.0
+      },
+      {
+        "type": "number",
+        "value": 2.0
+      },
+      {
+        "type": "number",
+        "value": 5.0
+      },
+      {
+        "type": "number",
+        "value": 722.0
+      },
+      {
+        "type": "check",
+        "label": "Miroir dense",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Per-zone SIFT",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Automatique par zone",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Ignorer les intervalles entre zones",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Cercles",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Lignes",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Points centraux",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Biomes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Zones de recherche",
+        "value": true
+      }
+    ],
+    "labels": [
+      "D\u00e9tecteur",
+      "Points / links",
+      "\u00c9cartement maximum",
+      "S\u00e9paration minimum",
+      "Tol\u00e9rance descripteur",
+      "Proximit\u00e9 des biomes",
+      "G\u00e9om\u00e9trie",
+      "Erreur maximum",
+      "T\u00e9moins minimum",
+      "Rayon / bin dense",
+      "It\u00e9rations denses",
+      "Texture minimum",
+      "Points minimum / c\u00f4t\u00e9",
+      "Image enti\u00e8re",
+      "Longueur affich\u00e9e minimum",
+      "maximum",
+      "Une famille de teintes par biome ; une nuance par lien, partag\u00e9e par ses deux extr\u00e9mit\u00e9s. Plus sombre : descripteurs plus proches. Les enveloppes sont indicatives.",
+      "Zoom:",
+      "131.68%",
+      "[400x600 px]",
+      "Champ dense : 219,906 liens, 6,353 coh\u00e9rents ; aper\u00e7u 6,000. 11993/11993 points \u00b7 30,903,024 comparaisons locales \u00b7 6,000 liens candidats \u00b7 2 biomes affich\u00e9s (6000 liens). Analyse 0.67 s ; affichage 0.036 s."
+    ],
+    "screenshot": "cloning2.png",
+    "result_metadata": {}
+  },
+  {
+    "tool": "defect_pixels",
+    "title": "Dead / Hot Pixels",
+    "input": "coffee-pixels.png",
+    "input_sha256": "3601b4edd8b4bcc78faaf4400a521bc443a70dd1e11b361000a1f4362208f295",
+    "module_sha256": "5103d3a9dd5899dbdb406d76a5d116601108d44c8e5410ae3c831cb764deb3d4",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "3 \u00d7 3"
+      },
+      {
+        "type": "choice",
+        "value": "Hot + dead"
+      },
+      {
+        "type": "choice",
+        "value": "Candidates mask"
+      },
+      {
+        "type": "number",
+        "value": 32
+      },
+      {
+        "type": "number",
+        "value": 32
+      }
+    ],
+    "labels": [
+      "Neighbourhood:",
+      "Min deviation:",
+      "Max neighbour range:",
+      "28 candidate pixels \u2014 0.001 s. Sensor defects cannot be confirmed from one decoded image.",
+      "Red = hot; blue = dead; magenta = both. Border pixels are excluded.",
+      "Zoom:",
+      "184.54%",
+      "[400x600 px]"
+    ],
+    "screenshot": "defect_pixels-mask.png"
+  },
+  {
+    "tool": "defect_pixels",
+    "title": "Dead / Hot Pixels",
+    "input": "coffee-pixels.png",
+    "input_sha256": "3601b4edd8b4bcc78faaf4400a521bc443a70dd1e11b361000a1f4362208f295",
+    "module_sha256": "5103d3a9dd5899dbdb406d76a5d116601108d44c8e5410ae3c831cb764deb3d4",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "3 \u00d7 3"
+      },
+      {
+        "type": "choice",
+        "value": "Hot + dead"
+      },
+      {
+        "type": "choice",
+        "value": "Candidates overlay"
+      },
+      {
+        "type": "number",
+        "value": 32
+      },
+      {
+        "type": "number",
+        "value": 32
+      }
+    ],
+    "labels": [
+      "Neighbourhood:",
+      "Min deviation:",
+      "Max neighbour range:",
+      "28 candidate pixels \u2014 0.003 s. Sensor defects cannot be confirmed from one decoded image.",
+      "Red = hot; blue = dead; magenta = both. Border pixels are excluded.",
+      "Zoom:",
+      "184.54%",
+      "[400x600 px]"
+    ],
+    "screenshot": "defect_pixels.png"
+  },
+  {
+    "tool": "ela",
+    "title": "Error Level Analysis",
+    "input": "coffee-copy.jpg",
+    "input_sha256": "4305b615792412807cb87ccdf8ad52cb343d2b3b4d665d613ef7da930b6d203f",
+    "module_sha256": "fa0134a4bec443459ff384004ee8b6c739d6ef94945a0207cd8127e01ca43f55",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Biomes sur image"
+      },
+      {
+        "type": "choice",
+        "value": "Conservative"
+      },
+      {
+        "type": "choice",
+        "value": "32"
+      },
+      {
+        "type": "number",
+        "value": 75
+      },
+      {
+        "type": "number",
+        "value": 50
+      },
+      {
+        "type": "number",
+        "value": 20
+      },
+      {
+        "type": "number",
+        "value": 0
+      },
+      {
+        "type": "number",
+        "value": 3
+      },
+      {
+        "type": "number",
+        "value": 2.0
+      },
+      {
+        "type": "check",
+        "label": "Linear",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Grayscale",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "JPEG Ghosts",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "All JPEG grids",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy disparities",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Auto thresholds",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy biomes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Cell biomes (legacy)",
+        "value": true
+      }
+    ],
+    "labels": [
+      "Quality:",
+      "Scale:",
+      "Contrast:",
+      "Error Level Analysis = 0.004 s",
+      "Zoom:",
+      "192.79%",
+      "[400x600 px]",
+      "Qualit\u00e9",
+      "Cellule (px)",
+      "Seuil",
+      "Cellules / biome",
+      "Lower histogram bound",
+      "1.0 %",
+      "Upper histogram bound",
+      "99.0 %",
+      "Shadow deviation",
+      "5.0",
+      "Highlight deviation",
+      "5.0",
+      "4 biomes \u00b7 Q 95 (tables JPEG) \u00b7 cellules 32 px \u00b7 87.9 % comparables \u00b7 0.71 s",
+      "Zoom:",
+      "156.90%",
+      "[400x600 px]",
+      "ELA lin\u00e9aire \u00b7 Scale 50 % \u00b7 Contrast 20 %\nBiomes exp\u00e9rimentaux = profils ELA atypiques, sans attribution de retouche. Gris dans les cartes : comparaison insuffisante."
+    ],
+    "screenshot": "ela-layers.png"
+  },
+  {
+    "tool": "ela",
+    "title": "Error Level Analysis",
+    "input": "texture-edited.png",
+    "input_sha256": "8553df70ebaa7c5dfc2757fc5fa01ef2b2b7d2b8e521489f237f65bc596a664f",
+    "module_sha256": "fa0134a4bec443459ff384004ee8b6c739d6ef94945a0207cd8127e01ca43f55",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Biomes sur image"
+      },
+      {
+        "type": "choice",
+        "value": "Conservative"
+      },
+      {
+        "type": "choice",
+        "value": "32"
+      },
+      {
+        "type": "number",
+        "value": 75
+      },
+      {
+        "type": "number",
+        "value": 50
+      },
+      {
+        "type": "number",
+        "value": 20
+      },
+      {
+        "type": "number",
+        "value": 0
+      },
+      {
+        "type": "number",
+        "value": 3
+      },
+      {
+        "type": "number",
+        "value": 2.0
+      },
+      {
+        "type": "check",
+        "label": "Linear",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Grayscale",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "JPEG Ghosts",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "All JPEG grids",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy disparities",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Auto thresholds",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy biomes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Cell biomes (legacy)",
+        "value": true
+      }
+    ],
+    "labels": [
+      "Quality:",
+      "Scale:",
+      "Contrast:",
+      "Error Level Analysis = 0.018 s",
+      "Zoom:",
+      "63.08%",
+      "[1254x1254 px]",
+      "Qualit\u00e9",
+      "Cellule (px)",
+      "Seuil",
+      "Cellules / biome",
+      "Lower histogram bound",
+      "1.0 %",
+      "Upper histogram bound",
+      "99.0 %",
+      "Shadow deviation",
+      "5.0",
+      "Highlight deviation",
+      "5.0",
+      "15 biomes \u00b7 Q 75 (repli sans tables JPEG) \u00b7 cellules 32 px \u00b7 99.0 % comparables \u00b7 3.30 s",
+      "Zoom:",
+      "51.28%",
+      "[1254x1254 px]",
+      "ELA lin\u00e9aire \u00b7 Scale 50 % \u00b7 Contrast 20 %\nBiomes exp\u00e9rimentaux = profils ELA atypiques, sans attribution de retouche. Gris dans les cartes : comparaison insuffisante."
+    ],
+    "screenshot": "ela-texture-layers.png"
+  },
+  {
+    "tool": "ela",
+    "title": "Error Level Analysis",
+    "input": "texture-edited.png",
+    "input_sha256": "8553df70ebaa7c5dfc2757fc5fa01ef2b2b7d2b8e521489f237f65bc596a664f",
+    "module_sha256": "fa0134a4bec443459ff384004ee8b6c739d6ef94945a0207cd8127e01ca43f55",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Biomes sur ELA"
+      },
+      {
+        "type": "choice",
+        "value": "Conservative"
+      },
+      {
+        "type": "choice",
+        "value": "32"
+      },
+      {
+        "type": "number",
+        "value": 0
+      },
+      {
+        "type": "number",
+        "value": 3
+      },
+      {
+        "type": "number",
+        "value": 75
+      },
+      {
+        "type": "number",
+        "value": 50
+      },
+      {
+        "type": "number",
+        "value": 20
+      },
+      {
+        "type": "number",
+        "value": 2.0
+      },
+      {
+        "type": "check",
+        "label": "JPEG Ghosts",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "All JPEG grids",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy disparities",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Auto thresholds",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy biomes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Cell biomes (legacy)",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Linear",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Grayscale",
+        "value": false
+      }
+    ],
+    "labels": [
+      "Qualit\u00e9",
+      "Cellule (px)",
+      "Seuil",
+      "Cellules / biome",
+      "Lower histogram bound",
+      "1.0 %",
+      "Upper histogram bound",
+      "99.0 %",
+      "Shadow deviation",
+      "5.0",
+      "Highlight deviation",
+      "5.0",
+      "15 biomes \u00b7 Q 75 (repli sans tables JPEG) \u00b7 cellules 32 px \u00b7 99.0 % comparables \u00b7 3.30 s",
+      "Zoom:",
+      "100.00%",
+      "[1254x1254 px]",
+      "ELA lin\u00e9aire \u00b7 Scale 50 % \u00b7 Contrast 20 %\nBiomes exp\u00e9rimentaux = profils ELA atypiques, sans attribution de retouche. Gris dans les cartes : comparaison insuffisante.",
+      "Quality:",
+      "Scale:",
+      "Contrast:",
+      "Error Level Analysis = 0.018 s",
+      "Zoom:",
+      "63.08%",
+      "[1254x1254 px]"
+    ],
+    "screenshot": "ela-texture.png"
+  },
+  {
+    "tool": "ela",
+    "title": "Error Level Analysis",
+    "input": "coffee-copy.jpg",
+    "input_sha256": "4305b615792412807cb87ccdf8ad52cb343d2b3b4d665d613ef7da930b6d203f",
+    "module_sha256": "fa0134a4bec443459ff384004ee8b6c739d6ef94945a0207cd8127e01ca43f55",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Biomes sur ELA"
+      },
+      {
+        "type": "choice",
+        "value": "Conservative"
+      },
+      {
+        "type": "choice",
+        "value": "32"
+      },
+      {
+        "type": "number",
+        "value": 0
+      },
+      {
+        "type": "number",
+        "value": 3
+      },
+      {
+        "type": "number",
+        "value": 75
+      },
+      {
+        "type": "number",
+        "value": 50
+      },
+      {
+        "type": "number",
+        "value": 20
+      },
+      {
+        "type": "number",
+        "value": 2.0
+      },
+      {
+        "type": "check",
+        "label": "JPEG Ghosts",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "All JPEG grids",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy disparities",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Auto thresholds",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy biomes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Cell biomes (legacy)",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Linear",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Grayscale",
+        "value": false
+      }
+    ],
+    "labels": [
+      "Qualit\u00e9",
+      "Cellule (px)",
+      "Seuil",
+      "Cellules / biome",
+      "Lower histogram bound",
+      "1.0 %",
+      "Upper histogram bound",
+      "99.0 %",
+      "Shadow deviation",
+      "5.0",
+      "Highlight deviation",
+      "5.0",
+      "4 biomes \u00b7 Q 95 (tables JPEG) \u00b7 cellules 32 px \u00b7 87.9 % comparables \u00b7 0.71 s",
+      "Zoom:",
+      "103.14%",
+      "[400x600 px]",
+      "ELA lin\u00e9aire \u00b7 Scale 50 % \u00b7 Contrast 20 %\nBiomes exp\u00e9rimentaux = profils ELA atypiques, sans attribution de retouche. Gris dans les cartes : comparaison insuffisante.",
+      "Quality:",
+      "Scale:",
+      "Contrast:",
+      "Error Level Analysis = 0.004 s",
+      "Zoom:",
+      "192.79%",
+      "[400x600 px]"
+    ],
+    "screenshot": "ela.png"
+  },
+  {
+    "tool": "focal",
+    "title": "FOCAL",
+    "input": "coffee-copy.png",
+    "input_sha256": "7c18855f471da252c50aba5bdbc24926edde852e231bbebb9e1f22e42cc43456",
+    "module_sha256": "9f6be2fef4c3273638dae71637055edfb3a4e0ce83e369e1a8f716b7efac9562",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "ViT-L + HRNet"
+      },
+      {
+        "type": "choice",
+        "value": "Superposition"
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      }
+    ],
+    "labels": [
+      "Mod\u00e8le",
+      "Analyse termin\u00e9e \u2014 5.77 s.",
+      "Carte : noir = 0 \u00b7 jaune = 1",
+      "Zoom:",
+      "192.79%",
+      "[400x600 px]"
+    ],
+    "screenshot": "focal.png",
+    "result_metadata": {
+      "image_shape": [
+        400,
+        600
+      ],
+      "analysis_shape": [
+        1024,
+        1024
+      ],
+      "native_shape": [
+        64,
+        64
+      ],
+      "seed": 123,
+      "clusters": 2,
+      "smallest_region_is_candidate": true,
+      "unused_checkpoint_heads": [
+        "fc.weight",
+        "fc.bias"
+      ],
+      "method": "focal",
+      "params": {
+        "variant": "ViT-L + HRNet"
+      },
+      "device": "mps",
+      "model_reused": false,
+      "weights": {
+        "FOCAL_ViT_weights.pth": "9de26b3f33c61c75da455181b88ef4befce5ffe2eaf70ee3118542877fecca89",
+        "FOCAL_HRNet_weights.pth": "693048dabb49f84f176dfb12c6a13f2204e31e57f2a74fee645675d08bba917f"
+      },
+      "model_seconds": 3.5760842919698916,
+      "inference_seconds": 2.1931431660195813,
+      "seconds": 5.7692277079913765,
+      "image_sha256": "92d0bf9296df4866b9183de44024adfb2d2625e9cb9266827882e8adc5443166",
+      "arrays": {
+        "map": {
+          "shape": [
+            64,
+            64
+          ],
+          "dtype": "float32"
+        },
+        "features": {
+          "shape": [
+            4096,
+            288
+          ],
+          "dtype": "float32"
+        }
+      }
+    }
+  },
+  {
+    "tool": "illuminant",
+    "title": "Illuminant Map",
+    "input": "coffee-original.png",
+    "input_sha256": "884b6c0be0f697ee5cc7604ca3a4a93647598ac120a56b1716bfadde4e9e0ad2",
+    "module_sha256": "5c3dc8ffa6df9a10a8bc0c0ac97a92e3f4239984293120bac57e509686abf4db",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Shades of Gray (p=6)"
+      },
+      {
+        "type": "choice",
+        "value": "32"
+      },
+      {
+        "type": "choice",
+        "value": "Illuminant colour"
+      },
+      {
+        "type": "check",
+        "label": "Linearize sRGB",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Exclude dark/clipped",
+        "value": true
+      }
+    ],
+    "labels": [
+      "Method:",
+      "Cell:",
+      "234/247 valid cells \u2014 0.022 s. Coloured surfaces can affect the estimate.",
+      "Estimated RGB colour; dark grey = insufficient valid pixels.",
+      "Zoom:",
+      "185.27%",
+      "[400x600 px]"
+    ],
+    "screenshot": "illuminant.png"
+  },
+  {
+    "tool": "multiple",
+    "title": "Multiple Compression",
+    "input": "coffee-double.jpg",
+    "input_sha256": "7f6ed82457487f4a7f6f0968bd548eeb06b1171368fb6e21b420b4212289f718",
+    "module_sha256": "bff3fd0d194681879fcbd3096135671be6d7ab19f63b7d95604745a8fe98b0fb",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "DCT (1, 0)"
+      }
+    ],
+    "labels": [
+      "Historical recompression curve. This curve alone does not determine how many JPEG compressions occurred.",
+      "101 quality levels \u2014 0.086 s. Loss values are raw pixel differences, not percentages.",
+      "Traces compatible with double JPEG compression detected. 8/9 frequencies support the result; 0.009 s.",
+      "Current step: 1; candidate earlier step: 8. Gap depletion score: 0.941; 2736 eligible coefficients. Orange bins are predicted gaps. The score is not a probability; the candidate step is not a recovered JPEG quality.",
+      "Experimental global detector for aligned JPEG grids and sufficiently separated quantization steps. Equal qualities, a coarser last compression, cropping, resampling, small or smooth images can hide traces. Periodic or synthetic content can imitate traces. A detected trace does not establish malicious editing; an inconclusive result does not establish a single compression."
+    ],
+    "screenshot": "multiple-double-jpeg.png"
+  },
+  {
+    "tool": "multiple",
+    "title": "Multiple Compression",
+    "input": "coffee-double.jpg",
+    "input_sha256": "7f6ed82457487f4a7f6f0968bd548eeb06b1171368fb6e21b420b4212289f718",
+    "module_sha256": "bff3fd0d194681879fcbd3096135671be6d7ab19f63b7d95604745a8fe98b0fb",
+    "controls": [
+      {
+        "type": "choice",
+        "value": ""
+      }
+    ],
+    "labels": [
+      "Analyze the JPEG file\u2019s stored DCT coefficients for aligned double-quantization traces.",
+      "Experimental global detector for aligned JPEG grids and sufficiently separated quantization steps. Equal qualities, a coarser last compression, cropping, resampling, small or smooth images can hide traces. Periodic or synthetic content can imitate traces. A detected trace does not establish malicious editing; an inconclusive result does not establish a single compression.",
+      "Historical recompression curve. This curve alone does not determine how many JPEG compressions occurred.",
+      "101 quality levels \u2014 0.086 s. Loss values are raw pixel differences, not percentages."
+    ],
+    "screenshot": "multiple.png"
+  },
+  {
+    "tool": "noisesniffer",
+    "title": "Noisesniffer",
+    "input": "coffee-copy.png",
+    "input_sha256": "7c18855f471da252c50aba5bdbc24926edde852e231bbebb9e1f22e42cc43456",
+    "module_sha256": "63faa3591feb7459a7715aeb56029b14c44459a93516cdd113e2a278f789930c",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "3"
+      },
+      {
+        "type": "choice",
+        "value": "R\u00e9gions"
+      },
+      {
+        "type": "number",
+        "value": 100
+      },
+      {
+        "type": "number",
+        "value": 20000
+      },
+      {
+        "type": "number",
+        "value": 0.1
+      },
+      {
+        "type": "number",
+        "value": 0.5
+      }
+    ],
+    "labels": [
+      "Bloc",
+      "Cellule",
+      "\u00c9chantillons / classe",
+      "Fraction",
+      "Bruit faible",
+      "2 r\u00e9gions ; 41,202 blocs retenus \u2014 0.31 s.",
+      "Zoom:",
+      "197.64%",
+      "[400x600 px]"
+    ],
+    "screenshot": "noisesniffer.png",
+    "result_metadata": {
+      "method": "IPOL Noisesniffer",
+      "parameters": [
+        3,
+        100,
+        20000,
+        0.1,
+        0.5
+      ],
+      "valid_blocks": 196219,
+      "selected_blocks": 41202,
+      "low_noise_blocks": 20601,
+      "regions": [
+        {
+          "cells": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "log10_nfa": -2.4088499829214935,
+          "selected_blocks": 10028,
+          "all_blocks": 18009
+        },
+        {
+          "cells": [
+            [
+              2,
+              1
+            ]
+          ],
+          "log10_nfa": -0.7615182617296051,
+          "selected_blocks": 1249,
+          "all_blocks": 1962
+        }
+      ],
+      "inconclusive": false,
+      "decoded_bgr8_sha256": "92d0bf9296df4866b9183de44024adfb2d2625e9cb9266827882e8adc5443166",
+      "seconds": 0.3111958330264315
+    }
+  },
+  {
+    "tool": "safire",
+    "title": "SAFIRE",
+    "input": "coffee-copy.png",
+    "input_sha256": "7c18855f471da252c50aba5bdbc24926edde852e231bbebb9e1f22e42cc43456",
+    "module_sha256": "d660a7eda5da4c27f4758e8daf266285d29fa7b2074d7e6bc1018c6b6dbad9ca",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Multisource \u2014 k-means"
+      },
+      {
+        "type": "choice",
+        "value": "Superposition"
+      },
+      {
+        "type": "choice",
+        "value": "16"
+      },
+      {
+        "type": "number",
+        "value": 3
+      },
+      {
+        "type": "number",
+        "value": 1
+      },
+      {
+        "type": "number",
+        "value": 0.2
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      }
+    ],
+    "labels": [
+      "Mod\u00e8le",
+      "Analyse termin\u00e9e \u2014 6.41 s.",
+      "<span style=\"color:rgb(162,61,242)\">\u25a0</span> Source 1 : 14.9 % \u00b7 <span style=\"color:rgb(61,242,109)\">\u25a0</span> Source 2 : 4.7 % \u00b7 <span style=\"color:rgb(242,61,65)\">\u25a0</span> Source 3 : 80.4 %",
+      "Zoom:",
+      "184.30%",
+      "[400x600 px]",
+      "Points / c\u00f4t\u00e9",
+      "Sources",
+      "Distance DBSCAN",
+      "Support DBSCAN"
+    ],
+    "screenshot": "safire.png",
+    "result_metadata": {
+      "image_shape": [
+        400,
+        600
+      ],
+      "analysis_shape": [
+        1024,
+        1024
+      ],
+      "sources": 3,
+      "chosen_prompt_ids": [
+        78,
+        206,
+        224
+      ],
+      "valid_prompts": 256,
+      "total_prompts": 256,
+      "binary": false,
+      "cluster": "kmeans",
+      "seed": 1701,
+      "points_per_batch": 16,
+      "proposals_reused": false,
+      "method": "safire",
+      "params": {
+        "variant": "Multisource \u2014 k-means",
+        "side": 16,
+        "groups": 3,
+        "eps": 0.2,
+        "minimum": 1
+      },
+      "device": "mps",
+      "model_reused": false,
+      "weights": {
+        "safire.pth": "65bdf6880380162d57f77d71b3fd367c3f16aebca316f942a821da16e9225b12"
+      },
+      "model_seconds": 2.3256764999823645,
+      "inference_seconds": 4.089223415998276,
+      "seconds": 6.414900125004351,
+      "image_sha256": "92d0bf9296df4866b9183de44024adfb2d2625e9cb9266827882e8adc5443166",
+      "arrays": {
+        "map": {
+          "shape": [
+            1024,
+            1024
+          ],
+          "dtype": "float32"
+        },
+        "source_probabilities": {
+          "shape": [
+            3,
+            1024,
+            1024
+          ],
+          "dtype": "float32"
+        },
+        "source_labels": {
+          "shape": [
+            1024,
+            1024
+          ],
+          "dtype": "uint8"
+        },
+        "prompt_features": {
+          "shape": [
+            256,
+            256
+          ],
+          "dtype": "float32"
+        },
+        "prompt_confidence": {
+          "shape": [
+            256
+          ],
+          "dtype": "float32"
+        },
+        "prompt_clusters": {
+          "shape": [
+            256
+          ],
+          "dtype": "int64"
+        },
+        "points": {
+          "shape": [
+            256,
+            2
+          ],
+          "dtype": "float32"
+        }
+      }
+    }
+  },
+  {
+    "tool": "trufor",
+    "title": "TruFor",
+    "input": "coffee-copy.jpg",
+    "input_sha256": "4305b615792412807cb87ccdf8ad52cb343d2b3b4d665d613ef7da930b6d203f",
+    "module_sha256": "f031e1bbbc1a27a997d0572ae82528d4ec14b1dad3992cbe9f5739ff38266bd2",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Confiance du mod\u00e8le"
+      }
+    ],
+    "labels": [
+      "Score TruFor : 0.9980 / 1 \u2014 4.7 s \u2014 GPU. R\u00e9sultats conserv\u00e9s.",
+      "Confiance : blanc = \u00e9lev\u00e9e ; noir = faible.",
+      "Zoom:",
+      "192.30%",
+      "[400x600 px]"
+    ],
+    "screenshot": "trufor-confidence.png",
+    "result_metadata": {}
+  },
+  {
+    "tool": "trufor",
+    "title": "TruFor",
+    "input": "coffee-copy.jpg",
+    "input_sha256": "4305b615792412807cb87ccdf8ad52cb343d2b3b4d665d613ef7da930b6d203f",
+    "module_sha256": "f031e1bbbc1a27a997d0572ae82528d4ec14b1dad3992cbe9f5739ff38266bd2",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Localisation des anomalies"
+      }
+    ],
+    "labels": [
+      "Score TruFor : 0.9980 / 1 \u2014 4.7 s \u2014 GPU. R\u00e9sultats conserv\u00e9s.",
+      "Localisation : rouge = anomalies \u00e9lev\u00e9es ; bleu = faibles.",
+      "Zoom:",
+      "192.30%",
+      "[400x600 px]"
+    ],
+    "screenshot": "trufor.png",
+    "result_metadata": {}
+  },
+  {
+    "tool": "zero",
+    "title": "ZERO JPEG Grids",
+    "input": "coffee-copy.png",
+    "input_sha256": "7c18855f471da252c50aba5bdbc24926edde852e231bbebb9e1f22e42cc43456",
+    "module_sha256": "2628d6946799f0033b1dcdec1a868a8073919a5e513545962807dc8bcb71eb50",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Votes de grille"
+      },
+      {
+        "type": "check",
+        "label": "Rechercher les grilles manquantes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      }
+    ],
+    "labels": [
+      "Grille principale : (0, 0) ; 1 r\u00e9gions diff\u00e9rentes, 0 manquantes \u2014 0.22 s.",
+      "Zoom:",
+      "205.88%",
+      "[400x600 px]"
+    ],
+    "screenshot": "zero-grids.png",
+    "result_metadata": {
+      "method": "ZERO IPOL 2021/390",
+      "main_grid": 0,
+      "foreign_regions": [
+        {
+          "x0": 482,
+          "y0": 260,
+          "x1": 569,
+          "y1": 363,
+          "grid": 34,
+          "log10_nfa": -119.0612290207217
+        }
+      ],
+      "missing_regions": [],
+      "jpeg99_used": true,
+      "missing_grid_analyzed": true,
+      "reference": false,
+      "seconds": 0.21804441697895527,
+      "decoded_bgr8_sha256": "92d0bf9296df4866b9183de44024adfb2d2625e9cb9266827882e8adc5443166",
+      "jpeg99_encoder": "OpenCV 4.11.0 4:4:4 quality99",
+      "jpeg99_sha256": "992072db270761bf7132407ac88a86b14cb75a1df4535e34683170926f70d746"
+    }
+  },
+  {
+    "tool": "zero",
+    "title": "ZERO JPEG Grids",
+    "input": "coffee-copy.png",
+    "input_sha256": "7c18855f471da252c50aba5bdbc24926edde852e231bbebb9e1f22e42cc43456",
+    "module_sha256": "2628d6946799f0033b1dcdec1a868a8073919a5e513545962807dc8bcb71eb50",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "R\u00e9gions"
+      },
+      {
+        "type": "check",
+        "label": "Rechercher les grilles manquantes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      }
+    ],
+    "labels": [
+      "Grille principale : (0, 0) ; 1 r\u00e9gions diff\u00e9rentes, 0 manquantes \u2014 0.22 s.",
+      "Zoom:",
+      "205.88%",
+      "[400x600 px]"
+    ],
+    "screenshot": "zero.png",
+    "result_metadata": {
+      "method": "ZERO IPOL 2021/390",
+      "main_grid": 0,
+      "foreign_regions": [
+        {
+          "x0": 482,
+          "y0": 260,
+          "x1": 569,
+          "y1": 363,
+          "grid": 34,
+          "log10_nfa": -119.0612290207217
+        }
+      ],
+      "missing_regions": [],
+      "jpeg99_used": true,
+      "missing_grid_analyzed": true,
+      "reference": false,
+      "seconds": 0.21804441697895527,
+      "decoded_bgr8_sha256": "92d0bf9296df4866b9183de44024adfb2d2625e9cb9266827882e8adc5443166",
+      "jpeg99_encoder": "OpenCV 4.11.0 4:4:4 quality99",
+      "jpeg99_sha256": "992072db270761bf7132407ac88a86b14cb75a1df4535e34683170926f70d746"
+    }
+  }
+]

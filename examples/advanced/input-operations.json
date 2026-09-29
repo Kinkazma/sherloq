@@ -1,0 +1,77 @@
+{
+  "source": "skimage.data.coffee",
+  "photographer": "Rachel Michetti",
+  "license": "CC0",
+  "source_url": "https://scikit-image.org/docs/stable/api/skimage.data#skimage.data.coffee",
+  "coffee-copy": {
+    "base_jpeg_quality": 65,
+    "source_xywh": [
+      320,
+      232,
+      94,
+      110
+    ],
+    "destination_xywh": [
+      482,
+      260,
+      94,
+      110
+    ],
+    "final_jpeg_quality": 95
+  },
+  "coffee-double.jpg": {
+    "jpeg_qualities": [
+      65,
+      95
+    ],
+    "aligned": true
+  },
+  "coffee-pixels.png": {
+    "coordinates_xy": [
+      [
+        240,
+        60
+      ],
+      [
+        270,
+        65
+      ],
+      [
+        310,
+        70
+      ],
+      [
+        335,
+        90
+      ],
+      [
+        355,
+        110
+      ],
+      [
+        240,
+        120
+      ],
+      [
+        270,
+        140
+      ],
+      [
+        295,
+        155
+      ],
+      [
+        325,
+        130
+      ],
+      [
+        290,
+        95
+      ]
+    ],
+    "values_alternating": [
+      255,
+      0
+    ]
+  }
+}
