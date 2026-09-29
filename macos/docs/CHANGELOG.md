@@ -5,6 +5,17 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 29 September 2026 — PatchMatch large-image memory
+
+I reduced temporary allocations in the Metal SIFT extended + mirror path and
+adapted its reservations, retaining the shared memory budget. On the 3510 × 4387
+case, paired reservations fall from about 45 GiB to at most 17.41 GiB. The CPU
+path is unchanged. Controlled descriptor/field comparisons remain bit-exact;
+all four full-resolution mirrored descriptor preparations completed. The full
+profile run was deliberately cancelled after several completed stages, so it
+is not claimed as an end-to-end validation on that image.
+[Changes, measured limits, checks and cumulative RC1 update](PATCHMATCH-MEMORY.md).
+
 ## 29 September 2026 — ELA manual input takes precedence
 
 I fixed a race where an automatic estimate already in progress could overwrite

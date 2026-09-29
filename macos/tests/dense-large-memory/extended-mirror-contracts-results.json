@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "extended_preserved": true,
+  "legacy_mirror_pairs_preserved": true,
+  "cpu_gpu_exact": true,
+  "frames_aligned": true,
+  "model_indices_correct": true,
+  "cache": true,
+  "search_isolated": true,
+  "compare_cross_only": true,
+  "disabled_zone_excluded": true,
+  "records": [
+    {
+      "case": "horizontal",
+      "seconds": 21.42892687499989,
+      "biomes": 2,
+      "metrics": {
+        "tp": 18678,
+        "fp": 0,
+        "fn": 6410,
+        "tn": 105984,
+        "precision": 1.0,
+        "recall": 0.744499362244898,
+        "iou": 0.744499362244898,
+        "f1": 0.8535392770643879,
+        "flagged": true,
+        "false_pixel_fraction": 0.0
+      }
+    },
+    {
+      "case": "retouched",
+      "seconds": 9.71091637504287,
+      "biomes": 2,
+      "metrics": {
+        "tp": 18975,
+        "fp": 506,
+        "fn": 5613,
+        "tn": 105978,
+        "precision": 0.974025974025974,
+        "recall": 0.7717179111761835,
+        "iou": 0.756156850243086,
+        "f1": 0.8611495609158365,
+        "flagged": true,
+        "false_pixel_fraction": 0.0047518876075278915
+      }
+    },
+    {
+      "case": "vertical",
+      "seconds": 10.161314250028227,
+      "biomes": 1,
+      "metrics": {
+        "tp": 11069,
+        "fp": 0,
+        "fn": 14019,
+        "tn": 105984,
+        "precision": 1.0,
+        "recall": 0.44120695153061223,
+        "iou": 0.44120695153061223,
+        "f1": 0.6122742484166275,
+        "flagged": true,
+        "false_pixel_fraction": 0.0
+      }
+    },
+    {
+      "case": "control",
+      "seconds": 9.723948542028666,
+      "biomes": 0,
+      "metrics": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 131072,
+        "precision": null,
+        "recall": null,
+        "iou": null,
+        "f1": null,
+        "flagged": false,
+        "false_pixel_fraction": 0.0
+      }
+    }
+  ]
+}

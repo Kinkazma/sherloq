@@ -50,11 +50,11 @@ def orientation_diversity(descriptors,cancel=lambda:False):
     return result.reshape(descriptors.shape[:2])
 
 
-def quarter_turn_frame(descriptors,cancel=lambda:False):
+def quarter_turn_frame(descriptors,cancel=lambda:False,*,inplace=False):
     if descriptors.ndim!=3 or descriptors.shape[-1]!=128:
         raise ValueError('Quarter-turn SIFT requires 128-dimensional dense descriptors.')
     source=descriptors.reshape(-1,4,4,8)
-    result=np.empty_like(source)
+    result=source if inplace else np.empty_like(source)
     # Bound gather temporaries independently of image dimensions.
     for start in range(0,len(source),8192):
         check(cancel);block=source[start:start+8192]

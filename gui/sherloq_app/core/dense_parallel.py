@@ -43,8 +43,8 @@ def parallel_fields(engine,algorithm,limit,radius,minimum,threshold,regions,comp
         if zone:
             xy=np.concatenate(zone);lo=np.maximum(0,np.floor(xy.min(0))-3*patch).astype(int);hi=np.minimum([w,h],np.ceil(xy.max(0))+3*patch+1).astype(int)
             w,h=map(int,hi-lo)
-        dims=128 if algorithm=='PatchMatch SIFT' else 12
-        estimate=int(h*w*(dims*4*(6 if target_patch not in (None,options[0]) else 4 if options[2] else 3)+64))
+        from .dense_memory import workspace_bytes
+        estimate=workspace_bytes(h,w,int(algorithm=='PatchMatch SIFT'),options[0],options[2],backend,target_patch,quarter_turn)
         before=child.counts.copy()
         def updated(n,text):
             with lock:

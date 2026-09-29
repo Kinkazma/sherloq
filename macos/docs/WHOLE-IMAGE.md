@@ -26,11 +26,12 @@ installation, run `restore_installation.py` there **before** applying this updat
 Then reopen its `build/SHERLOQ.app`, or run `venv/bin/python app_start.py` from the
 installation folder. No environment, model download or app rebuild is needed.
 
-The updater verifies all five source and destination files before replacement,
-keeps the original files under `.updates/rc1-ela-sliders-20260929/`, and refuses
+The updater verifies all ten source and destination files before replacement,
+keeps the original files under `.updates/rc1-patchmatch-memory-20260929/`, and refuses
 unrecognized local changes. Repeating the command leaves already updated files
 alone. Its baseline hashes were checked against the actual RC1 archive. The cumulative
-update also includes the [ELA manual-control correction](ELA-SLIDERS.md), and
+update also includes the [ELA manual-control correction](ELA-SLIDERS.md) and
+[PatchMatch memory correction](PATCHMATCH-MEMORY.md), and
 accepts installations that already received the earlier whole-image update.
 
 ## Reproduce the regression check

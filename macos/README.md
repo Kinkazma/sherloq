@@ -52,9 +52,9 @@ tools. It verifies the installation manifest, relocates bundled environments,
 locally signs changed native libraries and builds `build/SHERLOQ.app`.
 The application bundle can subsequently be opened in Finder. Keep it with the complete installation: `build/SHERLOQ.app` refers to the containing directory and is not a standalone app that can be moved on its own. Choose the final installation location before restoring. If you need to relocate it later, extract a fresh copy of the verified ZIP at the new location and restore that copy; the original manifest describes the files before relocation.
 
-### Apply the whole-image update
+### Apply the cumulative RC1 updates
 
-The frozen RC1 archive predates **Run on whole image** and the ELA slider correction. After restoration, close
+The frozen RC1 archive predates **Run on whole image**, the ELA slider correction and the PatchMatch memory fix. After restoration, close
 SHERLOQ and return to the **current repository folder** in Terminal. Run:
 
 ```sh
@@ -62,10 +62,10 @@ python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 ```
 
 Replace the quoted path with your restored installation folder. The updater
-checks and backs up five files; it refuses unknown local changes and can be
+validates ten files and backs up replaced files; it refuses unknown local changes and can be
 rerun safely. Then open `build/SHERLOQ.app` in the installation folder, or run
 `venv/bin/python app_start.py` there. Existing restored installations use the
-same update command without repeating restoration. [Behaviour and validation](docs/WHOLE-IMAGE.md).
+same update command without repeating restoration. [Whole-image behaviour](docs/WHOLE-IMAGE.md) · [ELA controls](docs/ELA-SLIDERS.md) · [PatchMatch memory and update details](docs/PATCHMATCH-MEMORY.md).
 
 ### Manual download and assembly
 

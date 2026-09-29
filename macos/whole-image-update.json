@@ -21,5 +21,25 @@
   "gui/sherloq_app/ui/ela_biomes.py": {
     "before": "e6a71bedcaf6237d34ae1db92c699f828cf56ded68221994d7464e6dc6781695",
     "after": "ad010f61eafc546b5d63664b90f67fc93498b2f8cd4efa4dfe76d7f10553cac2"
+  },
+  "gui/sherloq_app/core/dense_memory.py": {
+    "before": null,
+    "after": "a9ad6cef65fed00209147d2c2c257aaf9420ea058ffb064a2ad5edeefef1b00c"
+  },
+  "gui/sherloq_app/core/dense_copy.py": {
+    "before": "1bc0c01292de9d55741f1d91813b00079fcdbec6b76ebffbaebc937a690a1bbc",
+    "after": "a053c370a6a401f8a2da890451d85004a9dc46d68f776d3bc82cfd6280304aa0"
+  },
+  "gui/sherloq_app/core/dense_parallel.py": {
+    "before": "620c4c81793b7ef9b6689529f92f28866b613b879b7e913ab27ca52b54702559",
+    "after": "8cee988613eec13b44cfab6a6b37dad341d00e1e018310e750b2c744df751aea"
+  },
+  "gui/sherloq_app/core/metal_dense.py": {
+    "before": "09401731aa780d75bdb7f01efff89f9a29698366884b3fcdbda9bc3d3fc75dba",
+    "after": "6e017c6d919901978fdd31dc1034599fed963c94c80eab1d502fd2d11c8ebb7f"
+  },
+  "gui/sherloq_app/core/sift_frames.py": {
+    "before": "ecba1b4da9904e8bad75d41f7eda8afbf75e18e0eea135324c09187e43fad7a8",
+    "after": "9924025352642284fccceb800b47a6856675b6905fff71be3a52aa308943b79d"
   }
 }

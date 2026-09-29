@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "baseline_commit": "fc08617fc3f98e134bfa27cc732e2670f60cd68f",
+      "changed_files": 10,
+      "idempotent": true
+    },
+    {
+      "baseline_commit": "b56f1d60109185e35cb7ded7a08de6ba48308198",
+      "changed_files": 8,
+      "idempotent": true
+    },
+    {
+      "baseline_commit": "0ea97f373dbf9cea41f8ee7d2c053839ef8a53e0",
+      "changed_files": 5,
+      "idempotent": true
+    }
+  ]
+}

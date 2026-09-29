@@ -1,0 +1,309 @@
+{
+  "passed": true,
+  "descriptor_cases": 30,
+  "bit_exact": true,
+  "field_cases": 6,
+  "full_size_reservations": [
+    {
+      "flip": false,
+      "target": 6,
+      "bytes": 18689279360
+    },
+    {
+      "flip": false,
+      "target": 8,
+      "bytes": 10877926784
+    },
+    {
+      "flip": false,
+      "target": 10,
+      "bytes": 18641055104
+    },
+    {
+      "flip": false,
+      "target": 12,
+      "bytes": 18616998272
+    },
+    {
+      "flip": true,
+      "target": 6,
+      "bytes": 18689279360
+    },
+    {
+      "flip": true,
+      "target": 8,
+      "bytes": 18665148800
+    },
+    {
+      "flip": true,
+      "target": 10,
+      "bytes": 18641055104
+    },
+    {
+      "flip": true,
+      "target": 12,
+      "bytes": 18616998272
+    }
+  ],
+  "workspace_limit": 22906492245,
+  "cases": [
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "patch": 6,
+      "flip": false
+    },
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "patch": 8,
+      "flip": false
+    },
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "patch": 8,
+      "flip": true
+    },
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "patch": 12,
+      "flip": true
+    },
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "target": 6,
+      "flip": false,
+      "paired": true
+    },
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "target": 6,
+      "flip": true,
+      "paired": true
+    },
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "target": 10,
+      "flip": false,
+      "paired": true
+    },
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "target": 10,
+      "flip": true,
+      "paired": true
+    },
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "target": 12,
+      "flip": false,
+      "paired": true
+    },
+    {
+      "shape": [
+        91,
+        113
+      ],
+      "target": 12,
+      "flip": true,
+      "paired": true
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "patch": 6,
+      "flip": false
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "patch": 8,
+      "flip": false
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "patch": 8,
+      "flip": true
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "patch": 12,
+      "flip": true
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "target": 6,
+      "flip": false,
+      "paired": true
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "target": 6,
+      "flip": true,
+      "paired": true
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "target": 10,
+      "flip": false,
+      "paired": true
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "target": 10,
+      "flip": true,
+      "paired": true
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "target": 12,
+      "flip": false,
+      "paired": true
+    },
+    {
+      "shape": [
+        180,
+        231
+      ],
+      "target": 12,
+      "flip": true,
+      "paired": true
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "patch": 6,
+      "flip": false
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "patch": 8,
+      "flip": false
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "patch": 8,
+      "flip": true
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "patch": 12,
+      "flip": true
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "target": 6,
+      "flip": false,
+      "paired": true
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "target": 6,
+      "flip": true,
+      "paired": true
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "target": 10,
+      "flip": false,
+      "paired": true
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "target": 10,
+      "flip": true,
+      "paired": true
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "target": 12,
+      "flip": false,
+      "paired": true
+    },
+    {
+      "shape": [
+        512,
+        768
+      ],
+      "target": 12,
+      "flip": true,
+      "paired": true
+    }
+  ]
+}

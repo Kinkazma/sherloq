@@ -32,9 +32,10 @@ python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 ```
 
 For a fresh installation, run its `restore_installation.py` first. This cumulative
-update accepts both the original RC1 files and the previously published
-whole-image fix. It installs both corrections, verifies all five files before
-changing them, and saves originals under `.updates/rc1-ela-sliders-20260929/`.
+update accepts original RC1 files and installations carrying earlier fixes.
+It now also includes the [PatchMatch memory correction](PATCHMATCH-MEMORY.md),
+validates ten files before changing them, and saves originals under
+`.updates/rc1-patchmatch-memory-20260929/`. Earlier update backups are retained.
 Unknown local modifications are refused. Already updated files are left alone;
 the earlier `apply_whole_image_fix.py` command also applies this cumulative update
 when run from the current repository. Reopen the application to load the new code.

@@ -48,21 +48,18 @@ def features(image,patch=8,flip=False):
     return result[0],result[1] if flip else result[0],0.
 
 
-def features_sift(image,patch=8,flip=False,*,mirror_only=False):
+def features_sift(image,patch=8,flip=False):
     h,w=image.shape[:2]
     if min(h,w)<=3*patch or not 3<=patch<=32:raise ValueError('Invalid dense SIFT dimensions/settings (patch >= 3).')
     shape=(h-3*patch,w-3*patch,128)
-    from .dense_memory import workspace_bytes,normalize_inplace,mirror_inplace
-    from .dense_parallel import BUDGET
-    if workspace_bytes(h,w,1,patch,flip and not mirror_only,'metal')>BUDGET.limit:
-        raise ValueError('Dense descriptor working set exceeds the available workspace budget.')
+    if np.prod(shape)*4*(4 if flip else 3)+h*w*128>16*1024**3:raise ValueError('Dense descriptor working set exceeds 16 GiB. Select smaller regions or use Zernike.')
     gray=image.astype(np.float32).sum(axis=2)*np.float32(1/np.sqrt(np.float32(3)))
     lib=library();fp=ct.POINTER(ct.c_float)
     prepare=lib.sherloq_sift_inputs;prepare.argtypes=[fp,ct.c_int,ct.c_int,ct.c_int,ct.c_int,fp,fp];prepare.restype=ct.c_int
     compute=lib.sherloq_metal_sift_shared;compute.argtypes=[fp,fp,ct.c_int,ct.c_int,ct.c_int,fp,ct.c_char_p,ct.c_size_t];compute.restype=ct.c_int
     normalize=lib.sherloq_sift_normalize;normalize.argtypes=[fp,ct.c_int];normalize.restype=None
     result=[]
-    for mirror in ((1,) if mirror_only else range(2 if flip else 1)):
+    for mirror in range(2 if flip else 1):
         gradients=np.empty((8,h,w),np.float32);weights=np.empty(4,np.float32)
         if prepare(ptr(gray),w,h,patch,mirror,ptr(gradients),ptr(weights)):raise RuntimeError('SIFT preparation failed.')
         size=int(np.prod(shape))*4;size=((size+mmap.PAGESIZE-1)//mmap.PAGESIZE)*mmap.PAGESIZE
@@ -70,21 +67,6 @@ def features_sift(image,patch=8,flip=False,*,mirror_only=False):
         if compute(ptr(gradients),ptr(weights),w,h,patch,ptr(out),error,size):raise RuntimeError(error.value.decode(errors='replace'))
         del gradients
         normalize(ptr(out),shape[0]*shape[1])
-        if mirror:mirror_inplace(out)
-        normalize_inplace(out);result.append(out)
-    return result[0],result[-1],1.5*patch
-
-
-def paired_sift(image,patch,target_patch,flip=False):
-    """Build only the source and target that will actually be compared."""
-    from .dense_memory import compact_inplace,workspace_bytes
-    from .dense_parallel import BUDGET
-    if workspace_bytes(*image.shape[:2],1,patch,flip,'metal',target_patch)>BUDGET.limit:
-        raise ValueError('Dense descriptor working set exceeds the available workspace budget.')
-    first,_,source_shift=features_sift(image,patch,False)
-    second,_,target_shift=features_sift(image,target_patch,False,mirror_only=flip)
-    shift=max(source_shift,target_shift)
-    border=3*max(patch,target_patch)
-    height,width=image.shape[0]-border,image.shape[1]-border
-    return (compact_inplace(first,int(shift-source_shift),height,width),
-            compact_inplace(second,int(shift-target_shift),height,width),shift)
+        if mirror:out=np.ascontiguousarray(out[:,::-1])
+        out/=np.maximum(np.linalg.norm(out,axis=2,keepdims=True),1e-12);result.append(out)
+    return result[0],result[1] if flip else result[0],1.5*patch

@@ -147,8 +147,11 @@ class DenseCopyEngine:
                             metal_features=features_sift if method else metal_zernike
                             compute=lambda size,mirror:metal_features(crop,size,mirror)
                         else:compute=lambda size,mirror:features(crop,method,size,mirror)
-                        cached=compute(patch,flip if target_patch==patch else False)
-                        if target_patch!=patch:
+                        if backend=='metal' and method==1 and target_patch!=patch:
+                            from .metal_dense import paired_sift
+                            cached=paired_sift(crop,patch,target_patch,flip)
+                        else:cached=compute(patch,flip if target_patch==patch else False)
+                        if target_patch!=patch and not (backend=='metal' and method==1):
                             check(cancel)
                             first,_,source_shift=cached
                             _,second,target_shift=compute(target_patch,flip)
@@ -159,8 +162,9 @@ class DenseCopyEngine:
                             if method!=1:raise ValueError('Quarter-turn frame is only available for SIFT.')
                             from .sift_frames import quarter_turn_frame
                             first,second,center=cached
-                            transformed=quarter_turn_frame(first,cancel)
-                            cached=(transformed,transformed if first is second else quarter_turn_frame(second,cancel),center)
+                            inplace=backend=='metal' and method==1
+                            transformed=quarter_turn_frame(first,cancel,inplace=inplace)
+                            cached=(transformed,transformed if first is second else quarter_turn_frame(second,cancel,inplace=inplace),center)
                         check(cancel);self.descriptors.put(key,cached);self.counts['detections']+=1
                     a,b,_=cached
                     if quarter_turn:

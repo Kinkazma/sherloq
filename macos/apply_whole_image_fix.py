@@ -1,4 +1,4 @@
-"""Apply the cumulative whole-image and ELA slider fixes to a restored RC1 installation.
+"""Apply cumulative whole-image, ELA slider and PatchMatch memory fixes to RC1.
 
 Close SHERLOQ first. Run this script from a current checkout of the fork.
 Only the known RC1 files or already updated files are accepted.
@@ -11,6 +11,7 @@ from pathlib import Path
 import tempfile
 
 SUPPORT = Path(__file__).resolve().parent
+BACKUP_ROOT = '.updates/rc1-patchmatch-memory-20260929/source/'
 
 
 def digest(data):
@@ -48,29 +49,46 @@ def apply(installation):
         if digest(source) != hashes['after']:
             raise ValueError(f"Repository file does not match this update: {relative}")
         target = confined(root, 'source/' + relative)
-        before = target.read_bytes()
+        before = target.read_bytes() if target.exists() else None
+        before_hash = digest(before) if before is not None else None
         accepted = hashes['before'] if isinstance(hashes['before'], list) else [hashes['before']]
-        if digest(before) not in (*accepted, hashes['after']):
+        if before_hash not in (*accepted, hashes['after']):
             raise ValueError(f"Unrecognized installed file; left untouched: {relative}")
-        if digest(before) == hashes['after']:
+        if before_hash == hashes['after']:
             continue
-        backup = confined(root, '.updates/rc1-ela-sliders-20260929/source/' + relative)
-        if backup.exists() and backup.read_bytes() != before:
+        backup = confined(root, BACKUP_ROOT + relative)
+        absent = confined(root, BACKUP_ROOT + relative + '.absent')
+        # An empty .absent marker records a module newly introduced by this update.
+        if before is None:
+            if backup.exists() or (absent.exists() and absent.read_bytes() != b''):
+                raise ValueError(f"Existing backup differs: {backup}")
+            backup, backup_data = absent, b''
+        else:
+            if absent.exists():
+                raise ValueError(f"Existing backup differs: {absent}")
+            backup_data = before
+        if backup.exists() and backup.read_bytes() != backup_data:
             raise ValueError(f"Existing backup differs: {backup}")
-        plan.append((target, source, before, backup, target.stat().st_mode & 0o777))
-    for target, source, before, backup, mode in plan:
+        if not target.parent.is_dir():
+            raise ValueError(f"Missing installation directory: {target.parent}")
+        mode = target.stat().st_mode & 0o777 if before is not None else 0o644
+        plan.append((target, source, before, backup, backup_data, mode))
+    for target, source, before, backup, backup_data, mode in plan:
         backup.parent.mkdir(parents=True, exist_ok=True)
         if not backup.exists():
             with backup.open('xb') as stream:
-                stream.write(before)
+                stream.write(backup_data)
     changed = []
     try:
-        for target, source, before, backup, mode in plan:
+        for target, source, before, backup, backup_data, mode in plan:
             replace(target, source, mode)
             changed.append((target, before, mode))
     except Exception:
         for target, before, mode in reversed(changed):
-            replace(target, before, mode)
+            if before is None:
+                target.unlink()
+            else:
+                replace(target, before, mode)
         raise
     return len(changed)
 

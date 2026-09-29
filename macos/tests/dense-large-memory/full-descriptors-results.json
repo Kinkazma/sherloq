@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "source_shape": [
+    3510,
+    4387,
+    3
+  ],
+  "cases": [
+    {
+      "target": 6,
+      "shape": [
+        3486,
+        4363,
+        128
+      ],
+      "shift": 12.0,
+      "seconds": 27.740903207974043,
+      "peak_rss_bytes": 16784162816,
+      "reserved_bytes": 18689279360,
+      "eligible": 14787947
+    },
+    {
+      "target": 8,
+      "shape": [
+        3486,
+        4363,
+        128
+      ],
+      "shift": 12.0,
+      "seconds": 28.589436583046336,
+      "peak_rss_bytes": 16784162816,
+      "reserved_bytes": 18665148800,
+      "eligible": 14865571
+    },
+    {
+      "target": 10,
+      "shape": [
+        3480,
+        4357,
+        128
+      ],
+      "shift": 15.0,
+      "seconds": 27.890145124983974,
+      "peak_rss_bytes": 16784162816,
+      "reserved_bytes": 18641055104,
+      "eligible": 14777274
+    },
+    {
+      "target": 12,
+      "shape": [
+        3474,
+        4351,
+        128
+      ],
+      "shift": 18.0,
+      "seconds": 27.93656295799883,
+      "peak_rss_bytes": 16784162816,
+      "reserved_bytes": 18616998272,
+      "eligible": 14715068
+    }
+  ],
+  "full_resolution": true,
+  "all_mirror_scales": true,
+  "matching": false
+}
