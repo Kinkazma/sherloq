@@ -2,7 +2,8 @@
 
 Scope: exported native source relative to the upstream revision in README.
 The patch is an exact source transfer, not a claim that every feature has passed
-scientific or end-user validation. Private changelogs and screenshots are omitted.
+scientific or end-user validation. Private changelogs and test images are omitted.
+For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
 | Area | Changes visible in source | Principal paths under source/gui/sherloq_app |
 | --- | --- | --- |

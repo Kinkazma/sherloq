@@ -1,268 +1,90 @@
 # SHERLOQ — macOS Apple Silicon community fork
 
-SHERLOQ was created by **Guido Bartoli**. This fork preserves the original
-[project](https://github.com/GuidoBartoli/sherloq), history, credits and GPLv3
-license. Native integration changes were prepared with AI assistance and are
-maintained here by [Kinkazma](https://github.com/Kinkazma).
-
-**Start with the [macOS installation guide](macos/README.md).** It covers the
-complete installation, included models and runtimes, source development, and
-validation limits. Large installation files are hosted in this repository's
-[Releases](https://github.com/Kinkazma/sherloq/releases), with a downloader that
-verifies and assembles all six parts. No external cloud account is required.
-
-The application changes are in `gui/`; native integration, build sources,
-synthetic tests and download scripts are in `macos/`. Modified files are recorded
-in Git and [the change index](macos/docs/NATIVE-CHANGE-INDEX.md), dated
-29 September 2026, relative to upstream revision
-`3fe95fcb56037e47e2eefbc2d3785804a31a74f5`. Component-specific licenses remain
-in place. This candidate is independent of the original author's releases.
-The upstream installation instructions below describe the original project;
-use the macOS guide above for this fork's native installation layout.
-
----
-
-<p align="center">
-  <img src="logo/sherloq.png" width="600px" alt="Sherloq" />
-  <br><b>An open source digital image forensic toolset</b>
-</p>
-
-# Introduction
-"*Forensic Image Analysis is the application of image science and domain expertise to interpret the content of an image and/or the image itself in legal matters. Major subdisciplines of Forensic Image Analysis with law enforcement applications include: Photogrammetry, Photographic Comparison, Content Analysis, and Image Authentication.*" (Scientific Working Group on Imaging Technologies)
-
-**Sherloq** is a personal research project about implementing a fully integrated environment for digital image forensics. It is not meant as an automatic tool that decide if an image is forged or not (that tool probably will never exist...), but as a companion in experimenting with various algorithms found in the latest research papers and workshops.
-
-While many commercial solutions have high retail prices and often reserved to law enforcement and government agencies only, this toolset aims to be a both an extensible framework and a starting point for anyone interested in making experiments in this particular application of digital signal processing.
-
-I strongly believe that *security-by-obscurity* is the wrong way to offer any kind of forensic service (i.e. "Using this proprietary software I guarantee you that this photo *is* pristine... and you have to trust me!"). Following the open-source philosophy, everyone should be able to try various techniques on their own, gain knowledge and share it to the community... even better if they contribute with code improvements! :)
-
-- [History](#history)
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Updates](#updates)
-- [Bibliography](#bibliography)
-
-# History
-The first version was written in 2015 using C++11 to build a command line utility with many options, but soon it turned to be too cumbersome and not much interactive. That version could be compiled with CMake after installing OpenCV, Boost and AlgLib libraries. This first proof of concept offered about 80% of planned features (see below for the full list).
-
-While also including novel algorithms, the 2017 version mainly added a Qt-based multi-window GUI to provide a better user experience. Multiple analyses could be shown on screen and a fast zoom/scroll  viewer was implemented for easier image navigation. That project could be compiled with Qt Creator with Qt 5 and OpenCV 3 and covered about 70% of planned features.
-
-Fast-forward to 2020 when I decided to port everything in Python (PySide2 + Matplotlib + OpenCV) for easier development and deployment. While this iteration is just begun and I have yet to port all the previous code on the new platform, I think this will be the final "form" of the project (as long as someone does not volunteer up to develop a nice web application!).
-
-I'm happy to share my code and get in contact with anyone interested to improve or test it, but please keep in mind that this repository is *not* intended for distributing a final product, my aim is just to publicly track development of an *unpretentious educational tool*, so expect bugs, unpolished code and missing features! ;)
-
-# Features
-This list contains the functions that the toolkit will (hopefully) provide once beta stage is reached (**NOTE:** functions displayed in _italics_ inside the program are not yet implemented!).
-
-## Interface
-- Modern Qt-based GUI with multiple tool window management
-- Support for many formats (JPEG, PNG, TIFF, BMP, WebP, PGM, PFM, GIF)
-- Highly responsive image viewer with real-time pan and zoom
-- Many state-of-the-art algorithms to try out interactively
-- Export both visual and textual results of the analysis
-- Extensive online help with explanations and tutorials
-
-## Tools
-
-### General
-- __Original Image__: display the unaltered reference image for visual inspection
-- __File Digest__: retrieve physical file information, crypto and perceptual hashes
-- __Hex Editor__: open an external hexadecimal editor to show and edit raw bytes
-- __Similar Search__: browse online search services to find visually similar images
-
-### Metadata
-- __Header Structure__: dump the file header structure and display an interactive view
-- __EXIF Full Dump__: scan through file metadata and gather all available information
-- __Thumbnail Analysis__: extract optional embedded thumbnail and compare with original
-- __Geolocation Data__: retrieve optional geolocation data and show it on a world map
-
-### Inspection
-- __Enhancing Magnifier__: magnifying glass with enhancements for better identifying forgeries
-- __Channel Histogram__: display single color channels or RGB composite interactive histogram
-- __Global Adjustments__: apply standard image adjustments (brightness, hue, saturation, ...)
-- __Reference Comparison__: open a synchronized double view for comparison with another picture
-
-### Detail
-- __Luminance Gradient__: analyze horizontal/vertical brightness variations across the image
-- __Echo Edge Filter__: use derivative filters to reveal artificial out-of-focus regions
-- __Wavelet Threshold__: reconstruct image with different wavelet coefficient thresholds
-- __Frequency Split__: split image luminance into high and low frequency components
-
-### Colors
-- __RGB/HSV Plots__: display interactive 2D and 3D plots of RGB and HSV pixel values
-- __Space Conversion__: convert RGB channels into HSV/YCbCr/Lab/Luv/CMYK/Gray spaces
-- __PCA Projection__: use color PCA to project pixel onto most salient components
-- __Pixel Statistics__: compute minimum/maximum/average RGB values for every pixel
-
-### Noise
-- __Noise Separation__: estimate and extract different kind of image noise components
-- __Min/Max Deviation__: highlight pixels deviating from block-based min/max statistics
-- __Bit Planes Values__: show individual bit planes to find inconsistent noise patterns
-- __Wavelet Blocking__: shows averaged noise levels in an image to find noise inconsistencies
-- __PRNU Identification__: exploit sensor pattern noise introduced by different cameras
+**SHERLOQ is the work of [Guido Bartoli and the original contributors](https://github.com/GuidoBartoli/sherloq).** Start with the [original project](https://github.com/GuidoBartoli/sherloq) for its introduction, history, research references and upstream development.
 
-### JPEG
-- __Quality Estimation__: extract quantization tables and estimate last saved JPEG quality
-- __Error Level Analysis__: show pixel-level difference against fixed compression levels
-- __Multiple Compression__: use a machine learning model to detect multiple compression
-- __JPEG Ghost Maps__: highlight traces of different compression levels in difference images
+This independent fork is maintained by [Kinkazma](https://github.com/Kinkazma). It brings together macOS Apple Silicon installation work, fixes and interface improvements, additional analysis workflows, and integrations of existing research methods. Development was assisted by AI. The original project and research authors retain their credits; adding a method to this interface does not make its underlying algorithm our invention.
 
-### Tampering
-- __Contrast Enhancement__: analyze color distribution to detect contrast enhancements
-- __Copy-Move Forgery__: use invariant feature descriptors for cloned area detection
-- __Composite Splicing__: exploit DCT statistics for automatic splicing zone detection
-- __Image Resampling__: estimate 2D pixel interpolation for detecting resampling traces
+[Download the complete macOS installation](https://github.com/Kinkazma/sherloq/releases/tag/native-macos-arm64-2026.09.29-rc1) · [Installation guide](macos/README.md) · [Full tool inventory](macos/docs/TOOLS.md) · [Changes](macos/docs/CHANGELOG.md) · [Credits and licenses](macos/docs/ATTRIBUTION.md)
 
+## What comes from the original project
 
-### Various
-- __Median Filtering__: detect processing traces left by nonlinear median filtering
-- __Illuminant Map__: estimate scene local light direction on estimated 3D surfaces
-- __Dead/Hot Pixels__: detect and fix dead/hot pixels caused by sensor imperfections
-- __Stereogram Decoder__: decode 3D images concealed in crossed-eye autostereograms
+The comparison baseline is [upstream revision `3fe95fc`](https://github.com/GuidoBartoli/sherloq/tree/3fe95fcb56037e47e2eefbc2d3785804a31a74f5). It already provides **38 tool entries**, including image inspection, metadata, colour and noise analysis, ELA, JPEG ghosts, copy-move detection, resampling, PRNU and **TruFor**. These are retained here, with adaptations in several areas.
 
+For the original descriptions and scientific references, please use [Guido's README](https://github.com/GuidoBartoli/sherloq#readme). The original [source history](https://github.com/GuidoBartoli/sherloq/commits/master/) and [GPLv3 license](LICENSE) are preserved in this fork.
 
-# Screenshots
-<p align="center">
-  <img src="screenshots/0_general.png" alt="General"/>
-  <br><b>General</b>: Original Image, Hex Editor, File Digest, Similar Search
-</p>
+## What this fork adds
 
-<p align="center">
-  <img src="screenshots/1_metadata.png" alt="Metadata"/>
-  <br><b>Metadata</b>: EXIF Full Dump, Header Structure
-</p>
+The current source defines **50 distinct tool entries: 38 inherited and 12 added**. Favorites are shortcuts and are not counted twice. This is an interface inventory, not a count of independently validated detectors.
 
-<p align="center">
-  <img src="screenshots/2_inspection.png" alt="Inspection"/>
-  <br><b>Inspection</b>: Enhancing Magnifier, Channel Histogram, Reference Comparison
-</p>
+| Added entry or group | Contribution in this fork |
+| --- | --- |
+| C2PA Validation | Interface for checking signed provenance, asset integrity and local trust |
+| Noisesniffer | Integration of the existing research implementation for noise inconsistencies |
+| ZERO JPEG Grids | Integration of the existing ZERO method for JPEG-grid analysis |
+| Copy-Move Forgery 2 | Additional matching workflow with regions, dense descriptors, geometric controls and grouped results |
+| Adaptive CFA | Integration of an existing colour-filter-array analysis method |
+| Clone Detectors | Interface to additional research backends; availability depends on the included backend and weights |
+| Automatic Clone Search | Combined clone-search workflow, including microscopy and PatchMatch branches |
+| Complete Automatic Analysis | Combined workflow with clone-search results and ELA/JPEG-ghost views |
+| CAT-Net v2, SAFIRE, FOCAL, AdaIFL | Four additional research-method integrations, with original component credits and licenses |
 
-<p align="center">
-  <img src="screenshots/3_detail.png" alt="Detail"/>
-  <br><b>Detail</b>: Luminance Gradient, Echo Edge Filter, Wavelet Threshold, Frequency Split
-</p>
+See the [complete inventory](macos/docs/TOOLS.md) for all inherited and added entries and their current categories. Dependencies and model availability vary; optional missing checkpoints are recorded in the installation's `MISSING-WEIGHTS.md`.
 
-<p align="center">
-  <img src="screenshots/4_colors.png" alt="Colors"/>
-  <br><b>Colors</b>: RGB/HSV Plots, Space Conversion, PCA Projection, Pixel Statistics 
-</p>
+### Changes to existing tools and the interface
 
-<p align="center">
-  <img src="screenshots/5_noise.png" alt="Noise"/>
-  <br><b>Noise</b>: Signal Separation, Min/Max Deviation, Bit Plane Values
-</p>
+The contribution also includes ELA correctness and caching work; additional JPEG-analysis behavior; comparison and inspection controls; background processing and cancellation; region and layer views; localization and favorites; and native macOS build and launcher support. **TruFor is adapted from the original project, not a newly introduced method.** Illuminant Map and Dead/Hot Pixels also had entries upstream; implementation work on them is listed as an improvement to existing tools.
 
-<p align="center">
-  <img src="screenshots/6_jpeg.png" alt="JPEG"/>
-  <br><b>JPEG</b>: Quality Estimation, Error Level Analysis 
-</p>
+The [change index](macos/docs/CHANGELOG.md) and [file-level index](macos/docs/NATIVE-CHANGE-INDEX.md) describe the code changes. Colored outlines in historical test captures mark additions or extensions; they are not a scientific confidence rating or a complete authorship map.
 
-<p align="center">
-  <img src="screenshots/7_tampering.png" alt="Tampering"/>
-  <br><b>Tampering</b>: Contrast Enhancement, Copy/Move Forgery, Composite Splicing, Median Filtering
-</p>
+## Screenshots
 
-# Installation
+The gallery below preserves screenshots from the original SHERLOQ project, with attribution. It illustrates the inherited interface; the [tool inventory](macos/docs/TOOLS.md) describes the additional tools in this fork.
 
-## [1/4] Download source code
+<details>
+<summary>Original SHERLOQ screenshots — credited to the upstream project</summary>
 
-Clone the current repository into a local folder and change current directory to it.
+These inherited captures illustrate the original interface, not this fork's complete feature set. They are retained from [Guido Bartoli's project](https://github.com/GuidoBartoli/sherloq#screenshots).
 
-## [2/4] Create virtual environment
+| Area | Original capture |
+| --- | --- |
+| General | [Original image, hex editor, digest and similarity search](screenshots/0_general.png) |
+| Metadata | [EXIF and header structure](screenshots/1_metadata.png) |
+| Inspection | [Magnifier, histogram and comparison](screenshots/2_inspection.png) |
+| Detail | [Gradient, echo, wavelet and frequency tools](screenshots/3_detail.png) |
+| Colors | [Plots, conversion, PCA and statistics](screenshots/4_colors.png) |
+| Noise | [Signal, min/max, bit planes and wavelet tools](screenshots/5_noise.png) |
+| JPEG | [Quality estimation and ELA](screenshots/6_jpeg.png) |
+| Tampering | [Contrast, copy-move, splicing and median filtering](screenshots/7_tampering.png) |
 
-Sherloq uses Python 3.11. The recommended setup uses [uv](https://docs.astral.sh/uv/) because it provides the same workflow on Linux, macOS and Windows, can install Python when needed, and keeps the project environment in the local `.venv` folder.
+</details>
 
-Install `uv` following the [official installation guide](https://docs.astral.sh/uv/getting-started/installation/), then create the environment from the Sherloq root folder:
+## Install the macOS candidate
 
-```console
-$ uv venv --python 3.11
-```
+The supported packaged target is **macOS on Apple Silicon (ARM64)**. The complete installation is approximately **10.9 GB**, hosted in this repository's Release as six parts. It includes the application, installed Python environments, native dependencies and all 185 model/checkpoint files present in the frozen snapshot. It does not require a Mega account.
 
-The repository also includes a `.python-version` file, so future `uv` commands use Python 3.11 by default.
+1. Download this repository with **Code → Download ZIP**, or clone it. Open Terminal in the extracted repository folder.
+2. With **Python 3.11 or newer**, run:
 
-## [3/4] Install dependencies
+   ```sh
+   python3 macos/download_installation.py ~/Downloads/SHERLOQ-download
+   ```
 
-```console
-$ uv pip install -r gui/requirements.txt
-```
+3. The script downloads, verifies and assembles `SHERLOQ-installation-macos-arm64.zip`. Extract that ZIP into the location where you intend to keep the installation.
+4. Open Terminal in the extracted `SHERLOQ-installation` folder and run:
 
-Some experimental AI-backed tools need additional packages. Install them only if you plan to use those tools:
+   ```sh
+   python3 restore_installation.py
+   venv/bin/python app_start.py
+   ```
 
-```console
-$ uv pip install -r gui/requirements_ai_solutions.txt
-```
+Restoration needs **Apple's command-line developer tools**. It verifies the manifest, relocates the supplied environments and native libraries, signs modified binaries locally, and builds `build/SHERLOQ.app`. This app uses the surrounding installation directory; it is not a self-contained app to move on its own.
 
-## [4/4] Launch program
+Allow roughly **37 GB** for downloaded parts, the assembled ZIP and the extracted installation. Completed parts are reused when the downloader is rerun. See the [installation guide](macos/README.md) for prerequisites, manual assembly, relocation and source-development instructions. GitHub's automatic **Source code** archives contain the repository; the six separate Release files provide the complete installed environment.
 
-Sherloq can be launched from the repository root. The application package resolves icons, models and bundled tools through centralized project paths.
+## Validation and contribution
 
-#### Linux/macOS
+The release candidate was extracted, checked and restored on the same Apple Silicon Mac. Synthetic ELA, caching, QImage ownership and offscreen startup tests passed; both supplied Python environments imported NumPy/OpenCV/PyTorch, and native PatchMatch/ZERO libraries were rebuilt from retained sources. These checks do not establish scientific accuracy for every method or validation on another machine. See [validation details](macos/README.md#validation-and-limits).
 
-```console
-$ source .venv/bin/activate
-$ python -m gui.sherloq_app
-```
+The current packaged release is a native desktop candidate. Browser work is separate. For SHERLOQ's scientific background and upstream roadmap, return to [the original project](https://github.com/GuidoBartoli/sherloq). For this fork's code, start with `gui/` and `macos/`, or the [proposed contribution groups](macos/docs/PR-PLAN.md).
 
-#### Windows PowerShell
-
-```console
-> .venv\Scripts\Activate.ps1
-> python -m gui.sherloq_app
-```
-
-You can also use the repository-root compatibility launcher:
-
-```console
-$ python sherloq.py
-```
-
-NOTE for Linux users: if this error is displayed:
-```
-qt.qpa.plugin: From 6.5.0, xcb-cursor0 or libxcb-cursor0 is needed to load the Qt xcb platform plugin.
-qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
-This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
-```
-Run this command from the terminal: `sudo apt install -y libxcb-cursor-dev` 
-
-# Project Structure
-
-The Python Qt application now lives in the importable `gui/sherloq_app` package:
-
-- `main.py`: Qt application entry point and main window.
-- `core/`: shared image-processing helpers such as JPEG utilities and file loading.
-- `ui/`: reusable Qt widgets, viewers, tables and the tool tree.
-- `tools/`: analysis widgets grouped by toolbox category (`general`, `metadata`, `inspection`, `detail`, `colors`, `noise`, `jpeg`, `tampering`, `various`).
-- `paths.py`: centralized access to icons, models and bundled native helpers so code no longer depends on launching from `gui`.
-
-Large bundled assets and third-party research components remain under `gui/icons`, `gui/models`, `gui/noiseprint`, `gui/pyexiftool`, `gui/butteraugli`, `gui/ssimulacra` and optional `gui/TruFor_main`.
-
-See [docs/project-structure.md](docs/project-structure.md) for a contributor-oriented map.
-
-# Updates
-When a new version is released, update the local working copy with Git or by downloading the latest source, then refresh the environment from the Sherloq root folder:
-
-```console
-$ uv pip install --upgrade -r gui/requirements.txt
-```
-
-If you installed the optional AI dependencies, refresh them too:
-
-```console
-$ uv pip install --upgrade -r gui/requirements_ai_solutions.txt
-```
-
-# Recommended Resources for Getting Started
-- Paper with practical examples and thoughtful analysis for techniques that have since been implemented in Sherloq: "A Picture's Worth: Digital Image Analysis and Forensics" ([Neal Krawetz](https://www.hackerfactor.com/)) [[paper](http://blackhat.com/presentations/bh-dc-08/Krawetz/Whitepaper/bh-dc-08-krawetz-WP.pdf)]
-- Thesis with practical examples and thoughtful analysis for using the "JPEG Ghosts", "Image Resampling" and "Noise Wavelet Blocking" tools implemented in Sherloq. This work also offers insights towards the use and reliability of AI driven approaches in Digital Image Forensics. ([UHstudent](https://github.com/UHstudent)) [[paper](https://github.com/UHstudent/digital_image_forensics_thesis/blob/main/Thesis%20text_Digital%20Image%20Forensics-A%20Comparative%20Study%20between%20AI%20and%20traditional%20approaches.pdf)]
-
-# References for Algorithms Implemented in Sherloq
-- Image Resampling: "Exposing Digital Forgeries by Detecting Traces of Re-sampling" (Alin C. Popescu and Hany Farid) [[paper](https://farid.berkeley.edu/downloads/publications/sp05.pdf)]
-- JPEG Ghosts: "Exposing Digital Forgeries from JPEG Ghosts" (H. Farid) [[paper](https://farid.berkeley.edu/downloads/publications/tifs09.pdf)]
-- Noise Wavelet Blocking: "Using noise inconsistencies for blind image forensics" (Babak Mahdian and Stanislav Saic) [[paper](https://www.utia.cas.cz/files/Soutez_09/Saic/Mahdian%20Saic%20_2009_Image-and-Vision-Computingfinal%20final%20version%20.pdf)]
-
-
-# Bibliography
-- "Noiseprint: a CNN-based camera model fingerprint" (Davide Cozzolino, Luisa Verdoliva) [[website](http://www.grip.unina.it/research/83-multimedia_forensics/107-noiseprint.html)]
-- "Two Improved Forensic Methods of Detecting Contrast Enhancement in Digital Images" (Xufeng Lin, Xingjie Wei and Chang-Tsun Li) [[paper](https://d1wqtxts1xzle7.cloudfront.net/45863267/Two_Improved_Forensic_Methods_of_Detecti20160522-6998-1xf1cu.pdf?1463954131=&response-content-disposition=inline%3B+filename%3DTwo_improved_forensic_methods_of_detecti.pdf&Expires=1598306603&Signature=dYuKum8UF2NJS~2Jz2pFObtzdjKfYIcYD4GksLVNN0izhm2k10TVPV~UHKS0DbMLXKaurZPq7uvG~qQwQwwF4JKbY0zoCqZI-p9KZsEMYhlRJrYM8nNQL0V7sHMTLd3aYjNLWup~-i1RzJcJdRqzjU9doGxRJvHdsX6tbwIxNRq3JiYyldaXei4xJSJAbX7EoUOut2uh~jsPnsAbDOIrYpwUhebut-XsN2c5MXargD2UhKxZ3Ifwo4hJvz8Bl2sPys~E8P6vDlqOeEHoeByZms6JQON97EGsCTT5GYF98rQLDbqj0NroYE2zDMGcu9IUp8VV1Fotqci1G6eELTXx6w__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)]
+SHERLOQ retains its [GPLv3 license](LICENSE). Third-party implementations, models and images retain their applicable notices and rights; see [attribution](macos/docs/ATTRIBUTION.md). This is an independent contribution, not an official release or endorsement by Guido Bartoli.

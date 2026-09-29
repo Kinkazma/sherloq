@@ -14,7 +14,22 @@ than 2 GiB each. It includes the application, Python environments, native
 dependencies, research components and all model weights present in the frozen
 installation. The files are hosted on GitHub; no Mega account is needed.
 
-Download this repository, then run with Python 3.11 or newer:
+### Prerequisites
+
+Use an Apple Silicon Mac (ARM64), Python 3.11 or newer, and Apple's command-line developer tools. Check the active Python with `python3 --version` and the architecture with `uname -m` (expected: `arm64`). If your Python 3.11+ executable is named `python3.11` or `python3.12`, use that name in place of `python3` in the download and restoration commands.
+
+Check the developer tools with `xcode-select -p`. If they are absent, run `xcode-select --install` and complete Apple's installer before restoring. The bundled launcher is built locally; this is not an Apple-notarized application distribution.
+
+### Download and restore
+
+Obtain this repository with GitHub's **Code → Download ZIP**, then extract it and open Terminal in its folder. Alternatively:
+
+```sh
+git clone https://github.com/Kinkazma/sherloq.git
+cd sherloq
+```
+
+Run with Python 3.11 or newer:
 
 ```sh
 python3 macos/download_installation.py ~/Downloads/SHERLOQ-download
@@ -36,7 +51,27 @@ venv/bin/python app_start.py
 Restoration requires macOS ARM64, Python 3.11+ and Apple's command-line developer
 tools. It verifies the installation manifest, relocates bundled environments,
 locally signs changed native libraries and builds `build/SHERLOQ.app`.
-The application bundle can subsequently be opened in Finder.
+The application bundle can subsequently be opened in Finder. Keep it with the complete installation: `build/SHERLOQ.app` refers to the containing directory and is not a standalone app that can be moved on its own. Choose the final installation location before restoring. If you need to relocate it later, extract a fresh copy of the verified ZIP at the new location and restore that copy; the original manifest describes the files before relocation.
+
+### Manual download and assembly
+
+If you prefer browser downloads, save **all six** `.part01` through `.part06` files and `SHA256SUMS` from the Release into the same folder. In Terminal, enter that folder and run:
+
+```sh
+shasum -a 256 -c SHA256SUMS
+cat SHERLOQ-installation-macos-arm64.zip.part0{1,2,3,4,5,6} > SHERLOQ-installation-macos-arm64.zip
+shasum -a 256 SHERLOQ-installation-macos-arm64.zip
+```
+
+Do not continue if any part fails verification. The final ZIP must have SHA-256:
+
+```text
+f1cbdaedf5f287630eb0fdb6c06a161643e9b16614c65663e963afd33a5f427d
+```
+
+Extract the ZIP and follow the restoration commands above. The numbered files are raw parts of one ZIP; do not try to extract them individually. GitHub's automatic **Source code (zip)** and **Source code (tar.gz)** downloads provide sources, not the installed environments or model bundle.
+
+If a downloaded part is interrupted or incorrect, rerun the downloader: completed valid parts are kept, and invalid parts are downloaded again. After successful assembly and verification, you may remove the six part files to recover space; keep the verified ZIP if you want an untouched restoration copy.
 
 ## Source development
 

@@ -23,7 +23,7 @@ Synthetic tests check ELA against a direct OpenCV formula, including negative
 compression errors; exact repeatability and retained cache behavior; image
 memory ownership; and a Qt main-window startup in an isolated settings directory.
 These tests do not measure false positives or scientific efficacy. They do not
-validate all 47 panels, a physical GPU, excluded weights or every native backend.
+validate all 50 tool entries, a physical GPU, excluded weights or every native backend.
 Timing values from a small synthetic test are not end-to-end speedups. No legacy
 performance claim is carried into this candidate without a redistributable test.
 
