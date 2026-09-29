@@ -5,8 +5,9 @@ I ran all fourteen tools below on my Apple Silicon installation and captured
 source in this fork at revision `0cf050dbcf66859b654467401cfc53d8e864c323`.
 These are demonstrations on a few images, not an accuracy benchmark.
 
-The [main README galleries](../../README.md#screenshots) display the captures
-inside expandable sections. The original SHERLOQ screenshots remain separately
+The [main README gallery](../../README.md#screenshots) presents the texture
+examples inside an expandable section. The coffee runs below are retained as
+reproducible technical examples, outside the main presentation. The original SHERLOQ screenshots remain separately
 credited to Guido Bartoli's project.
 
 ## Input photographs and edits
