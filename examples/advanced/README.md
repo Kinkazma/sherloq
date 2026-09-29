@@ -1,4 +1,6 @@
-# Fourteen additional SHERLOQ tool examples
+# Recorded spiral and earlier technical examples
+
+For the current city photograph and its edit reference, see the [Rue Clamar gallery](../street/README.md). The spiral pair and its copy-move examples below remain in the main presentation.
 
 I ran all fourteen tools below on my Apple Silicon installation and captured
 23 views of their actual interfaces and results. The tool modules match the

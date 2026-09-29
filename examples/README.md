@@ -30,6 +30,15 @@ dependencies and run `python examples/render_examples.py` from the repository
 root. The script uses the repository's actual tool code and writes PNGs into
 `screenshots/fork/`. Font rendering and timing labels can vary by machine.
 
+## City photograph with an edit reference
+
+The [Rue Clamar examples](street/README.md) add 21 actual tool views using my
+original photograph, edited input and separate reference of changed areas.
+Aligned crops make the clouds, signs and pedestrian easy to compare. The
+reference is never supplied to a detector. Together with the spiral copy-move
+examples, this covers the fourteen tools without using the coffee photographs
+in the main gallery.
+
 ## Fourteen additional tools
 
 The [extended examples](advanced/README.md) cover clone searches, ELA and its layers,

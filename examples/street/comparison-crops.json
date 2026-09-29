@@ -1,0 +1,23 @@
+[
+  {
+    "label": "Sky",
+    "x": 1860,
+    "y": 880,
+    "width": 850,
+    "height": 500
+  },
+  {
+    "label": "Signs",
+    "x": 2630,
+    "y": 2410,
+    "width": 520,
+    "height": 530
+  },
+  {
+    "label": "Pedestrian",
+    "x": 3400,
+    "y": 2860,
+    "width": 500,
+    "height": 560
+  }
+]

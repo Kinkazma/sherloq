@@ -1,0 +1,53 @@
+{
+  "source_revision": "0ea97f373dbf9cea41f8ee7d2c053839ef8a53e0",
+  "input_dimensions": [
+    4387,
+    3510
+  ],
+  "reference_used_for_inference": false,
+  "note": "The edited PNG was recompressed losslessly for distribution; its decoded pixels equal the captured input. Both encoded-file hashes are recorded. Display previews are separate and were not used for inference.",
+  "tool_modules": {
+    "gui/sherloq_app/tools/jpeg/ela.py": "fa0134a4bec443459ff384004ee8b6c739d6ef94945a0207cd8127e01ca43f55",
+    "gui/sherloq_app/tools/noise/noisesniffer.py": "63faa3591feb7459a7715aeb56029b14c44459a93516cdd113e2a278f789930c",
+    "gui/sherloq_app/tools/jpeg/zero.py": "2628d6946799f0033b1dcdec1a868a8073919a5e513545962807dc8bcb71eb50",
+    "gui/sherloq_app/tools/tampering/adaptive_cfa.py": "a79c634c19b837838cda271824d7e8bd8f0ab000d38b5b5e3b993abfc0eb0c89",
+    "gui/sherloq_app/tools/various/illuminant.py": "5c3dc8ffa6df9a10a8bc0c0ac97a92e3f4239984293120bac57e509686abf4db",
+    "gui/sherloq_app/tools/various/defect_pixels.py": "5103d3a9dd5899dbdb406d76a5d116601108d44c8e5410ae3c831cb764deb3d4",
+    "gui/sherloq_app/tools/jpeg/multiple.py": "bff3fd0d194681879fcbd3096135671be6d7ab19f63b7d95604745a8fe98b0fb",
+    "gui/sherloq_app/tools/various/trufor.py": "f031e1bbbc1a27a997d0572ae82528d4ec14b1dad3992cbe9f5739ff38266bd2",
+    "gui/sherloq_app/tools/various/catnet.py": "214d520d2bf8a262e39bae2cf285b7a097eb6761527e24fa9da6682afb274fa5",
+    "gui/sherloq_app/tools/various/safire.py": "d660a7eda5da4c27f4758e8daf266285d29fa7b2074d7e6bc1018c6b6dbad9ca",
+    "gui/sherloq_app/tools/various/focal.py": "9f6be2fef4c3273638dae71637055edfb3a4e0ce83e369e1a8f716b7efac9562",
+    "gui/sherloq_app/tools/various/adaifl.py": "3a445555e811ddae7754f2ed9ab5909bd0ba3e2c8c8d9a3fdede3f7542195b12"
+  },
+  "files": {
+    "adaifl.png": "c658b738de2e0e146e0bbebacb4ce6502c8d40faeddd0b9afe7076a7220cf21b",
+    "adaptive_cfa.png": "b7269eaba93839d2924737773690a93ad559b68e03e255132afbb5538966e0dd",
+    "catnet.png": "f2687b3adb9d33b62666896c43c760c24d4be76d8f5ce859a1c7d42aa1a2b3c1",
+    "comparison-details.png": "3d9acea540d2bb29a540c51698768dda201249aed307b0c51f884ff9c9fcc711",
+    "defect_pixels-detail.png": "9d112d270076d7d8c679e4293b75f6614bb7e99b0be8244797f007aebe1e2a8f",
+    "defect_pixels-mask.png": "e9986af17de117cdbccf8ddec5101520d5448e9aba9da4a9ddf71626e587b63f",
+    "defect_pixels.png": "c711d1c7d64fc6b826b420bbd15186a01c923747799fa727883ea021ce92d619",
+    "ela-energy.png": "09e55781493fe93ed1fa8e3804c1d8baa676665cea73e7a60d0d816127d73fda",
+    "ela-layers.png": "a3701b45933bc397bb13b2d5e0639dee92a262d7e7c681763d0b5b4cfb1c3416",
+    "ela.png": "ef925ec51d0c196106e50e128f573d2450c3824537cb63afad4113aa980d43fe",
+    "focal.png": "e6021e06dd854339267da7d34d2f31a25ce9d4f84a3b4d86001977bc82e882c0",
+    "illuminant.png": "04eb91c8e506055b2a98bd0db2d1effcf2e37a284c7d263cbdc796502ad3c47f",
+    "multiple-double-jpeg.png": "f594b5233c9ff2333ba61b2a40df8dc5b203a8b7f8322c70e7b53e4a067a1ff5",
+    "multiple.png": "535737c8e145fc6c87b78f5c01310badf7417db45a836b95e91232d1f2d3d1ee",
+    "noisesniffer.png": "71d739301cd46a6ed5453dc0a4e116c0bc74e448d4eecedf00f60982e5187f74",
+    "safire.png": "6668e1e05c076622fa9278b3a0185f08c5fd7733c69a73660a408aafdd57dcc8",
+    "street-edited-preview.png": "d94f43fcb07c28ffde6bb27ef818450f3bc03c7e0a53c2b58051151ac4d57242",
+    "street-edited.png": "288e77d27432932a42c5c34550dc1e6ab2f98c173e706bc704b5338ea4daf70d",
+    "street-original-preview.jpg": "dfc1447ba98047c609770a0f3fae50248d1fb383641216aa0820a71d5c977fa0",
+    "street-original.jpg": "9b97fa1e07b6c74c20a2151c0998a100b3eb04864a8b6e3349b354486853262d",
+    "street-reference-preview.jpg": "f364b91442e7cfb81c09042b12732406f5ad568134da83ea69eea3215c39b16e",
+    "street-reference.jpg": "efac7ac4c308ab7ef5add7b9ab0b8c1d5ebad511c2ac5af7021e7a378b958386",
+    "trufor-confidence.png": "49fdaf78a53f2fbe5350d6f569108d6307572051552bca5330435c5eccf6efd1",
+    "trufor.png": "d49b1bf5b4d340d499344e09537c83e608e9ef088c01c9b8b41e15a0699c94cd",
+    "zero-foreign.png": "2181571fc94f1dffc5c230b5dd5ad403cb64c714515bf0c76f6e212ac8f74d8b",
+    "zero-grids.png": "5eadeef8e2ddff12249e37610abfda5f4007e29f56836fcc4b947b9829681e0b",
+    "zero-pedestrian.png": "ec21dc36113b57337368c7da632a63ef747b418ebe9809b8b79ec9ad48553cc5",
+    "zero.png": "c7e46757ebaecefe8b4d946e2e5c2448b2c971d693ebd57cc07d3130f863b3df"
+  }
+}
