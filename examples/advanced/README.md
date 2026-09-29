@@ -1,6 +1,6 @@
 # Recorded spiral and earlier technical examples
 
-For the current city photograph and its edit reference, see the [Rue Clamar gallery](../street/README.md). The spiral pair and its copy-move examples below remain in the main presentation.
+For the current city photograph and its edit reference, see the [Street Photo gallery](../street/README.md). The spiral pair and its copy-move examples below remain in the main presentation.
 
 I ran all fourteen tools below on my Apple Silicon installation and captured
 23 views of their actual interfaces and results. The tool modules match the
@@ -49,9 +49,12 @@ edited TIFF, saved as PNG without additional image compression loss. It does
 not contain the coloured SHERLOQ annotations. I used it directly for
 Copy-Move Forgery 2, Automatic Clone Search and both ELA views.
 
-| Original before my edits | Edited input to these analyses |
-| --- | --- |
-| ![Original texture](../../screenshots/fork/texture-original.png) | ![Edited texture, without analysis annotations](texture-edited.png) |
+| Original | Edited input | My edit reference |
+| --- | --- | --- |
+| ![Original texture](../../screenshots/fork/texture-original.png) | ![Edited texture, without analysis annotations](texture-edited.png) | ![My spiral edit reference](../spiral/spiral-reference.png) |
+
+I also supplied a separate reference showing the areas I changed. It is used only
+for presentation, never as detector input. See the [aligned spiral comparisons](../spiral/README.md).
 
 These texture images are my supplied example material; the Rachel Michetti
 CC0 credit above applies only to the coffee photograph and its derivatives.

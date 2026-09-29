@@ -32,7 +32,7 @@ root. The script uses the repository's actual tool code and writes PNGs into
 
 ## City photograph with an edit reference
 
-The [Rue Clamar examples](street/README.md) add 21 actual tool views using my
+The [Street Photo examples](street/README.md) add 21 actual tool views using my
 original photograph, edited input and separate reference of changed areas.
 Aligned crops make the clouds, signs and pedestrian easy to compare. The
 reference is never supplied to a detector. Together with the spiral copy-move
@@ -65,3 +65,6 @@ full-field 16-bit TIFF. No additional change was made to the supplied crop.
 
 These credits apply to the BBBC039 image and the two panels using it;
 the separately supplied microscopy analysis export is a different figure.
+
+The [spiral reference gallery](spiral/README.md) compares my original, edited input
+and supplied edit reference with actual Copy-Move Forgery 2 and ELA outputs.

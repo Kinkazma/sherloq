@@ -1,0 +1,266 @@
+[
+  {
+    "tool": "cloning2",
+    "title": "Copy-Move Forgery 2",
+    "input": "texture-edited.png",
+    "input_sha256": "8553df70ebaa7c5dfc2757fc5fa01ef2b2b7d2b8e521489f237f65bc596a664f",
+    "module_sha256": "869f7de90df58ac5bad8f6362a66ebaa15ad2c5d3f43b9b69a269c8a3a112669",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "PatchMatch Zernike"
+      },
+      {
+        "type": "choice",
+        "value": "px"
+      },
+      {
+        "type": "choice",
+        "value": "Similitude"
+      },
+      {
+        "type": "choice",
+        "value": "D\u00e9placer"
+      },
+      {
+        "type": "number",
+        "value": 6000
+      },
+      {
+        "type": "number",
+        "value": 6
+      },
+      {
+        "type": "number",
+        "value": 8
+      },
+      {
+        "type": "number",
+        "value": 8
+      },
+      {
+        "type": "number",
+        "value": 3
+      },
+      {
+        "type": "number",
+        "value": 600.0
+      },
+      {
+        "type": "number",
+        "value": 5.0
+      },
+      {
+        "type": "number",
+        "value": 0.3
+      },
+      {
+        "type": "number",
+        "value": 50.0
+      },
+      {
+        "type": "number",
+        "value": 3.0
+      },
+      {
+        "type": "number",
+        "value": 2.0
+      },
+      {
+        "type": "number",
+        "value": 5.0
+      },
+      {
+        "type": "number",
+        "value": 1774.0
+      },
+      {
+        "type": "check",
+        "label": "Miroir dense",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "CPU",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Per-zone SIFT",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Automatique par zone",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Ignorer les intervalles entre zones",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Cercles",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Lignes",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Points centraux",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Biomes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Zones de recherche",
+        "value": true
+      }
+    ],
+    "labels": [
+      "D\u00e9tecteur",
+      "Points / links",
+      "\u00c9cartement maximum",
+      "S\u00e9paration minimum",
+      "Tol\u00e9rance descripteur",
+      "Proximit\u00e9 des biomes",
+      "G\u00e9om\u00e9trie",
+      "Erreur maximum",
+      "T\u00e9moins minimum",
+      "Rayon / bin dense",
+      "It\u00e9rations denses",
+      "Texture minimum",
+      "Points minimum / c\u00f4t\u00e9",
+      "Image enti\u00e8re",
+      "Longueur affich\u00e9e minimum",
+      "maximum",
+      "Une famille de teintes par biome ; une nuance par lien, partag\u00e9e par ses deux extr\u00e9mit\u00e9s. Plus sombre : descripteurs plus proches. Les enveloppes sont indicatives.",
+      "Zoom:",
+      "42.98%",
+      "[1254x1254 px]",
+      "Champ dense : 1,571,978 liens, 9,461 coh\u00e9rents ; aper\u00e7u 6,000. 11780/11780 points \u00b7 223,821,997 comparaisons locales \u00b7 6,000 liens candidats \u00b7 9 biomes affich\u00e9s (5996 liens). Analyse 6.44 s ; affichage 0.037 s."
+    ],
+    "screenshot": "cloning2-texture.png",
+    "result_metadata": {}
+  },
+  {
+    "tool": "ela",
+    "title": "Error Level Analysis",
+    "input": "texture-edited.png",
+    "input_sha256": "8553df70ebaa7c5dfc2757fc5fa01ef2b2b7d2b8e521489f237f65bc596a664f",
+    "module_sha256": "fa0134a4bec443459ff384004ee8b6c739d6ef94945a0207cd8127e01ca43f55",
+    "controls": [
+      {
+        "type": "choice",
+        "value": "Biomes sur ELA"
+      },
+      {
+        "type": "choice",
+        "value": "Conservative"
+      },
+      {
+        "type": "choice",
+        "value": "32"
+      },
+      {
+        "type": "number",
+        "value": 0
+      },
+      {
+        "type": "number",
+        "value": 3
+      },
+      {
+        "type": "number",
+        "value": 75
+      },
+      {
+        "type": "number",
+        "value": 50
+      },
+      {
+        "type": "number",
+        "value": 20
+      },
+      {
+        "type": "number",
+        "value": 2.0
+      },
+      {
+        "type": "check",
+        "label": "JPEG Ghosts",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "All JPEG grids",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy disparities",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Auto thresholds",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Energy biomes",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Cell biomes (legacy)",
+        "value": true
+      },
+      {
+        "type": "check",
+        "label": "Linear",
+        "value": false
+      },
+      {
+        "type": "check",
+        "label": "Grayscale",
+        "value": false
+      }
+    ],
+    "labels": [
+      "Qualit\u00e9",
+      "Cellule (px)",
+      "Seuil",
+      "Cellules / biome",
+      "Lower histogram bound",
+      "1.0 %",
+      "Upper histogram bound",
+      "99.0 %",
+      "Shadow deviation",
+      "5.0",
+      "Highlight deviation",
+      "5.0",
+      "15 biomes \u00b7 Q 75 (repli sans tables JPEG) \u00b7 cellules 32 px \u00b7 99.0 % comparables \u00b7 3.12 s",
+      "Zoom:",
+      "100.00%",
+      "[1254x1254 px]",
+      "ELA lin\u00e9aire \u00b7 Scale 50 % \u00b7 Contrast 20 %\nBiomes exp\u00e9rimentaux = profils ELA atypiques, sans attribution de retouche. Gris dans les cartes : comparaison insuffisante.",
+      "Quality:",
+      "Scale:",
+      "Contrast:",
+      "Error Level Analysis = 0.019 s",
+      "Zoom:",
+      "63.08%",
+      "[1254x1254 px]"
+    ],
+    "screenshot": "ela-texture.png"
+  }
+]

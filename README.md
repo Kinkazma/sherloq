@@ -130,11 +130,21 @@ Bit 5 of the luminance channel, alongside the original texture.
 <details>
 <summary>My examples — clone searches and ELA on my spiral texture</summary>
 
-I analysed my edited TIFF without the coloured annotations from the earlier automatic-analysis export. The original and edited image are shown first so the results can be compared with the image itself.
+I supplied the original spiral, my edited image and a separate reference showing the areas I changed. The reference is shown only for comparison; it was never supplied to the detectors.
 
-| Original before my edits | Edited input |
-| --- | --- |
-| ![Original texture](screenshots/fork/texture-original.png) | ![Edited texture without analysis annotations](examples/advanced/texture-edited.png) |
+| Original | Edited input | My edit reference |
+| --- | --- | --- |
+| ![Original texture](screenshots/fork/texture-original.png) | ![Edited texture without analysis annotations](examples/advanced/texture-edited.png) | ![My spiral edit reference](examples/spiral/spiral-reference.png) |
+
+**Same coordinates, four views:** compare the original, edited input and my reference with the actual Copy-Move Forgery 2 output. The shared colours connect matching regions; they do not distinguish a copied destination from its source.
+
+![Spiral edits and copy-move results at matching coordinates](examples/spiral/comparison-clones.png)
+
+The softened areas are easier to compare with ELA: they appear darker than the surrounding detailed texture. This response describes recompression differences, not the editing operation itself.
+
+![Spiral edits and ELA results at matching coordinates](examples/spiral/comparison-ela.png)
+
+[Reference, detailed comparisons and reproduction](examples/spiral/README.md).
 
 ### Copy-Move Forgery 2
 
@@ -165,13 +175,15 @@ The layered view places the unusual profiles back onto the texture. In particula
 </details>
 
 <details>
-<summary>My city photograph — original, edits and reference</summary>
+<summary>Street Photo — original, edits and reference</summary>
 
 I supplied the original photograph, my edited version and a separate image showing the areas I changed. The reference is for visual comparison only; none of the detectors receives it. The analyses use the 4387 × 3510 input, with any internal model resizing recorded in the example documentation.
 
 | Original | Edited input | My edit reference |
 | --- | --- | --- |
 | ![Original city photograph](examples/street/street-original-preview.jpg) | ![Edited city photograph](examples/street/street-edited-preview.png) | ![My reference of touched areas](examples/street/street-reference-preview.jpg) |
+
+### Street Photo
 
 **Same coordinates, four views:** original, edited input, my edit reference, and the actual CAT-Net output. Look at the removed clouds, signs and pedestrian.
 
@@ -182,7 +194,7 @@ I supplied the original photograph, my edited version and a separate image showi
 </details>
 
 <details>
-<summary>My city photograph — CAT-Net, SAFIRE, ZERO and ELA</summary>
+<summary>Street Photo — CAT-Net, SAFIRE, ZERO and ELA</summary>
 
 ### CAT-Net v2
 
@@ -212,7 +224,7 @@ The central sky edit is visible among the legacy cell-layer responses. Natural s
 </details>
 
 <details>
-<summary>My city photograph — other methods and what they actually show</summary>
+<summary>Street Photo — other methods and what they actually show</summary>
 
 ### Noisesniffer
 

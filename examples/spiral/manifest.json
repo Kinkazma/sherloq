@@ -1,0 +1,22 @@
+{
+  "source_revision": "132a8c2355cfb2b9f965415500b7ca1b82dd8e03",
+  "input_dimensions": [
+    1254,
+    1254
+  ],
+  "reference_used_for_inference": false,
+  "reference_encoding": "Lossless PNG of the supplied TIFF decoded BGR8 pixels.",
+  "files": {
+    "spiral-reference.png": "24486c8c55fc48c4b553e6f653234c001511a25f36018414a69dda6b0ca11baf",
+    "copy-move-output.png": "5c4e299a89af7d6b566458cc31c69f2d8e87eb9cc45f17bfc9497be9732ee33c",
+    "ela-output.png": "7fad4b517b2ed425edec352ab4dad84d48f11b899a9d306494d5007253acb189",
+    "comparison-clones.png": "739b11bef498b2d9f18aa4cf08ae1fc50afb35c5370902e12f9a57794cd2500c",
+    "comparison-ela.png": "9bb33d1716d2e0bfabf50d782a062a7d4f533bb555bb858255c51fd72422f010",
+    "comparison-crops.json": "38d220d1130afd72c2d623be8931af9011812dbcbbb9fff792ec427acd84efe1",
+    "analysis-records.json": "54f8da453c129b75cb49bc9788c3a46399e117c6138bec6d04005f5b84979eef"
+  },
+  "processed_views": {
+    "copy-move-output.png": "Cloning2Widget ImageViewer 0",
+    "ela-output.png": "ElaWidget classic ImageViewer 1 (ImageViewer 0 is the layers view)"
+  }
+}

@@ -38,7 +38,7 @@ if kind in ('trufor','catnet'):tool=Class(str(path),image)
 elif kind in ('ela','multiple'):tool=Class(image,filename=str(path))
 else:tool=Class(image)
 frame=QWidget();layout=QVBoxLayout(frame);header=QLabel(title+' · SHERLOQ');header.setFont(QFont('Arial',18,QFont.Weight.Bold));layout.addWidget(header);layout.addWidget(tool,1)
-caption=QLabel('Rue Clamar · '+filename+' · actual SHERLOQ output · input '+str(image.shape[1])+' × '+str(image.shape[0]));layout.addWidget(caption)
+caption=QLabel('Street Photo · '+filename+' · actual SHERLOQ output · input '+str(image.shape[1])+' × '+str(image.shape[0]));layout.addWidget(caption)
 frame.resize(1600,1100 if kind=='automatic_clones' else 1050);frame.show()
 if kind=='zero':tool.layout().setStretch(2,1)
 for obj in tool.findChildren(__import__('PySide6.QtCore',fromlist=['QObject']).QObject):
