@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-29",
+  "source_snapshot_identical": true,
+  "upstream_base": "3fe95fcb56037e47e2eefbc2d3785804a31a74f5",
+  "source_layout_export_tested": true,
+  "synthetic_ela_cases": 9,
+  "qimage_ownership": true,
+  "offscreen_main_window_and_image": true,
+  "downloader_fixture_binary_assembly": true,
+  "downloader_reuses_valid_parts": true,
+  "downloader_retries_corrupt_part": true,
+  "downloader_rejects_checksum_mismatch": true,
+  "full_github_download_tested": false
+}

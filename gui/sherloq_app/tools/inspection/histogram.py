@@ -1,6 +1,8 @@
-import cv2 as cv
 import numpy as np
 from PySide6.QtGui import QColor, QBrush
+from PySide6.QtCore import QTimer
+from gui.sherloq_app.ui.jobs import LatestJob
+from gui.sherloq_app.core.histogram import analyze_histogram
 from PySide6.QtWidgets import (
     QVBoxLayout,
     QHBoxLayout,
@@ -14,11 +16,11 @@ from PySide6.QtWidgets import (
     QAbstractItemView,
     QRadioButton,
 )
-from matplotlib.backends.backend_qt5agg import FigureCanvas
+from gui.sherloq_app.ui.plot_canvas import FigureCanvas
 from matplotlib.figure import Figure
 
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import compute_hist, modify_font, ParamSlider, color_by_value
+from gui.sherloq_app.core.utility import modify_font, ParamSlider
 
 
 class HistWidget(ToolWidget):
@@ -45,15 +47,16 @@ class HistWidget(ToolWidget):
         self.start_slider = ParamSlider([0, 255], 8, 0, bold=True)
         self.end_slider = ParamSlider([0, 255], 8, 255, bold=True)
 
-        channels = list(cv.split(cv.cvtColor(image, cv.COLOR_BGR2RGB)))
-        channels.append(cv.cvtColor(image, cv.COLOR_BGR2GRAY))
-        self.hist = [compute_hist(c) for c in channels]
-        rows, cols, chans = image.shape
-        pixels = rows * cols
-        self.unique_colors = np.unique(
-            np.reshape(image, (pixels, chans)), axis=0
-        ).shape[0]
-        self.unique_ratio = np.round(self.unique_colors / pixels * 100, 2)
+        self.hist = None
+        self.unique_colors = self.unique_ratio = None
+        self.status = QLabel(self.tr("Computing histograms and unique colours…"))
+        self.redraw_timer = QTimer(self)
+        self.redraw_timer.setSingleShot(True)
+        self.redraw_timer.setInterval(40)
+        self.redraw_timer.timeout.connect(self._redraw)
+        self.job = LatestJob(self, lambda _: analyze_histogram(image), delay=0)
+        self.job.result.connect(self._computed)
+        self.job.failed.connect(self.status.setText)
 
         self.value_radio.clicked.connect(self.redraw)
         self.red_radio.clicked.connect(self.redraw)
@@ -116,7 +119,6 @@ class HistWidget(ToolWidget):
         figure = Figure()
         plot_canvas = FigureCanvas(figure)
         self.axes = plot_canvas.figure.subplots()
-        self.redraw()
         figure.set_tight_layout(True)
 
         range_layout = QGridLayout()
@@ -149,11 +151,28 @@ class HistWidget(ToolWidget):
         bottom_layout.addWidget(self.marker_check)
 
         main_layout = QVBoxLayout()
-        main_layout.addWidget(center_split)
+        main_layout.addWidget(self.status)
+        main_layout.addWidget(center_split, 1)
         main_layout.addLayout(bottom_layout)
         self.setLayout(main_layout)
+        self.job.request(True)
+
+    def _computed(self, result):
+        self.hist, self.unique_colors, self.unique_ratio = result
+        self.status.setText("")
+        self._redraw()
 
     def redraw(self):
+        if self.hist is not None:
+            self.redraw_timer.start()
+
+    def shutdown(self):
+        self.redraw_timer.stop()
+        super().shutdown()
+
+    def _redraw(self):
+        if self.hist is None:
+            return
         x = np.arange(256)
         alpha = 0.25
         rgb = self.rgb_radio.isChecked()
@@ -227,10 +246,7 @@ class HistWidget(ToolWidget):
             self.end_slider.setEnabled(True)
             start = self.start_slider.value()
             end = self.end_slider.value()
-            if end <= start:
-                end = start + 1
-            elif start >= end:
-                start = end - 1
+            start, end = sorted((start, end))
             total = np.sum(y)
             x = x[start : end + 1]
             y = y[start : end + 1]
@@ -244,7 +260,7 @@ class HistWidget(ToolWidget):
                 percent = np.round(count / total * 100, 2)
                 empty = len(x) - np.count_nonzero(y)
                 nonzero = [np.nonzero(y)[0][0] + start, np.nonzero(y)[0][-1] + start]
-                fullness = np.round(count / (255 * np.max(y)) * 100, 2)
+                fullness = np.round(count / (len(y) * np.max(y)) * 100, 2)
                 y = y / np.max(y)
                 sweep = len(y)
                 smoothness = 0
@@ -266,7 +282,9 @@ class HistWidget(ToolWidget):
                     mean
                 ) = (
                     stddev
-                ) = median = percent = smoothness = empty = nonzero = fullness = 0
+                ) = median = percent = smoothness = fullness = 0
+                empty = len(x)
+                nonzero = []
 
             self.table_widget.setItem(0, 1, QTableWidgetItem(str(argmin)))
             self.table_widget.setItem(1, 1, QTableWidgetItem(str(argmax)))
@@ -296,4 +314,4 @@ class HistWidget(ToolWidget):
                 self.axes.fill_between(
                     np.arange(start, end + 1), top, facecolor="y", alpha=alpha * 2
                 )
-        self.axes.figure.canvas.draw()
+        self.axes.figure.canvas.draw_idle()

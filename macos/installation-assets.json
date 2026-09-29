@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "release": "native-macos-arm64-2026.09.29-rc1",
+  "base_url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/",
+  "archive": {
+    "name": "SHERLOQ-installation-macos-arm64.zip",
+    "bytes": 10894627579,
+    "sha256": "f1cbdaedf5f287630eb0fdb6c06a161643e9b16614c65663e963afd33a5f427d"
+  },
+  "parts": [
+    {
+      "name": "SHERLOQ-installation-macos-arm64.zip.part01",
+      "bytes": 1992294400,
+      "sha256": "ea6002e727647991262e4ddd2d4c38f4d80549f3bedd2d04ba36b9790f610b55"
+    },
+    {
+      "name": "SHERLOQ-installation-macos-arm64.zip.part02",
+      "bytes": 1992294400,
+      "sha256": "c04860c33c7cd436e62395eeb2380cd713b1f3495cbb344914c1e3cfeacf6e96"
+    },
+    {
+      "name": "SHERLOQ-installation-macos-arm64.zip.part03",
+      "bytes": 1992294400,
+      "sha256": "ebc8de3495ffade7ef9c41e30a99da6609467ffef0492da502cd3180e854c700"
+    },
+    {
+      "name": "SHERLOQ-installation-macos-arm64.zip.part04",
+      "bytes": 1992294400,
+      "sha256": "c2ed2fc03332f970fe95111bddf00ebc4199b00d358ac5e28b5dd8fcc646b013"
+    },
+    {
+      "name": "SHERLOQ-installation-macos-arm64.zip.part05",
+      "bytes": 1992294400,
+      "sha256": "b384a0324c6bc61a5a94f4d96800511b93d116679c4e960e5acb0b36b0fc7e5a"
+    },
+    {
+      "name": "SHERLOQ-installation-macos-arm64.zip.part06",
+      "bytes": 933155579,
+      "sha256": "5084b422e6c34038c3b881d7579620bf8ffbdf77d240440002f5488ae5546c9c"
+    }
+  ]
+}

@@ -1,7 +1,5 @@
-from time import time
-
-import cv2 as cv
-import numpy as np
+from gui.sherloq_app.core.gradient import GradientEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 from PySide6.QtWidgets import (
     QSpinBox,
     QComboBox,
@@ -12,7 +10,6 @@ from PySide6.QtWidgets import (
 )
 
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import create_lut, norm_mat, equalize_img, elapsed_time
 from gui.sherloq_app.ui.viewer import ImageViewer
 
 
@@ -37,9 +34,13 @@ class GradientWidget(ToolWidget):
 
         self.image = image
         self.viewer = ImageViewer(self.image, self.image)
-        self.dx, self.dy = cv.spatialGradient(
-            cv.cvtColor(self.image, cv.COLOR_BGR2GRAY)
-        )
+        self.engine = GradientEngine(image)
+        self.job = LatestJob(self, self.engine.compute, delay=40)
+        self.status_label = QLabel()
+        self.job.result.connect(self.show_result)
+        self.job.failed.connect(lambda error: self.status_label.setText(error))
+        self.job.busy.connect(self.set_busy)
+        self._requested = None
         self.process()
 
         self.intensity_spin.valueChanged.connect(self.process)
@@ -54,6 +55,7 @@ class GradientWidget(ToolWidget):
         top_layout.addWidget(self.blue_combo)
         top_layout.addWidget(self.invert_check)
         top_layout.addWidget(self.equalize_check)
+        top_layout.addWidget(self.status_label)
         top_layout.addStretch()
 
         main_layout = QVBoxLayout()
@@ -63,36 +65,20 @@ class GradientWidget(ToolWidget):
         self.setLayout(main_layout)
 
     def process(self):
-        start = time()
-        intensity = int(self.intensity_spin.value() / 100 * 127)
-        invert = self.invert_check.isChecked()
         equalize = self.equalize_check.isChecked()
         self.intensity_spin.setEnabled(not equalize)
-        blue_mode = self.blue_combo.currentIndex()
-        if invert:
-            dx = (-self.dx).astype(np.float32)
-            dy = (-self.dy).astype(np.float32)
-        else:
-            dx = (+self.dx).astype(np.float32)
-            dy = (+self.dy).astype(np.float32)
-        dx_abs = np.abs(dx)
-        dy_abs = np.abs(dy)
-        red = ((dx / np.max(dx_abs) * 127) + 127).astype(np.uint8)
-        green = ((dy / np.max(dy_abs) * 127) + 127).astype(np.uint8)
-        if blue_mode == 0:
-            blue = np.zeros_like(red)
-        elif blue_mode == 1:
-            blue = np.full_like(red, 255)
-        elif blue_mode == 2:
-            blue = norm_mat(dx_abs + dy_abs)
-        elif blue_mode == 3:
-            blue = norm_mat(np.linalg.norm(cv.merge((red, green)), axis=2))
-        else:
-            blue = None
-        gradient = cv.merge([blue, green, red])
-        if equalize:
-            gradient = equalize_img(gradient)
-        elif intensity > 0:
-            gradient = cv.LUT(gradient, create_lut(intensity, intensity))
-        self.viewer.update_processed(gradient)
-        self.info_message.emit(self.tr(f"Luminance Gradient = {elapsed_time(start)}"))
+        params = (0 if equalize else self.intensity_spin.value(),
+                  self.blue_combo.currentIndex(), self.invert_check.isChecked(), equalize)
+        if params != self._requested:
+            self._requested = params
+            self.job.request(params)
+
+    def set_busy(self, busy):
+        self.viewer.set_busy(busy)
+        if busy:
+            self.status_label.setText(self.tr("Calculating…"))
+
+    def show_result(self, image):
+        self.viewer.update_processed(image)
+        self.status_label.setText(f"{self.job.seconds:.3f} s")
+        self.info_message.emit(f"Luminance Gradient = {self.job.seconds:.3f} s")

@@ -1,8 +1,9 @@
+from gui.sherloq_app.ui.localization import t
 import os
 import sys
 
-from PySide6.QtCore import Qt, QSettings
-from PySide6.QtGui import QKeySequence, QAction
+from PySide6.QtCore import Qt, QSettings, Signal, QTimer
+from PySide6.QtGui import QKeySequence, QAction, QPainter, QPalette
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -10,6 +11,9 @@ from PySide6.QtWidgets import (
     QMdiSubWindow,
     QDockWidget,
     QMessageBox,
+    QPushButton,
+    QLabel,
+    QProgressBar,
 )
 
 from gui.sherloq_app.tools.colors.pca import PcaWidget
@@ -44,31 +48,108 @@ from gui.sherloq_app.tools.noise.prnu import PrnuWidget
 from gui.sherloq_app.tools.tampering.cloning import CloningWidget
 from gui.sherloq_app.tools.tampering.contrast import ContrastWidget
 from gui.sherloq_app.tools.tampering.resampling import ResamplingWidget
-from gui.sherloq_app.tools.tampering.splicing import SplicingWidget
 from gui.sherloq_app.tools.various.median import MedianWidget
+from gui.sherloq_app.tools.various.illuminant import IlluminantWidget
+from gui.sherloq_app.tools.various.defect_pixels import DefectWidget
 from gui.sherloq_app.tools.various.stereogram import StereoWidget
 from gui.sherloq_app.tools.various.trufor import TruForWidget
-from gui.sherloq_app.ui.icons import themed_icon
+from gui.sherloq_app.ui.icons import themed_icon, application_icon
 from gui.sherloq_app.ui.tools import ToolTree
 from gui.sherloq_app.core.utility import modify_font, load_image
 
+class ImageWorkspace(QMdiArea):
+    imageDropped = Signal(str)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setAcceptDrops(True)
+        self.viewport().setAcceptDrops(True)
+
+    @staticmethod
+    def dropped_file(mime_data):
+        urls = mime_data.urls()
+        if len(urls) != 1 or not urls[0].isLocalFile():
+            return None
+        filename = urls[0].toLocalFile()
+        return filename if os.path.isfile(filename) else None
+
+    def dragEnterEvent(self, event):
+        if self.dropped_file(event.mimeData()) is not None:
+            event.setDropAction(Qt.CopyAction)
+            event.accept()
+        else:
+            event.ignore()
+
+    def dragMoveEvent(self, event):
+        self.dragEnterEvent(event)
+
+    def dropEvent(self, event):
+        filename = self.dropped_file(event.mimeData())
+        if filename is None:
+            event.ignore()
+            return
+        event.setDropAction(Qt.CopyAction)
+        event.accept()
+        # Complete the native drag before loading or closing analysis windows.
+        QTimer.singleShot(0, lambda: self.imageDropped.emit(filename))
+
+    def paintEvent(self, event):
+        super().paintEvent(event)
+        if not self.subWindowList():
+            painter = QPainter(self.viewport())
+            painter.setPen(self.palette().color(QPalette.Text))
+            font = painter.font()
+            font.setPointSize(15)
+            painter.setFont(font)
+            painter.drawText(
+                self.viewport().rect(), Qt.AlignCenter,
+                t("Glissez une image ici\nou utilisez « Load image… » (⌘O)"),
+            )
+
+
+class AnalysisSubWindow(QMdiSubWindow):
+    def closeEvent(self, event):
+        widget = self.widget()
+        if hasattr(widget, "shutdown"):
+            widget.shutdown()
+        super().closeEvent(event)
+
+
 class MainWindow(QMainWindow):
     max_recent = 5
+    image_loaded = Signal(str)
 
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         QApplication.setApplicationName("Sherloq")
         QApplication.setOrganizationName("Guido Bartoli")
         QApplication.setOrganizationDomain("http://www.guidobartoli.com")
+        from gui.sherloq_app.ui.localization import install
+        self.language_manager = install()
         QApplication.setApplicationVersion(ToolTree().version)
-        QApplication.setWindowIcon(themed_icon("sherloq_white.png"))
+        icon = application_icon()
+        if icon is not None:
+            QApplication.setWindowIcon(icon)
         self.setWindowTitle(
             f"{QApplication.applicationName()} {QApplication.applicationVersion()}"
         )
-        self.mdi_area = QMdiArea()
+        self.mdi_area = ImageWorkspace()
+        self.mdi_area.imageDropped.connect(self.open_image)
         self.setCentralWidget(self.mdi_area)
         self.filename = None
         self.image = None
+        from gui.sherloq_app.ui.image_io import ImageLoadJob
+        self.load_job = ImageLoadJob(self)
+        self.load_job.result.connect(self._image_ready)
+        self.load_job.failed.connect(self._load_error)
+        self.load_job.busy.connect(self._load_busy)
+        self.load_progress = QProgressBar();self.load_progress.setRange(0,0);self.load_progress.setMaximumWidth(110)
+        self.cancel_load_button = QPushButton('Cancel loading');self.cancel_load_button.clicked.connect(self.cancel_loading)
+        self.image_details = QLabel()
+        self.statusBar().addPermanentWidget(self.image_details)
+        self.statusBar().addPermanentWidget(self.load_progress)
+        self.statusBar().addPermanentWidget(self.cancel_load_button)
+        self._load_busy(False)
         modify_font(self.statusBar(), bold=True)
 
         tree_dock = QDockWidget(self.tr("TOOLS"), self)
@@ -211,6 +292,7 @@ class MainWindow(QMainWindow):
         help_menu.addSeparator()
         help_menu.addAction(about_action)
         help_menu.addAction(about_qt_action)
+        self.language_manager.add_menu(self.menuBar())
 
         main_toolbar = self.addToolBar(self.tr("&Toolbar"))
         main_toolbar.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
@@ -251,7 +333,9 @@ class MainWindow(QMainWindow):
         close_action.setEnabled(False)
         tabbed_action.setEnabled(False)
         self.tree_widget.setEnabled(False)
-        self.showNormal()
+        if self.width() < 900 or self.height() < 600:
+            self.resize(1280, 850)
+        self.showMaximized()
         self.normal_action.setEnabled(False)
         self.show_message(self.tr("Ready"))
 
@@ -267,6 +351,8 @@ class MainWindow(QMainWindow):
             self.normal_action.setEnabled(True)
 
     def closeEvent(self, event):
+        self.load_job.shutdown()
+        self.mdi_area.closeAllSubWindows()
         settings = QSettings()
         settings.beginGroup("main_window")
         settings.setValue("geometry", self.saveGeometry())
@@ -291,10 +377,11 @@ class MainWindow(QMainWindow):
     def open_recent(self):
         action = self.sender()
         if action:
-            filename, basename, image = load_image(self, action.data())
-            self.initialize(filename, basename, image)
+            self.open_image(action.data())
 
     def initialize(self, filename, basename, image):
+        self.load_job.invalidate()
+        self.image_details.clear()
         self.filename = filename
         self.image = image
         self.findChild(ToolTree, "tree_widget").setEnabled(True)
@@ -316,13 +403,47 @@ class MainWindow(QMainWindow):
 
         # FIXME: disable_bold della chiusura viene chiamato DOPO open_tool e nell'albero la voce NON diventa neretto
         self.mdi_area.closeAllSubWindows()
-        self.open_tool(self.tree_widget.topLevelItem(0).child(0), None)
+        self.open_tool(self.tree_widget.tool_item(0, 0), None)
 
     def load_file(self):
-        filename, basename, image = load_image(self)
+        self.open_image()
+
+    def open_image(self, filename=None):
+        from gui.sherloq_app.ui.image_io import choose_image
         if filename is None:
+            filename = choose_image(self)
+        if not filename:
             return
+        self.show_message(f'Loading {os.path.basename(filename)}…')
+        self.load_job.load(filename)
+
+    def _load_busy(self, busy):
+        self.load_progress.setVisible(busy)
+        self.cancel_load_button.setVisible(busy)
+
+    def cancel_loading(self):
+        self.load_job.invalidate()
+        self.show_message('Loading cancelled. Previous image retained.')
+
+    def _load_error(self, message):
+        self.show_message(f'Unable to load image: {message}')
+
+    def _image_ready(self, result):
+        if result is None:
+            return
+        filename, basename, image, metadata = result
         self.initialize(filename, basename, image)
+        QSettings().setValue('load_folder', os.path.dirname(os.path.abspath(filename)))
+        labels = []
+        if metadata.get('format') == 'RAW':labels.append('RAW → 8-bit analysis')
+        if metadata['source_bits'] and metadata['source_bits'] > 8:
+            labels.append(f"{metadata['source_bits']}-bit source → 8-bit analysis")
+        if metadata['icc']:labels.append('ICC not applied')
+        if metadata['alpha']:labels.append('alpha not analysed')
+        if metadata['frames'] > 1:labels.append('first frame')
+        self.image_details.setText(' · '.join(labels))
+        self.image_details.setToolTip('Analysis uses decoded 8-bit pixels. The source file remains unchanged. Colour profiles are not applied to this analysis copy.')
+        self.image_loaded.emit(filename)
 
     def open_tool(self, item, _):
         if not item.data(0, Qt.UserRole):
@@ -330,7 +451,7 @@ class MainWindow(QMainWindow):
         group = item.data(0, Qt.UserRole + 1)
         tool = item.data(0, Qt.UserRole + 2)
         for sub_window in self.mdi_area.subWindowList():
-            if sub_window.windowTitle() == item.text(0):
+            if sub_window.property('toolGroup') == group and sub_window.property('toolIndex') == tool:
                 sub_window.setFocus()
                 return
 
@@ -354,6 +475,9 @@ class MainWindow(QMainWindow):
                 tool_widget = ThumbWidget(self.filename, self.image)
             elif tool == 3:
                 tool_widget = LocationWidget(self.filename)
+            elif tool == 4:
+                from gui.sherloq_app.tools.metadata.c2pa import C2paWidget
+                tool_widget = C2paWidget(self.filename)
             else:
                 return
         elif group == 2:
@@ -400,17 +524,23 @@ class MainWindow(QMainWindow):
                 tool_widget = NoiseWaveletBlockingWidget(self.filename, self.image)
             elif tool == 4:
                 tool_widget = PrnuWidget(self.filename, self.image)
+            elif tool == 5:
+                from gui.sherloq_app.tools.noise.noisesniffer import NoisesnifferWidget
+                tool_widget = NoisesnifferWidget(self.image)
             else:
                 return
         elif group == 6:
             if tool == 0:
                 tool_widget = QualityWidget(self.filename, self.image)
             elif tool == 1:
-                tool_widget = ElaWidget(self.image)
-            # elif tool == 2:
-            #     tool_widget = MultipleWidget(self.image)
+                tool_widget = ElaWidget(self.image, filename=self.filename)
+            elif tool == 2:
+                tool_widget = MultipleWidget(self.image, filename=self.filename)
             elif tool == 3:
                 tool_widget = GhostmapWidget(self.filename, self.image)
+            elif tool == 4:
+                from gui.sherloq_app.tools.jpeg.zero import ZeroWidget
+                tool_widget = ZeroWidget(self.image)
             else:
                 return
         elif group == 7:
@@ -419,19 +549,51 @@ class MainWindow(QMainWindow):
             elif tool == 1:
                 tool_widget = CloningWidget(self.image)
             elif tool == 2:
+                from gui.sherloq_app.tools.tampering.splicing import SplicingWidget
                 tool_widget = SplicingWidget(self.image)
             elif tool == 3:
                 tool_widget = ResamplingWidget(self.filename, self.image)
+            elif tool == 4:
+                from gui.sherloq_app.tools.tampering.cloning2 import Cloning2Widget
+                tool_widget = Cloning2Widget(self.image)
+            elif tool == 5:
+                from gui.sherloq_app.tools.tampering.adaptive_cfa import AdaptiveCFAWidget
+                tool_widget = AdaptiveCFAWidget(self.image)
+            elif tool == 6:
+                from gui.sherloq_app.tools.tampering.clone_detectors import CloneDetectorsWidget
+                tool_widget = CloneDetectorsWidget(self.image)
+            elif tool == 7:
+                from gui.sherloq_app.tools.tampering.automatic_clones import AutomaticClonesWidget
+                tool_widget = AutomaticClonesWidget(self.image)
+            elif tool == 8:
+                from gui.sherloq_app.tools.tampering.complete_analysis import CompleteAnalysisWidget
+                tool_widget = CompleteAnalysisWidget(self.image, self.filename)
             else:
                 return
         elif group == 8:
             if tool == 0:
                 tool_widget = TruForWidget(self.filename, self.image)
+            elif tool == 1:
+                from gui.sherloq_app.tools.various.catnet import CatNetWidget
+                tool_widget = CatNetWidget(self.filename,self.image)
+            elif tool == 2:
+                from gui.sherloq_app.tools.various.safire import SafireWidget
+                tool_widget = SafireWidget(self.image)
+            elif tool == 3:
+                from gui.sherloq_app.tools.various.focal import FocalWidget
+                tool_widget = FocalWidget(self.image)
+            elif tool == 4:
+                from gui.sherloq_app.tools.various.adaifl import AdaIFLWidget
+                tool_widget = AdaIFLWidget(self.image)
             else:
                 return
         elif group == 9:
             if tool == 0:
                 tool_widget = MedianWidget(self.image)
+            elif tool == 1:
+                tool_widget = IlluminantWidget(self.image)
+            elif tool == 2:
+                tool_widget = DefectWidget(self.image)
             elif tool == 3:
                 tool_widget = StereoWidget(self.image)
             else:
@@ -440,16 +602,18 @@ class MainWindow(QMainWindow):
             return
         tool_widget.info_message.connect(self.show_message)
 
-        sub_window = QMdiSubWindow()
+        sub_window = AnalysisSubWindow()
         sub_window.setWidget(tool_widget)
+        sub_window.setProperty('toolGroup', group)
+        sub_window.setProperty('toolIndex', tool)
         sub_window.setWindowTitle(item.text(0))
         sub_window.setObjectName(item.text(0))
         sub_window.setAttribute(Qt.WA_DeleteOnClose)
         sub_window.setWindowIcon(themed_icon(f"{group}.svg"))
         self.mdi_area.addSubWindow(sub_window)
-        sub_window.show()
-        sub_window.destroyed.connect(self.disable_bold)
-        self.tree_widget.set_bold(item.text(0), enabled=True)
+        sub_window.showMaximized()
+        sub_window.destroyed.connect(lambda _=None, key=(group,tool): self.tree_widget.set_bold(key, enabled=False))
+        self.tree_widget.set_bold((group,tool), enabled=True)
 
     def disable_bold(self, item):
         self.tree_widget.set_bold(item.windowTitle(), enabled=False)
@@ -466,12 +630,12 @@ class MainWindow(QMainWindow):
 
     def show_about(self):
         message = f"<h2>{QApplication.applicationName()} {QApplication.applicationVersion()}</h2>"
-        message += "<h3>A digital image forensic toolkit</h3>"
-        message += f'<p>author: <a href="{QApplication.organizationDomain()}">{QApplication.organizationName()}</a></p>'
-        message += '<p>source: <a href="https://github.com/GuidoBartoli/sherloq">GitHub repository</a></p>'
-        message += '<p>license: <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPLv3</a></p>'
-        message += '<p>libraries: <a href="https://opencv.org/">OpenCV</a> <a href="https://exiftool.org/">ExifTool</a> <a href="https://www.tensorflow.org/">TensorFlow</a></p>'
-        QMessageBox.about(self, self.tr("About"), message)
+        message += f"<h3>{t('A digital image forensic toolkit')}</h3>"
+        message += f'<p>{t("Author")}: <a href="{QApplication.organizationDomain()}">{QApplication.organizationName()}</a></p>'
+        message += f'<p>Source: <a href="https://github.com/GuidoBartoli/sherloq">{t("GitHub repository")}</a></p>'
+        message += f'<p>{t("License")}: <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPLv3</a></p>'
+        message += f'<p>{t("Libraries")}: <a href="https://opencv.org/">OpenCV</a> <a href="https://exiftool.org/">ExifTool</a> <a href="https://www.tensorflow.org/">TensorFlow</a></p>'
+        QMessageBox.about(self, t(self.tr("About")), t(message))
 
     def show_message(self, message):
         self.statusBar().showMessage(message, 10000)

@@ -87,7 +87,7 @@ def loss_curve(image, qualities=tuple(range(1, 101)), normalize=True):
 
 
 def estimate_qf(image):
-    return np.argmin(loss_curve(image))
+    return int(np.argmin(loss_curve(image))) + 1
 
 
 def get_tables(quality):

@@ -34,51 +34,48 @@ configSess.gpu_options.allow_growth = True
 # configSess = tf.ConfigProto(gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.95))
 
 
-def genNoiseprint(img, QF=101, model_name="net"):
+def genNoiseprint(img, QF=101, model_name="net", progress=None, cache_dir=None):
+    """Original tile geometry/arithmetic, with optional resumable tile files.
+
+    cache_dir must belong to one immutable input/model, as provided by the
+    application's isolated worker. Complete tiles are atomically published.
+    """
+    from pathlib import Path
     if QF > 100:
         QF = 101
     chkpt_fname = chkpt_folder % (model_name, QF)
-
+    cache = Path(cache_dir) if cache_dir is not None else None
+    if cache is not None:
+        cache.mkdir(parents=True, exist_ok=True)
+    tiled = img.shape[0]*img.shape[1] > largeLimit
+    step = slide if tiled else max(img.shape)
+    positions = [(y,x) for y in range(0,img.shape[0],step)
+                 for x in range(0,img.shape[1],step)]
+    result = np.zeros(img.shape,np.float32)
     with tf.Session(config=configSess) as sess:
         saver.restore(sess, chkpt_fname)
-
-        if img.shape[0] * img.shape[1] > largeLimit:
-            # print(' %dx%d large %3d' % (img.shape[0], img.shape[1], QF))
-            # for large image the network is executed windows with partial overlapping
-            res = np.zeros((img.shape[0], img.shape[1]), np.float32)
-            for index0 in range(0, img.shape[0], slide):
-                index0start = index0 - overlap
-                index0end = index0 + slide + overlap
-
-                for index1 in range(0, img.shape[1], slide):
-                    index1start = index1 - overlap
-                    index1end = index1 + slide + overlap
-                    clip = img[
-                        max(index0start, 0) : min(index0end, img.shape[0]),
-                        max(index1start, 0) : min(index1end, img.shape[1]),
-                    ]
-                    resB = sess.run(
-                        net.output,
-                        feed_dict={x_data: clip[np.newaxis, :, :, np.newaxis]},
-                    )
-                    resB = np.squeeze(resB)
-
-                    if index0 > 0:
-                        resB = resB[overlap:, :]
-                    if index1 > 0:
-                        resB = resB[:, overlap:]
-                    resB = resB[
-                        : min(slide, resB.shape[0]), : min(slide, resB.shape[1])
-                    ]
-
-                    res[
-                        index0 : min(index0 + slide, res.shape[0]),
-                        index1 : min(index1 + slide, res.shape[1]),
-                    ] = resB
-        else:
-            # print(' %dx%d small %3d' % (img.shape[0], img.shape[1], QF))
-            res = sess.run(
-                net.output, feed_dict={x_data: img[np.newaxis, :, :, np.newaxis]}
-            )
-            res = np.squeeze(res)
-    return res
+        for number,(y,x) in enumerate(positions):
+            height = min(step,img.shape[0]-y)
+            width = min(step,img.shape[1]-x)
+            path = cache/f"{y}-{x}.npy" if cache is not None else None
+            if path is not None and path.exists():
+                block = np.load(path,allow_pickle=False)
+                if block.shape != (height,width) or block.dtype != np.float32:
+                    raise ValueError('Invalid cached Noiseprint tile.')
+            else:
+                clip = img[max(y-overlap,0):min(y+step+overlap,img.shape[0]),
+                           max(x-overlap,0):min(x+step+overlap,img.shape[1])]
+                block = sess.run(net.output,feed_dict={x_data:clip[None,:,:,None]})[0,:,:,0]
+                if y > 0:
+                    block = block[overlap:,:]
+                if x > 0:
+                    block = block[:,overlap:]
+                block = block[:height,:width]
+                if path is not None:
+                    temporary = path.with_suffix('.partial.npy')
+                    np.save(temporary,block,allow_pickle=False)
+                    temporary.replace(path)
+            result[y:y+height,x:x+width] = block
+            if progress is not None:
+                progress(number+1,len(positions))
+    return result

@@ -1,24 +1,28 @@
-# This code implements JPEG Ghost maps as explained in the paper: "Exposing Digital Forgeries from JPEG Ghosts" by Hany Farid
-# The book "Digital Image Forensics" by Hany Farid gives a more detailed explanation of the technique for those interested
-
-from PySide6.QtWidgets import (
-    QVBoxLayout,
-    QHBoxLayout,
-    QLabel,
-    QSpinBox,
-    QCheckBox,
-    QPushButton,
-)
-
+"""JPEG Ghost Maps: cached numeric maps, isolated rendering and safe cancellation."""
+from functools import partial
+from threading import Event
+from PySide6.QtCore import QObject, Signal, QSignalBlocker
+from PySide6.QtWidgets import (QVBoxLayout, QHBoxLayout, QLabel, QSpinBox,
+                              QCheckBox, QPushButton, QProgressBar)
+from gui.sherloq_app.core.ghost_maps import GhostEngine
+from gui.sherloq_app.core.jpeg_curve import Cancelled
+from gui.sherloq_app.ui.jobs import LatestJob
 from gui.sherloq_app.ui.tools import ToolWidget
 from gui.sherloq_app.ui.viewer import ImageViewer
 
-# ghost necessary imports
-import matplotlib.pyplot as plt
-import math
-import numpy as np
-import cv2
-import os
+
+class _Progress(QObject):
+    changed = Signal(object, int, str)
+
+
+def _run_ghost(engine, updates, request):
+    params, cancel = request
+    try:
+        plot, maps = engine.compute(params, cancel.is_set,
+            lambda value, text: updates.changed.emit(cancel, value, text))
+        return params, plot, maps
+    except Cancelled:
+        return None
 
 
 class GhostmapWidget(ToolWidget):
@@ -28,9 +32,14 @@ class GhostmapWidget(ToolWidget):
 
         # save variables to self
         self.filename = filename
+        self.image = image
 
         # store different xy-offsets so user can quickly cycle different maps and inspect changes
-        self.ghostmaps = [None] * 64
+        self.engine = GhostEngine(image)
+        self.cancel_event = Event()
+        self._requested = None
+        self._displayed = None
+        self.maps = None
 
         # prepare user interface - input variables
         # qmin
@@ -43,7 +52,7 @@ class GhostmapWidget(ToolWidget):
         self.qmax_spin.setValue(90)
         # qstep
         self.qstep_spin = QSpinBox()
-        self.qstep_spin.setRange(0, 20)
+        self.qstep_spin.setRange(1, 20)
         self.qstep_spin.setValue(5)
         # lattice X offset
         self.xoffset_spin = QSpinBox()
@@ -77,17 +86,32 @@ class GhostmapWidget(ToolWidget):
         top_layout.addWidget(self.showgray_check)
         top_layout.addWidget(self.includeoriginal_check)
         top_layout.addWidget(self.process_button)
-        top_layout.addWidget(QLabel(self.tr("Offset X:")))
-        top_layout.addWidget(self.xoffset_spin)
-        top_layout.addWidget(QLabel(self.tr("Offset Y:")))
-        top_layout.addWidget(self.yoffset_spin)
-        top_layout.addWidget(self.process_previous_offset_button)
-        top_layout.addWidget(self.process_next_offset_button)
+        offset_layout = QHBoxLayout()
+        offset_layout.addWidget(QLabel(self.tr("Offset X:")))
+        offset_layout.addWidget(self.xoffset_spin)
+        offset_layout.addWidget(QLabel(self.tr("Offset Y:")))
+        offset_layout.addWidget(self.yoffset_spin)
+        offset_layout.addWidget(self.process_previous_offset_button)
+        offset_layout.addWidget(self.process_next_offset_button)
+        offset_layout.addStretch()
         top_layout.addStretch()
 
         self.viewer = ImageViewer(image, image, None)
 
-        self.plt = plt
+        self.status_label = QLabel()
+        self.progress = QProgressBar()
+        self.progress.setRange(0, 100)
+        self.updates = _Progress()
+        self.updates.changed.connect(self._progress)
+        self.job = LatestJob(self, partial(_run_ghost, self.engine, self.updates), delay=0)
+        self.job.busy.connect(self.set_busy)
+        self.job.result.connect(self.show_result)
+        self.job.failed.connect(self.show_error)
+        for control in (self.qmin_spin, self.qmax_spin, self.qstep_spin,
+                        self.xoffset_spin, self.yoffset_spin):
+            control.valueChanged.connect(self.invalidate)
+        self.showgray_check.stateChanged.connect(self.invalidate)
+        self.includeoriginal_check.stateChanged.connect(self.invalidate)
         self.processGhostmaps()
 
         self.process_button.clicked.connect(self.processGhostmaps)
@@ -98,220 +122,89 @@ class GhostmapWidget(ToolWidget):
 
         main_layout = QVBoxLayout()
         main_layout.addLayout(top_layout)
+        main_layout.addLayout(offset_layout)
+        main_layout.addWidget(self.status_label)
+        main_layout.addWidget(self.progress)
         main_layout.addWidget(self.viewer)
         self.setLayout(main_layout)
 
-    def calculate_next_offset(self):
-        x_offset = self.xoffset_spin.value()
-        y_offset = self.yoffset_spin.value()
+    def parameters(self):
+        return (self.qmin_spin.value(), self.qmax_spin.value(), self.qstep_spin.value(),
+                self.xoffset_spin.value(), self.yoffset_spin.value(),
+                self.showgray_check.isChecked(), self.includeoriginal_check.isChecked())
 
-        if x_offset < 7:
-            x_offset = x_offset + 1
-            self.xoffset_spin.setValue(x_offset)
-            self.processGhostmaps()
-        elif y_offset < 7:
-            x_offset = 0
-            y_offset = y_offset + 1
-            self.xoffset_spin.setValue(x_offset)
-            self.yoffset_spin.setValue(y_offset)
-            self.processGhostmaps()
-        else:
-            x_offset = 0
-            y_offset = 0
-            self.xoffset_spin.setValue(x_offset)
-            self.yoffset_spin.setValue(y_offset)
-            self.processGhostmaps()
+    def invalidate(self):
+        self.cancel_event.set()
+        self.job.invalidate()
+        self._requested = None
+        self.set_busy(False)
+        self.status_label.setText("Parameters changed. Calculate Maps to update.")
+
+    def calculate_next_offset(self):
+        self._move_offset(1)
 
     def calculate_previous_offset(self):
-        x_offset = self.xoffset_spin.value()
-        y_offset = self.yoffset_spin.value()
+        self._move_offset(-1)
 
-        if x_offset > 0:
-            x_offset = x_offset - 1
-            self.xoffset_spin.setValue(x_offset)
-            self.processGhostmaps()
-        elif y_offset > 0:
-            x_offset = 7
-            y_offset = y_offset - 1
-            self.xoffset_spin.setValue(x_offset)
-            self.yoffset_spin.setValue(y_offset)
-            self.processGhostmaps()
-        else:
-            x_offset = 7
-            y_offset = 7
-            self.xoffset_spin.setValue(x_offset)
-            self.yoffset_spin.setValue(y_offset)
-            self.processGhostmaps()
+    def _move_offset(self, direction):
+        index = (self.xoffset_spin.value() + 8*self.yoffset_spin.value() + direction) % 64
+        blockers = [QSignalBlocker(self.xoffset_spin), QSignalBlocker(self.yoffset_spin)]
+        self.xoffset_spin.setValue(index % 8)
+        self.yoffset_spin.setValue(index // 8)
+        del blockers
+        self.processGhostmaps()
 
-    # calculate ghost maps function:
     def processGhostmaps(self):
-        self.process_button.setEnabled(False)  # wait for processing
-        self.plt.clf()
+        params = self.parameters()
+        if self.job.is_busy and params == self._requested:
+            self.cancel_event.set()
+            self.job.invalidate()
+            self._requested = None
+            self.set_busy(False)
+            self.status_label.setText("Cancelled. Completed quality maps are retained.")
+            return
+        if params == self._displayed:
+            self.set_busy(False)
+            return
+        self.cancel_event.set()
+        self.cancel_event = Event()
+        self._requested = params
+        self.job.request((params, self.cancel_event))
 
-        Qmin = self.qmin_spin.value()
-        Qmax = self.qmax_spin.value()
-        Qstep = self.qstep_spin.value()
+    def set_busy(self, busy):
+        self.process_button.setText("Cancel" if busy else "Calculate Maps")
+        self.viewer.set_busy(busy or self._displayed != self.parameters())
+        if busy:
+            self.status_label.setText("Calculating…")
 
-        averagingBlock = 16
+    def _progress(self, event, value, text):
+        if not self.job.closed and event is self.cancel_event and not event.is_set():
+            self.progress.setValue(value)
+            self.status_label.setText(text)
 
-        shift_x = self.xoffset_spin.value()
-        shift_y = self.yoffset_spin.value()
+    def show_result(self, result):
+        if result is None:
+            self._requested = None
+            self.set_busy(False)
+            return
+        params, plot, maps = result
+        if params != self.parameters():
+            return
+        self._displayed = params
+        self.maps = maps
+        self.viewer.update_processed(plot)
+        self.set_busy(False)
+        self.progress.setValue(100)
+        self.status_label.setText(f"JPEG Ghost Maps = {self.job.seconds:.3f} s")
+        if maps.shape[2] == 1:
+            self.status_label.setText("One quality selected: normalization across qualities gives zero maps. Select a range to compare.")
+        self.info_message.emit(self.status_label.text())
 
-        includeoriginal = self.includeoriginal_check.isChecked()
-        grayscale = self.showgray_check.isChecked()
+    def show_error(self, message):
+        self._requested = None
+        self.set_busy(False)
+        self.status_label.setText(message)
 
-        # if ghostmaps already exists, return map and exit
-        if self.ghostmaps[shift_x + shift_y * 8] is not None:
-            (
-                ghostplot,
-                sqmin,
-                sqmax,
-                sqstep,
-                sincludeoriginal,
-                sgrayscale,
-            ) = self.ghostmaps[shift_x + shift_y * 8]
-            if (
-                sqmin == Qmin
-                and sqmax == Qmax
-                and sqstep == Qstep
-                and sincludeoriginal == includeoriginal
-                and sgrayscale == grayscale
-            ):
-                self.viewer.update_processed(ghostplot)
-                self.process_button.setEnabled(True)
-                return
-
-        # load original
-        original = np.double(cv2.imread(self.filename))
-        ydim, xdim, zdim = original.shape
-
-        # construct ghostmaps with possible shift
-        nQ = int((Qmax - Qmin) / Qstep) + 1
-
-        i = 0
-        ghostmap = np.zeros((ydim, xdim, nQ))
-        for quality in range(Qmin, Qmax + 1, Qstep):
-            # Shift the image because:
-            # misalignment of JPEG block lattice may destroy the JPEG ghost since new spatial frequencies will be introduced
-            # by shifting we can search for the correct alignment, if there is one
-            shifted_original = np.roll(original, shift_x, axis=1)
-            shifted_original = np.roll(shifted_original, shift_y, axis=0)
-            # compute difference original and re-compressed versions of original
-            # store recompressed image as variable so we're not writing to disk:
-            tempvar1 = cv2.imencode(
-                ".jpg", shifted_original, [int(cv2.IMWRITE_JPEG_QUALITY), quality]
-            )[1].tobytes()
-            tempcar2 = np.frombuffer(tempvar1, np.byte)
-            tmpResave = np.double(cv2.imdecode(tempcar2, cv2.IMREAD_ANYCOLOR))
-
-            # compute difference and average over RGB
-            for z in range(zdim):
-                ghostmap[:, :, i] += np.square(
-                    shifted_original[:, :, z].astype(np.double) - tmpResave[:, :, z]
-                )
-
-            ghostmap[:, :, i] /= zdim
-            i += 1
-
-        # compute average over larger area to counter complicating factor, as explained in paper
-        blkE = np.zeros(
-            (int((ydim) / averagingBlock), int((xdim) / averagingBlock), nQ)
-        )
-        for c in range(nQ):
-            cy = 0
-            for y in range(0, ydim - averagingBlock, averagingBlock):
-                cx = 0
-                for x in range(0, xdim - averagingBlock, averagingBlock):
-                    bE = ghostmap[y : y + averagingBlock, x : x + averagingBlock, c]
-                    blkE[cy, cx, c] = np.mean(bE)
-                    cx += 1
-                cy += 1
-
-        # normalize difference
-        minval = np.min(blkE, axis=2)
-        maxval = np.max(blkE, axis=2)
-        for c in range(nQ):
-            blkE[:, :, c] = (blkE[:, :, c] - minval) / (maxval - minval)
-
-        # change plotsize (inches)
-        self.plt.figure(figsize=(12, 8))
-
-        if includeoriginal:
-            sp = math.ceil(math.sqrt(nQ + 1))
-            # Plot original image - needs to be normalized first for a subplot & converted to RGB, because cv2 works by default on BGR
-            original_uint8 = cv2.convertScaleAbs(
-                original
-            )  # cv2.cvtColor expects input images to have depth of 8-bit per channel
-            original_rgb = cv2.cvtColor(original_uint8, cv2.COLOR_BGR2RGB)
-            originalRGB_normalized = original_rgb.astype(np.float32) / 255.0
-            self.plt.subplot(sp, sp, 1)
-            self.plt.imshow(originalRGB_normalized)
-            self.plt.title("Original Image")
-            self.plt.axis("off")
-            # add maps:
-            if grayscale:
-                for c in range(nQ):
-                    self.plt.subplot(sp, sp, c + 2)
-                    self.plt.imshow(blkE[:, :, c], cmap="gray", vmin=0, vmax=1)
-                    self.plt.axis("off")
-                    self.plt.title("Quality " + str(Qmin + c * Qstep))
-                    self.plt.draw()
-            else:
-                for c in range(nQ):
-                    self.plt.subplot(sp, sp, c + 2)
-                    self.plt.imshow(blkE[:, :, c], vmin=0, vmax=1)
-                    self.plt.axis("off")
-                    self.plt.title("Quality " + str(Qmin + c * Qstep))
-                    self.plt.draw()
-        else:
-            sp = math.ceil(math.sqrt(nQ))
-            if grayscale:
-                for c in range(nQ):
-                    self.plt.subplot(sp, sp, c + 1)
-                    self.plt.imshow(blkE[:, :, c], cmap="gray", vmin=0, vmax=1)
-                    self.plt.axis("off")
-                    self.plt.title("Quality " + str(Qmin + c * Qstep))
-                    self.plt.draw()
-            else:
-                for c in range(nQ):
-                    self.plt.subplot(sp, sp, c + 1)
-                    self.plt.imshow(blkE[:, :, c], vmin=0, vmax=1)
-                    self.plt.axis("off")
-                    self.plt.title("Quality " + str(Qmin + c * Qstep))
-                    self.plt.draw()
-
-        # Add main title
-        self.plt.suptitle(
-            "Ghost plots for grid offset X = "
-            + str(shift_x)
-            + " and Y = "
-            + str(shift_y)
-        )
-
-        # Save plot directly to a file (temporarily)
-        # Matplotlib deals with RGB images by default and does not provide functionality to switch between RGB and BGR
-        # since sherloq primarily works with BGR, the conversion is made here using cv2 to read to image to a numpy array, BGR format, for further use
-        temp_filename = "temp_ghostplot.png"
-        plt.savefig(temp_filename, dpi=200)  # increase quality plot
-
-        # Load the saved image in a numpy array, BGR format
-        numpy_ghostplot = cv2.imread(temp_filename, cv2.IMREAD_COLOR)
-
-        # save plot in memory so no recalculations are needed if user wants to revistit plot
-        self.ghostmaps[shift_x + shift_y * 8] = [
-            numpy_ghostplot,
-            Qmin,
-            Qmax,
-            Qstep,
-            includeoriginal,
-            grayscale,
-        ]
-
-        # Remove the temporary file
-        os.remove(temp_filename)
-
-        # update viewer with plot:
-        self.viewer.update_processed(numpy_ghostplot)
-
-        self.plt.close()  # matplot figures are kept in memory unless closed
-        self.process_button.setEnabled(True)  # allow new process to start
+    def shutdown(self):
+        self.cancel_event.set()
+        super().shutdown()

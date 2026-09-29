@@ -1,5 +1,5 @@
-import cv2 as cv
-import numpy as np
+from gui.sherloq_app.core.pca import PcaEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 from PySide6.QtWidgets import (
     QAbstractItemView,
     QTableWidgetItem,
@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (
 )
 
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import norm_mat, modify_font, norm_img, equalize_img
+from gui.sherloq_app.core.utility import modify_font
 from gui.sherloq_app.ui.viewer import ImageViewer
 
 
@@ -42,50 +42,28 @@ class PcaWidget(ToolWidget):
         self.equalize_check = QCheckBox(self.tr("Equalize"))
         self.equalize_check.setToolTip(self.tr("Apply histogram equalization"))
 
-        rows, cols, chans = image.shape
-        x = np.reshape(image, (rows * cols, chans)).astype(np.float64)
-        mu, ev, ew = cv.PCACompute2(x, np.array([]))
-        p = np.reshape(cv.PCAProject(x, mu, ev), (rows, cols, chans))
-        x0 = image.astype(np.float32) - mu
-        self.output = []
-        for i, v in enumerate(ev):
-            cross = np.cross(x0, v)
-            distance = np.linalg.norm(cross, axis=2) / np.linalg.norm(v)
-            project = p[:, :, i]
-            self.output.extend(
-                [
-                    norm_mat(distance, to_bgr=True),
-                    norm_mat(project, to_bgr=True),
-                    norm_img(cross),
-                ]
-            )
-
-        table_data = [
-            [mu[0, 2], mu[0, 1], mu[0, 0]],
-            [ev[0, 2], ev[0, 1], ev[0, 0]],
-            [ev[1, 2], ev[1, 1], ev[1, 0]],
-            [ev[2, 2], ev[2, 1], ev[2, 0]],
-            [ew[2, 0], ew[1, 0], ew[0, 0]],
-        ]
-        table_widget = QTableWidget(5, 4)
+        table_widget = self.table_widget = QTableWidget(4, 5)
         table_widget.setHorizontalHeaderLabels(
-            [self.tr("Element"), self.tr("Red"), self.tr("Green"), self.tr("Blue")]
+            [self.tr("Element"), self.tr("Red"), self.tr("Green"), self.tr("Blue"), self.tr("Eigenvalue")]
         )
-        table_widget.setItem(0, 0, QTableWidgetItem(self.tr("Mean vector")))
-        table_widget.setItem(1, 0, QTableWidgetItem(self.tr("Eigenvector 1")))
-        table_widget.setItem(2, 0, QTableWidgetItem(self.tr("Eigenvector 2")))
-        table_widget.setItem(3, 0, QTableWidgetItem(self.tr("Eigenvector 3")))
-        table_widget.setItem(4, 0, QTableWidgetItem(self.tr("Eigenvalues")))
-        for i in range(len(table_data)):
-            modify_font(table_widget.item(i, 0), bold=True)
-            for j in range(len(table_data[i])):
-                table_widget.setItem(i, j + 1, QTableWidgetItem(str(table_data[i][j])))
+        for row, title in enumerate([self.tr("Mean vector"), self.tr("Eigenvector 1"),
+                                     self.tr("Eigenvector 2"), self.tr("Eigenvector 3")]):
+            table_widget.setItem(row, 0, QTableWidgetItem(title))
+            modify_font(table_widget.item(row, 0), bold=True)
+        self._model_displayed = False
         table_widget.resizeColumnsToContents()
         table_widget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         table_widget.setSelectionMode(QAbstractItemView.SingleSelection)
         table_widget.setMaximumHeight(190)
 
         self.viewer = ImageViewer(image, image, None)
+        self.engine = PcaEngine(image)
+        self.job = LatestJob(self, self.engine.compute, delay=0)
+        self.status_label = QLabel()
+        self.job.result.connect(self.show_result)
+        self.job.busy.connect(self.set_busy)
+        self.job.failed.connect(self.show_error)
+        self._requested = None
         self.process()
 
         self.component_combo.currentIndexChanged.connect(self.process)
@@ -104,6 +82,7 @@ class PcaWidget(ToolWidget):
         top_layout.addWidget(self.crossprod_radio)
         top_layout.addWidget(self.invert_check)
         top_layout.addWidget(self.equalize_check)
+        top_layout.addWidget(self.status_label)
         top_layout.addStretch()
         bottom_layout = QHBoxLayout()
         bottom_layout.addWidget(table_widget)
@@ -115,21 +94,37 @@ class PcaWidget(ToolWidget):
         self.setLayout(main_layout)
 
     def process(self):
-        index = 3 * self.component_combo.currentIndex()
-        if self.distance_radio.isChecked():
-            output = self.output[index]
-            self.last_radio = self.distance_radio
-        elif self.project_radio.isChecked():
-            output = self.output[index + 1]
-            self.last_radio = self.project_radio
-        elif self.crossprod_radio.isChecked():
-            output = self.output[index + 2]
-            self.last_radio = self.crossprod_radio
-        else:
+        mode = next((name for name in ('distance', 'project', 'crossprod')
+                     if getattr(self, name+'_radio').isChecked()), None)
+        if mode is None:
             self.last_radio.setChecked(True)
             return
-        if self.invert_check.isChecked():
-            output = cv.bitwise_not(output)
-        if self.equalize_check.isChecked():
-            output = equalize_img(output)
-        self.viewer.update_processed(output)
+        self.last_radio = getattr(self, mode+'_radio')
+        params = (self.component_combo.currentIndex(), mode,
+                  self.invert_check.isChecked(), self.equalize_check.isChecked())
+        if params != self._requested:
+            self._requested = params
+            self.job.request(params)
+
+    def set_busy(self, busy):
+        self.viewer.set_busy(busy)
+        if busy:
+            self.status_label.setText(self.tr("Calculating…"))
+
+    def show_result(self, result):
+        image, (mean, vectors, values) = result
+        self.viewer.update_processed(image)
+        if not self._model_displayed:
+            table = self.table_widget
+            for row, vector in enumerate((mean[0], *vectors)):
+                for column, value in enumerate(vector[::-1], 1):
+                    table.setItem(row, column, QTableWidgetItem(str(value)))
+                if row:
+                    table.setItem(row, 4, QTableWidgetItem(str(values[row-1, 0])))
+            table.resizeColumnsToContents()
+            self._model_displayed = True
+        self.status_label.setText(f"{self.job.seconds:.3f} s")
+
+    def show_error(self, error):
+        self._requested = None
+        self.status_label.setText(error)

@@ -1,11 +1,10 @@
-from time import time
+from gui.sherloq_app.core.interactive import FrequencyEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 
-import cv2 as cv
-import numpy as np
 from PySide6.QtWidgets import QHBoxLayout, QLabel, QVBoxLayout, QGridLayout, QSpinBox
 
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import norm_mat, elapsed_time, modify_font
+from gui.sherloq_app.core.utility import modify_font
 from gui.sherloq_app.ui.viewer import ImageViewer
 
 
@@ -45,25 +44,7 @@ class FrequencyWidget(ToolWidget):
         self.filter_spin.valueChanged.connect(self.postprocess)
 
         self.image = image
-        gray = cv.cvtColor(self.image, cv.COLOR_BGR2GRAY)
-        rows, cols = gray.shape
-        height = cv.getOptimalDFTSize(rows)
-        width = cv.getOptimalDFTSize(cols)
-        padded = cv.copyMakeBorder(
-            gray, 0, height - rows, 0, width - cols, cv.BORDER_CONSTANT
-        )
-        self.dft = np.fft.fftshift(
-            cv.dft(padded.astype(np.float32), flags=cv.DFT_COMPLEX_OUTPUT)
-        )
-        self.magnitude0, self.phase0 = cv.cartToPolar(
-            self.dft[:, :, 0], self.dft[:, :, 1]
-        )
-        self.magnitude0 = cv.normalize(
-            cv.log(self.magnitude0), None, 0, 255, cv.NORM_MINMAX
-        )
-        self.phase0 = cv.normalize(self.phase0, None, 0, 255, cv.NORM_MINMAX)
-        self.magnitude = self.phase = None
-
+        self.engine = FrequencyEngine(image)
         self.low_viewer = ImageViewer(
             self.image, self.image, self.tr("Low frequency"), export=True
         )
@@ -76,6 +57,12 @@ class FrequencyWidget(ToolWidget):
         self.phase_viewer = ImageViewer(
             self.image, None, self.tr("DFT Phase"), export=True
         )
+        self.job = LatestJob(self, self.engine.compute, delay=40)
+        self.job.result.connect(self.show_result)
+        self.job.failed.connect(lambda error: self.zero_label.setText("Error: " + error))
+        self.job.busy.connect(self.set_busy)
+        self._requested = None
+        self._shown_images = (None, None, None, None)
         self.process()
 
         self.low_viewer.viewChanged.connect(self.high_viewer.changeView)
@@ -107,50 +94,31 @@ class FrequencyWidget(ToolWidget):
         self.setLayout(main_layout)
 
     def process(self):
-        start = time()
-        rows, cols, _ = self.dft.shape
-        mask = np.zeros((rows, cols), np.float32)
-        half = np.sqrt(rows ** 2 + cols ** 2) / 2
-        radius = int(half * self.split_spin.value() / 100)
-        mask = cv.circle(mask, (cols // 2, rows // 2), radius, 1, cv.FILLED)
-        kernel = 2 * int(half * self.smooth_spin.value() / 100) + 1
-        mask = cv.GaussianBlur(mask, (kernel, kernel), 0)
-        mask /= np.max(mask)
-        threshold = int(self.thr_spin.value() / 100 * 255)
-        if threshold > 0:
-            mask[self.magnitude0 < threshold] = 0
-            zeros = (mask.size - np.count_nonzero(mask)) / mask.size * 100
-        else:
-            zeros = 0
-        self.zero_label.setText(
-            self.tr("(zeroed coefficients = {:.2f}%)").format(zeros)
-        )
-        mask2 = np.repeat(mask[:, :, np.newaxis], 2, axis=2)
-
-        rows0, cols0, _ = self.image.shape
-        low = cv.idft(np.fft.ifftshift(self.dft * mask2), flags=cv.DFT_SCALE)
-        low = norm_mat(
-            cv.magnitude(low[:, :, 0], low[:, :, 1])[:rows0, :cols0], to_bgr=True
-        )
-        self.low_viewer.update_processed(low)
-        high = cv.idft(np.fft.ifftshift(self.dft * (1 - mask2)), flags=cv.DFT_SCALE)
-        high = norm_mat(cv.magnitude(high[:, :, 0], high[:, :, 1]), to_bgr=True)
-        self.high_viewer.update_processed(
-            np.copy(high[: self.image.shape[0], : self.image.shape[1]])
-        )
-        self.magnitude = (self.magnitude0 * mask).astype(np.uint8)
-        self.phase = (self.phase0 * mask).astype(np.uint8)
-        self.postprocess()
-        self.info_message.emit(self.tr(f"Frequency Split = {elapsed_time(start)}"))
+        params = (self.split_spin.value(), self.smooth_spin.value(),
+                  self.thr_spin.value(), self.filter_spin.value())
+        if params != self._requested:
+            display_only = self._requested is not None and params[:3] == self._requested[:3]
+            self.job.timer.setInterval(0 if display_only else 40)
+            self._requested = params
+            self.job.request(params)
 
     def postprocess(self):
-        kernel = 2 * self.filter_spin.value() + 1
-        if kernel >= 3:
-            magnitude = cv.GaussianBlur(self.magnitude, (kernel, kernel), 0)
-            phase = cv.GaussianBlur(self.phase, (kernel, kernel), 0)
-            # phase = cv.medianBlur(self.phase, kernel)
-        else:
-            magnitude = self.magnitude
-            phase = self.phase
-        self.mag_viewer.update_original(cv.cvtColor(magnitude, cv.COLOR_GRAY2BGR))
-        self.phase_viewer.update_original(cv.cvtColor(phase, cv.COLOR_GRAY2BGR))
+        self.process()
+
+    def set_busy(self, busy):
+        for viewer in (self.low_viewer, self.high_viewer, self.mag_viewer, self.phase_viewer):
+            viewer.set_busy(busy)
+        if busy:
+            self.zero_label.setText(self.tr("Calculating…"))
+
+    def show_result(self, result):
+        low, high, magnitude, phase, zeros = result
+        images = low, high, magnitude, phase
+        updates = (self.low_viewer.update_processed, self.high_viewer.update_processed,
+                   self.mag_viewer.update_original, self.phase_viewer.update_original)
+        for previous, image, update in zip(self._shown_images, images, updates):
+            if image is not previous:
+                update(image)
+        self._shown_images = images
+        self.zero_label.setText(self.tr("(zeroed coefficients = {:.2f}%)").format(zeros))
+        self.info_message.emit(f"Frequency Split = {self.job.seconds:.3f} s")

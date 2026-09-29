@@ -1,11 +1,12 @@
-import cv2 as cv
-import numpy as np
+from gui.sherloq_app.core.color_spaces import SpaceEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 from PySide6.QtWidgets import (
     QVBoxLayout,
     QGridLayout,
     QRadioButton,
     QComboBox,
     QHBoxLayout,
+    QLabel,
 )
 
 from gui.sherloq_app.ui.tools import ToolWidget
@@ -16,39 +17,6 @@ from gui.sherloq_app.ui.viewer import ImageViewer
 class SpaceWidget(ToolWidget):
     def __init__(self, image, parent=None):
         super(SpaceWidget, self).__init__(parent)
-        rows, cols, chans = image.shape
-        scaled = image.astype(np.float32) / 255
-
-        self.rgb = cv.cvtColor(image, cv.COLOR_BGR2RGB)
-        self.ycrcb = cv.cvtColor(image, cv.COLOR_BGR2YCrCb)
-        self.xyz = cv.cvtColor(image, cv.COLOR_BGR2XYZ)
-        self.lab = cv.cvtColor(image, cv.COLOR_BGR2Lab)
-        self.luv = cv.cvtColor(image, cv.COLOR_BGR2Luv)
-
-        self.gray = np.zeros((rows, cols, 4))
-        self.gray[:, :, 0] = (np.amax(scaled, axis=2) + np.amin(scaled, axis=2)) / 2
-        self.gray[:, :, 1] = (
-            0.21 * scaled[:, :, 2] + 0.72 * scaled[:, :, 1] + 0.07 * scaled[:, :, 0]
-        )
-        self.gray[:, :, 2] = np.mean(scaled, axis=2)
-        self.gray[:, :, 3] = cv.cvtColor(scaled, cv.COLOR_BGR2GRAY)
-        self.gray = (self.gray * 255).astype(np.uint8)
-
-        self.hsv = cv.cvtColor(scaled, cv.COLOR_BGR2HSV) * 255
-        self.hsv[:, :, 0] /= 360
-        self.hsv = self.hsv.astype(np.uint8)
-        self.hls = cv.cvtColor(scaled, cv.COLOR_BGR2HLS) * 255
-        self.hls[:, :, 0] /= 360
-        self.hls = self.hls.astype(np.uint8)
-
-        self.cmyk = np.zeros((rows, cols, 4))
-        k = np.repeat(np.amin(1 - scaled, axis=2)[:, :, np.newaxis], repeats=3, axis=2)
-        k[k == 1] = 1 - np.finfo(np.float32).eps
-        self.cmyk[:, :, :-1] = (1 - scaled - k) / (1 - k) * 255
-        self.cmyk[:, :, -1] = k[:, :, 0] * 255
-        self.cmyk[:, :, [0, 1, 2, 3]] = self.cmyk[:, :, [2, 1, 0, 3]]
-        self.cmyk = self.cmyk.astype(np.uint8)
-
         self.rgb_radio = QRadioButton(self.tr("RGB"))
         self.rgb_radio.setChecked(True)
         self.rgb_combo = QComboBox()
@@ -58,6 +26,7 @@ class SpaceWidget(ToolWidget):
         self.last_radio = self.rgb_radio
 
         self.cmyk_radio = QRadioButton(self.tr("CMYK"))
+        self.cmyk_radio.setToolTip(self.tr("Uncalibrated CMYK decomposition; no printer ICC profile is applied."))
         self.cmyk_combo = QComboBox()
         self.cmyk_combo.addItem(self.tr("Cyan"))
         self.cmyk_combo.addItem(self.tr("Magenta"))
@@ -127,6 +96,13 @@ class SpaceWidget(ToolWidget):
         self.luv_combo.currentIndexChanged.connect(self.process)
 
         self.viewer = ImageViewer(image, image)
+        self.engine = SpaceEngine(image)
+        self.job = LatestJob(self, self.engine.compute, delay=0)
+        self.status_label = QLabel()
+        self.job.result.connect(self.show_result)
+        self.job.failed.connect(self.show_error)
+        self.job.busy.connect(self.set_busy)
+        self._requested = None
         self.process()
 
         grid_layout = QGridLayout()
@@ -150,6 +126,7 @@ class SpaceWidget(ToolWidget):
         grid_layout.addWidget(self.luv_combo, 2, 5)
         top_layout = QHBoxLayout()
         top_layout.addLayout(grid_layout)
+        top_layout.addWidget(self.status_label)
         top_layout.addStretch()
 
         main_layout = QVBoxLayout()
@@ -158,44 +135,28 @@ class SpaceWidget(ToolWidget):
         self.setLayout(main_layout)
 
     def process(self):
-        if self.rgb_radio.isChecked():
-            channel = self.rgb[:, :, self.rgb_combo.currentIndex()]
-            self.last_radio = self.rgb_radio
-        elif self.cmyk_radio.isChecked():
-            channel = self.cmyk[:, :, self.cmyk_combo.currentIndex()]
-            self.last_radio = self.cmyk_radio
-        elif self.gray_radio.isChecked():
-            channel = self.gray[:, :, self.gray_combo.currentIndex()]
-            self.last_radio = self.gray_radio
-        elif self.hsv_radio.isChecked():
-            channel = self.hsv[:, :, self.hsv_combo.currentIndex()]
-            self.last_radio = self.hsv_radio
-        elif self.hls_radio.isChecked():
-            channel = self.hls[:, :, self.hls_combo.currentIndex()]
-            self.last_radio = self.hls_radio
-        elif self.ycrcb_radio.isChecked():
-            channel = self.ycrcb[:, :, self.ycrcb_combo.currentIndex()]
-            self.last_radio = self.ycrcb_radio
-        elif self.luv_radio.isChecked():
-            channel = self.luv[:, :, self.luv_combo.currentIndex()]
-            self.last_radio = self.luv_radio
-        elif self.xyz_radio.isChecked():
-            channel = self.xyz[:, :, self.xyz_combo.currentIndex()]
-            self.last_radio = self.xyz_radio
-        elif self.lab_radio.isChecked():
-            channel = self.lab[:, :, self.lab_combo.currentIndex()]
-            self.last_radio = self.lab_radio
-        else:
+        spaces = ('rgb', 'cmyk', 'gray', 'hsv', 'hls', 'ycrcb', 'xyz', 'lab', 'luv')
+        active = next((name for name in spaces if getattr(self, name+'_radio').isChecked()), None)
+        if active is None:
             self.last_radio.setChecked(True)
             return
-        modify_font(self.rgb_radio, bold=False)
-        modify_font(self.cmyk_radio, bold=False)
-        modify_font(self.gray_radio, bold=False)
-        modify_font(self.hsv_radio, bold=False)
-        modify_font(self.hls_radio, bold=False)
-        modify_font(self.ycrcb_radio, bold=False)
-        modify_font(self.luv_radio, bold=False)
-        modify_font(self.xyz_radio, bold=False)
-        modify_font(self.lab_radio, bold=False)
-        modify_font(self.last_radio, bold=True)
-        self.viewer.update_processed(cv.cvtColor(channel, cv.COLOR_GRAY2BGR))
+        self.last_radio = getattr(self, active+'_radio')
+        for name in spaces:
+            modify_font(getattr(self, name+'_radio'), bold=name == active)
+        params = active, getattr(self, active+'_combo').currentIndex()
+        if params != self._requested:
+            self._requested = params
+            self.job.request(params)
+
+    def set_busy(self, busy):
+        self.viewer.set_busy(busy)
+        if busy:
+            self.status_label.setText(self.tr("Converting…"))
+
+    def show_result(self, image):
+        self.viewer.update_processed(image)
+        self.status_label.setText(f"{self.job.seconds:.3f} s")
+
+    def show_error(self, error):
+        self._requested = None
+        self.status_label.setText(error)

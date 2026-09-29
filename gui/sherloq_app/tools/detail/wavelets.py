@@ -1,7 +1,7 @@
-from copy import deepcopy
+from gui.sherloq_app.ui.localization import choice
+from gui.sherloq_app.core.interactive import WaveletEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 
-import cv2 as cv
-import numpy as np
 import pywt
 from PySide6.QtWidgets import QSpinBox, QComboBox, QHBoxLayout, QVBoxLayout, QLabel
 
@@ -40,8 +40,14 @@ class WaveletWidget(ToolWidget):
         self.level_spin = QSpinBox()
 
         self.image = image
-        self.coeffs = None
+        self.engine = WaveletEngine(image)
+        self.job = LatestJob(self, self.engine.compute, delay=40)
+        self.status_label = QLabel()
+        self.job.result.connect(self.show_result)
+        self.job.failed.connect(lambda error: self.status_label.setText("Error: " + error))
+        self.job.busy.connect(self.set_busy)
         self.viewer = ImageViewer(self.image, self.image)
+        self._requested = None
         self.update_wavelet()
 
         self.family_combo.activated.connect(self.update_wavelet)
@@ -61,6 +67,7 @@ class WaveletWidget(ToolWidget):
         top_layout.addWidget(self.mode_combo)
         top_layout.addWidget(QLabel(self.tr("Level:")))
         top_layout.addWidget(self.level_spin)
+        top_layout.addWidget(self.status_label)
         top_layout.addStretch()
 
         main_layout = QVBoxLayout()
@@ -99,37 +106,32 @@ class WaveletWidget(ToolWidget):
         self.update_level()
 
     def update_level(self):
-        wavelet = self.wavelet_combo.currentText()
+        wavelet = choice(self.wavelet_combo)
         max_level = pywt.dwtn_max_level(self.image.shape[:-1], wavelet)
         self.level_spin.blockSignals(True)
-        self.level_spin.setRange(1, max_level)
+        self.level_spin.setRange(0 if max_level == 0 else 1, max_level)
         self.level_spin.setValue(max_level // 2)
         self.level_spin.blockSignals(False)
         self.compute_dwt()
 
     def compute_dwt(self):
-        wavelet = self.wavelet_combo.currentText()
-        self.coeffs = pywt.wavedec2(self.image[:, :, 0], wavelet)
         self.compute_idwt()
 
     def compute_idwt(self):
-        thr = self.threshold_spin.value()
-        if thr > 0:
-            level = self.level_spin.value()
-            coeffs = deepcopy(self.coeffs)
-            threshold = self.threshold_spin.value() / 100
-            mode = self.mode_combo.currentText().lower()
-            for i in range(1, level + 1):
-                octave = [None] * 3
-                for j in range(3):
-                    plane = coeffs[-i][j]
-                    t = threshold * np.max(np.abs(plane))
-                    octave[j] = pywt.threshold(plane, t, mode)
-                coeffs[-i] = tuple(octave)
-        else:
-            coeffs = self.coeffs
-        wavelet = self.wavelet_combo.currentText()
-        image = cv.cvtColor(
-            pywt.waverec2(coeffs, wavelet).astype(np.uint8), cv.COLOR_GRAY2BGR
-        )
+        threshold, level = self.threshold_spin.value(), self.level_spin.value()
+        mode = choice(self.mode_combo).lower()
+        if threshold == 0 or level == 0:
+            threshold, level, mode = 0, 0, 'soft'
+        params = choice(self.wavelet_combo), threshold, level, mode
+        if params != self._requested:
+            self._requested = params
+            self.job.request(params)
+
+    def set_busy(self, busy):
+        self.viewer.set_busy(busy)
+        if busy:
+            self.status_label.setText(self.tr("Calculating…"))
+
+    def show_result(self, image):
         self.viewer.update_processed(image)
+        self.status_label.setText(f"{self.job.seconds:.3f} s")

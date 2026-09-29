@@ -150,7 +150,7 @@ def EMgu(feats, seed=0, maxIter=100, replicates=10, outliersNlogl=42):
 
 
 def EMgu_img(
-    spam, valid, extFeat=range(32), seed=0, maxIter=100, replicates=10, outliersNlogl=42
+    spam, valid, extFeat=range(32), seed=0, maxIter=100, replicates=10, outliersNlogl=42, workers=1, progress=None
 ):
     shape_spam = spam.shape
     list_spam = spam.reshape([shape_spam[0] * shape_spam[1], shape_spam[2]])
@@ -160,19 +160,32 @@ def EMgu_img(
     list_valid = list_spam[valid.flatten(), :]
 
     randomState = np.random.RandomState(seed)
-    gm_data = gm(
-        shape_spam[2],
-        [0],
-        [2],
-        outliersProb=0.01,
-        outliersNlogl=outliersNlogl,
-        dtype=list_valid.dtype,
-    )
-    gm_data.setRandomParams(list_valid, regularizer=-1.0, randomState=randomState)
-    avrLogl, _, _ = gm_data.EM(list_valid, maxIter=maxIter, regularizer=-1.0)
-
-    for index in range(1, replicates):
-        gm_data_1 = gm(
+    if workers > 1:
+        # Initialize in reference order: random draws must never depend on
+        # scheduling. Each EM fit owns its model and only reads the features.
+        # The caller must limit BLAS threads to avoid nested oversubscription.
+        from concurrent.futures import ThreadPoolExecutor
+        models = []
+        for index in range(replicates):
+            model = gm(shape_spam[2], [0], [2], outliersProb=0.01,
+                       outliersNlogl=outliersNlogl, dtype=list_valid.dtype)
+            model.setRandomParams(list_valid, regularizer=-1.0,
+                                  randomState=randomState)
+            models.append(model)
+        def fit(model):
+            return model.EM(list_valid, maxIter=maxIter, regularizer=-1.0)[0]
+        with ThreadPoolExecutor(max_workers=min(workers, replicates)) as pool:
+            scores = []
+            for index, score in enumerate(pool.map(fit, models)):
+                scores.append(score)
+                if progress is not None:
+                    progress(index + 1, replicates)
+        gm_data, avrLogl = models[0], scores[0]
+        for model, score in zip(models[1:], scores[1:]):
+            if score > avrLogl:
+                gm_data, avrLogl = model, score
+    else:
+        gm_data = gm(
             shape_spam[2],
             [0],
             [2],
@@ -180,11 +193,23 @@ def EMgu_img(
             outliersNlogl=outliersNlogl,
             dtype=list_valid.dtype,
         )
-        gm_data_1.setRandomParams(list_valid, regularizer=-1.0, randomState=randomState)
-        avrLogl_1, _, _ = gm_data_1.EM(list_valid, maxIter=maxIter, regularizer=-1.0)
-        if avrLogl_1 > avrLogl:
-            gm_data = gm_data_1
-            avrLogl = avrLogl_1
+        gm_data.setRandomParams(list_valid, regularizer=-1.0, randomState=randomState)
+        avrLogl, _, _ = gm_data.EM(list_valid, maxIter=maxIter, regularizer=-1.0)
+
+        for index in range(1, replicates):
+            gm_data_1 = gm(
+                shape_spam[2],
+                [0],
+                [2],
+                outliersProb=0.01,
+                outliersNlogl=outliersNlogl,
+                dtype=list_valid.dtype,
+            )
+            gm_data_1.setRandomParams(list_valid, regularizer=-1.0, randomState=randomState)
+            avrLogl_1, _, _ = gm_data_1.EM(list_valid, maxIter=maxIter, regularizer=-1.0)
+            if avrLogl_1 > avrLogl:
+                gm_data = gm_data_1
+                avrLogl = avrLogl_1
 
     _, mahal = gm_data.getNlogl(list_spam)
     mahal = mahal.reshape([shape_spam[0], shape_spam[1]])

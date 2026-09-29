@@ -1,0 +1,380 @@
+[
+  {
+    "source": "models/external/clone_detectors/03_cmsegnet/predict_folder/model.py",
+    "source_sha256": "cb91e5b08f91a33fa7714e1d39c07902e103e4114be6833802017c63dbcafed5",
+    "target": "integration/clone_detectors/sherloq_clone_models/cmsegnet/model.py",
+    "sha256": "0f23e233f80dee6b7e462e08fac3a64f98c4c8ebc5b0f759cbed3dc942a3f00f",
+    "replacements": [
+      [
+        "from Cor import Corr",
+        "from .Cor import Corr"
+      ],
+      [
+        "else: self._init_weights()",
+        "else: pass  # Full checkpoint loaded strictly by the adapter."
+      ]
+    ],
+    "definitions_only": true
+  },
+  {
+    "source": "models/external/clone_detectors/03_cmsegnet/predict_folder/Cor.py",
+    "source_sha256": "6026290db2fc0a0d88eab3bf8d290b3bdc067c2c58ec64f6da9b46830648a049",
+    "target": "integration/clone_detectors/sherloq_clone_models/cmsegnet/Cor.py",
+    "sha256": "03e038cba1e4768dbda9376937217b18db3f464afa672c3e51b43a7789991a72",
+    "replacements": [
+      [
+        "key = str(x_in.shape) + str(rat_s)",
+        "key = (tuple(x_in.shape), rat_s, str(x_in.device), x_in.dtype)"
+      ]
+    ],
+    "definitions_only": true
+  },
+  {
+    "source": "third_party/research/clone_detectors/04_mgcfdn/model/MGCFDN.py",
+    "source_sha256": "aa3b616688c9d9ffdcb732adf09a869e9f3d34c39e15c4425549b362688780b7",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/model/MGCFDN.py",
+    "sha256": "a96fa20c506fd1b1a12e684d2c858c0eb0d896fd836aa176938e4390cf9f421d",
+    "replacements": [
+      [
+        "weights=torchvision.models.EfficientNet_B7_Weights.IMAGENET1K_V1",
+        "weights=None"
+      ]
+    ],
+    "definitions_only": true
+  },
+  {
+    "source": "third_party/research/clone_detectors/04_mgcfdn/model/EffNet_MGCFDN.py",
+    "source_sha256": "8b79976df54369423124d8be47cfbdedead011238635f0f29b36c2d116e5f98a",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/model/EffNet_MGCFDN.py",
+    "sha256": "8ea50bf54d7f25c9f47abc0923e5281a1cf87acce1d01bef6a4d7d09764532ad",
+    "replacements": [
+      [
+        "weights=torchvision.models.EfficientNet_B7_Weights.IMAGENET1K_V1",
+        "weights=None"
+      ]
+    ],
+    "definitions_only": true
+  },
+  {
+    "source": "third_party/research/clone_detectors/04_mgcfdn/model/MPDN_MGCFDN.py",
+    "source_sha256": "3e37c3bf919a5f20f364ebb522768176a91427c9d0c7a965c1b4eac7138c5a42",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/model/MPDN_MGCFDN.py",
+    "sha256": "dfbe56a843d967cbfe44e5c854a53f46a20f6b5394380f4bea7a4b832aedf6aa",
+    "replacements": [
+      [
+        "from backbones.",
+        "from ..backbones."
+      ]
+    ],
+    "definitions_only": true
+  },
+  {
+    "source": "third_party/research/clone_detectors/04_mgcfdn/model/TNT_MGCFDN.py",
+    "source_sha256": "075fbd7fa17189f3720129691d4dbe821700b54a3de257eefb88d6ffee4bfeff",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/model/TNT_MGCFDN.py",
+    "sha256": "d52a160d5e3acbbb324a669c2e87eab8ada9a4fb7ff1185a2132eb190fc4b374",
+    "replacements": [
+      [
+        "from backbones.",
+        "from ..backbones."
+      ]
+    ],
+    "definitions_only": true
+  },
+  {
+    "source": "third_party/research/clone_detectors/04_mgcfdn/model/VIG_MGCFDN.py",
+    "source_sha256": "40cf1dc1224ce0ceb10ec6b6d57b36c68a9a0e4ed1fabb87ceb923e42a13379c",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/model/VIG_MGCFDN.py",
+    "sha256": "2a1f72a79cf568c2882b0b1a5fa2107c0b253d0a12414dee92a62010b7651a80",
+    "replacements": [
+      [
+        "from backbones.",
+        "from ..backbones."
+      ]
+    ],
+    "definitions_only": true
+  },
+  {
+    "source": "third_party/research/clone_detectors/04_mgcfdn/backbones/MPDN.py",
+    "source_sha256": "d31234824818458eed37c834ca9155a680801ff783fd1a139d517033ca93ae0b",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/backbones/MPDN.py",
+    "sha256": "16b246572082b10284b23ec05f89b808359b1cc8cb2a40542bce804a3eb00203",
+    "replacements": [],
+    "definitions_only": true
+  },
+  {
+    "source": "third_party/research/clone_detectors/04_mgcfdn/backbones/TNT.py",
+    "source_sha256": "17436fac738a13ccff4ae05545fd8994fae380bfbbc1b85fb4819f7cf2939a51",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/backbones/TNT.py",
+    "sha256": "c9e1ec9601502447d1755467ab9efa0e6107c1deaf93b149fdaa19813d257e7d",
+    "replacements": [],
+    "definitions_only": true
+  },
+  {
+    "source": "third_party/research/clone_detectors/04_mgcfdn/backbones/VIG.py",
+    "source_sha256": "a7052629c8ad6fd17a5dc19ab28027c4e358f5f86c61ebfdb3302aee38a09e56",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/backbones/VIG.py",
+    "sha256": "7b141809ce3842f280f8b9456ee7ad69aff99501c36c9f6b60b057bc3dae2544",
+    "replacements": [
+      [
+        "from gcn_lib import",
+        "from ..gcn_lib import"
+      ]
+    ],
+    "definitions_only": true
+  },
+  {
+    "source": "third_party/research/clone_detectors/vig_dependency/__init__.py",
+    "source_sha256": "1ba4f5cde0abafd34a33b5f9cd1820a2a1de333a016275c41673bb743f53c898",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/gcn_lib/__init__.py",
+    "sha256": "72540f0531c3ea8823f1ba531cbeaffb88269216b5baa84d006bc0c3b5ffad96",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/vig_dependency/pos_embed.py",
+    "source_sha256": "8b22fa7d2971fe8401e7791f18f7ed6b070a7f7732fe92877f6f620accaa5b54",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/gcn_lib/pos_embed.py",
+    "sha256": "5228e41437003de930bddb327570483489a5d50de68227297ee77c85c6bc65eb",
+    "replacements": [
+      [
+        "np.float)",
+        "float)"
+      ]
+    ],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/vig_dependency/torch_edge.py",
+    "source_sha256": "7e925017093cfe8940cc42c2d9071c8a4d5b3eae909d3aad9bbc5b6942bb5d0c",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/gcn_lib/torch_edge.py",
+    "sha256": "97d5c754565901777344e632d58b447a92936226956b5b85ad214d3f7d9365de",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/vig_dependency/torch_nn.py",
+    "source_sha256": "eefb7bc6c73b1b34213e9ba08cfb20f7a4e4fdb6cbadcfe0e79bbb741a6c8d09",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/gcn_lib/torch_nn.py",
+    "sha256": "308fd3a359497dfd8362fa9d82378234ecedf88dbd39297a228c9cc2cb0cf02b",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/vig_dependency/torch_vertex.py",
+    "source_sha256": "821a6057221ee96df426220dabaf92e3ff8a0f66dc35669d533eef4d26c4ee5c",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/gcn_lib/torch_vertex.py",
+    "sha256": "2dedd24ec1bed87db671590247cd97e97724dba900e7731f8789f751a4f22c52",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/__init__.py",
+    "source_sha256": "78c8baf76ef222fc7858bfc39fbdf2d6648c75132800314ed900533ee08d683a",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/__init__.py",
+    "sha256": "eab7143ab0eb829421ce5dc293ae672def75fb48601cd51bb74c56c675773d6b",
+    "replacements": [
+      [
+        "from forgeryscope",
+        "from sherloq_clone_models.forgeryscope"
+      ]
+    ],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/detector/__init__.py",
+    "source_sha256": "a8b2c5c868953ff450215b448bb005ac1a867eb89910280619bbac576596e540",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/detector/__init__.py",
+    "sha256": "91b1aac75593e312f3c33f9e8f335bdb6b12b725d9af3e71b1eca7a1ca1dd0d5",
+    "replacements": [
+      [
+        "from forgeryscope",
+        "from sherloq_clone_models.forgeryscope"
+      ]
+    ],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/detector/yolo.py",
+    "source_sha256": "d035f913ea5ed794d3337f4a02a9634c8081960345c5428a086250ef9ffb3f8a",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/detector/yolo.py",
+    "sha256": "082809ace4b2e658a239f3a1d5c396741d6b64da9421b1f7ccaeea2002d98f08",
+    "replacements": [
+      [
+        "from forgeryscope",
+        "from sherloq_clone_models.forgeryscope"
+      ],
+      [
+        "from ultralytics import YOLO",
+        "from gui.sherloq_app.core.forgeryscope_adapter import local_yolo as YOLO"
+      ]
+    ],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/embedder/__init__.py",
+    "source_sha256": "f199e5f6ce0714d075ead885b3ca3780349928c19babb72322218fa9ae9c667f",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/embedder/__init__.py",
+    "sha256": "9ec820c12df39f71ff4e252714072a02b14886dec6667057a53d6c19ae03b610",
+    "replacements": [
+      [
+        "from forgeryscope",
+        "from sherloq_clone_models.forgeryscope"
+      ]
+    ],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/embedder/torch.py",
+    "source_sha256": "c9f42b3254259b515393e4e580f25c28770e13d3dc5a4c4166e5d05742e003dc",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/embedder/torch.py",
+    "sha256": "d189c9e7e7d3296b7cc52bafb1a46722b9154398b824de0a80c60cf098a4f899",
+    "replacements": [
+      [
+        "from forgeryscope",
+        "from sherloq_clone_models.forgeryscope"
+      ],
+      [
+        "timm.data.resolve_model_data_config(hparams['model_name'])",
+        "timm.data.resolve_model_data_config(self.backbone)"
+      ],
+      [
+        "torch.load(checkpoint_path, map_location='cpu')",
+        "torch.load(checkpoint_path, map_location='cpu', weights_only=True)"
+      ]
+    ],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/matcher/__init__.py",
+    "source_sha256": "c4f8c84ecf1e992a6448cf258ad7d69b11a030ad9b68354855281fc6fee9ec0d",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/matcher/__init__.py",
+    "sha256": "0490ea3ad8588899199a0df81b83ee71558fcb4ae52d7d3bc10395474a4b2fa5",
+    "replacements": [
+      [
+        "from forgeryscope",
+        "from sherloq_clone_models.forgeryscope"
+      ]
+    ],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/matcher/geometry.py",
+    "source_sha256": "36a979ece8e78dfd1ec55e0947f96a58fc11ed4a8c6a61d80c5a489ec416faca",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/matcher/geometry.py",
+    "sha256": "699f885a4023033e721728992e4bd3e1a7663ea4cf20308c7e253f4b76ae8770",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/matcher/lane.py",
+    "source_sha256": "d4f6f145e97de52dac8b2358d93d4fdfb442254e016b401cb65edb437471b54d",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/matcher/lane.py",
+    "sha256": "3f7e359dbc702d8c50d84a66ba3d190f984de05a34cfd7f96d8029a8b25b80e2",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/matcher/lightglue.py",
+    "source_sha256": "75524579c4f29ee531d217ea331b57d228a9463669a2358df11d194099d664b6",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/matcher/lightglue.py",
+    "sha256": "447c8bb6a89abed9b1ba5c7fb107ee52fcf724d468503186a5aa5e1fc79465ac",
+    "replacements": [
+      [
+        "from forgeryscope",
+        "from sherloq_clone_models.forgeryscope"
+      ],
+      [
+        "from lightglue import LightGlue, SIFT, ALIKED, match_pair",
+        "from gui.sherloq_app.vendor.lightglue.lightglue import LightGlue\nfrom gui.sherloq_app.vendor.lightglue.sift import SIFT\nfrom gui.sherloq_app.vendor.lightglue.aliked import ALIKED\nfrom gui.sherloq_app.vendor.lightglue.utils import match_pair"
+      ],
+      [
+        "from lightglue.utils import",
+        "from gui.sherloq_app.vendor.lightglue.utils import"
+      ],
+      [
+        "self.matcher = LightGlue(features=",
+        "from gui.sherloq_app.core.forgeryscope_adapter import local_lightglue\n        self.matcher = local_lightglue(features="
+      ],
+      [
+        "torch.cuda.synchronize()",
+        "if self.device.type == \"mps\": torch.mps.synchronize()"
+      ],
+      [
+        "return None, None, None, f\"Matching failed with error: {e}\"",
+        "raise RuntimeError(f\"\u00c9chec LightGlue : {e}\") from e"
+      ]
+    ],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/matcher/plot.py",
+    "source_sha256": "ab636031ea00b0b5b0c0ee8f498b01b53827a23925ad690628fb0f10c31f84b7",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/matcher/plot.py",
+    "sha256": "5ee35ee225dd2c24e63a6908a41b7aa134230a0735853a6a86b0d95fb32cce35",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/forgeryscope/model_zoo.py",
+    "source_sha256": "34a000a5715f3e93032cf95dd3bd7d84ba32290520d82e78e48d175d97d2410c",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/model_zoo.py",
+    "sha256": "02d1219e4de6779443c279792bb8c244e296a47754107716afdbda5445018a75",
+    "replacements": [
+      [
+        "with urlopen(url) as response, open(temp_destination, \"wb\") as handle:",
+        "raise FileNotFoundError(\"Poids absent : \" + str(destination))\n    with urlopen(url) as response, open(temp_destination, \"wb\") as handle:"
+      ]
+    ],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/02_forgeryscope/LICENSE",
+    "source_sha256": "143a9e89a9eb6e686401c86b1ae64ce62d3dbde28479763b39536d9ea660bd79",
+    "target": "integration/clone_detectors/sherloq_clone_models/forgeryscope/LICENSE",
+    "sha256": "143a9e89a9eb6e686401c86b1ae64ce62d3dbde28479763b39536d9ea660bd79",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/04_mgcfdn/LICENSE",
+    "source_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "source": "third_party/research/clone_detectors/vig_dependency/License.txt",
+    "source_sha256": "1ee267680bc3e403a4027aac7bfec7ae3a2b730ad0e19be1208130bf828c049c",
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/gcn_lib/License.txt",
+    "sha256": "1ee267680bc3e403a4027aac7bfec7ae3a2b730ad0e19be1208130bf828c049c",
+    "replacements": [],
+    "definitions_only": false
+  },
+  {
+    "target": "integration/clone_detectors/sherloq_clone_models/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generated": "empty namespace initializer"
+  },
+  {
+    "target": "integration/clone_detectors/sherloq_clone_models/cmsegnet/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generated": "empty namespace initializer"
+  },
+  {
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generated": "empty namespace initializer"
+  },
+  {
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/model/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generated": "empty namespace initializer"
+  },
+  {
+    "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/backbones/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generated": "empty namespace initializer"
+  }
+]

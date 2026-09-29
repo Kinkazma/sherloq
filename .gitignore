@@ -8,3 +8,13 @@
 __pycache__/
 
 pyrightconfig.json
+
+# Local downloads and generated native build outputs
+.DS_Store
+__pycache__/
+*.pyc
+SHERLOQ-download/
+*.zip.part*
+*.download
+*.assembling
+macos/native/runtime/

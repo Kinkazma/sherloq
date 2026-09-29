@@ -1,3 +1,4 @@
+from gui.sherloq_app.ui.localization import t
 import csv
 
 from PySide6.QtCore import Qt, QRect, QRegularExpression, QSettings, QFileInfo
@@ -35,7 +36,7 @@ class TableWidget(QWidget):
     ):
         super(TableWidget, self).__init__(parent)
 
-        self.table_widget = QTableWidget(len(table), len(table[0]))
+        self.table_widget = QTableWidget(len(table), len(headers))
         for i, row in enumerate(table):
             for j, item in enumerate(row):
                 if item is not None:
@@ -195,9 +196,9 @@ class TableWidget(QWidget):
         settings = QSettings()
         filename = QFileDialog.getSaveFileName(
             self,
-            self.tr("Export metadata"),
+            t(self.tr("Export metadata")),
             settings.value("save_folder"),
-            self.tr("CSV files (*.csv)"),
+            t(self.tr("CSV files (*.csv)")),
         )[0]
         if not filename:
             return

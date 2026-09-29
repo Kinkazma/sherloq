@@ -1,20 +1,15 @@
-from time import time
-
-import cv2 as cv
-import numpy as np
-from PySide6.QtCore import Qt
+from gui.sherloq_app.core.minmax import MinMaxEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 from PySide6.QtWidgets import (
     QVBoxLayout,
     QHBoxLayout,
     QComboBox,
     QSpinBox,
     QPushButton,
-    QProgressDialog,
     QLabel,
 )
 
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import elapsed_time, norm_mat
 from gui.sherloq_app.ui.viewer import ImageViewer
 
 
@@ -56,7 +51,14 @@ class MinMaxWidget(ToolWidget):
         self.image = image
         self.viewer = ImageViewer(self.image, self.image)
         self.low = self.high = None
-        self.stopped = False
+        self.engine = MinMaxEngine(image)
+        self.job = LatestJob(self, self.engine.compute, delay=0)
+        self.status_label = QLabel()
+        self._requested = None
+        self._available = False
+        self.job.result.connect(self.show_result)
+        self.job.busy.connect(self.set_busy)
+        self.job.failed.connect(self.show_error)
         self.change()
 
         self.process_button.clicked.connect(self.preprocess)
@@ -75,130 +77,71 @@ class MinMaxWidget(ToolWidget):
         top_layout.addWidget(self.max_combo)
         top_layout.addWidget(QLabel(self.tr("Filter:")))
         top_layout.addWidget(self.filter_spin)
+        top_layout.addWidget(self.status_label)
         top_layout.addStretch()
         main_layout = QVBoxLayout()
         main_layout.addLayout(top_layout)
         main_layout.addWidget(self.viewer)
         self.setLayout(main_layout)
 
-    @staticmethod
-    def minmax_dev(patch, mask):
-        c = patch[1, 1]
-        minimum, maximum, _, _ = cv.minMaxLoc(patch, mask)
-        if c < minimum:
-            return -1
-        if c > maximum:
-            return +1
-        return 0
-
-    @staticmethod
-    def blk_filter(img, radius):
-        result = np.zeros_like(img, np.float32)
-        rows, cols = result.shape
-        block = 2 * radius + 1
-        for i in range(radius, rows, block):
-            for j in range(radius, cols, block):
-                result[
-                    i - radius : i + radius + 1, j - radius : j + radius + 1
-                ] = np.std(
-                    img[i - radius : i + radius + 1, j - radius : j + radius + 1]
-                )
-        return cv.normalize(result, None, 0, 127, cv.NORM_MINMAX, cv.CV_8UC1)
-
     def change(self):
+        self.job.invalidate()
+        self._requested = None
+        self._available = False
+        self.low = self.high = None
         self.min_combo.setEnabled(False)
         self.max_combo.setEnabled(False)
         self.filter_spin.setEnabled(False)
         self.process_button.setEnabled(True)
+        self.process_button.setText(self.tr("Process"))
+        self.status_label.clear()
         self.viewer.update_processed(self.image)
+        self.viewer.set_busy(True)
 
     def preprocess(self):
-        start = time()
-        channel = self.chan_combo.currentIndex()
-        if channel == 0:
-            img = cv.cvtColor(self.image, cv.COLOR_BGR2GRAY)
-        elif channel == 4:
-            b, g, r = cv.split(self.image.astype(np.float64))
-            img = cv.sqrt(cv.pow(b, 2) + cv.pow(g, 2) + cv.pow(r, 2))
-        else:
-            img = self.image[:, :, 3 - channel]
-        kernel = 3
-        border = kernel // 2
-        shape = (img.shape[0] - kernel + 1, img.shape[1] - kernel + 1, kernel, kernel)
-        strides = 2 * img.strides
-        patches = np.lib.stride_tricks.as_strided(img, shape=shape, strides=strides)
-        patches = patches.reshape((-1, kernel, kernel))
-        mask = np.full((kernel, kernel), 255, dtype=np.uint8)
-        mask[border, border] = 0
-        progress = QProgressDialog(
-            self.tr("Computing deviation..."),
-            self.tr("Cancel"),
-            0,
-            shape[0] * shape[1] - 1,
-            self,
-        )
-        progress.canceled.connect(self.cancel)
-        progress.setWindowModality(Qt.WindowModal)
-        blocks = [0] * shape[0] * shape[1]
-        for i, patch in enumerate(patches):
-            blocks[i] = self.minmax_dev(patch, mask)
-            progress.setValue(i)
-            if self.stopped:
-                self.stopped = False
-                return
-        output = np.array(blocks).reshape(shape[:-2])
-        output = cv.copyMakeBorder(
-            output, border, border, border, border, cv.BORDER_CONSTANT
-        )
-        self.low = output == -1
-        self.high = output == +1
+        if self.job.is_busy:
+            self.cancel()
+            return
+        self._request()
+
+    def cancel(self):
+        self.job.invalidate()
+        self._requested = None
+        self.process_button.setText(self.tr("Process"))
+        self.process_button.setEnabled(True)
+        self.status_label.setText(self.tr("Cancelled"))
+        self.viewer.set_busy(True)
+
+    def process(self):
+        if self._available:
+            self._request()
+
+    def _request(self):
+        params = (self.chan_combo.currentIndex(), self.min_combo.currentIndex(),
+                  self.max_combo.currentIndex(), self.filter_spin.value())
+        if params != self._requested:
+            self._requested = params
+            self.job.request(params)
+
+    def set_busy(self, busy):
+        self.viewer.set_busy(busy)
+        self.process_button.setText(self.tr("Cancel") if busy else self.tr("Process"))
+        self.process_button.setEnabled(busy or not self._available)
+        if busy:
+            self.status_label.setText(self.tr("Calculating…"))
+
+    def show_result(self, result):
+        image, self.low, self.high = result
+        self._available = True
         self.min_combo.setEnabled(True)
         self.max_combo.setEnabled(True)
         self.filter_spin.setEnabled(True)
         self.process_button.setEnabled(False)
-        self.process()
-        self.info_message.emit(self.tr(f"Min/Max Deviation = {elapsed_time(start)}"))
+        self.viewer.update_processed(image)
+        self.status_label.setText(f"{self.job.seconds:.3f} s")
 
-    def cancel(self):
-        self.stopped = True
-
-    def process(self):
-        minmax = np.zeros_like(self.image)
-        minimum = self.min_combo.currentIndex()
-        maximum = self.max_combo.currentIndex()
-        radius = self.filter_spin.value()
-        if radius > 0:
-            start = time()
-            radius += 3
-            if minimum < 4:
-                low = self.blk_filter(self.low, radius)
-                if minimum <= 2:
-                    minmax[:, :, 2 - minimum] = low
-                else:
-                    minmax = np.repeat(low[:, :, np.newaxis], 3, axis=2)
-            if maximum < 4:
-                high = self.blk_filter(self.high, radius)
-                if maximum <= 2:
-                    minmax[:, :, 2 - maximum] += high
-                else:
-                    minmax += np.repeat(high[:, :, np.newaxis], 3, axis=2)
-            minmax = norm_mat(minmax)
-            self.info_message.emit(self.tr(f"Min/Max Filter = {elapsed_time(start)}"))
-        else:
-            if minimum == 0:
-                minmax[self.low] = [0, 0, 255]
-            elif minimum == 1:
-                minmax[self.low] = [0, 255, 0]
-            elif minimum == 2:
-                minmax[self.low] = [255, 0, 0]
-            elif minimum == 3:
-                minmax[self.low] = [255, 255, 255]
-            if maximum == 0:
-                minmax[self.high] = [0, 0, 255]
-            elif maximum == 1:
-                minmax[self.high] = [0, 255, 0]
-            elif maximum == 2:
-                minmax[self.high] = [255, 0, 0]
-            elif maximum == 3:
-                minmax[self.high] = [255, 255, 255]
-        self.viewer.update_processed(minmax)
+    def show_error(self, error):
+        self._requested = None
+        self.process_button.setEnabled(True)
+        self.viewer.set_busy(True)
+        self.status_label.setText(error)

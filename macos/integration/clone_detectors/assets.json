@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "acquired_utc": "2026-09-28T12:26:44Z",
+  "assets": [
+    {
+      "id": "01_d2prl_source",
+      "kind": "source_archive",
+      "repo": "byc33/D2PRL",
+      "commit": "a4314b614ea3186b4fac98e9e96939e37f275fc5",
+      "url": "https://codeload.github.com/byc33/D2PRL/tar.gz/a4314b614ea3186b4fac98e9e96939e37f275fc5",
+      "path": "downloads/clone_detectors/01_d2prl.tar.gz",
+      "status": "downloaded",
+      "size": 107069,
+      "sha256": "8f5bde2898a0d321255c96ebfcff4f02017c7944a1cc87b751d6793b53633d0e"
+    },
+    {
+      "id": "02_forgeryscope_source",
+      "kind": "source_archive",
+      "repo": "vlad3996/forgeryscope",
+      "commit": "63101e28a12daea6f8c9f6b1cd1ff3b8ffd2d7c8",
+      "url": "https://codeload.github.com/vlad3996/forgeryscope/tar.gz/63101e28a12daea6f8c9f6b1cd1ff3b8ffd2d7c8",
+      "path": "downloads/clone_detectors/02_forgeryscope.tar.gz",
+      "status": "downloaded",
+      "size": 3685981,
+      "sha256": "3e1fee35bb2b833f8b0e12978f472f3aeb1b9d34bbb037a2a2af0bd1830db818"
+    },
+    {
+      "id": "03_cmsegnet_reference_source",
+      "kind": "source_archive",
+      "repo": "YoursEver/FakeParaEgg",
+      "commit": "ae09c70b19c5626787ea525a009039645a31205b",
+      "url": "https://codeload.github.com/YoursEver/FakeParaEgg/tar.gz/ae09c70b19c5626787ea525a009039645a31205b",
+      "path": "downloads/clone_detectors/03_cmsegnet_reference.tar.gz",
+      "status": "downloaded",
+      "size": 151749377,
+      "sha256": "ed807ac5df8105f07e6b3baff9810158cc1077f7a3492779976293db1bf4f07d"
+    },
+    {
+      "id": "04_mgcfdn_source",
+      "kind": "source_archive",
+      "repo": "tuhanglsWorld/MGCFDN",
+      "commit": "2f0827b7c5675753c55318ca244bc2c712d6cd47",
+      "url": "https://codeload.github.com/tuhanglsWorld/MGCFDN/tar.gz/2f0827b7c5675753c55318ca244bc2c712d6cd47",
+      "path": "downloads/clone_detectors/04_mgcfdn.tar.gz",
+      "status": "downloaded",
+      "size": 4899767,
+      "sha256": "3c5f4a8a20031ece264e8bc445c99719ca583743c4d31cca8d1406f3dbd188a1"
+    },
+    {
+      "id": "05_sift_g2nn_ransac_source",
+      "kind": "source_archive",
+      "repo": "oshima-yoppi/luc_pub",
+      "commit": "6f5b6790c2e03ea14faf5bc58799bc53da915c78",
+      "url": "https://codeload.github.com/oshima-yoppi/luc_pub/tar.gz/6f5b6790c2e03ea14faf5bc58799bc53da915c78",
+      "path": "downloads/clone_detectors/05_sift_g2nn_ransac.tar.gz",
+      "status": "downloaded",
+      "size": 68523270,
+      "sha256": "2191fc95037ff234faa22d0fd425aca161f5dddec2d0f6bbbddc8099bac5294b"
+    },
+    {
+      "id": "02_aliked_wblot.pth",
+      "kind": "weights",
+      "url": "https://github.com/vlad3996/forgeryscope/releases/download/models-v1/aliked_wblot.pth",
+      "size_expected": 151145298,
+      "path": "models/external/clone_detectors/02_forgeryscope/aliked_wblot.pth",
+      "status": "downloaded",
+      "size": 151145298,
+      "sha256": "e9ddeb9e87b96555a6db4a4fbfb5b99b31c36371bf4171765dce8f1f9ef95022"
+    },
+    {
+      "id": "02_micro_overlap_embedder.ckpt",
+      "kind": "weights",
+      "url": "https://github.com/vlad3996/forgeryscope/releases/download/models-v1/micro_overlap_embedder.ckpt",
+      "size_expected": 124354059,
+      "path": "models/external/clone_detectors/02_forgeryscope/micro_overlap_embedder.ckpt",
+      "status": "downloaded",
+      "size": 124354059,
+      "sha256": "b91f3923a93705898c864324b5c5d70589499e208c45f622b6a447a31225ae2a"
+    },
+    {
+      "id": "02_wblot_duplicate_embedder.ckpt",
+      "kind": "weights",
+      "url": "https://github.com/vlad3996/forgeryscope/releases/download/models-v1/wblot_duplicate_embedder.ckpt",
+      "size_expected": 123301843,
+      "path": "models/external/clone_detectors/02_forgeryscope/wblot_duplicate_embedder.ckpt",
+      "status": "downloaded",
+      "size": 123301843,
+      "sha256": "87e62f05cba4127357097d2f15f1401aed017ac0f6a64c67a57246aa33bfb02e"
+    },
+    {
+      "id": "02_wblot_lane_embedder.ckpt",
+      "kind": "weights",
+      "url": "https://github.com/vlad3996/forgeryscope/releases/download/models-v1/wblot_lane_embedder.ckpt",
+      "size_expected": 369457114,
+      "path": "models/external/clone_detectors/02_forgeryscope/wblot_lane_embedder.ckpt",
+      "status": "downloaded",
+      "size": 369457114,
+      "sha256": "6cee086eab4ead02a242cbcb584da1a7e30b84cfcfa43e97e466019e6f2f0849"
+    },
+    {
+      "id": "02_wblot_overlap_embedder.ckpt",
+      "kind": "weights",
+      "url": "https://github.com/vlad3996/forgeryscope/releases/download/models-v1/wblot_overlap_embedder.ckpt",
+      "size_expected": 123301843,
+      "path": "models/external/clone_detectors/02_forgeryscope/wblot_overlap_embedder.ckpt",
+      "status": "downloaded",
+      "size": 123301843,
+      "sha256": "afc8c81fd829f356c51be7f6df357c3d258879342f2739d64595522f55497929"
+    },
+    {
+      "id": "02_yolo_lane_extractor.pt",
+      "kind": "weights",
+      "url": "https://github.com/vlad3996/forgeryscope/releases/download/models-v1/yolo_lane_extractor.pt",
+      "size_expected": 19167194,
+      "path": "models/external/clone_detectors/02_forgeryscope/yolo_lane_extractor.pt",
+      "status": "downloaded",
+      "size": 19167194,
+      "sha256": "0061376bcb8895707ac8d052698c21849ee151c6c7bfc6d00de0939422571712"
+    },
+    {
+      "id": "02_yolo_panel_extractor.pt",
+      "kind": "weights",
+      "url": "https://github.com/vlad3996/forgeryscope/releases/download/models-v1/yolo_panel_extractor.pt",
+      "size_expected": 119075905,
+      "path": "models/external/clone_detectors/02_forgeryscope/yolo_panel_extractor.pt",
+      "status": "downloaded",
+      "size": 119075905,
+      "sha256": "f686674cfb06e73c0e95791cd5ba73823a2cccc918b0bd67f6418e41f88d057f"
+    },
+    {
+      "id": "03_cmsegnet_code",
+      "kind": "zip_archive",
+      "url": "https://www.dropbox.com/scl/fi/d70p1q7sh2qd0o983cbs5/FongYi_code.zip?rlkey=i3jdpdbhx40d69lwy3m06ov05&dl=1",
+      "path": "downloads/clone_detectors/03_cmsegnet_code.zip",
+      "status": "downloaded",
+      "size": 61482376,
+      "sha256": "b9df5fc6e7fba78a506125f38d616ef7e66fe1d41b3d103106f8f6390347373a"
+    },
+    {
+      "id": "03_cmsegnet_weights",
+      "kind": "zip_archive",
+      "url": "https://www.dropbox.com/scl/fi/aym6cdp84mqa6iehzf80h/prediction_folder_FongYi.zip?rlkey=74vzkqo2up7gg2wakemkropls&dl=1",
+      "path": "downloads/clone_detectors/03_cmsegnet_weights.zip",
+      "status": "downloaded",
+      "size": 62130535,
+      "sha256": "57363c7743520fcb5534909ba7e3080571612ce361e65f34b9235aa8e6b89cf0"
+    },
+    {
+      "id": "04_mgcfdn_weights",
+      "kind": "zip_archive",
+      "url": "https://drive.google.com/file/d/1o9iCAOukI3iwMW64hSvfapwaNHCI5-Hd/view",
+      "path": "downloads/clone_detectors/04_mgcfdn_weights.zip",
+      "size": 1515585404,
+      "sha256": "718452e160d9a6bd1bdbef8d161be368af6b4a97cbac25b5264bb324e07d7d2f",
+      "status": "downloaded"
+    },
+    {
+      "id": "01_d2prl_pretrain",
+      "kind": "weights",
+      "url": "https://pan.baidu.com/s/1m_FU5fqBl5J50uKs9Vu7Ng",
+      "access_code": "xhwq",
+      "access_code_source": "https://github.com/byc33/D2PRL/issues/3",
+      "path": "models/external/clone_detectors/01_d2prl/pretrain.pth",
+      "status": "missing",
+      "reason": "Baidu blocked by browser site-safety policy; user offered manual download.",
+      "contact_status": "Chinese email sent after user approval from EHESS to Yuanman Li on 2026-09-28 at 17:09 Europe/Paris; English email sent after user approval to Joao Phillipe Cardenuto at 17:24 Europe/Paris. Both verified in Sent. Weights remain missing.",
+      "correspondence": "integration/clone_detectors/correspondence/03-d2prl-email.txt",
+      "additional_correspondence": [
+        "integration/clone_detectors/correspondence/04-cardenuto-email.txt"
+      ]
+    },
+    {
+      "id": "05_luc_pub_yolo",
+      "kind": "weights",
+      "expected_files": [
+        "epoch20_0.pt",
+        "epoch20_42.pt",
+        "epoch20_123.pt",
+        "epoch20_456.pt",
+        "epoch20_789.pt",
+        "best.pt"
+      ],
+      "status": "missing",
+      "reason": "Referenced Kaggle checkpoints absent from pinned public repository; exact public download URLs not established.",
+      "contact_status": "Request sent from user EHESS mailbox on 2026-09-28; no received files recorded locally.",
+      "correspondence": "integration/clone_detectors/correspondence/02-oshima-email.txt"
+    },
+    {
+      "id": "02_forgeryscope_competition_extras",
+      "kind": "competition_components",
+      "status": "missing",
+      "scope": "Full best private-leaderboard submission, beyond the seven public models-v1 checkpoints",
+      "source": "https://github.com/vlad3996/forgeryscope/blob/63101e28a12daea6f8c9f6b1cd1ff3b8ffd2d7c8/SOLUTION.md",
+      "expected_components": [
+        "Additional microscopy/macroscopy embedding checkpoints for the ensemble of three models (two additional models if public checkpoint is the matching version)",
+        "Additional panel detector checkpoint for the ensemble of two YOLO panel detectors",
+        "Exact public segmentation fallback notebook version, checkpoint links and inference configuration"
+      ],
+      "reason": "Pinned SOLUTION.md explicitly describes simplified public release; exact additional filenames and segmentation checkpoint count not established.",
+      "contact_status": "Request sent from user EHESS mailbox on 2026-09-28; no additional received files recorded locally.",
+      "correspondence": "integration/clone_detectors/correspondence/01-leketush-email.txt"
+    }
+  ],
+  "last_local_review_date": "2026-09-28"
+}

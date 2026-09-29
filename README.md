@@ -1,3 +1,27 @@
+# SHERLOQ — macOS Apple Silicon community fork
+
+SHERLOQ was created by **Guido Bartoli**. This fork preserves the original
+[project](https://github.com/GuidoBartoli/sherloq), history, credits and GPLv3
+license. Native integration changes were prepared with AI assistance and are
+maintained here by [Kinkazma](https://github.com/Kinkazma).
+
+**Start with the [macOS installation guide](macos/README.md).** It covers the
+complete installation, included models and runtimes, source development, and
+validation limits. Large installation files are hosted in this repository's
+[Releases](https://github.com/Kinkazma/sherloq/releases), with a downloader that
+verifies and assembles all six parts. No external cloud account is required.
+
+The application changes are in `gui/`; native integration, build sources,
+synthetic tests and download scripts are in `macos/`. Modified files are recorded
+in Git and [the change index](macos/docs/NATIVE-CHANGE-INDEX.md), dated
+29 September 2026, relative to upstream revision
+`3fe95fcb56037e47e2eefbc2d3785804a31a74f5`. Component-specific licenses remain
+in place. This candidate is independent of the original author's releases.
+The upstream installation instructions below describe the original project;
+use the macOS guide above for this fork's native installation layout.
+
+---
+
 <p align="center">
   <img src="logo/sherloq.png" width="600px" alt="Sherloq" />
   <br><b>An open source digital image forensic toolset</b>

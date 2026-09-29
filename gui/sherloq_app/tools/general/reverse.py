@@ -1,5 +1,5 @@
 from PySide6.QtCore import QUrl
-from PySide6.QtWebEngineWidgets import QWebEngineView
+from gui.sherloq_app.ui.browser import BrowserPanel
 from PySide6.QtWidgets import QLabel, QVBoxLayout, QRadioButton, QHBoxLayout
 
 from gui.sherloq_app.ui.icons import themed_icon
@@ -22,7 +22,7 @@ class ReverseWidget(ToolWidget):
         self.karma_radio.setIcon(themed_icon("karmadecay.jpg"))
         self.tineye_radio.setChecked(True)
         self.last_radio = self.tineye_radio
-        self.web_view = QWebEngineView()
+        self.web_view = BrowserPanel("https://tineye.com/", self)
         self.choose()
 
         self.tineye_radio.clicked.connect(self.choose)
@@ -64,3 +64,7 @@ class ReverseWidget(ToolWidget):
             self.last_radio = self.karma_radio
         else:
             self.last_radio.setChecked(True)
+
+    def shutdown(self):
+        self.web_view.shutdown()
+        super().shutdown()

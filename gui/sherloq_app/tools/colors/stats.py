@@ -1,5 +1,5 @@
-import cv2 as cv
-import numpy as np
+from gui.sherloq_app.core.pixel_stats import StatsEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QCheckBox, QLabel, QRadioButton
 
 from gui.sherloq_app.ui.tools import ToolWidget
@@ -14,64 +14,22 @@ class StatsWidget(ToolWidget):
         self.min_radio.setToolTip(self.tr("RGB channel with smallest value"))
         self.min_radio.setChecked(True)
         self.last_radio = self.min_radio
-        self.avg_radio = QRadioButton(self.tr("Average"))
-        self.avg_radio.setToolTip(self.tr("RGB channel with average value"))
+        self.avg_radio = QRadioButton(self.tr("Middle"))
+        self.avg_radio.setToolTip(self.tr("RGB channel with middle value (median)"))
         self.max_radio = QRadioButton(self.tr("Maximum"))
         self.max_radio.setToolTip(self.tr("RGB channel with largest value"))
         self.incl_check = QCheckBox(self.tr("Inclusive"))
-        self.incl_check.setToolTip(self.tr("Use not strict inequalities"))
+        self.incl_check.setToolTip(self.tr("Include equal values; ties use the original priority: red, then green, then blue."))
 
         self.image = image
-        b, g, r = cv.split(self.image)
-        blue = np.array([255, 0, 0])
-        green = np.array([0, 255, 0])
-        red = np.array([0, 0, 255])
-        self.minimum = [[], []]
-        self.minimum[0] = np.zeros_like(self.image)
-        self.minimum[0][np.logical_and(b < g, b < r)] = blue
-        self.minimum[0][np.logical_and(g < r, g < b)] = green
-        self.minimum[0][np.logical_and(r < b, r < g)] = red
-        self.minimum[1] = np.zeros_like(self.image)
-        self.minimum[1][np.logical_and(b <= g, b <= r)] = blue
-        self.minimum[1][np.logical_and(g <= r, g <= b)] = green
-        self.minimum[1][np.logical_and(r <= b, r <= g)] = red
-        self.maximum = [[], []]
-        self.maximum[0] = np.zeros_like(self.image)
-        self.maximum[0][np.logical_and(b > g, b > r)] = blue
-        self.maximum[0][np.logical_and(g > r, g > b)] = green
-        self.maximum[0][np.logical_and(r > b, r > g)] = red
-        self.maximum[1] = np.zeros_like(self.image)
-        self.maximum[1][np.logical_and(b >= g, b >= r)] = blue
-        self.maximum[1][np.logical_and(g >= r, g >= b)] = green
-        self.maximum[1][np.logical_and(r >= b, r >= g)] = red
-        self.average = [[], []]
-        self.average[0] = np.zeros_like(self.image)
-        self.average[0][
-            np.logical_or(np.logical_and(r < b, b < g), np.logical_and(g < b, b < r))
-        ] = blue
-        self.average[0][
-            np.logical_or(np.logical_and(r < g, g < b), np.logical_and(b < g, g < r))
-        ] = green
-        self.average[0][
-            np.logical_or(np.logical_and(b < r, r < g), np.logical_and(g < r, r < b))
-        ] = red
-        self.average[1] = np.zeros_like(self.image)
-        self.average[1][
-            np.logical_or(
-                np.logical_and(r <= b, b <= g), np.logical_and(g <= b, b <= r)
-            )
-        ] = blue
-        self.average[1][
-            np.logical_or(
-                np.logical_and(r <= g, g <= b), np.logical_and(b <= g, g <= r)
-            )
-        ] = green
-        self.average[1][
-            np.logical_or(
-                np.logical_and(b <= r, r <= g), np.logical_and(g <= r, r <= b)
-            )
-        ] = red
         self.viewer = ImageViewer(self.image, self.image)
+        self.engine = StatsEngine(image)
+        self.job = LatestJob(self, self.engine.compute, delay=0)
+        self.status_label = QLabel()
+        self.job.result.connect(self.show_result)
+        self.job.busy.connect(self.set_busy)
+        self.job.failed.connect(self.show_error)
+        self._requested = None
         self.process()
 
         self.min_radio.clicked.connect(self.process)
@@ -85,6 +43,7 @@ class StatsWidget(ToolWidget):
         params_layout.addWidget(self.avg_radio)
         params_layout.addWidget(self.max_radio)
         params_layout.addWidget(self.incl_check)
+        params_layout.addWidget(self.status_label)
         params_layout.addStretch()
 
         main_layout = QVBoxLayout()
@@ -93,17 +52,26 @@ class StatsWidget(ToolWidget):
         self.setLayout(main_layout)
 
     def process(self):
-        inclusive = self.incl_check.isChecked()
-        if self.min_radio.isChecked():
-            result = self.minimum[1 if inclusive else 0]
-            self.last_radio = self.min_radio
-        elif self.max_radio.isChecked():
-            result = self.maximum[1 if inclusive else 0]
-            self.last_radio = self.max_radio
-        elif self.avg_radio.isChecked():
-            result = self.average[1 if inclusive else 0]
-            self.last_radio = self.avg_radio
-        else:
+        mode = next((name for name in ('min', 'avg', 'max')
+                     if getattr(self, name+'_radio').isChecked()), None)
+        if mode is None:
             self.last_radio.setChecked(True)
             return
-        self.viewer.update_processed(result)
+        self.last_radio = getattr(self, mode+'_radio')
+        params = mode, self.incl_check.isChecked()
+        if params != self._requested:
+            self._requested = params
+            self.job.request(params)
+
+    def set_busy(self, busy):
+        self.viewer.set_busy(busy)
+        if busy:
+            self.status_label.setText(self.tr("Calculating…"))
+
+    def show_result(self, image):
+        self.viewer.update_processed(image)
+        self.status_label.setText(f"{self.job.seconds:.3f} s")
+
+    def show_error(self, error):
+        self._requested = None
+        self.status_label.setText(error)

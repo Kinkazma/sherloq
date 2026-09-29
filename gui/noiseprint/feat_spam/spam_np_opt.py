@@ -29,7 +29,7 @@ def getParams(ordResid, symTranspose, q, T, ordCooc, mapper, strides):
     radius = (np.asarray(Wres.shape[0:2]) - 1) / 2
 
     n = 2 * T + 1
-    values = (float(q) * Fres / 256.0) * np.asarray(range(-T, T + 1)).astype(np.float)
+    values = (float(q) * Fres / 256.0) * np.asarray(range(-T, T + 1)).astype(float)
 
     radius = radius + (ordCooc - (ordCooc % 2)) / 2
     radius = radius.astype(int)
@@ -68,6 +68,20 @@ def getParams(ordResid, symTranspose, q, T, ordCooc, mapper, strides):
     }
 
 
+def _block_histograms(array, destination, strides):
+    """Exact integer histograms by block; bound the temporary coded array."""
+    rows, cols, bins = destination.shape
+    sy, sx = strides
+    for start in range(0, rows, 16):
+        count = min(16, rows-start)
+        blocks = array[start*sy:(start+count)*sy, :cols*sx]
+        blocks = blocks.reshape(count, sy, cols, sx).transpose(0, 2, 1, 3)
+        blocks = blocks.copy().reshape(count*cols, sy*sx)
+        codes = blocks + np.arange(len(blocks), dtype=np.int64)[:, None]*bins
+        counts = np.bincount(codes.ravel(), minlength=count*cols*bins)
+        destination[start:start+count] = counts.reshape(count, cols, bins)
+
+
 def computeSpamRes(res, params, weights=list(), normalize=True):
 
     ## Quantization & Truncation
@@ -100,8 +114,8 @@ def computeSpamRes(res, params, weights=list(), normalize=True):
     numFeat = max(max(np.max(resH), np.max(resV)) + 1, params["numFeat"])
 
     shapeR = resH.shape
-    range0 = np.arange(0, shapeR[0] - strides[0] + 1, strides[0], dtype=np.uint16)
-    range1 = np.arange(0, shapeR[1] - strides[1] + 1, strides[1], dtype=np.uint16)
+    range0 = np.arange(0, shapeR[0] - strides[0] + 1, strides[0], dtype=np.int64)
+    range1 = np.arange(0, shapeR[1] - strides[1] + 1, strides[1], dtype=np.int64)
     rangeH = np.arange(0, numFeat + 2, dtype=resH.dtype)  # range(0, numFeat+1)
     if normalize:
         out_dtype = np.float32
@@ -121,19 +135,8 @@ def computeSpamRes(res, params, weights=list(), normalize=True):
     else:
         weights = np.ones(resH.shape, dtype=out_dtype)
 
-    for index0 in range(range0.size):
-        for index1 in range(range1.size):
-            pos0 = range0[index0]
-            end0 = strides[0] + pos0
-            pos1 = range1[index1]
-            end1 = strides[1] + pos1
-
-            spamH[index0, index1, :], _ = np.histogram(
-                resH[pos0:end0, pos1:end1], rangeH, density=False
-            )
-            spamV[index0, index1, :], _ = np.histogram(
-                resV[pos0:end0, pos1:end1], rangeH, density=False
-            )
+    _block_histograms(resH, spamH, strides)
+    _block_histograms(resV, spamV, strides)
 
     spamW = (strides[0] * strides[1]) - spamH[:, :, -1]
     spamH = spamH[:, :, :-1]

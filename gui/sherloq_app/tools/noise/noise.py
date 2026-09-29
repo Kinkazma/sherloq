@@ -1,6 +1,5 @@
-from time import time
-
-import cv2 as cv
+from gui.sherloq_app.core.noise import NoiseEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -11,7 +10,6 @@ from PySide6.QtWidgets import (
 )
 
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import create_lut, elapsed_time, equalize_img
 from gui.sherloq_app.ui.viewer import ImageViewer
 
 
@@ -49,12 +47,20 @@ class NoiseWidget(ToolWidget):
 
         self.image = image
         self.viewer = ImageViewer(self.image, self.image)
+        self.engine = NoiseEngine(image)
+        self.job = LatestJob(self, self.engine.compute, delay=40)
+        self.status_label = QLabel()
+        self.radius_label = QLabel(self.tr("Radius:"))
+        self._requested = None
+        self.job.result.connect(self.show_result)
+        self.job.failed.connect(self.show_error)
+        self.job.busy.connect(self.set_busy)
         self.process()
 
         params_layout = QHBoxLayout()
         params_layout.addWidget(QLabel(self.tr("Mode:")))
         params_layout.addWidget(self.mode_combo)
-        params_layout.addWidget(QLabel(self.tr("Radius:")))
+        params_layout.addWidget(self.radius_label)
         params_layout.addWidget(self.radius_spin)
         params_layout.addWidget(QLabel(self.tr("Sigma:")))
         params_layout.addWidget(self.sigma_spin)
@@ -62,6 +68,7 @@ class NoiseWidget(ToolWidget):
         params_layout.addWidget(self.levels_spin)
         params_layout.addWidget(self.gray_check)
         params_layout.addWidget(self.denoised_check)
+        params_layout.addWidget(self.status_label)
         params_layout.addStretch()
 
         main_layout = QVBoxLayout()
@@ -77,53 +84,31 @@ class NoiseWidget(ToolWidget):
         self.denoised_check.stateChanged.connect(self.process)
 
     def process(self):
-        start = time()
-        grayscale = self.gray_check.isChecked()
-        if grayscale:
-            original = cv.cvtColor(self.image, cv.COLOR_BGR2GRAY)
-        else:
-            original = self.image
-        radius = self.radius_spin.value()
-        kernel = radius * 2 + 1
-        sigma = self.sigma_spin.value()
-        choice = self.mode_combo.currentText()
-        if choice == self.tr("Median"):
-            self.sigma_spin.setEnabled(False)
-            denoised = cv.medianBlur(original, kernel)
-        elif choice == self.tr("Gaussian"):
-            self.sigma_spin.setEnabled(False)
-            denoised = cv.GaussianBlur(original, (kernel, kernel), 0)
-        elif choice == self.tr("BoxBlur"):
-            self.sigma_spin.setEnabled(False)
-            denoised = cv.blur(original, (kernel, kernel))
-        elif choice == self.tr("Bilateral"):
-            self.sigma_spin.setEnabled(True)
-            denoised = cv.bilateralFilter(original, kernel, sigma, sigma)
-        elif choice == self.tr("NonLocal"):
-            if grayscale:
-                denoised = cv.fastNlMeansDenoising(original, None, kernel)
-            else:
-                denoised = cv.fastNlMeansDenoisingColored(
-                    original, None, kernel, kernel
-                )
-        else:
-            denoised = None
+        mode = self.mode_combo.currentIndex()
+        denoised = self.denoised_check.isChecked()
+        self.sigma_spin.setEnabled(mode == 3)
+        self.levels_spin.setEnabled(not denoised)
+        self.radius_label.setText(self.tr("Strength step:") if mode == 4 else self.tr("Radius:"))
+        self.radius_spin.setSuffix("" if mode == 4 else self.tr(" px"))
+        self.radius_spin.setToolTip(self.tr("Non-local strength h = 2 × step + 1; default search and template windows") if mode == 4 else "")
+        params = self.engine.parameters((mode, self.radius_spin.value(), self.sigma_spin.value(),
+                                         self.gray_check.isChecked(), denoised, self.levels_spin.value()))
+        if params != self._requested:
+            display_only = self._requested is not None and params[:4] == self._requested[:4]
+            self.job.timer.setInterval(0 if display_only else 40)
+            self._requested = params
+            self.job.request(params)
 
-        if self.denoised_check.isChecked():
-            self.levels_spin.setEnabled(False)
-            result = denoised
-        else:
-            self.levels_spin.setEnabled(True)
-            noise = cv.absdiff(original, denoised)
-            levels = self.levels_spin.value()
-            if levels == 0:
-                if grayscale:
-                    result = cv.equalizeHist(noise)
-                else:
-                    result = equalize_img(noise)
-            else:
-                result = cv.LUT(noise, create_lut(0, 255 - levels))
-        if grayscale:
-            result = cv.cvtColor(result, cv.COLOR_GRAY2BGR)
-        self.viewer.update_processed(result)
-        self.info_message.emit(self.tr(f"Noise estimation = {elapsed_time(start)}"))
+    def set_busy(self, busy):
+        self.viewer.set_busy(busy)
+        if busy:
+            self.status_label.setText(self.tr("Calculating…"))
+
+    def show_result(self, image):
+        self.viewer.update_processed(image)
+        self.status_label.setText(f"{self.job.seconds:.3f} s")
+        self.info_message.emit(f"Signal Separation = {self.job.seconds:.3f} s")
+
+    def show_error(self, error):
+        self._requested = None
+        self.status_label.setText(error)

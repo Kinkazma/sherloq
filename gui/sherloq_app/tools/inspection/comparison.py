@@ -1,11 +1,12 @@
-import math
+from gui.sherloq_app.ui.localization import t
 import os
-from subprocess import run, PIPE
 
 import cv2 as cv
 import numpy as np
-import sewar
-from PySide6.QtCore import QTemporaryDir, Qt
+from PySide6.QtCore import Qt, QTimer
+from gui.sherloq_app.ui.jobs import LatestJob
+from gui.sherloq_app.ui.comparison_job import ComparisonJob
+from gui.sherloq_app.core import comparison as computation
 from PySide6.QtWidgets import (
     QAbstractItemView,
     QTableWidgetItem,
@@ -17,7 +18,7 @@ from PySide6.QtWidgets import (
     QCheckBox,
     QLabel,
     QRadioButton,
-    QProgressDialog,
+    QProgressBar,
 )
 
 from gui.sherloq_app.ui.icons import themed_icon
@@ -233,9 +234,29 @@ class ComparisonWidget(ToolWidget):
         self.table_widget.setSelectionMode(QAbstractItemView.SingleSelection)
         self.table_widget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.table_widget.resizeColumnsToContents()
+        self.table_widget.setMinimumWidth(min(480, self.table_widget.horizontalHeader().length()
+                                                + self.table_widget.verticalHeader().width() + 30))
         self.table_widget.setMaximumWidth(250)
         self.table_widget.setAlternatingRowColors(True)
         self.stopped = False
+        self.engine = None
+        self.job = ComparisonJob(self)
+        self.job.result.connect(self._metrics_ready)
+        self.job.failed.connect(self._failed)
+        self.display_job = LatestJob(self, lambda p: p[0].display(*p[1:]), delay=40)
+        self.display_job.result.connect(self.reference_viewer.update_original)
+        self.display_job.failed.connect(self._failed)
+        self.status = QLabel()
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setRange(0, 20)
+        self.progress_bar.hide()
+        self.cancel_button = QPushButton(self.tr("Cancel"))
+        self.cancel_button.setEnabled(False)
+        self.cancel_button.clicked.connect(self.cancel)
+        self.progress_timer = QTimer(self)
+        self.progress_timer.setInterval(100)
+        self.progress_timer.timeout.connect(self._progress)
+
 
         self.comp_label.setEnabled(False)
         self.normal_radio.setEnabled(False)
@@ -276,15 +297,18 @@ class ComparisonWidget(ToolWidget):
         metric_layout.addWidget(index_label)
         metric_layout.addWidget(self.table_widget)
         metric_layout.addWidget(self.metric_button)
+        metric_layout.addWidget(self.progress_bar)
+        metric_layout.addWidget(self.cancel_button)
 
         center_layout = QHBoxLayout()
-        center_layout.addWidget(self.evidence_viewer)
-        center_layout.addWidget(self.reference_viewer)
+        center_layout.addWidget(self.evidence_viewer, 1)
+        center_layout.addWidget(self.reference_viewer, 1)
         center_layout.addLayout(metric_layout)
 
         main_layout = QVBoxLayout()
         main_layout.addLayout(top_layout)
-        main_layout.addLayout(center_layout)
+        main_layout.addWidget(self.status)
+        main_layout.addLayout(center_layout, 1)
         self.setLayout(main_layout)
 
     def load(self):
@@ -294,13 +318,22 @@ class ComparisonWidget(ToolWidget):
         if reference.shape != self.evidence.shape:
             QMessageBox.critical(
                 self,
-                self.tr("Error"),
-                self.tr("Evidence and reference must have the same size!"),
+                t(self.tr("Error")),
+                t(self.tr("Evidence and reference must have the same size!")),
             )
             return
+        if self.engine is not None:
+            self.engine.cancelled.set()
+        self.job.invalidate()
+        self.display_job.invalidate()
+        self.progress_timer.stop()
+        self.cancel_button.setEnabled(False)
+        self.progress_bar.hide()
+        self.status.clear()
         self.reference = reference
+        self.engine = computation.ComparisonEngine(self.evidence, reference)
+        self.ssim_map = self.butter_map = self.difference = None
         self.reference_viewer.set_title(self.tr(f"Reference: {basename}"))
-        self.difference = norm_mat(cv.absdiff(self.evidence, self.reference))
 
         self.comp_label.setEnabled(True)
         self.normal_radio.setEnabled(True)
@@ -316,270 +349,119 @@ class ComparisonWidget(ToolWidget):
         self.table_widget.setEnabled(False)
         self.change()
 
+    @property
+    def is_busy(self):
+        return self.job.is_busy or self.display_job.is_busy
+
+    def _ensure_engine(self):
+        if self.reference is None:
+            return False
+        if self.engine is None or self.engine.reference is not self.reference:
+            if self.engine is not None:
+                self.engine.cancelled.set()
+            self.engine = computation.ComparisonEngine(self.evidence, self.reference)
+        return True
+
     def change(self):
+        if not self._ensure_engine():
+            return
         if self.normal_radio.isChecked():
-            result = self.reference
-            self.gray_check.setEnabled(False)
-            self.equalize_check.setEnabled(False)
+            mode, gray, equalized = 'normal', False, False
             self.last_radio = self.normal_radio
         elif self.difference_radio.isChecked():
-            result = self.difference
-            self.gray_check.setEnabled(True)
-            self.equalize_check.setEnabled(True)
+            mode, gray, equalized = 'difference', True, True
             self.last_radio = self.difference_radio
         elif self.ssim_radio.isChecked():
-            result = self.ssim_map
-            self.gray_check.setEnabled(False)
-            self.equalize_check.setEnabled(True)
+            mode, gray, equalized = 'ssim', False, True
             self.last_radio = self.ssim_radio
         elif self.butter_radio.isChecked():
-            result = self.butter_map
-            self.gray_check.setEnabled(True)
-            self.equalize_check.setEnabled(False)
+            mode, gray, equalized = 'butter', True, False
             self.last_radio = self.butter_radio
         else:
             self.last_radio.setChecked(True)
             return
-        if self.equalize_check.isChecked():
-            result = equalize_img(result)
-        if self.gray_check.isChecked():
-            result = desaturate(result)
-        self.reference_viewer.update_original(result)
+        self.gray_check.setEnabled(gray)
+        self.equalize_check.setEnabled(equalized)
+        self.display_job.request((self.engine, mode,
+                                  equalized and self.equalize_check.isChecked(),
+                                  gray and self.gray_check.isChecked()))
 
     def metrics(self):
-        progress = QProgressDialog(
-            self.tr("Computing metrics..."),
-            self.tr("Cancel"),
-            1,
-            self.table_widget.rowCount(),
-            self,
-        )
-        progress.canceled.connect(self.cancel)
-        progress.setWindowModality(Qt.WindowModal)
-        img1 = cv.cvtColor(self.evidence, cv.COLOR_BGR2GRAY)
-        img2 = cv.cvtColor(self.reference, cv.COLOR_BGR2GRAY)
-        x = img1.astype(np.float64)
-        y = img2.astype(np.float64)
-
-        rmse = self.rmse(x, y)
-        progress.setValue(1)
-        if self.stopped:
+        if self.job.is_busy or not self._ensure_engine():
             return
-        sam = sewar.sam(img1, img2)
-        progress.setValue(2)
-        if self.stopped:
-            return
-        ergas = sewar.ergas(img1, img2)
-        progress.setValue(3)
-        if self.stopped:
-            return
-        mb = self.mb(x, y)
-        progress.setValue(4)
-        if self.stopped:
-            return
-        pfe = self.pfe(x, y)
-        progress.setValue(5)
-        if self.stopped:
-            return
-        psnr = self.psnr(x, y)
-        progress.setValue(6)
-        if self.stopped:
-            return
-        try:
-            psnrb = sewar.psnrb(img1, img2)
-        except NameError:
-            # FIXME: C'\`e un bug in psnrb (https://github.com/andrewekhalel/sewar/issues/17)
-            psnrb = 0
-        progress.setValue(7)
-        if self.stopped:
-            return
-        ssim, self.ssim_map = self.ssim(x, y)
-        progress.setValue(8)
-        if self.stopped:
-            return
-        mssim = sewar.msssim(img1, img2).real
-        progress.setValue(9)
-        if self.stopped:
-            return
-        rase = sewar.rase(img1, img2)
-        progress.setValue(10)
-        if self.stopped:
-            return
-        scc = sewar.scc(img1, img2)
-        progress.setValue(11)
-        if self.stopped:
-            return
-        uqi = sewar.uqi(img1, img2)
-        progress.setValue(12)
-        if self.stopped:
-            return
-        vifp = sewar.vifp(img1, img2)
-        progress.setValue(13)
-        if self.stopped:
-            return
-        ssimul = self.ssimul(img1, img2)
-        progress.setValue(14)
-        if self.stopped:
-            return
-        butter, self.butter_map = self.butter(img1, img2)
-        progress.setValue(15)
-        if self.stopped:
-            return
-
-        sizes = [256, 256, 256]
-        ranges = [0, 256] * 3
-        channels = [0, 1, 2]
-        hist1 = cv.calcHist([self.evidence], channels, None, sizes, ranges)
-        hist2 = cv.calcHist([self.reference], channels, None, sizes, ranges)
-        correlation = cv.compareHist(hist1, hist2, cv.HISTCMP_CORREL)
-        progress.setValue(16)
-        if self.stopped:
-            return
-        chi_square = cv.compareHist(hist1, hist2, cv.HISTCMP_CHISQR)
-        progress.setValue(17)
-        if self.stopped:
-            return
-        chi_square2 = cv.compareHist(hist1, hist2, cv.HISTCMP_CHISQR_ALT)
-        progress.setValue(18)
-        if self.stopped:
-            return
-        intersection = cv.compareHist(hist1, hist2, cv.HISTCMP_INTERSECT)
-        progress.setValue(19)
-        if self.stopped:
-            return
-        hellinger = cv.compareHist(hist1, hist2, cv.HISTCMP_HELLINGER)
-        progress.setValue(20)
-        if self.stopped:
-            return
-        divergence = cv.compareHist(hist1, hist2, cv.HISTCMP_KL_DIV)
-        progress.setValue(21)
-
-        self.table_widget.setItem(0, 1, QTableWidgetItem(f"{rmse:.2f}"))
-        self.table_widget.setItem(1, 1, QTableWidgetItem(f"{sam:.4f}"))
-        self.table_widget.setItem(2, 1, QTableWidgetItem(f"{ergas:.2f}"))
-        self.table_widget.setItem(3, 1, QTableWidgetItem(f"{mb:.4f}"))
-        self.table_widget.setItem(4, 1, QTableWidgetItem(f"{pfe:.2f}"))
-        if psnr > 0:
-            self.table_widget.setItem(5, 1, QTableWidgetItem(f"{psnr:.2f} dB"))
-        else:
-            self.table_widget.setItem(5, 1, QTableWidgetItem("+" + "\u221e" + " dB"))
-        # self.table_widget.setItem(6, 1, QTableWidgetItem('{:.2f}'.format(psnrb)))
-        self.table_widget.setItem(6, 1, QTableWidgetItem(f"{ssim:.4f}"))
-        self.table_widget.setItem(7, 1, QTableWidgetItem(f"{mssim:.4f}"))
-        self.table_widget.setItem(8, 1, QTableWidgetItem(f"{rase:.2f}"))
-        self.table_widget.setItem(9, 1, QTableWidgetItem(f"{scc:.4f}"))
-        self.table_widget.setItem(10, 1, QTableWidgetItem(f"{uqi:.4f}"))
-        self.table_widget.setItem(11, 1, QTableWidgetItem(f"{vifp:.4f}"))
-        self.table_widget.setItem(12, 1, QTableWidgetItem(f"{ssimul:.4f}"))
-        self.table_widget.setItem(13, 1, QTableWidgetItem(f"{butter:.2f}"))
-        self.table_widget.setItem(14, 1, QTableWidgetItem(f"{correlation:.2f}"))
-        self.table_widget.setItem(15, 1, QTableWidgetItem(f"{chi_square:.2f}"))
-        self.table_widget.setItem(16, 1, QTableWidgetItem(f"{chi_square2:.2f}"))
-        self.table_widget.setItem(17, 1, QTableWidgetItem(f"{intersection:.2f}"))
-        self.table_widget.setItem(18, 1, QTableWidgetItem(f"{hellinger:.2f}"))
-        self.table_widget.setItem(19, 1, QTableWidgetItem(f"{divergence:.2f}"))
-        self.table_widget.resizeColumnsToContents()
-        self.table_widget.setEnabled(True)
+        self.stopped = False
+        self.engine.cancelled.clear()
         self.metric_button.setEnabled(False)
-        self.ssim_radio.setEnabled(True)
-        self.butter_radio.setEnabled(True)
-        progress.close()
+        self.cancel_button.setEnabled(True)
+        self.progress_bar.setValue(0)
+        self.progress_bar.show()
+        self.progress_timer.start()
+        self.job.request(self.engine)
+
+    def _progress(self):
+        if self.engine is not None:
+            value, name = self.engine.progress
+            self.progress_bar.setValue(value)
+            self.status.setText(self.tr("Computing metrics: ") + name)
+
+    def _metrics_ready(self, result):
+        self.progress_timer.stop()
+        self.cancel_button.setEnabled(False)
+        self.progress_bar.hide()
+        self.table_widget.setEnabled(True)
+        values, errors = result['values'], result['errors']
+        precision = (2, 4, 2, 4, 2, 2, 4, 4, 2, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2)
+        for row, name in enumerate(computation.METRICS):
+            if name in values:
+                value = values[name]
+                text = ('+∞ dB' if np.isposinf(value) else f'{value:.2f} dB') if name == 'psnr' else f'{value:.{precision[row]}f}'
+            else:
+                text = self.tr("Not available") if name in errors else ''
+            item = QTableWidgetItem(text)
+            if name in errors:
+                item.setToolTip(errors[name])
+            self.table_widget.setItem(row, 1, item)
+        self.table_widget.resizeColumnsToContents()
+        self.table_widget.setMinimumWidth(min(480, self.table_widget.horizontalHeader().length()
+                                                + self.table_widget.verticalHeader().width() + 30))
+        self.ssim_map = self.engine.maps.get('ssim')
+        self.butter_map = self.engine.maps.get('butter')
+        self.ssim_radio.setEnabled(self.ssim_map is not None)
+        self.butter_radio.setEnabled(self.butter_map is not None)
+        self.metric_button.setEnabled(result['cancelled'] or bool(errors))
+        self.status.setText(self.tr("Cancelled; computed metrics retained.") if result['cancelled'] else
+                            self.tr("Some metrics are unavailable; see their tooltips.") if errors else '')
+        if self.ssim_radio.isChecked() or self.butter_radio.isChecked():
+            self.change()
+
+    def _failed(self, message):
+        self.progress_timer.stop()
+        self.progress_bar.hide()
+        self.cancel_button.setEnabled(False)
+        self.metric_button.setEnabled(self.reference is not None)
+        self.status.setText(message)
 
     def cancel(self):
         self.stopped = True
+        if self.engine is not None:
+            self.engine.cancelled.set()
+        self.job.cancel()
+        self.cancel_button.setEnabled(False)
+        self.status.setText(self.tr("Cancelling…"))
+        self.progress_timer.stop()
 
-    @staticmethod
-    def rmse(x, y):
-        return np.sqrt(np.mean(np.square(x - y)))
+    def shutdown(self):
+        if self.engine is not None:
+            self.engine.cancelled.set()
+        self.progress_timer.stop()
+        self.job.shutdown()
+        super().shutdown()
 
-    @staticmethod
-    def mb(x, y):
-        mx = np.mean(x)
-        my = np.mean(y)
-        return (mx - my) / mx
-
-    @staticmethod
-    def pfe(x, y):
-        return np.linalg.norm(x - y) / np.linalg.norm(x) * 100
-
-    @staticmethod
-    def ssim(x, y):
-        c1 = 6.5025
-        c2 = 58.5225
-        k = (11, 11)
-        s = 1.5
-        x2 = x ** 2
-        y2 = y ** 2
-        xy = x * y
-        mu_x = cv.GaussianBlur(x, k, s)
-        mu_y = cv.GaussianBlur(y, k, s)
-        mu_x2 = mu_x ** 2
-        mu_y2 = mu_y ** 2
-        mu_xy = mu_x * mu_y
-        s_x2 = cv.GaussianBlur(x2, k, s) - mu_x2
-        s_y2 = cv.GaussianBlur(y2, k, s) - mu_y2
-        s_xy = cv.GaussianBlur(xy, k, s) - mu_xy
-        t1 = 2 * mu_xy + c1
-        t2 = 2 * s_xy + c2
-        t3 = t1 * t2
-        t1 = mu_x2 + mu_y2 + c1
-        t2 = s_x2 + s_y2 + c2
-        t1 *= t2
-        ssim_map = cv.divide(t3, t1)
-        ssim = cv.mean(ssim_map)[0]
-        return ssim, 255 - norm_mat(ssim_map, to_bgr=True)
-
-    @staticmethod
-    def corr(x, y):
-        return np.corrcoef(x, y)[0, 1]
-
-    @staticmethod
-    def psnr(x, y):
-        k = np.mean(np.square(x - y))
-        if k == 0:
-            return -1
-        return 20 * math.log10((255 ** 2) / k)
-
-    @staticmethod
-    def butter(x, y):
-        try:
-            exe = butter_exe()
-            if exe is None:
-                raise FileNotFoundError
-            temp_dir = QTemporaryDir()
-            if temp_dir.isValid():
-                filename1 = os.path.join(temp_dir.path(), "img1.png")
-                cv.imwrite(filename1, x)
-                filename2 = os.path.join(temp_dir.path(), "img2.png")
-                cv.imwrite(filename2, y)
-                filename3 = os.path.join(temp_dir.path(), "map.ppm")
-                p = run([exe, filename1, filename2, filename3], stdout=PIPE)
-                if p.returncode == 0:
-                    value = float(p.stdout)
-                    heatmap = cv.imread(filename3, cv.IMREAD_COLOR)
-                else:
-                    raise ValueError
-                return value, heatmap
-        except (FileNotFoundError, ValueError) as _:
-            return -1, cv.cvtColor(np.full_like(x, 127), cv.COLOR_GRAY2BGR)
-
-    @staticmethod
-    def ssimul(x, y):
-        try:
-            exe = ssimul_exe()
-            if exe is None:
-                raise FileNotFoundError
-            temp_dir = QTemporaryDir()
-            if temp_dir.isValid():
-                filename1 = os.path.join(temp_dir.path(), "img1.png")
-                cv.imwrite(filename1, x)
-                filename2 = os.path.join(temp_dir.path(), "img2.png")
-                cv.imwrite(filename2, y)
-                p = run([exe, filename1, filename2], stdout=PIPE)
-                if p.returncode == 0:
-                    value = float(p.stdout)
-                else:
-                    raise ValueError
-                return value
-        except (FileNotFoundError, ValueError) as _:
-            return -1
+    rmse = staticmethod(computation.rmse)
+    mb = staticmethod(computation.mb)
+    pfe = staticmethod(computation.pfe)
+    psnr = staticmethod(computation.psnr)
+    ssim = staticmethod(computation.ssim)
+    corr = staticmethod(computation.corr)
+    butter = staticmethod(computation.butter)
+    ssimul = staticmethod(computation.ssimul)

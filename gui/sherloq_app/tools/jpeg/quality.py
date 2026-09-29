@@ -1,232 +1,156 @@
-import subprocess
-from shutil import copyfile
-
+from threading import Event
+from functools import partial
 import cv2 as cv
 import numpy as np
-from PySide6.QtCore import QTemporaryFile, Qt
+from PySide6.QtCore import Qt, QObject, Signal
 from PySide6.QtGui import QColor, QBrush
-from joblib import load
-from PySide6.QtWidgets import (
-    QLabel,
-    QVBoxLayout,
-    QGridLayout,
-    QTableWidget,
-    QMessageBox,
-    QTableWidgetItem,
-    QAbstractItemView,
-)
-from matplotlib.backends.backend_qt5agg import FigureCanvas
+from PySide6.QtWidgets import (QLabel, QVBoxLayout, QGridLayout, QTableWidget,
+    QTableWidgetItem, QAbstractItemView, QPushButton, QProgressBar, QScrollArea, QWidget)
+from gui.sherloq_app.ui.plot_canvas import FigureCanvas
 from matplotlib.figure import Figure
-
-from gui.sherloq_app.core.jpeg import TABLE_SIZE, ZIG_ZAG, DCT_SIZE, get_tables, loss_curve
+from gui.sherloq_app.core.jpeg import DCT_SIZE, loss_curve
+from gui.sherloq_app.core.jpeg_quality import QualityEngine, Cancelled
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import modify_font, exiftool_exe, clip_value
-from gui.sherloq_app.paths import model_path
+from gui.sherloq_app.ui.jobs import LatestJob
+from gui.sherloq_app.core.utility import modify_font, clip_value
+
+
+class _Progress(QObject):
+    changed = Signal(int, str)
+
+
+def _run_quality(engine, updates, cancel):
+    try:
+        return engine.compute(cancel.is_set, updates.changed.emit)
+    except Cancelled:
+        return None
 
 
 class QualityWidget(ToolWidget):
     def __init__(self, filename, image, parent=None):
-        super(QualityWidget, self).__init__(parent)
+        super().__init__(parent)
+        self.engine = QualityEngine(filename, image)
+        self.cancel_event = Event()
+        self.result = None
+        self.status = QLabel("Computing JPEG quality…")
+        self.progress = QProgressBar()
+        self.progress.setRange(0, 100)
+        self.process_button = QPushButton("Cancel")
+        self.process_button.clicked.connect(self.process)
+        self.canvas = FigureCanvas(Figure())
+        self.main_layout = QVBoxLayout(self)
+        self.main_layout.addWidget(self.status)
+        self.main_layout.addWidget(self.progress)
+        self.main_layout.addWidget(self.process_button)
+        self.main_layout.addWidget(self.canvas, 1)
+        self.table_area = QScrollArea()
+        self.table_area.setWidgetResizable(True)
+        self.table_area.setMinimumHeight(310)
+        self.main_layout.addWidget(self.table_area)
+        self.updates = _Progress()
+        self.updates.changed.connect(self._progress)
+        self.job = LatestJob(self, partial(_run_quality, self.engine, self.updates), delay=0)
+        self.job.result.connect(self._result)
+        self.job.failed.connect(self._error)
+        self.job.request(self.cancel_event)
 
+    def _progress(self, value, text):
+        if not self.job.closed and not self.cancel_event.is_set():
+            self.progress.setValue(value)
+            self.status.setText(text)
+
+    def process(self):
+        if self.job.is_busy:
+            self.cancel_event.set()
+            self.process_button.setEnabled(False)
+            self.status.setText("Cancelling after current recompressions…")
+        elif self.result is None:
+            self.cancel_event = Event()
+            self.process_button.setText("Cancel")
+            self.job.request(self.cancel_event)
+
+    def _error(self, message):
+        self.status.setText(f"JPEG quality error: {message}")
+        self.process_button.setText("Retry")
+        self.process_button.setEnabled(True)
+
+    def _result(self, result):
+        self.process_button.setEnabled(True)
+        if result is None:
+            self.status.setText("Cancelled. Completed quality levels are retained for retry.")
+            self.process_button.setText("Resume")
+            return
+        self.result = result
+        self.process_button.setVisible(False)
+        self.progress.setValue(100)
+        self.status.setText("JPEG quality analysis complete")
+        figure = self.canvas.figure
+        figure.clear()
+        axes = figure.subplots()
         x = np.arange(1, 101)
-        y = loss_curve(image)
-        tail = 5
-        qm = np.argmin(y[:-tail]) + 1
-        if qm == 100 - tail:
-            qm = 100
-
-        figure = Figure()
-        canvas = FigureCanvas(figure)
-        axes = canvas.figure.subplots()
+        y = result['curve']
+        minimum = result['minimum']
         axes.plot(x, y * 100, label="compression loss")
         axes.fill_between(x, y * 100, alpha=0.2)
-        axes.axvline(qm, linestyle=":", color="k", label=f"min error (q = {qm})")
-        xt = axes.get_xticks()
-        xt = np.append(xt, 1)
-        axes.set_xticks(xt)
-        axes.set_xlim([1, 100])
-        axes.set_ylim([0, 100])
+        axes.axvline(minimum, linestyle=":", color="k", label=f"min error (q = {minimum})")
+        axes.set_xticks(np.append(axes.get_xticks(), 1))
+        axes.set_xlim([1, 100]); axes.set_ylim([0, 100])
         axes.set_xlabel(self.tr("JPEG quality (%)"))
         axes.set_ylabel(self.tr("average error (%)"))
         axes.grid(True, which="both")
         axes.legend(loc="upper center")
-        axes.figure.canvas.draw()
         figure.set_tight_layout(True)
-
-        main_layout = QVBoxLayout()
-        main_layout.addWidget(canvas)
-
-        MRK = b"\xFF"
-        SOI = b"\xD8"
-        DQT = b"\xDB"
-        # DHT = b'\xC4'
-        MSK = b"\x0F"
-        PAD = b"\x00"
-
-        MAX_TABLES = 2
-        LEN_OFFSET = 2
-        LUMA_IDX = 0
-        CHROMA_IDX = 1
-
-        luma = np.zeros((DCT_SIZE, DCT_SIZE), dtype=int)
-        chroma = np.zeros((DCT_SIZE, DCT_SIZE), dtype=int)
-        temp_file = QTemporaryFile()
-        try:
-            if temp_file.open():
-                copyfile(filename, temp_file.fileName())
-                subprocess.run(
-                    [
-                        exiftool_exe(),
-                        "-all=",
-                        "-overwrite_original",
-                        temp_file.fileName(),
-                    ],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                )
-                found = False
-                with open(temp_file.fileName(), "rb") as file:
-                    first = file.read(1)
-                    if first not in [MRK, SOI]:
-                        raise ValueError(self.tr("File is not a JPEG image!"))
-                    while True:
-                        if not self.find_next(file, [MRK, DQT, PAD]):
-                            break
-                        length = file.read(1)[0] - LEN_OFFSET
-                        if length <= 0 or length % (TABLE_SIZE + 1) != 0:
-                            continue
-                        while length > 0:
-                            mode = file.read(1)
-                            if not mode:
-                                break
-                            index = mode[0] & MSK[0]
-                            if index >= MAX_TABLES:
-                                break
-                            length -= 1
-                            for k in range(TABLE_SIZE):
-                                b = file.read(1)[0]
-                                if not b:
-                                    break
-                                length -= 1
-                                i, j = ZIG_ZAG[k]
-                                if index == LUMA_IDX:
-                                    luma[i, j] = b
-                                elif index == CHROMA_IDX:
-                                    chroma[i, j] = b
-                            else:
-                                found = True
-            if not found:
-                raise ValueError(self.tr("Unable to find JPEG tables!"))
-
-            levels = [
-                (1 - (np.mean(t.ravel()[1:]) - 1) / 254) * 100 for t in [luma, chroma]
-            ]
-            distance = np.zeros(101)
-            for qm in range(101):
-                lu, ch = cv.split(get_tables(qm))
-                lu_diff = np.mean(cv.absdiff(luma, lu))
-                ch_diff = np.mean(cv.absdiff(chroma, ch))
-                distance[qm] = (lu_diff + 2 * ch_diff) / 3
-            closest = np.argmin(distance)
-            deviation = distance[closest]
-            if deviation == 0:
-                quality = closest
-                message = "(standard tables)"
+        self.canvas.draw_idle()
+        container = QWidget()
+        layout = QGridLayout(container)
+        quantization = result['quantization']
+        if quantization is not None:
+            tables, components = quantization
+            for col, (key, matrix) in enumerate(tables.items()):
+                role = 'Luminance' if key == components[0] else 'Chrominance' if len(components) == 3 and key in components[1:] else 'Component'
+                level = (1 - (np.mean(matrix.ravel()[1:]) - 1) / 254) * 100
+                suffix = f" (level = {level:.2f}%)" if np.max(matrix) <= 255 else " (16-bit entries)"
+                label = QLabel(f"{role} quantization table {key}{suffix}")
+                label.setAlignment(Qt.AlignCenter)
+                layout.addWidget(label, 0, col)
+                table = self.create_table(matrix)
+                table.setMinimumWidth(300)
+                table.setFixedHeight(sum(table.rowHeight(i) for i in range(8)) + table.horizontalHeader().height() + 12)
+                layout.addWidget(table, 1, col)
+            estimate = result['estimate']
+            if estimate is None:
+                text = "JPEG tables available; conventional quality estimate unavailable for these components."
             else:
-                quality = int(np.round(closest - deviation))
-                message = f"(deviation from standard tables --> {deviation:.4f})"
-            if quality == 0:
-                quality = 1
-            quality_label = QLabel(
-                self.tr(f"[JPEG FORMAT] Last saved quality: {quality}% {message}")
-            )
-            modify_font(quality_label, bold=True)
+                quality, deviation, _ = estimate
+                detail = "standard tables" if deviation == 0 else f"nonstandard tables; deviation {deviation:.4f}"
+                text = f"[JPEG] Estimated last saved quality: {quality}% ({detail})"
+            note = QLabel(text)
+            note.setWordWrap(True)
+            layout.addWidget(note, 2, 0, 1, max(1, len(tables)))
+        else:
+            if result['metadata_error']:
+                text = f"Quantization tables unavailable: {result['metadata_error']}"
+            elif result['model_error']:
+                text = f"Learned quality estimate unavailable: {result['model_error']}"
+            else:
+                quality = result['prediction']
+                text = f"[Non-JPEG format] Model estimate of previous JPEG quality: {quality:.1f}%"
+                text += " — heuristic, not proof of JPEG compression history."
+            note = QLabel(text)
+            note.setWordWrap(True)
+            layout.addWidget(note, 0, 0)
+        self.status.setText(text)
+        self.status.setWordWrap(True)
+        self.table_area.setWidget(container)
+        self.info_message.emit(self.status.text())
 
-            luma_label = QLabel(
-                self.tr(f"Luminance Quantization Table (level = {levels[0]:.2f}%)\n")
-            )
-            luma_label.setAlignment(Qt.AlignCenter)
-            modify_font(luma_label, underline=True)
-            luma_table = self.create_table(luma)
-            luma_table.setFixedSize(420, 190)
-
-            chroma_label = QLabel(
-                self.tr(f"Chrominance Quantization Table (level = {levels[1]:.2f}%)\n")
-            )
-            chroma_label.setAlignment(Qt.AlignCenter)
-            modify_font(chroma_label, underline=True)
-            chroma_table = self.create_table(chroma)
-            chroma_table.setFixedSize(420, 190)
-
-            table_layout = QGridLayout()
-            table_layout.addWidget(luma_label, 0, 0)
-            table_layout.addWidget(luma_table, 1, 0)
-            table_layout.addWidget(chroma_label, 0, 1)
-            table_layout.addWidget(chroma_table, 1, 1)
-            table_layout.addWidget(quality_label, 2, 0, 1, 2)
-            main_layout.addLayout(table_layout)
-
-        except ValueError:
-            modelfile = model_path("jpeg_qf.mdl")
-            try:
-                model = load(modelfile)
-                limit = (
-                    model.best_ntree_limit
-                    if hasattr(model, "best_ntree_limit")
-                    else None
-                )
-                # f = self.get_features(image)
-                # p = model.predict_proba(f, ntree_limit=limit)[0, 0]
-                qp = model.predict(np.reshape(y, (1, len(y))), ntree_limit=limit)[0]
-                # if p > 0.5:
-                #     p = 2 * (p - 0.5) * 100
-                #     output = self.tr('Uncompressed image (p = {:.2f}%)'.format(p))
-                # else:
-                #     p = (1 - 2 * p) * 100
-                #     output = self.tr('Compressed image (p = {:.2f}%) ---> Estimated JPEG quality = {}%'.format(p, qm))
-                message = self.tr(
-                    f"[LOSSLESS FORMAT] Estimated last saved quality = {qp:.1f}%{'' if qp <= 99 else ' (uncompressed)'}"
-                )
-                if qp == 100:
-                    message += " (uncompressed)"
-                prob_label = QLabel(message)
-                modify_font(prob_label, bold=True)
-                main_layout.addWidget(prob_label)
-            except FileNotFoundError:
-                QMessageBox.critical(
-                    self, self.tr("Error"), self.tr(f'Model not found ("{modelfile}")!')
-                )
-
-        main_layout.addStretch()
-        self.setLayout(main_layout)
-
-    def show_error(self, message):
-        error_label = QLabel(message)
-        modify_font(error_label, bold=True)
-        error_label.setStyleSheet("color: #FF0000")
-        error_label.setAlignment(Qt.AlignCenter)
-        main_layout = QVBoxLayout()
-        main_layout.addWidget(error_label)
-        self.setLayout(main_layout)
+    def shutdown(self):
+        self.cancel_event.set()
+        super().shutdown()
 
     @staticmethod
     def get_features(image):
-        # q = [6, 8, 10, 13, 31, 71, 73, 75, 76, 81, 84, 87, 88, 93, 94, 96, 97, 98, 99, 100]
-        q = list(range(1, 101))
-        c = loss_curve(image, q)
-        return np.reshape(c, (1, len(q)))
-
-    @staticmethod
-    def find_next(file, markers):
-        while True:
-            for m in markers:
-                b = file.read(1)
-                if not b:
-                    return False
-                if b != m:
-                    break
-            else:
-                return True
+        return loss_curve(image).reshape(1, 100)
 
     @staticmethod
     def create_table(matrix):

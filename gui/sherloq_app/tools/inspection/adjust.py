@@ -1,5 +1,3 @@
-import cv2 as cv
-import numpy as np
 from PySide6.QtWidgets import (
     QVBoxLayout,
     QLabel,
@@ -10,7 +8,9 @@ from PySide6.QtWidgets import (
 )
 
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import create_lut, ParamSlider
+from gui.sherloq_app.core.utility import ParamSlider
+from gui.sherloq_app.core.adjust import AdjustEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 from gui.sherloq_app.ui.viewer import ImageViewer
 
 
@@ -46,6 +46,14 @@ class AdjustWidget(ToolWidget):
 
         self.image = image
         self.viewer = ImageViewer(self.image, self.image)
+        self.engine = AdjustEngine(image)
+        self.job = LatestJob(self, self.engine.compute, delay=40)
+        self.job.result.connect(self.viewer.update_processed)
+        self.job.busy.connect(self._busy)
+        self.job.failed.connect(self._failed)
+        self.status = QLabel()
+        self.requested = None
+        self._resetting = False
         self.reset()
 
         self.bright_slider.valueChanged.connect(self.process)
@@ -89,82 +97,35 @@ class AdjustWidget(ToolWidget):
 
         main_layout = QVBoxLayout()
         main_layout.addLayout(params_layout)
-        main_layout.addWidget(self.viewer)
+        main_layout.addWidget(self.status)
+        main_layout.addWidget(self.viewer, 1)
         self.setLayout(main_layout)
 
-    def process(self):
-        brightness = self.bright_slider.value()
-        saturation = self.sat_slider.value()
-        hue = self.hue_slider.value()
-        gamma = self.gamma_slider.value() / 10
-        shadows = self.shadow_slider.value()
-        highlights = self.high_slider.value()
-        equalize = self.equalize_combo.currentIndex()
-        invert = self.invert_check.isChecked()
-        sweep = self.sweep_slider.value()
-        width = self.width_slider.value()
-        threshold = self.thr_slider.value()
-        sharpen = self.sharpen_slider.value() // 4
+    def _busy(self, busy):
+        self.viewer.set_busy(busy)
+        self.status.setText(self.tr("Calculating…") if busy else "")
 
-        result = np.copy(self.image)
-        if sharpen > 0:
-            kernel = 2 * sharpen + 1
-            gaussian = cv.GaussianBlur(result, (kernel, kernel), 0)
-            result = cv.addWeighted(result, 1.5, gaussian, -0.5, 0)
-        if brightness != 0 or saturation != 0 or hue != 0:
-            h, s, v = cv.split(cv.cvtColor(result, cv.COLOR_BGR2HSV))
-            if hue != 0:
-                h = h.astype(np.float64) + hue
-                h[h < 0] += 180
-                h[h > 180] -= 180
-                h = h.astype(np.uint8)
-            if saturation != 0:
-                s = cv.add(s, saturation)
-            if brightness != 0:
-                v = cv.add(v, brightness)
-            result = cv.cvtColor(cv.merge([h, s, v]), cv.COLOR_HSV2BGR)
-        if gamma != 0:
-            inverse = 1 / gamma
-            lut = np.array(
-                [((i / 255) ** inverse) * 255 for i in np.arange(0, 256)]
-            ).astype(np.uint8)
-            result = cv.LUT(result, lut)
-        if shadows != 0:
-            result = cv.LUT(result, create_lut(int(shadows / 100 * 255), 0))
-        if highlights != 0:
-            result = cv.LUT(result, create_lut(0, int(highlights / 100 * 255)))
-        if width < 255:
-            radius = width // 2
-            low = max(sweep - radius, 0)
-            high = 255 - min(sweep + radius, 255)
-            result = cv.LUT(result, create_lut(low, high))
-        if equalize > 0:
-            h, s, v = cv.split(cv.cvtColor(result, cv.COLOR_BGR2HSV))
-            if equalize == 1:
-                v = cv.equalizeHist(v)
-            elif equalize > 1:
-                clip = 0
-                if equalize == 2:
-                    clip = 2
-                elif equalize == 3:
-                    clip = 5
-                elif equalize == 4:
-                    clip = 10
-                elif equalize == 5:
-                    clip = 20
-                v = cv.createCLAHE(clip).apply(v)
-            result = cv.cvtColor(cv.merge([h, s, v]), cv.COLOR_HSV2BGR)
-        if threshold < 255:
-            if threshold == 0:
-                gray = cv.cvtColor(result, cv.COLOR_BGR2GRAY)
-                threshold, _ = cv.threshold(gray, 0, 255, cv.THRESH_OTSU)
-            _, result = cv.threshold(result, threshold, 255, cv.THRESH_BINARY)
-        if invert:
-            result = cv.bitwise_not(result)
-        self.viewer.update_processed(result)
+    def _failed(self, message):
+        self.status.setText(message)
+        self.viewer.set_busy(True)
+        self.requested = None
+
+    def process(self):
+        if self._resetting:
+            return
+        params = tuple(slider.value() for slider in (
+            self.bright_slider, self.sat_slider, self.hue_slider,
+            self.gamma_slider, self.shadow_slider, self.high_slider,
+            self.sweep_slider, self.width_slider, self.sharpen_slider,
+            self.thr_slider,
+        )) + (self.equalize_combo.currentIndex(), self.invert_check.isChecked())
+        key = params[:8] + (params[8] // 4,) + params[9:]
+        if key != self.requested:
+            self.requested = key
+            self.job.request(params)
 
     def reset(self):
-        self.blockSignals(True)
+        self._resetting = True
         self.bright_slider.reset_value()
         self.sat_slider.reset_value()
         self.hue_slider.reset_value()
@@ -177,5 +138,5 @@ class AdjustWidget(ToolWidget):
         self.thr_slider.reset_value()
         self.equalize_combo.setCurrentIndex(0)
         self.invert_check.setChecked(False)
-        self.blockSignals(False)
+        self._resetting = False
         self.process()

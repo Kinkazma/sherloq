@@ -13,7 +13,6 @@
 """
 
 import numpy as np
-from .noiseprint import genNoiseprint
 from .post_em import EMgu_img, getSpamFromNoiseprint
 from .utility.utilityRead import resizeMapWithPadding
 from .utility.utilityRead import imread2f
@@ -40,6 +39,7 @@ def noiseprint_blind_file(filename, model_name="net"):
 
 
 def noiseprint_blind(img, QF, model_name="net"):
+    from .noiseprint import genNoiseprint
     res = genNoiseprint(img, QF, model_name)
     assert img.shape == res.shape
     return noiseprint_blind_post(res, img)
@@ -83,11 +83,16 @@ def genMappUint8(mapp, valid, range0, range1, imgsize, vmax=None, vmin=None):
     if vmin is None:
         vmin = np.nanmin(mapp_s)
 
-    mapUint8 = (
-        (255 * (mapp_s.clip(vmin, vmax) - vmin) / (vmax - vmin))
-        .clip(0, 255)
-        .astype(np.uint8)
-    )
+    if vmax == vmin:
+        # Historically NaNs cast to zero with a warning; keep that raster
+        # deterministically, without invalid division/casts.
+        mapUint8 = np.zeros(mapp_s.shape, dtype=np.uint8)
+    else:
+        mapUint8 = (
+            (255 * (mapp_s.clip(vmin, vmax) - vmin) / (vmax - vmin))
+            .clip(0, 255)
+            .astype(np.uint8)
+        )
     mapUint8 = 255 - resizeMapWithPadding(mapUint8, range0, range1, imgsize)
 
     return mapUint8

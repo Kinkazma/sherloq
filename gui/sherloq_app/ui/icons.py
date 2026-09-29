@@ -71,3 +71,16 @@ def themed_icon(name):
     if name == "sherloq_alpha.png":
         return _mask_icon(source)
     return QIcon(source)
+
+
+def application_icon():
+    """Keep the exact bundle artwork in the macOS Dock; never theme/recolour it."""
+    import sys
+    from PySide6.QtCore import QCoreApplication
+    if sys.platform == 'darwin':
+        bundle_icon = Path(QCoreApplication.applicationDirPath()).parent / 'Resources' / 'SHERLOQ.icns'
+        if bundle_icon.is_file():
+            return QIcon(str(bundle_icon))
+        # Unbundled developer runs have no application artwork to override.
+        return None
+    return themed_icon('sherloq_white.png')

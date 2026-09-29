@@ -1,0 +1,74 @@
+{
+  "status": "native_candidate_verified_not_published",
+  "upstream_base": "3fe95fcb56037e47e2eefbc2d3785804a31a74f5",
+  "rights_basis": "User confirmation of permissions obtained by email; no further documentary verification requested",
+  "full_installation": {
+    "zip_sha256": "f1cbdaedf5f287630eb0fdb6c06a161643e9b16614c65663e963afd33a5f427d",
+    "zip_bytes": 10894627579,
+    "manifest_entries": 54589,
+    "unique_members": 54590,
+    "extracted_file_hashes_verified": true,
+    "fixed_timestamps_no_owner_metadata": true,
+    "safe_internal_symlinks": true,
+    "private_directories_absent": true
+  },
+  "sources": {
+    "patch_application": true,
+    "reconstructed_source_bytes_exact": true,
+    "source_index_unchanged": true,
+    "git_objects_scanned": 589,
+    "git_commits": 0,
+    "git_remote": null,
+    "publication_identity": "not configured",
+    "archive_sha256": "cc90359baa9f741091ea11d5ea7a486946fd6476cee1019b30a0472c16b29560",
+    "input_files": 541,
+    "manifest_files": 676,
+    "zip_bytes": 2533176,
+    "zip_byte_reproduction_verified": true,
+    "code_files_equal_to_installed_snapshot": 407
+  },
+  "builds": {
+    "patchmatch": "passed from exported sources",
+    "zero": "passed from exported sources",
+    "launcher": "rebuilt and signed during restoration"
+  },
+  "restore_from_final_zip": {
+    "verified_files": 54589,
+    "relocated_files": 99,
+    "bundle_built": true
+  },
+  "tests": {
+    "synthetic_ela_cases": 9,
+    "synthetic_exact": true,
+    "qimage_memory_ownership": true,
+    "qt_startup_and_synthetic_image": true,
+    "primary_and_research_environments_relocated": true,
+    "actual_entrypoint": {
+      "main_window_ready_logged": true,
+      "remained_running": true,
+      "terminated_by_test": true,
+      "isolated_settings": true,
+      "offscreen": true,
+      "no_image_argument": true
+    }
+  },
+  "weights": {
+    "files": 185,
+    "bytes": 6585138490,
+    "all_original_bytes_preserved": true
+  },
+  "limits": [
+    "macOS ARM64 on the current physical machine; not cross-machine certification",
+    "Offscreen Qt checks, not full manual GUI coverage",
+    "No exhaustive inference or scientific validation of every panel/model",
+    "Existing missing checkpoints remain missing",
+    "Dependency version inventory is not a fresh wheel-hash-locked installation test",
+    "Public URLs, publication identity and web delivery remain pending"
+  ],
+  "publication": {
+    "email_sent": false,
+    "push": false,
+    "remote_created": false,
+    "public_demo": false
+  }
+}

@@ -1,156 +1,81 @@
-import os
-import re
-
-import cv2 as cv
-import magic
-from PySide6.QtCore import QFileInfo, QLocale, QFile, QIODevice, QCryptographicHash
-from PySide6.QtWidgets import QVBoxLayout, QMessageBox
-
+from PySide6.QtCore import QTimer
+from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QProgressBar
 from gui.sherloq_app.ui.table import TableWidget
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import human_size
-
-
-def ballistics(filename):
-    table = [
-        ["^DSCN[0-9]{4}\\.JPG$", "Nikon Coolpix camera"],
-        ["^DSC_[0-9]{4}\\.JPG$", "Nikon digital camera"],
-        ["^FUJI[0-9]{4}\\.JPG$", "Fujifilm digital camera"],
-        ["^IMG_[0-9]{4}\\.JPG$", "Canon DSLR or iPhone camera"],
-        ["^PIC[0-9]{5}\\.JPG$", "Olympus D-600L camera"],
-    ]
-    for entry in table:
-        if re.match(entry[0], filename, re.IGNORECASE) is not None:
-            return entry[1]
-    return "Unknown source or manually renamed"
+from gui.sherloq_app.ui.jobs import LatestJob
+from gui.sherloq_app.core.digest import DigestEngine, ballistics
 
 
 class DigestWidget(ToolWidget):
     def __init__(self, filename, image, parent=None):
-        super(DigestWidget, self).__init__(parent)
-
-        table = []
-
-        file_info = QFileInfo(filename)
-        table.append(
-            [self.tr("PhysicalFile"), self.tr("File name"), file_info.fileName()]
-        )
-        table.append(
-            [None, self.tr("Parent folder"), str(file_info.dir().absolutePath())]
-        )
-        table.append([None, self.tr("MIME type"), magic.from_file(filename, mime=True)])
-        table.append(
-            [
-                None,
-                self.tr("File size"),
-                f"{QLocale().toString(file_info.size())} bytes ({human_size(file_info.size())})",
-            ]
-        )
-        table.append([None, self.tr("File owner"), file_info.owner()])
-        table.append(
-            [None, self.tr("Permissions"), str(oct(os.stat(filename).st_mode)[-3:])]
-        )
-        table.append(
-            [
-                None,
-                self.tr("Creation time"),
-                file_info.birthTime().toLocalTime().toString(),
-            ]
-        )
-        table.append(
-            [
-                None,
-                self.tr("Last access"),
-                file_info.lastRead().toLocalTime().toString(),
-            ]
-        )
-        table.append(
-            [
-                None,
-                self.tr("Last modified"),
-                file_info.lastModified().toLocalTime().toString(),
-            ]
-        )
-        table.append(
-            [
-                None,
-                self.tr("Metadata changed"),
-                file_info.metadataChangeTime().toLocalTime().toString(),
-            ]
-        )
-        table.append(
-            [None, self.tr("Name ballistics"), ballistics(file_info.fileName())]
-        )
-
-        file = QFile(filename)
-        if not file.open(QIODevice.ReadOnly):
-            QMessageBox.warning(
-                self, self.tr("Warning"), self.tr("Unable to read file from disk!")
-            )
-            return
-        data = file.readAll()
-        md5 = QCryptographicHash.hash(data, QCryptographicHash.Md5).toHex()
-        table.append(
-            [self.tr("CryptoHash"), self.tr("MD5"), str(md5, encoding="utf-8")]
-        )
-        sha1 = QCryptographicHash.hash(data, QCryptographicHash.Sha1).toHex()
-        table.append([None, self.tr("SHA2-1"), str(sha1, encoding="utf-8")])
-        sha224 = QCryptographicHash.hash(data, QCryptographicHash.Sha224).toHex()
-        table.append([None, self.tr("SHA2-224"), str(sha224, encoding="utf-8")])
-        sha256 = QCryptographicHash.hash(data, QCryptographicHash.Sha256).toHex()
-        table.append([None, self.tr("SHA2-256"), str(sha256, encoding="utf-8")])
-        sha384 = QCryptographicHash.hash(data, QCryptographicHash.Sha384).toHex()
-        table.append([None, self.tr("SHA2-384"), str(sha384, encoding="utf-8")])
-        sha512 = QCryptographicHash.hash(data, QCryptographicHash.Sha512).toHex()
-        table.append([None, self.tr("SHA2-512"), str(sha512, encoding="utf-8")])
-
-        sha3_224 = QCryptographicHash.hash(data, QCryptographicHash.Sha3_224).toHex()
-        table.append([None, self.tr("SHA3-224"), str(sha3_224, encoding="utf-8")])
-        sha3_256 = QCryptographicHash.hash(data, QCryptographicHash.Sha3_256).toHex()
-        table.append([None, self.tr("SHA3-256"), str(sha3_256, encoding="utf-8")])
-        sha3_384 = QCryptographicHash.hash(data, QCryptographicHash.Sha3_384).toHex()
-        table.append([None, self.tr("SHA3-384"), str(sha3_384, encoding="utf-8")])
-        sha3_512 = QCryptographicHash.hash(data, QCryptographicHash.Sha3_512).toHex()
-        table.append([None, self.tr("SHA3-512"), str(sha3_512, encoding="utf-8")])
-
-        table.append(
-            [
-                self.tr("ImageHash"),
-                self.tr("Average"),
-                str(cv.img_hash.averageHash(image)[0]),
-            ]
-        )
-        # table_widget.item(15, 0).setToolTip(self.tr('Average hash'))
-        table.append(
-            [None, self.tr("Block mean"), str(cv.img_hash.blockMeanHash(image)[0])]
-        )
-        # table_widget.item(16, 0).setToolTip(self.tr('Block mean hash'))
-        table.append(
-            [None, self.tr("Color moments"), str(cv.img_hash.colorMomentHash(image)[0])]
-        )
-        # table_widget.item(17, 0).setToolTip(self.tr('Color moments hash'))
-        table.append(
-            [
-                None,
-                self.tr("Marr-Hildreth"),
-                str(cv.img_hash.marrHildrethHash(image)[0]),
-            ]
-        )
-        # table_widget.item(18, 0).setToolTip(self.tr('Marr-Hildreth hash'))
-        table.append([None, self.tr("Perceptual"), str(cv.img_hash.pHash(image)[0])])
-        # table_widget.item(19, 0).setToolTip(self.tr('Perceptual hash'))
-        table.append(
-            [
-                None,
-                self.tr("Radial variance"),
-                str(cv.img_hash.radialVarianceHash(image)[0]),
-            ]
-        )
-        # table_widget.item(20, 0).setToolTip(self.tr('Radial variance hash'))
-
-        headers = [self.tr("Group"), self.tr("Property"), self.tr("Value")]
-        table_widget = TableWidget(table, headers)
-        main_layout = QVBoxLayout()
-        main_layout.addWidget(table_widget)
-        self.setLayout(main_layout)
+        super().__init__(parent)
+        self.engine = DigestEngine(filename, image)
+        self.table_widget = None
+        self.status = QLabel()
+        self.status.setWordWrap(True)
+        self.progress = QProgressBar()
+        self.refresh_button = QPushButton(self.tr('Recalculate'))
+        self.cancel_button = QPushButton(self.tr('Cancel'))
+        controls = QHBoxLayout()
+        controls.addWidget(self.refresh_button)
+        controls.addWidget(self.cancel_button)
+        controls.addStretch()
+        self.main_layout = QVBoxLayout(self)
+        self.main_layout.addWidget(self.status)
+        self.main_layout.addWidget(self.progress)
+        self.main_layout.addLayout(controls)
         self.setMinimumSize(700, 520)
+        self.job = LatestJob(self, self.engine.compute, delay=0)
+        self.job.result.connect(self._finished)
+        self.job.failed.connect(self._failed)
+        self.job.busy.connect(self._busy)
+        self.refresh_button.clicked.connect(self.recalculate)
+        self.cancel_button.clicked.connect(self.engine.cancelled.set)
+        self.poll = QTimer(self)
+        self.poll.setInterval(100)
+        self.poll.timeout.connect(self._progress)
+        cancelled = self.engine.cancelled
+        self.destroyed.connect(lambda *_: cancelled.set())
+        self.recalculate()
+
+    def recalculate(self):
+        if self.job.is_busy or self.job.closed:
+            return
+        if self.table_widget is not None:
+            self.main_layout.removeWidget(self.table_widget)
+            self.table_widget.deleteLater()
+            self.table_widget = None
+        self.engine.cancelled.clear()
+        self.engine.progress = 0
+        self.progress.setValue(0)
+        self.status.setText(self.tr('Calculating file and image hashes…'))
+        self.job.request(True)
+
+    def _progress(self):
+        self.progress.setValue(self.engine.progress)
+
+    def _busy(self, busy):
+        self.refresh_button.setEnabled(not busy)
+        self.cancel_button.setEnabled(busy)
+        self.progress.setVisible(busy)
+        if busy:
+            self.poll.start()
+        else:
+            self.poll.stop()
+
+    def _finished(self, result):
+        if result is None:
+            self.status.setText(self.tr('Analysis cancelled.'))
+            return
+        rows, _ = result
+        self.table_widget = TableWidget(rows, [self.tr('Group'), self.tr('Property'), self.tr('Value')])
+        self.main_layout.addWidget(self.table_widget, 1)
+        self.status.setText(self.tr('File hashes describe the bytes on disk; image hashes describe the loaded image.'))
+
+    def _failed(self, message):
+        self.status.setText(self.tr('Unable to calculate hashes: ') + message)
+
+    def shutdown(self):
+        self.engine.cancelled.set()
+        self.poll.stop()
+        super().shutdown()

@@ -264,7 +264,7 @@ class gm:
                     # sigma = sigma - regularizer * np.spacing(np.max(np.linalg.eigvalsh(sigma))) * np.eye(dim)
                     sigma = sigma + np.abs(
                         regularizer
-                        * np.spacing(eigvalsh(sigma, eigvals=(dim - 1, dim - 1)))
+                        * np.spacing(eigvalsh(sigma, subset_by_index=(dim - 1, dim - 1)))
                     ) * np.eye(dim)
             elif sigmaType == 1:  # diagonal covariance
                 sigma = np.zeros([1, dim], dtype=dtype)

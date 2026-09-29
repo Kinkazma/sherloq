@@ -1,5 +1,7 @@
+from gui.sherloq_app.ui.localization import t
 import os
 import sys
+import shutil
 import rawpy
 from time import time
 
@@ -23,6 +25,12 @@ from gui.sherloq_app.paths import BUTTERAUGLI_DIR, PYEXIFTOOL_DIR, SSIMULACRA_DI
 
 def mat2img(cvmat):
     height, width, channels = cvmat.shape
+    if channels != 3 or cvmat.dtype != np.uint8:
+        raise ValueError('Display expects an 8-bit BGR image.')
+    if not cvmat.flags.c_contiguous:
+        # QImage must own the temporary copy after this function returns.
+        contiguous = np.ascontiguousarray(cvmat)
+        return QImage(contiguous.data, width, height, 3 * width, QImage.Format_BGR888).copy()
     return QImage(cvmat.data, width, height, 3 * width, QImage.Format_BGR888)
 
 
@@ -107,9 +115,8 @@ def create_lut(low, high):
 
 
 def compute_hist(image, normalize=False):
-    hist = np.array(
-        [h[0] for h in cv.calcHist([image], [0], None, [256], [0, 256])], int
-    )
+    from .histogram import exact_channel_histogram
+    hist = exact_channel_histogram(image)
     return hist / image.size if normalize else hist
 
 
@@ -118,7 +125,7 @@ def auto_lut(image, centile):
     if centile == 0:
         nonzero = np.nonzero(hist)[0]
         low = nonzero[0]
-        high = nonzero[-1]
+        high = 255 - nonzero[-1]
     else:
         low_sum = high_sum = 0
         low = 0
@@ -172,93 +179,22 @@ def gray_to_bgr(image):
 
 
 def load_image(parent, filename=None):
-    nothing = [None] * 3
-    settings = QSettings()
-    mime_filters = [
-        "image/jpeg",
-        "image/png",
-        "image/tiff",
-        "image/gif",
-        "image/bmp",
-        "image/webp",
-        "image/x-portable-pixmap",
-        "image/x-portable-graymap",
-        "image/x-portable-bitmap",
-        "image/x-nikon-nef",
-        "image/x-fuji-raf",
-        "image/x-canon-cr2",
-        "image/x-adobe-dng",
-        "image/x-sony-arw",
-        "image/x-kodak-dcr",
-        "image/x-minolta-mrw",
-        "image/x-pentax-pef",
-        "image/x-canon-crw",
-        "image/x-sony-sr2",
-        "image/x-olympus-orf",
-        "image/x-panasonic-raw",
-    ]
-    mime_db = QMimeDatabase()
-    mime_patterns = [
-        mime_db.mimeTypeForName(mime).globPatterns() for mime in mime_filters
-    ]
-    all_formats = f"Supported formats ({' '.join([item for sub in mime_patterns for item in sub])})"
-    raw_exts = [p[-3:] for p in mime_patterns][-12:]
+    """Synchronous compatibility API; main-window opening uses ImageLoadJob."""
+    from gui.sherloq_app.ui.image_io import choose_image
+    from gui.sherloq_app.core.image_io import decode_image
     if filename is None:
-        dialog = QFileDialog(
-            parent, parent.tr("Load image"), settings.value("load_folder")
-        )
-        dialog.setOption(QFileDialog.DontUseNativeDialog, True)
-        dialog.setFileMode(QFileDialog.ExistingFile)
-        dialog.setViewMode(QFileDialog.Detail)
-        dialog.setMimeTypeFilters(mime_filters)
-        name_filters = dialog.nameFilters()
-        dialog.setNameFilters(name_filters + [all_formats])
-        dialog.selectNameFilter(all_formats)
-        if dialog.exec_():
-            filename = dialog.selectedFiles()[0]
-        else:
-            return nothing
-    ext = os.path.splitext(filename)[1][1:].lower()
-    if ext in raw_exts:
-        with rawpy.imread(filename) as raw:
-            image = cv.cvtColor(
-                raw.postprocess(
-                    no_auto_bright=True,
-                    use_camera_wb=True,
-                ),
-                cv.COLOR_RGB2BGR,
-            )
-    elif ext == "gif":
-        capture = cv.VideoCapture(filename)
-        frames = int(capture.get(cv.CAP_PROP_FRAME_COUNT))
-        if frames > 1:
-            QMessageBox.warning(
-                parent,
-                parent.tr("Warning"),
-                parent.tr("Animated GIF: importing first frame"),
-            )
-        result, image = capture.read()
-        if not result:
-            QMessageBox.critical(
-                parent, parent.tr("Error"), parent.tr("Unable to decode GIF!")
-            )
-            return nothing
-        if len(image.shape) == 2:
-            image = cv.cvtColor(image, cv.COLOR_GRAY2BGR)
-    else:
-        image = cv.imread(filename, cv.IMREAD_COLOR)
-    if image is None:
-        QMessageBox.critical(
-            parent, parent.tr("Error"), parent.tr("Unable to load image!")
-        )
-        return nothing
-    if image.shape[2] > 3:
-        QMessageBox.warning(
-            parent, parent.tr("Warning"), parent.tr("Alpha channel discarded")
-        )
-        image = cv.cvtColor(image, cv.COLOR_BGRA2BGR)
-    settings.setValue("load_folder", QFileInfo(filename).absolutePath())
-    return filename, os.path.basename(filename), image
+        filename = choose_image(parent)
+    if not filename:
+        return [None] * 3
+    try:
+        filename, basename, image, metadata = decode_image(filename)
+    except Exception as error:
+        QMessageBox.critical(parent, t(parent.tr('Error')), t(str(error)))
+        return [None] * 3
+    if metadata['frames'] > 1:
+        QMessageBox.warning(parent, t(parent.tr('Warning')), t(parent.tr('Animated GIF: importing first frame')))
+    QSettings().setValue('load_folder', QFileInfo(filename).absolutePath())
+    return filename, basename, image
 
 
 def desaturate(image):
@@ -273,6 +209,9 @@ def norm_mat(matrix, to_bgr=False):
 
 
 def exiftool_exe():
+    if sys.platform == "darwin":
+        private_exiftool = PYEXIFTOOL_DIR.parents[2] / "native" / "exiftool" / "exiftool"
+        return str(private_exiftool) if private_exiftool.is_file() else (shutil.which("exiftool") or str(PYEXIFTOOL_DIR / "exiftool" / "linux" / "exiftool"))
     if sys.platform.startswith("linux"):
         return str(PYEXIFTOOL_DIR / "exiftool" / "linux" / "exiftool")
     if sys.platform.startswith("win32"):
@@ -281,6 +220,8 @@ def exiftool_exe():
 
 
 def butter_exe():
+    if sys.platform == "darwin":
+        return str(BUTTERAUGLI_DIR / "macos" / "butteraugli")
     if sys.platform.startswith("linux"):
         return str(BUTTERAUGLI_DIR / "linux" / "butteraugli")
     if sys.platform.startswith("win32"):
@@ -289,6 +230,8 @@ def butter_exe():
 
 
 def ssimul_exe():
+    if sys.platform == "darwin":
+        return str(SSIMULACRA_DIR / "macos" / "ssimulacra")
     if sys.platform.startswith("linux"):
         return str(SSIMULACRA_DIR / "linux" / "ssimulacra")
     if sys.platform.startswith("win32"):

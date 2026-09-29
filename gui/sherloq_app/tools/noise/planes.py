@@ -1,9 +1,8 @@
-import cv2 as cv
-import numpy as np
+from gui.sherloq_app.core.bit_planes import PlanesEngine
+from gui.sherloq_app.ui.jobs import LatestJob
 from PySide6.QtWidgets import QHBoxLayout, QComboBox, QLabel, QVBoxLayout, QSpinBox
 
 from gui.sherloq_app.ui.tools import ToolWidget
-from gui.sherloq_app.core.utility import norm_mat
 from gui.sherloq_app.ui.viewer import ImageViewer
 
 
@@ -21,6 +20,7 @@ class PlanesWidget(ToolWidget):
                 self.tr("RGB Norm"),
             ]
         )
+        self.chan_combo.setToolTip(self.tr("RGB Norm: truncated square root of R²+G²+B², modulo 256 (original convention)."))
         self.plane_spin = QSpinBox()
         self.plane_spin.setPrefix(self.tr("Bit "))
         self.plane_spin.setRange(0, 7)
@@ -31,10 +31,16 @@ class PlanesWidget(ToolWidget):
 
         self.image = image
         self.viewer = ImageViewer(self.image, self.image)
-        self.planes = None
-        self.preprocess()
+        self.engine = PlanesEngine(image)
+        self.job = LatestJob(self, self.engine.compute, delay=0)
+        self.status_label = QLabel()
+        self._requested = None
+        self.job.result.connect(self.show_result)
+        self.job.busy.connect(self.set_busy)
+        self.job.failed.connect(self.show_error)
+        self.process()
 
-        self.chan_combo.currentIndexChanged.connect(self.preprocess)
+        self.chan_combo.currentIndexChanged.connect(self.process)
         self.plane_spin.valueChanged.connect(self.process)
         self.filter_combo.currentIndexChanged.connect(self.process)
 
@@ -45,6 +51,7 @@ class PlanesWidget(ToolWidget):
         top_layout.addWidget(self.plane_spin)
         top_layout.addWidget(QLabel(self.tr("Filter:")))
         top_layout.addWidget(self.filter_combo)
+        top_layout.addWidget(self.status_label)
         top_layout.addStretch()
 
         main_layout = QVBoxLayout()
@@ -52,34 +59,21 @@ class PlanesWidget(ToolWidget):
         main_layout.addWidget(self.viewer)
         self.setLayout(main_layout)
 
-    def preprocess(self):
-        channel = self.chan_combo.currentIndex()
-        if channel == 0:
-            img = cv.cvtColor(self.image, cv.COLOR_BGR2GRAY)
-        elif channel == 4:
-            b, g, r = cv.split(self.image.astype(np.float64))
-            img = cv.sqrt(cv.pow(b, 2) + cv.pow(g, 2) + cv.pow(r, 2)).astype(np.uint8)
-        else:
-            img = self.image[:, :, 3 - channel]
-
-        self.planes = [
-            norm_mat(cv.bitwise_and(np.full_like(img, 2 ** b), img), to_bgr=True)
-            for b in range(8)
-        ]
-
-        # rows, cols = img.shape
-        # bits = 8
-        # data = [np.binary_repr(img[i][j], width=bits) for i in range(rows) for j in range(cols)]
-        # self.planes = [
-        #     (np.array([int(i[b]) for i in data], dtype=np.uint8) * 2 ** (bits - b - 1)).reshape(
-        #         (rows, cols)) for b in range(bits)]
-
-        self.process()
-
     def process(self):
-        plane = self.planes[self.plane_spin.value()]
-        if self.filter_combo.currentIndex() == 1:
-            plane = cv.medianBlur(plane, 3)
-        elif self.filter_combo.currentIndex() == 2:
-            plane = cv.GaussianBlur(plane, (3, 3), 0)
-        self.viewer.update_processed(plane)
+        params = self.chan_combo.currentIndex(), self.plane_spin.value(), self.filter_combo.currentIndex()
+        if params != self._requested:
+            self._requested = params
+            self.job.request(params)
+
+    def set_busy(self, busy):
+        self.viewer.set_busy(busy)
+        if busy:
+            self.status_label.setText(self.tr("Calculating…"))
+
+    def show_result(self, image):
+        self.viewer.update_processed(image)
+        self.status_label.setText(f"{self.job.seconds:.3f} s")
+
+    def show_error(self, error):
+        self._requested = None
+        self.status_label.setText(error)
