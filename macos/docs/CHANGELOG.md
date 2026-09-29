@@ -5,6 +5,19 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 29 September 2026 — whole-image analysis override
+
+I added **Run on whole image** to Complete Automatic Analysis and Automatic
+Clone Search. Subimage detection remains the default; the new button clears
+regions and exclusions, cancels the old work and restarts on the entire image.
+An early click is preserved instead of being overwritten by delayed startup
+detection. Users can return to **Detect subimages** afterwards.
+
+The French interface includes **Exécuter sur toute l’image**. Tests cover both
+panels and obsolete asynchronous results, using real Qt jobs and ELA with
+explicit clone fixtures. The scientific algorithms are unchanged.
+[Usage, RC1 updater and reproducible regression check](WHOLE-IMAGE.md).
+
 ## Tools made usable under existing menu entries
 
 I implemented **Illuminant Map** and **Dead/Hot Pixels**, whose menu labels existed in the baseline but had no working dispatch or implementation. Illuminant Map estimates local illuminant colour with Gray World, Shades of Gray and White Patch; Dead/Hot Pixels detects isolated candidates and offers overlays, correction previews and coordinate exports. These are new implementations under inherited labels, not just interface adjustments.

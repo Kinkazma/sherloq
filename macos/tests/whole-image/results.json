@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "platform": "cocoa",
+  "real_ela": true,
+  "clone_math": "explicit empty fixtures through real jobs/cache; no model accuracy claim",
+  "stale_detection_error_rejected": true,
+  "records": [
+    {
+      "panel": "AutomaticClonesWidget",
+      "default_detection": true,
+      "whole_image_clears_exclusions": true,
+      "all_branches_restarted": true,
+      "redetect": true,
+      "empty_detection": true,
+      "detection_error_recovery": true,
+      "early_click": true
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "default_detection": true,
+      "whole_image_clears_exclusions": true,
+      "all_branches_restarted": true,
+      "redetect": true,
+      "empty_detection": true,
+      "detection_error_recovery": true,
+      "early_click": true
+    },
+    {
+      "stale_branch": "auto_job",
+      "late_result_rejected": true
+    },
+    {
+      "stale_branch": "job",
+      "late_result_rejected": true
+    },
+    {
+      "stale_branch": "ela_job",
+      "late_result_rejected": true
+    },
+    {
+      "stale_branch": "prepare",
+      "late_result_rejected": true
+    },
+    {
+      "stale_branch": "draw",
+      "late_result_rejected": true
+    },
+    {
+      "stale_branch": "forge.loader",
+      "late_result_rejected": true
+    }
+  ]
+}

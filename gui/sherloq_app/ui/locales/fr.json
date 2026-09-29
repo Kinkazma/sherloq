@@ -918,5 +918,7 @@
   "Settings": "Réglages",
   "Profiles…": "Profils…",
   "Energy": "Énergie",
-  "Cells / Ghosts": "Cellules / Ghosts"
+  "Cells / Ghosts": "Cellules / Ghosts",
+  "Run on whole image": "Exécuter sur toute l’image",
+  "Ignore detected subimages and excluded zones, then restart all analyses on the whole image.": "Ignorer les sous-images détectées et les zones exclues, puis relancer toutes les analyses sur l’image entière."
 }

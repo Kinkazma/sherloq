@@ -1,0 +1,14 @@
+{
+  "gui/sherloq_app/tools/tampering/automatic_clones.py": {
+    "before": "3094e48aebcdb79296fea4c09059c62aee680ce96aa460047c1e8d4bf76c719e",
+    "after": "a6b602a46a0f660dd99214ca141a15580c9e472be2cb82d34c270e7f314ec0d2"
+  },
+  "gui/sherloq_app/tools/tampering/complete_analysis.py": {
+    "before": "6520442f8c5fea0abe9c36b6ef3cc75bbf45de96564ea89ea343b64139e49e15",
+    "after": "8a3f10af6d8b4138fd37f943c7a3fd0a7773fb3a69e911f62a757264bc23f68a"
+  },
+  "gui/sherloq_app/ui/locales/fr.json": {
+    "before": "f0db26bbb86bae7bd308ede21bc62b9ca295438641486f4132feace1eaa77e6d",
+    "after": "ecab56f64b2ba78819b7c7c1ea5beb57a2ec559391e5bef089a54b49d3a06f93"
+  }
+}

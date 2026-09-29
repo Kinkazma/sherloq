@@ -142,6 +142,8 @@ class AutomaticClonesWidget(ToolWidget):
         self.cpu = QCheckBox('CPU')
         self.detect = QPushButton('Detect subimages')
         self.run = QPushButton('Run again')
+        self.run_whole = QPushButton('Run on whole image')
+        self.run_whole.setToolTip('Ignore detected subimages and excluded zones, then restart all analyses on the whole image.')
         self.stop_button = QPushButton('Cancel')
         self.save = QPushButton('Export results')
         self.show_zones = QCheckBox('Search zones'); self.show_zones.setChecked(True)
@@ -165,7 +167,7 @@ class AutomaticClonesWidget(ToolWidget):
         self.detail = QLabel(); self.detail.setWordWrap(True)
         layout = QVBoxLayout(self); layout.addWidget(self.tabs)
         controls = QHBoxLayout()
-        for w in (self.detect, self.run, self.stop_button, self.cpu, self.show_zones, self.save):
+        for w in (self.detect, self.run, self.run_whole, self.stop_button, self.cpu, self.show_zones, self.save):
             controls.addWidget(w)
         controls.addStretch(); layout.addLayout(controls)
         self.clone_intervals=QWidget()
@@ -201,6 +203,7 @@ class AutomaticClonesWidget(ToolWidget):
         self.export_job.result.connect(lambda p: self.detail.setText('Exported: '+p))
         self.export_job.failed.connect(lambda e: self.detail.setText('Export failed: '+e))
         self.detect.clicked.connect(self.detect_zones); self.run.clicked.connect(self.start)
+        self.run_whole.clicked.connect(self.run_whole_image)
         self.stop_button.clicked.connect(self.stop); self.save.clicked.connect(self.export_results)
         self.cpu.toggled.connect(self.changed); self.show_zones.toggled.connect(self.toggle_zones)
         self.zone_model.changed.connect(self.changed)
@@ -218,7 +221,20 @@ class AutomaticClonesWidget(ToolWidget):
         QApplication.instance().installEventFilter(self)
         self.update_status()
         if autostart:
-            QTimer.singleShot(0, self.detect_zones)
+            QTimer.singleShot(0, self.initial_detection)
+
+    def initial_detection(self):
+        # A user action before the queued startup must not be overwritten.
+        if not self.closed and not self.viewer.view.snapshot():
+            self.detect_zones()
+
+    def run_whole_image(self):
+        if self.closed:
+            return
+        # Invalidate detection as well as analysis: a late detector answer must
+        # not restore the subimages after this explicit override.
+        self.cancel_work()
+        self.auto_ready(())
 
     def initial_states(self):
         return {'patchmatch': 'Waiting', 'forgeryscope': 'Waiting'}

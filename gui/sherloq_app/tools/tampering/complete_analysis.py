@@ -85,7 +85,7 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.profiles.apply()
         self.tabs.currentChanged.connect(self.settings_visibility)
         self.settings_visibility()
-        if autostart:QTimer.singleShot(0,self.detect_zones)
+        if autostart:QTimer.singleShot(0,self.initial_detection)
 
     def settings_visibility(self,*_):
         self.ela_settings.setVisible(self.source()==ELA_SOURCE)
