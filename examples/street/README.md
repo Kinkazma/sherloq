@@ -1,4 +1,4 @@
-# Rue Clamar — my original, edited input and edit reference
+# Street Photo — my original, edited input and edit reference
 
 I supplied three versions of this photograph: the original JPEG, my edited TIFF,
 and an image showing the areas I changed. The reference is displayed for comparison;
@@ -15,7 +15,7 @@ Full-resolution files: [original JPEG](street-original.jpg),
 The previews above are resized for reading; the analyses use the full-resolution
 inputs. Some research methods resize internally, as recorded below.
 
-## Read the result alongside the actual changes
+## Street Photo — compare the result with the actual changes
 
 These three crops use exactly the same coordinates in all four columns. They
 show removed clouds, removed signs and the removed pedestrian. The last column
@@ -169,7 +169,7 @@ photograph; the candidates do not establish physical sensor defects.
 
 The spiral's before/after pair and actual **Copy-Move Forgery 2**, **Automatic
 Clone Search** and ELA captures are retained in the
-[spiral gallery](../../README.md#screenshots) and [recorded texture runs](../advanced/README.md#my-edited-texture).
+[spiral reference gallery](../spiral/README.md) and [recorded texture runs](../advanced/README.md#my-edited-texture).
 Together these examples cover fourteen tools with the spiral and
 city photograph. The older coffee demonstrations remain in the technical archive.
 
@@ -204,3 +204,7 @@ also saves available arrays locally as NPZ and display outputs as PNG. The
 reference image is never opened by that renderer. Display zooms do not crop the
 analysis input. Runtime, fonts and model results can vary across environments.
 Research-method credits remain in [the component attribution](../../macos/docs/ATTRIBUTION.md).
+
+The displayed tool captures have their bottom caption band cropped away. The
+comparison figure has only its top title strip removed; its column headings and
+all image panels are unchanged. These are presentation crops, not new analyses.

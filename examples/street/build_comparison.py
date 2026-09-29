@@ -14,7 +14,7 @@ if any(image is None for image in images):
 assert len({image.shape for image in images}) == 1
 crops = json.loads((root / 'comparison-crops.json').read_text())
 fig, axes = plt.subplots(len(crops), 4, figsize=(16, 13), layout='constrained')
-fig.suptitle('Rue Clamar — same coordinates, four views', fontsize=21, weight='bold')
+fig.suptitle('Street Photo — same coordinates, four views', fontsize=21, weight='bold')
 for row, crop in enumerate(crops):
     x, y, w, h = (crop[key] for key in ('x', 'y', 'width', 'height'))
     for col, (name, image) in enumerate(zip(('Original', 'Edited input', 'My edit reference', 'CAT-Net output'), images)):

@@ -71,7 +71,10 @@ def capture(suffix=''):
   scale=min(viewer.view.viewport().width()/w,viewer.view.viewport().height()/h)*.97
   if scale>1:
    viewer.view.set_scaling(min(scale,3.0));viewer.view.notify_change()
- app.processEvents();target=OUT/(kind+TAG+suffix+'.png');assert frame.grab().save(str(target))
+ app.processEvents()
+ for n,viewer in enumerate(tool.findChildren(ImageViewer)):
+  if viewer.processed is not None:cv.imwrite(str(OUT/(kind+TAG+suffix+'-view'+str(n)+'.png')),viewer.processed)
+ target=OUT/(kind+TAG+suffix+'.png');assert frame.grab().save(str(target))
  controls=[]
  for c in tool.findChildren(QComboBox):controls.append({'type':'choice','value':c.currentText()})
  for c in tool.findChildren(QSpinBox)+tool.findChildren(QDoubleSpinBox):controls.append({'type':'number','value':c.value()})
