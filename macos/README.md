@@ -54,15 +54,15 @@ The application bundle can subsequently be opened in Finder. Keep it with the co
 
 ### Apply the whole-image update
 
-The frozen RC1 archive predates **Run on whole image**. After restoration, close
+The frozen RC1 archive predates **Run on whole image** and the ELA slider correction. After restoration, close
 SHERLOQ and return to the **current repository folder** in Terminal. Run:
 
 ```sh
-python3 macos/apply_whole_image_fix.py "/path/to/SHERLOQ-installation"
+python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 ```
 
 Replace the quoted path with your restored installation folder. The updater
-checks and backs up three files; it refuses unknown local changes and can be
+checks and backs up five files; it refuses unknown local changes and can be
 rerun safely. Then open `build/SHERLOQ.app` in the installation folder, or run
 `venv/bin/python app_start.py` there. Existing restored installations use the
 same update command without repeating restoration. [Behaviour and validation](docs/WHOLE-IMAGE.md).

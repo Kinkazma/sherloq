@@ -5,6 +5,15 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 29 September 2026 — ELA manual input takes precedence
+
+I fixed a race where an automatic estimate already in progress could overwrite
+all four ELA controls after manual input at a slider limit. Both the ELA biomes
+panel and Complete Automatic Analysis now take manual control before Qt processes
+the input and reject the obsolete response. The four values and their geometry
+passed 64 Cocoa cases; the numerical formulas are unchanged.
+[Reproduction, validation and cumulative RC1 update](ELA-SLIDERS.md).
+
 ## 29 September 2026 — whole-image analysis override
 
 I added **Run on whole image** to Complete Automatic Analysis and Automatic

@@ -82,6 +82,7 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.blue_outline=ExtensionOutline(self.tabs);self.blue_outline.color=BLUE
         self.blue_outline.update()
         self.profiles=ElaProfiles(self,self.ela_auto_profile,self.ela_auto_thresholds,(self.ela_histogram_low,self.ela_histogram_high,self.ela_shadow_threshold,self.ela_highlight_threshold),self.ela_changed,self.ela_settings.toolbar)
+        self.profiles.editStarted.connect(self.take_manual_ela_control)
         self.profiles.apply()
         self.tabs.currentChanged.connect(self.settings_visibility)
         self.settings_visibility()

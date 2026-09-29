@@ -18,7 +18,7 @@ current repository with **Code → Download ZIP** (or update your checkout), and
 open Terminal in that repository folder. Run with Python 3.11 or newer:
 
 ```sh
-python3 macos/apply_whole_image_fix.py "/path/to/SHERLOQ-installation"
+python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 ```
 
 Replace the quoted path with your extracted installation folder. For a fresh
@@ -26,10 +26,12 @@ installation, run `restore_installation.py` there **before** applying this updat
 Then reopen its `build/SHERLOQ.app`, or run `venv/bin/python app_start.py` from the
 installation folder. No environment, model download or app rebuild is needed.
 
-The updater verifies all three source and destination files before replacement,
-keeps the original files under `.updates/whole-image-20260929/`, and refuses
+The updater verifies all five source and destination files before replacement,
+keeps the original files under `.updates/rc1-ela-sliders-20260929/`, and refuses
 unrecognized local changes. Repeating the command leaves already updated files
-alone. Its baseline hashes were checked against the actual RC1 archive.
+alone. Its baseline hashes were checked against the actual RC1 archive. The cumulative
+update also includes the [ELA manual-control correction](ELA-SLIDERS.md), and
+accepts installations that already received the earlier whole-image update.
 
 ## Reproduce the regression check
 

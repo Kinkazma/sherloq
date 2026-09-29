@@ -1,7 +1,7 @@
 """Shared named snapshots of the four ELA energy controls, persisted locally."""
 import json
 import uuid
-from PySide6.QtCore import QObject,Signal,QSettings,QCoreApplication,QSignalBlocker
+from PySide6.QtCore import QObject,Signal,QSettings,QCoreApplication,QSignalBlocker,QEvent,Qt
 from PySide6.QtWidgets import QToolButton,QMenu,QInputDialog,QMessageBox
 from PySide6.QtGui import QAction
 from .localization import t,LITERAL_ROLE
@@ -68,6 +68,7 @@ def profile_store():
     return app._ela_profile_store
 
 class ElaProfiles(QObject):
+    editStarted=Signal()
     def __init__(self,owner,combo,automatic,sliders,changed,row):
         super().__init__(owner)
         self.owner=owner;self.combo=combo;self.automatic=automatic;self.sliders=sliders;self.recompute=changed
@@ -81,6 +82,19 @@ class ElaProfiles(QObject):
         self.save.setToolTip('Save the current histogram bounds and shadow/highlight deviations.')
         self.save.triggered.connect(self.save_current);self.rename.triggered.connect(self.rename_current);self.delete.triggered.connect(self.delete_current)
         self.store.changed.connect(self.refresh);self.refresh()
+        for slider in self.sliders:slider.installEventFilter(self)
+    def eventFilter(self,control,event):
+        # A groove click, a wheel tick or a key at a limit need not emit
+        # sliderPressed/valueChanged. Claim manual control BEFORE Qt handles
+        # input, so a pending automatic result cannot move the other handles.
+        kind=event.type()
+        editing=(kind==QEvent.MouseButtonPress and event.button()==Qt.LeftButton
+                 or kind==QEvent.Wheel and (not event.angleDelta().isNull() or not event.pixelDelta().isNull())
+                 or kind==QEvent.KeyPress and event.key() in (
+                     Qt.Key_Left,Qt.Key_Right,Qt.Key_Up,Qt.Key_Down,
+                     Qt.Key_Home,Qt.Key_End,Qt.Key_PageUp,Qt.Key_PageDown))
+        if editing and control.isEnabled():self.editStarted.emit()
+        return False
     def refresh(self):
         selected=self.combo.currentData() or 'standard'
         with QSignalBlocker(self.combo):

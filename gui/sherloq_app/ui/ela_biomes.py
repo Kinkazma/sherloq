@@ -179,6 +179,7 @@ class ElaBiomesPanel(ToolWidget):
         self.mode.currentIndexChanged.connect(self.refilter);self.legend.currentRowChanged.connect(self.redraw)
         self.energy_visible.toggled.connect(self.refilter);self.legacy_visible.toggled.connect(self.refilter)
         self.profiles=ElaProfiles(self,self.auto_profile,self.auto_thresholds,(self.histogram_low,self.histogram_high,self.shadow_threshold,self.highlight_threshold),self.changed,self.settings.toolbar)
+        self.profiles.editStarted.connect(self.take_manual_control)
         self.profiles.apply()
         QTimer.singleShot(0, self.activate)
 

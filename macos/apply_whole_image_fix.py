@@ -1,4 +1,4 @@
-"""Apply the three-file whole-image fix to a restored RC1 installation.
+"""Apply the cumulative whole-image and ELA slider fixes to a restored RC1 installation.
 
 Close SHERLOQ first. Run this script from a current checkout of the fork.
 Only the known RC1 files or already updated files are accepted.
@@ -49,11 +49,12 @@ def apply(installation):
             raise ValueError(f"Repository file does not match this update: {relative}")
         target = confined(root, 'source/' + relative)
         before = target.read_bytes()
-        if digest(before) not in (hashes['before'], hashes['after']):
+        accepted = hashes['before'] if isinstance(hashes['before'], list) else [hashes['before']]
+        if digest(before) not in (*accepted, hashes['after']):
             raise ValueError(f"Unrecognized installed file; left untouched: {relative}")
         if digest(before) == hashes['after']:
             continue
-        backup = confined(root, '.updates/whole-image-20260929/source/' + relative)
+        backup = confined(root, '.updates/rc1-ela-sliders-20260929/source/' + relative)
         if backup.exists() and backup.read_bytes() != before:
             raise ValueError(f"Existing backup differs: {backup}")
         plan.append((target, source, before, backup, target.stat().st_mode & 0o777))
@@ -74,7 +75,7 @@ def apply(installation):
     return len(changed)
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('installation', type=Path, help='Restored SHERLOQ-installation folder')
     args = parser.parse_args()
@@ -83,3 +84,7 @@ if __name__ == '__main__':
     except (OSError, ValueError) as error:
         parser.exit(1, f'Update refused: {error}\n')
     print(f'Updated {count} files. You can now reopen SHERLOQ.')
+
+
+if __name__ == '__main__':
+    main()

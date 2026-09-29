@@ -26,6 +26,7 @@ These are substantial additions to usability even though they reuse existing men
 ### Bugs I fixed
 
 - **Automatic analysis:** keep subimage detection by default and add **Run on whole image** to restart on the complete input if the detected regions are unsuitable. [Usage and RC1 update](macos/docs/WHOLE-IMAGE.md).
+- **ELA slider control:** manual edits take precedence over automatic estimates already in progress, including input at a slider limit. [Correction and update](macos/docs/ELA-SLIDERS.md).
 - **ELA:** preserve both signs of compression differences in linear mode; correct the inverted contrast endpoint at 100%.
 - **Reference Comparison:** correct a doubled PSNR calculation and improve handling of individual metric failures and cancellation.
 - **Histogram:** correct large-image counting precision, single-level ranges, empty ranges and percentages exceeding 100%.
@@ -220,10 +221,10 @@ The supported packaged target is **macOS on Apple Silicon (ARM64)**. The complet
    python3 restore_installation.py
    ```
 
-5. The frozen RC1 archive predates the whole-image button. Close SHERLOQ and, from the current **repository** folder, apply the verified three-file update:
+5. The frozen RC1 archive predates the whole-image button and ELA slider correction. Close SHERLOQ and, from the current **repository** folder, apply the verified cumulative update:
 
    ```sh
-   python3 macos/apply_whole_image_fix.py "/path/to/SHERLOQ-installation"
+   python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
    ```
 
    Replace the quoted path with your restored installation folder, then open its `build/SHERLOQ.app`. [Update details](macos/docs/WHOLE-IMAGE.md).

@@ -1,0 +1,11 @@
+{
+  "description": "Exact native source transfer; synthetic fixture and portable Cocoa regression.",
+  "files": {
+    "gui/sherloq_app/ui/ela_profiles.py": "1b0570233b0a765cdf2dcad821c42bd6cc338b132b63767bb84afc1be4878720",
+    "gui/sherloq_app/ui/ela_biomes.py": "ad010f61eafc546b5d63664b90f67fc93498b2f8cd4efa4dfe76d7f10553cac2",
+    "gui/sherloq_app/tools/tampering/complete_analysis.py": "6449d27f7b4680bcea9291c76ccea9952b24c510f7dcec9b2242b1d6a4e998c9",
+    "macos/tests/ela-slider-independence/check.py": "16bf8f6c018b16587e0117a18a5f11b7e0e19bff01cdf89ce67cee6195c005c2",
+    "macos/tests/sample.jpg": "64361624ad63451b266b9742c32d5187a2116a1ca563e260f26499c3ba9caf79",
+    "macos/tests/ela-slider-independence/results.json": "edfabff4c150dfd395e82bdb82b402b42d65eab721954259e1e2b3fc1ea0a6f5"
+  }
+}

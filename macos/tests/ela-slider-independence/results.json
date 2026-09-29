@@ -1,0 +1,1131 @@
+{
+  "passed": true,
+  "platform": "cocoa",
+  "cases": 64,
+  "real_qt_drag": true,
+  "delayed_automatic_result_rejected": true,
+  "geometry_stable": true,
+  "formulas_unchanged": true,
+  "rows": [
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "standard",
+      "index": 0,
+      "before": [
+        10,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        31,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "standard",
+      "index": 1,
+      "before": [
+        10,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        970,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "standard",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        72,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "standard",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        72
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "conservative",
+      "index": 0,
+      "before": [
+        16,
+        996,
+        164,
+        25
+      ],
+      "after": [
+        39,
+        996,
+        164,
+        25
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "conservative",
+      "index": 1,
+      "before": [
+        16,
+        996,
+        164,
+        25
+      ],
+      "after": [
+        16,
+        977,
+        164,
+        25
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "conservative",
+      "index": 2,
+      "before": [
+        16,
+        996,
+        164,
+        25
+      ],
+      "after": [
+        16,
+        996,
+        142,
+        25
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "conservative",
+      "index": 3,
+      "before": [
+        16,
+        996,
+        164,
+        25
+      ],
+      "after": [
+        16,
+        996,
+        164,
+        47
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "sensitive",
+      "index": 0,
+      "before": [
+        78,
+        980,
+        80,
+        10
+      ],
+      "after": [
+        120,
+        980,
+        80,
+        10
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "sensitive",
+      "index": 1,
+      "before": [
+        78,
+        980,
+        80,
+        10
+      ],
+      "after": [
+        78,
+        957,
+        80,
+        10
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "sensitive",
+      "index": 2,
+      "before": [
+        78,
+        980,
+        80,
+        10
+      ],
+      "after": [
+        78,
+        980,
+        104,
+        10
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "sensitive",
+      "index": 3,
+      "before": [
+        78,
+        980,
+        80,
+        10
+      ],
+      "after": [
+        78,
+        980,
+        80,
+        32
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "saved",
+      "index": 0,
+      "before": [
+        2,
+        997,
+        41,
+        42
+      ],
+      "after": [
+        20,
+        997,
+        41,
+        42
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "saved",
+      "index": 1,
+      "before": [
+        2,
+        997,
+        41,
+        42
+      ],
+      "after": [
+        2,
+        978,
+        41,
+        42
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "saved",
+      "index": 2,
+      "before": [
+        2,
+        997,
+        41,
+        42
+      ],
+      "after": [
+        2,
+        997,
+        63,
+        42
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "drag",
+      "profile": "saved",
+      "index": 3,
+      "before": [
+        2,
+        997,
+        41,
+        42
+      ],
+      "after": [
+        2,
+        997,
+        41,
+        64
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "key_at_limit",
+      "index": 0,
+      "before": [
+        0,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        0,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "key_at_limit",
+      "index": 1,
+      "before": [
+        10,
+        1000,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        1000,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "key_at_limit",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        0,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        0,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "key_at_limit",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        0
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        0
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "wheel_at_limit",
+      "index": 0,
+      "before": [
+        0,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        0,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "wheel_at_limit",
+      "index": 1,
+      "before": [
+        10,
+        1000,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        1000,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "wheel_at_limit",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        0,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        0,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "wheel_at_limit",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        0
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        0
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "groove_at_limit",
+      "index": 0,
+      "before": [
+        0,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        0,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "groove_at_limit",
+      "index": 1,
+      "before": [
+        10,
+        1000,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        1000,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "groove_at_limit",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        0,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        0,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "groove_at_limit",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        0
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        0
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "handle_press",
+      "index": 0,
+      "before": [
+        0,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        0,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "handle_press",
+      "index": 1,
+      "before": [
+        10,
+        1000,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        1000,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "handle_press",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        0,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        0,
+        50
+      ]
+    },
+    {
+      "panel": "ElaBiomesPanel",
+      "action": "handle_press",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        0
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        0
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "standard",
+      "index": 0,
+      "before": [
+        10,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        31,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "standard",
+      "index": 1,
+      "before": [
+        10,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        970,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "standard",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        72,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "standard",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        72
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "conservative",
+      "index": 0,
+      "before": [
+        16,
+        996,
+        164,
+        25
+      ],
+      "after": [
+        39,
+        996,
+        164,
+        25
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "conservative",
+      "index": 1,
+      "before": [
+        16,
+        996,
+        164,
+        25
+      ],
+      "after": [
+        16,
+        977,
+        164,
+        25
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "conservative",
+      "index": 2,
+      "before": [
+        16,
+        996,
+        164,
+        25
+      ],
+      "after": [
+        16,
+        996,
+        142,
+        25
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "conservative",
+      "index": 3,
+      "before": [
+        16,
+        996,
+        164,
+        25
+      ],
+      "after": [
+        16,
+        996,
+        164,
+        47
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "sensitive",
+      "index": 0,
+      "before": [
+        78,
+        980,
+        80,
+        10
+      ],
+      "after": [
+        120,
+        980,
+        80,
+        10
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "sensitive",
+      "index": 1,
+      "before": [
+        78,
+        980,
+        80,
+        10
+      ],
+      "after": [
+        78,
+        957,
+        80,
+        10
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "sensitive",
+      "index": 2,
+      "before": [
+        78,
+        980,
+        80,
+        10
+      ],
+      "after": [
+        78,
+        980,
+        104,
+        10
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "sensitive",
+      "index": 3,
+      "before": [
+        78,
+        980,
+        80,
+        10
+      ],
+      "after": [
+        78,
+        980,
+        80,
+        32
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "saved",
+      "index": 0,
+      "before": [
+        2,
+        997,
+        41,
+        42
+      ],
+      "after": [
+        20,
+        997,
+        41,
+        42
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "saved",
+      "index": 1,
+      "before": [
+        2,
+        997,
+        41,
+        42
+      ],
+      "after": [
+        2,
+        978,
+        41,
+        42
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "saved",
+      "index": 2,
+      "before": [
+        2,
+        997,
+        41,
+        42
+      ],
+      "after": [
+        2,
+        997,
+        63,
+        42
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "drag",
+      "profile": "saved",
+      "index": 3,
+      "before": [
+        2,
+        997,
+        41,
+        42
+      ],
+      "after": [
+        2,
+        997,
+        41,
+        64
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "key_at_limit",
+      "index": 0,
+      "before": [
+        0,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        0,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "key_at_limit",
+      "index": 1,
+      "before": [
+        10,
+        1000,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        1000,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "key_at_limit",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        0,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        0,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "key_at_limit",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        0
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        0
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "wheel_at_limit",
+      "index": 0,
+      "before": [
+        0,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        0,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "wheel_at_limit",
+      "index": 1,
+      "before": [
+        10,
+        1000,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        1000,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "wheel_at_limit",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        0,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        0,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "wheel_at_limit",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        0
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        0
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "groove_at_limit",
+      "index": 0,
+      "before": [
+        0,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        0,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "groove_at_limit",
+      "index": 1,
+      "before": [
+        10,
+        1000,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        1000,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "groove_at_limit",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        0,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        0,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "groove_at_limit",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        0
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        0
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "handle_press",
+      "index": 0,
+      "before": [
+        0,
+        990,
+        50,
+        50
+      ],
+      "after": [
+        0,
+        990,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "handle_press",
+      "index": 1,
+      "before": [
+        10,
+        1000,
+        50,
+        50
+      ],
+      "after": [
+        10,
+        1000,
+        50,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "handle_press",
+      "index": 2,
+      "before": [
+        10,
+        990,
+        0,
+        50
+      ],
+      "after": [
+        10,
+        990,
+        0,
+        50
+      ]
+    },
+    {
+      "panel": "CompleteAnalysisWidget",
+      "action": "handle_press",
+      "index": 3,
+      "before": [
+        10,
+        990,
+        50,
+        0
+      ],
+      "after": [
+        10,
+        990,
+        50,
+        0
+      ]
+    }
+  ]
+}
