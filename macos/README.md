@@ -54,7 +54,7 @@ The application bundle can subsequently be opened in Finder. Keep it with the co
 
 ### Apply the cumulative RC1 updates
 
-The frozen RC1 archive predates **Run on whole image**, the ELA slider correction and the PatchMatch memory fix. After restoration, close
+The frozen RC1 archive predates **Run on whole image**, the ELA slider correction and the adaptive-memory changes. After restoration, close
 SHERLOQ and return to the **current repository folder** in Terminal. Run:
 
 ```sh
@@ -62,10 +62,10 @@ python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 ```
 
 Replace the quoted path with your restored installation folder. The updater
-validates ten files and backs up replaced files; it refuses unknown local changes and can be
+validates 45 source/build files, rebuilds the native PatchMatch libraries, and backs up replaced files; it refuses unknown local changes and can be
 rerun safely. Then open `build/SHERLOQ.app` in the installation folder, or run
 `venv/bin/python app_start.py` there. Existing restored installations use the
-same update command without repeating restoration. [Whole-image behaviour](docs/WHOLE-IMAGE.md) · [ELA controls](docs/ELA-SLIDERS.md) · [PatchMatch memory and update details](docs/PATCHMATCH-MEMORY.md).
+same update command without repeating restoration. [Whole-image behaviour](docs/WHOLE-IMAGE.md) · [ELA controls](docs/ELA-SLIDERS.md) · [Adaptive-memory scope and update details](docs/ADAPTIVE-MEMORY.md).
 
 ### Manual download and assembly
 
@@ -106,6 +106,7 @@ synthetic tests run from the exported layout, using a compatible environment:
 cd ../SHERLOQ-native-source
 python3.11 -m venv .venv
 .venv/bin/python -m pip install -r requirements-macos-arm64.lock
+.venv/bin/python packaging/build_patchmatch.py
 .venv/bin/python tests/public/synthetic.py
 .venv/bin/python tests/public/startup.py
 ```

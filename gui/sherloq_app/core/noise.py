@@ -58,6 +58,18 @@ class NoiseEngine:
         raise ValueError('Unknown denoising method')
 
     def compute(self, params):
+        params=self.parameters(params)
+        cached=self.results.get(params)
+        if cached is not None:return cached
+        from .memory_resources import MEMORY,MiB
+        def bounded():
+            from .noise_bounded import compute
+            result=compute(self,params)
+            return self.results.put(params,result)
+        return MEMORY.execute(self.image.shape[0]*self.image.shape[1]*32,64*MiB,
+                              lambda:self._compute(params),bounded)
+
+    def _compute(self, params):
         params = self.parameters(params)
         result = self.results.get(params)
         if result is not None:

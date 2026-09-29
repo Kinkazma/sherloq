@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "image_pixels": 96000000,
+  "field_shape": [
+    7976,
+    11976
+  ],
+  "eligible_pixels": 18432,
+  "all_pixel_matching": false,
+  "global_coordinates_preserved": true,
+  "exact_translation_fraction": 1.0,
+  "iterations": 3,
+  "comparisons": 809486,
+  "matching_seconds": 5.680104458006099,
+  "total_seconds": 208.30425316700712,
+  "peak_rss_bytes": 644399104,
+  "peak_temp_bytes": 6432000000
+}

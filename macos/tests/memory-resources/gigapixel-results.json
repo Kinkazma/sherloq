@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "pixels": 1000000000,
+  "bit_exact": true,
+  "reference": "pointwise previous engine in blocks; full RAM reference not allocated",
+  "seconds": 66.64211116702063,
+  "peak_rss_bytes": 245153792
+}

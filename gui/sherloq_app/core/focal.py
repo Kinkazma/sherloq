@@ -25,7 +25,8 @@ def predict(image,models):
     from torch_kmeans import KMeans
     from torch_kmeans.utils.distances import CosineSimilarity
     device=next(models.parameters()).device
-    pixels=(cv.resize(image[:,:,::-1],(1024,1024)).astype(float)/255).astype(np.float32)
+    from .image_buffers import resize_rgb
+    pixels=(resize_rgb(image,(1024,1024)).astype(float)/255).astype(np.float32)
     rgb=torch.from_numpy(pixels.transpose(2,0,1))[None].to(device)
     with torch.inference_mode():
         first=models[0](rgb);h,w=first.shape[-2:];features=[F.normalize(first.permute(0,2,3,1),dim=3)]

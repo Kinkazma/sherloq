@@ -127,3 +127,40 @@ void sherloq_sift_normalize(float* descriptors,int count){
 #endif
  normalize_range(descriptors,count);
 }
+
+/* Streaming path: keep normalization factors instead of 128 floats/pixel. */
+static void norm_factors_range(float* descriptors,int count,float* factors){
+ #pragma clang fp contract(off)
+ for(int i=0;i<count;++i){float* d=descriptors+(size_t)i*128;
+  for(int repeat=0;repeat<2;++repeat){
+   float norm=0;for(int k=0;k<128;++k)norm=fmaf(d[k],d[k],norm);
+   norm=vl_fast_sqrt_f(norm)+VL_EPSILON_F;factors[(size_t)i*3+repeat]=norm;
+   for(int k=0;k<128;++k)d[k]/=norm;
+   if(repeat==0)for(int k=0;k<128;++k)if(d[k]>.2f)d[k]=.2f;
+  }
+ }
+}
+#ifdef __APPLE__
+typedef struct {float* data;float* factors;int count;} FactorContext;
+static void factor_task(void* raw,size_t block){
+ FactorContext* ctx=(FactorContext*)raw;int start=(int)block*1024;
+ int n=ctx->count-start;if(n>1024)n=1024;
+ norm_factors_range(ctx->data+(size_t)start*128,n,ctx->factors+(size_t)start*3);
+}
+#endif
+void sherloq_sift_norm_factors(float* descriptors,int count,float* factors){
+#ifdef __APPLE__
+ if(count>=4096){FactorContext ctx={descriptors,factors,count};
+  dispatch_apply_f(((size_t)count+1023)/1024,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),&ctx,factor_task);return;
+ }
+#endif
+ norm_factors_range(descriptors,count,factors);
+}
+void sherloq_sift_pack_range(const float* hist,const float* weights,int width,int height,int patch,size_t first,int count,float* output){
+ #pragma clang fp contract(off)
+ int dw=width-3*patch;
+ for(int i=0;i<count;++i){size_t pixel=first+i;int x=pixel%dw,y=pixel/dw;
+  for(int by=0;by<4;++by)for(int bx=0;bx<4;++bx)for(int bin=0;bin<8;++bin)
+   output[(size_t)i*128+(by*4+bx)*8+bin]=(weights[bx]*weights[by])*hist[((size_t)(y+by*patch)*width+x+bx*patch)*8+bin];
+ }
+}

@@ -1,0 +1,580 @@
+{
+  "snapshot_sha256": "589dc0ded4d6a7562f8845c19c95ee3c5acf60f7fa847bbd3b45bb54aff81faf",
+  "files": [
+    {
+      "snapshot_path": "packaging/build_patchmatch.py",
+      "repository_path": "macos/packaging/build_patchmatch.py",
+      "sha256": "b360b5b0b1914dc3006c26ae52fdf410674d700d730eff93c0734286d825b7e3"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/adjust.py",
+      "repository_path": "gui/sherloq_app/core/adjust.py",
+      "sha256": "22ec57d31a06e7b2285bc020cd182bf6a3fa74f9176653fa5b62a18b1cc9d299"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/adjust_bounded.py",
+      "repository_path": "gui/sherloq_app/core/adjust_bounded.py",
+      "sha256": "9403f7c8b266961c923243455b4aa89d194fb79170e73702ce2f67645bee7c8e"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/bit_planes.py",
+      "repository_path": "gui/sherloq_app/core/bit_planes.py",
+      "sha256": "3adcc94a4ef29afb583d06e29d2f4df9f3bee513994e0f1cc483e2d42931b7fe"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/bounded_ops.py",
+      "repository_path": "gui/sherloq_app/core/bounded_ops.py",
+      "sha256": "9c2866923b5e66b790680e9b78d5f2f5274b8dd705024294e583b0a087250d67"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/cache_budget.py",
+      "repository_path": "gui/sherloq_app/core/cache_budget.py",
+      "sha256": "529bd0423447065ac49f10d1def5ddcb072b59d7d2d4ea5d6b3838f86e8f903b"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/clone_detector_worker.py",
+      "repository_path": "gui/sherloq_app/core/clone_detector_worker.py",
+      "sha256": "f79ea762fe7106e013f8c708b725eae010354026e228bd8a4944ffe5375af073"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/color_spaces.py",
+      "repository_path": "gui/sherloq_app/core/color_spaces.py",
+      "sha256": "c144dcde45f3bd60ade82856fc862de2d0eddea1377ff14e9171d76e631a0577"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/defect_pixels.py",
+      "repository_path": "gui/sherloq_app/core/defect_pixels.py",
+      "sha256": "fa932eb01781bf03a2cc621b474dfa8cd3cd015e21e5becb78d42272ce4ab517"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/dense_copy.py",
+      "repository_path": "gui/sherloq_app/core/dense_copy.py",
+      "sha256": "888cbde965b937b45b72b77855e47d3d9b0f440b4ecac831abc5f6900aff6df8"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/dense_links.py",
+      "repository_path": "gui/sherloq_app/core/dense_links.py",
+      "sha256": "54807c09baf6e6a2b5f063931d15ceadec8fba77fd13b7fb6a82815ccf0883d2"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/dense_memory.py",
+      "repository_path": "gui/sherloq_app/core/dense_memory.py",
+      "sha256": "a9ad6cef65fed00209147d2c2c257aaf9420ea058ffb064a2ad5edeefef1b00c"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/dense_parallel.py",
+      "repository_path": "gui/sherloq_app/core/dense_parallel.py",
+      "sha256": "81a8d6e07b6d0ade9fe8c1aab2c94da3a9433beeac66c9c1d27ebd8206cca581"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/dense_streaming.py",
+      "repository_path": "gui/sherloq_app/core/dense_streaming.py",
+      "sha256": "969733d49340cac8e2550bb49cae7ac83ec71307e9dd5eba21fb6d7d3215c8e9"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/echo_bounded.py",
+      "repository_path": "gui/sherloq_app/core/echo_bounded.py",
+      "sha256": "181300fbfb0d4fb98ba5be2d33c826049a6117ac5a5140c241724146caf258c9"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/focal.py",
+      "repository_path": "gui/sherloq_app/core/focal.py",
+      "sha256": "ae757c7f31a6c60fa896c84e7d85ee08b915a23d58189cff8ef597c184aad416"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/gradient.py",
+      "repository_path": "gui/sherloq_app/core/gradient.py",
+      "sha256": "b57df161ae36d42926f03bf370cea66f22faa5f4a622ccee23b9f2abcb7b31c7"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/gradient_bounded.py",
+      "repository_path": "gui/sherloq_app/core/gradient_bounded.py",
+      "sha256": "43326df174628b05c796bd50df6345df75a19e7af4f39389ca70a849a98511ac"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/image_buffers.py",
+      "repository_path": "gui/sherloq_app/core/image_buffers.py",
+      "sha256": "b565c6f4d4ee4fd837f90d03e6a883ff8aad383acf103d9d4c1225b096d039cd"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/interactive.py",
+      "repository_path": "gui/sherloq_app/core/interactive.py",
+      "sha256": "4ffb8a578f95c04740841c61ad43307922de21c1b3aa8c64e1e0109679ddae3b"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/memory_resources.py",
+      "repository_path": "gui/sherloq_app/core/memory_resources.py",
+      "sha256": "acaefd05e3eb52cafdd6720337cac99aa994c6fb8900268580b77222519d2bae"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/minmax.py",
+      "repository_path": "gui/sherloq_app/core/minmax.py",
+      "sha256": "d05512c99fc355d5e00baa5d5d4a28e1ba09584e6bd4d8b38240225a58367ea7"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/minmax_bounded.py",
+      "repository_path": "gui/sherloq_app/core/minmax_bounded.py",
+      "sha256": "5553db8f9c6c34b8bc852aef842cdd4a5fca8669632b76b016b48a04bd58230b"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/noise.py",
+      "repository_path": "gui/sherloq_app/core/noise.py",
+      "sha256": "41d5ef6bdd4e8df1b2e4635c3be5c0954fb6324f6b9cd533b1809cb632ae24d6"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/noise_bounded.py",
+      "repository_path": "gui/sherloq_app/core/noise_bounded.py",
+      "sha256": "620e739bee597e7d770f1d71cc6f2d4150977a40fae40a3b897af0386368a57a"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/pixel_stats.py",
+      "repository_path": "gui/sherloq_app/core/pixel_stats.py",
+      "sha256": "5e9273adc10b1442e9e6d8c0137401b93f3350a5754f240d6f10cb9a90b87890"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/research_worker.py",
+      "repository_path": "gui/sherloq_app/core/research_worker.py",
+      "sha256": "a29473a357c58c21d3f6a2c59799f4f2cb18fca380b088a462c996a1c91b25b6"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/safire.py",
+      "repository_path": "gui/sherloq_app/core/safire.py",
+      "sha256": "84dba2cce7f126f4c8e1020ac00d007d59ab293bd0fdcf876733f6735fdf41c6"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/ui/jobs.py",
+      "repository_path": "gui/sherloq_app/ui/jobs.py",
+      "sha256": "03b7d919c9fa2dca7b105b297c7aeac95a058255018d7f82e67ab2ad39ae9505"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/ui/research_job.py",
+      "repository_path": "gui/sherloq_app/ui/research_job.py",
+      "sha256": "574604a69ac5efe07cf874c27ca5d8ff1312003da18362648f3305d9333152e6"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/ui/tiled_image.py",
+      "repository_path": "gui/sherloq_app/ui/tiled_image.py",
+      "sha256": "1d2af49c69db178e8727ff5c72441ab6295170968eb1711b5d8bba880fe51f15"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/ui/trufor_job.py",
+      "repository_path": "gui/sherloq_app/ui/trufor_job.py",
+      "sha256": "f973eceec6a6e80ec9a3a6a5b6cba47c3c1f58c0f96b524513404c8d4b51571e"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/ui/viewer.py",
+      "repository_path": "gui/sherloq_app/ui/viewer.py",
+      "sha256": "494f0908d80da5c6155f1dc3959412dafba7a1f89f52766c90cff6f9359123f4"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/vendor/patchmatch/bridge.cpp",
+      "repository_path": "gui/sherloq_app/vendor/patchmatch/bridge.cpp",
+      "sha256": "c88109e032d1e35e0c4d78298da7a6724ca77046f5f505b6cd148450a83c3a15"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/vendor/patchmatch/candidate_pool.h",
+      "repository_path": "gui/sherloq_app/vendor/patchmatch/candidate_pool.h",
+      "sha256": "e469ab4e80c596483ed0b6e06dee6651b6aebac84d6cfd51de6713bcb8a41e12"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/vendor/patchmatch/compact_sift.h",
+      "repository_path": "gui/sherloq_app/vendor/patchmatch/compact_sift.h",
+      "sha256": "864a07af49edea66bf19a49bd04a8da8a4de326dd9207502f77439ae7e54402b"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/vendor/patchmatch/dsift_gpu.c",
+      "repository_path": "gui/sherloq_app/vendor/patchmatch/dsift_gpu.c",
+      "sha256": "54bce761544eea6bec4697f93c35692722e10da37bdd7799eb01eceda352bfff"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/vendor/patchmatch/metal_stream.mm",
+      "repository_path": "gui/sherloq_app/vendor/patchmatch/metal_stream.mm",
+      "sha256": "c8ed935ef53395d2037c1ddb918a62359e480e680df6352edaa8246eee5d6884"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/automatic-fallback-results.json",
+      "repository_path": "macos/tests/dense-streaming/automatic-fallback-results.json",
+      "sha256": "651d6f89bbd0ff098da8c019e4573e5ec3414bac3f09077cce25a4b4e42e7062"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/automatic_fallback.py",
+      "repository_path": "macos/tests/dense-streaming/automatic_fallback.py",
+      "sha256": "ba53e733f5f262367e74e20192f6072904bc5980dbdfec0e6da837b07bc6b2f9"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/bridge_before.cpp",
+      "repository_path": "macos/tests/dense-streaming/bridge_before.cpp",
+      "sha256": "9dcc8f8bfbedbabfca9fdf3d6516ffff8151882a8b413889e95f3dc974381847"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/build.py",
+      "repository_path": "macos/tests/dense-streaming/build.py",
+      "sha256": "ae2fb77eed407094beee73dfbf3f81b375087ffdf22401f588d568a0309f0912"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/coherence-results.json",
+      "repository_path": "macos/tests/dense-streaming/coherence-results.json",
+      "sha256": "c1b9b9d9e419642d6d1367dc7c5578ee9ad9d00b1d6e0f31cbef0b9bc3c2ca38"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/coherence-rounding-results.json",
+      "repository_path": "macos/tests/dense-streaming/coherence-rounding-results.json",
+      "sha256": "7b73ed453ce13ab21f3b596f5d37e2c64a0ab6612296b06157dba71c3fe433ee"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/coherence_contract.py",
+      "repository_path": "macos/tests/dense-streaming/coherence_contract.py",
+      "sha256": "46bc0ff3486dccf9e55ee7b9d2982c093ff5559932b4f17621bd1ba2cbbd467b"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/coherence_rounding.py",
+      "repository_path": "macos/tests/dense-streaming/coherence_rounding.py",
+      "sha256": "7e2c40e7286457eb729bd6b0f8a4ae0a0e483176faa616ca6d48f13447448e78"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/compact-contract-results.json",
+      "repository_path": "macos/tests/dense-streaming/compact-contract-results.json",
+      "sha256": "9462e897e2c71820db802eda1496cb2855403b359fd6aee13df55899218b7932"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/compact_contract.py",
+      "repository_path": "macos/tests/dense-streaming/compact_contract.py",
+      "sha256": "c6d19cbdec51f321d5399dfef6f457ea23b9b899e8a09d2c22cf97d45c5bbff5"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/dense_copy_before_integration.py",
+      "repository_path": "macos/tests/dense-streaming/dense_copy_before_integration.py",
+      "sha256": "66c938c4358c63914e2d793c13248c5c6e321c961f6a435f45552245b0226b45"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/dense_parallel_before_integration.py",
+      "repository_path": "macos/tests/dense-streaming/dense_parallel_before_integration.py",
+      "sha256": "8cee988613eec13b44cfab6a6b37dad341d00e1e018310e750b2c744df751aea"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/global-results.json",
+      "repository_path": "macos/tests/dense-streaming/global-results.json",
+      "sha256": "8f2134535fce8b928a8b1607155d617001a9ec3b5a51b0fa0da422961d4fb66c"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/huge-full-results.json",
+      "repository_path": "macos/tests/dense-streaming/huge-full-results.json",
+      "sha256": "cbea3c0a62593673208dbb0cf9ec902d3cc7879d2dce995ae7fa7643b82a4683"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/huge-results.json",
+      "repository_path": "macos/tests/dense-streaming/huge-results.json",
+      "sha256": "433256df422f279d9a4be2dbab2a74a0d1eeb9a01f8006e3a96f06db6a9adb7a"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/huge_full_pipeline.py",
+      "repository_path": "macos/tests/dense-streaming/huge_full_pipeline.py",
+      "sha256": "312823229a6dd7b11c8986b2d074a4bd59c0ef4abd326dec9d70fb64df1fe9ef"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/huge_global.py",
+      "repository_path": "macos/tests/dense-streaming/huge_global.py",
+      "sha256": "4969e063eb626e19e1dce277b2f262e2d85538493d51646fb0702b61093d7272"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/huge_prepare.py",
+      "repository_path": "macos/tests/dense-streaming/huge_prepare.py",
+      "sha256": "ff088d41d30c6f7d43d6a80eb2bfa4b8147b2e72ee9bbcbb3023d73509bec5d7"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/integration-production-results.json",
+      "repository_path": "macos/tests/dense-streaming/integration-production-results.json",
+      "sha256": "77dfb3f5623799cb74a1a0fd5786e626463dc3c6ffb8d227bd6cb7e87f6caecc"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/integration-results.json",
+      "repository_path": "macos/tests/dense-streaming/integration-results.json",
+      "sha256": "77dfb3f5623799cb74a1a0fd5786e626463dc3c6ffb8d227bd6cb7e87f6caecc"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/integration.py",
+      "repository_path": "macos/tests/dense-streaming/integration.py",
+      "sha256": "a99ee7d778711628dfdf269b79ef78b638407a2ed140c1710379302bb7f33930"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/real_image.py",
+      "repository_path": "macos/tests/dense-streaming/real_image.py",
+      "sha256": "b59f32aaa5abfebe2ea86530e7865b0b8d700294f4589264779726edc25ba7dd"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/stream-contract-results.json",
+      "repository_path": "macos/tests/dense-streaming/stream-contract-results.json",
+      "sha256": "64c1f835bc51b66c6ea609d0939413b9a4884819ca03fdb7aec50f72a521519c"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/stream_candidate.py",
+      "repository_path": "macos/tests/dense-streaming/stream_candidate.py",
+      "sha256": "04b9c05964b46e9e127b5830a4bdcbac2411f605cffdb08b604eb1d91a642cb7"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/stream_contract.py",
+      "repository_path": "macos/tests/dense-streaming/stream_contract.py",
+      "sha256": "d5113041c56c024c3d8da7457671d8830240b574bf33d075198f6262bdc581c3"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/zernike-results.json",
+      "repository_path": "macos/tests/dense-streaming/zernike-results.json",
+      "sha256": "488d1243a96849894fa22e7f810e9c932227666dce5cd6b81ebd9504fa76994b"
+    },
+    {
+      "snapshot_path": "tests/dense-streaming/zernike_candidate.py",
+      "repository_path": "macos/tests/dense-streaming/zernike_candidate.py",
+      "sha256": "14942cffb86e301be4bdf2329773367436c87cb4b1f0581e81180e0e8e1c09f0"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/adjust-results.json",
+      "repository_path": "macos/tests/memory-resources/adjust-results.json",
+      "sha256": "1bb530cc40955c7b30ddcef184a71479a374856aa94cdcfedfe23401467448f6"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/adjust_before.py",
+      "repository_path": "macos/tests/memory-resources/adjust_before.py",
+      "sha256": "563e378cb532c0f4f787e7f6dd1228fde0bec436309b9105ccf8519c25163b52"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/adjust_contract.py",
+      "repository_path": "macos/tests/memory-resources/adjust_contract.py",
+      "sha256": "5f1e852965e0c5e13c9635f95531707cabc88e9a839b18edf772cfe130e4852a"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/bit_planes_before.py",
+      "repository_path": "macos/tests/memory-resources/bit_planes_before.py",
+      "sha256": "02af51ccdec62c30ee86d6236722e01adede1f2da26b43d9ce29360439928a41"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/build_legacy_bridge.py",
+      "repository_path": "macos/tests/memory-resources/build_legacy_bridge.py",
+      "sha256": "eff076146db4fad98347c97f8c82428b03a475655bf4b60d78861f015bb98750"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/color_spaces_before.py",
+      "repository_path": "macos/tests/memory-resources/color_spaces_before.py",
+      "sha256": "5f6bfcca1cb487c0814d31f24742df08f2a5c23e168887092b14bf4ad1062a4d"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/contracts.py",
+      "repository_path": "macos/tests/memory-resources/contracts.py",
+      "sha256": "d52712027f36e43594929c5d700ef5f6250a858e38563ef49a03c3edf29233df"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/defect_pixels_before.py",
+      "repository_path": "macos/tests/memory-resources/defect_pixels_before.py",
+      "sha256": "5b2b72688977935fb2f2b2508d3dd5d11ee5f556c80714ccc01b396b86c950e0"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/dense-links-results.json",
+      "repository_path": "macos/tests/memory-resources/dense-links-results.json",
+      "sha256": "e800393b3a7716a8118bf17231d080a630fe336671104565adceaa7769d7fbc7"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/dense_links.py",
+      "repository_path": "macos/tests/memory-resources/dense_links.py",
+      "sha256": "86a0a24daa76bd9e17436eeee36ad7f76e473a16c3b2781cfa9cfd91b82618f9"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/fast-local-results.json",
+      "repository_path": "macos/tests/memory-resources/fast-local-results.json",
+      "sha256": "1674051ebeb1e1ce5c65fb0531f91d5f7d6ffa30fc27997438641405f50d8d60"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/fast-path-results.json",
+      "repository_path": "macos/tests/memory-resources/fast-path-results.json",
+      "sha256": "18b7f9b964245ae4a1a40292492ba9294802233fbcff20e5c3094036a83cbb15"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/fast_local.py",
+      "repository_path": "macos/tests/memory-resources/fast_local.py",
+      "sha256": "5b3abef9c1a2663e486fe85c3fb50e0bb3d8de06f7cfa1cd860eec850ab6e7bd"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/fast_path.py",
+      "repository_path": "macos/tests/memory-resources/fast_path.py",
+      "sha256": "808f0626faec436520fedd225bf11b3fd211702ec68bb2b0f6a6f3699679b165"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/gigapixel-results.json",
+      "repository_path": "macos/tests/memory-resources/gigapixel-results.json",
+      "sha256": "5e8127f86550203d36babd4d7208c6f44b0870643348319aa5f04fc0278d90db"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/gigapixel.py",
+      "repository_path": "macos/tests/memory-resources/gigapixel.py",
+      "sha256": "5fe249281bcdfb102acfc76cdde79969acda7ec75b7373618d134df46cd619ab"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/gradient-results.json",
+      "repository_path": "macos/tests/memory-resources/gradient-results.json",
+      "sha256": "96ad167103d97498c17e16af0ba438f9424bb81f1dc5e3e1b13a5bcc9aa0a67d"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/gradient_before.py",
+      "repository_path": "macos/tests/memory-resources/gradient_before.py",
+      "sha256": "04dcc1a77cbccc1d1ec5cf10d8d1eccde3ca21cb8954cc63375d3acad175e470"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/gradient_contract.py",
+      "repository_path": "macos/tests/memory-resources/gradient_contract.py",
+      "sha256": "9c2dffb9d5dda793ba4df310e8cf7b154298ccc89a12ad8e68e24c658b6557ab"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-adjust-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-adjust-results.json",
+      "sha256": "a40b5b2013fa029fe87b78403a90c797d745d33958044561f1f6efc644ed11c6"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-bit_planes-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-bit_planes-results.json",
+      "sha256": "88953ffd44cd61653add836d2f038381c122e0f5f839974eb6bd1f074e29e768"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-color_spaces-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-color_spaces-results.json",
+      "sha256": "d024a39b67768a19b3a8b124b69cd1f0e9dca5b20e4d5764329c07842adaff11"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-defect_pixels-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-defect_pixels-results.json",
+      "sha256": "81a47008f3dd532c634bde712c5f0af511cd4b5fe39f4b0bf27b727da334db10"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-gradient-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-gradient-results.json",
+      "sha256": "f6eaf710477bdb8068778979d330473895f12ba69f3435f14f2da9c2522c5425"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-interactive-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-interactive-results.json",
+      "sha256": "54033713351eb55f5b1db5f8d19af70f6f9728da39a1d5d8b5dff4caea26c744"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-minmax-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-minmax-results.json",
+      "sha256": "fd8582981ea7e785138655ae1b1f5159749696f8828a533ccabd33021021a9ed"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-noise-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-noise-results.json",
+      "sha256": "1ebe1d28cd3251780e58d671c56b41c7951110113613091083c8cd516ddd17aa"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-pixel_stats-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-pixel_stats-results.json",
+      "sha256": "7722e06ba2dafdb779dc5a4babdeded92a52aca88df4d9e641d83dc2cd7a33e1"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge_gradient.py",
+      "repository_path": "macos/tests/memory-resources/huge_gradient.py",
+      "sha256": "281aa4af3e8d11896c2528acb2efaf166469643ccf54371cd839049f06cd3b93"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge_local.py",
+      "repository_path": "macos/tests/memory-resources/huge_local.py",
+      "sha256": "a60635217922c389bf8b280024f0e4640e27bd9606a2ecdc340d001827a7bce0"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/image-buffers-results.json",
+      "repository_path": "macos/tests/memory-resources/image-buffers-results.json",
+      "sha256": "79ccc8ff94098f343cd75435979f2c8f34db3a0b4b603c6040a77656842b0da0"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/image_buffers_contract.py",
+      "repository_path": "macos/tests/memory-resources/image_buffers_contract.py",
+      "sha256": "18a8b2adeef2688ae2adbe7d75fa965c5486304168d3caad3b9687ec6500b4ef"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/interactive_before.py",
+      "repository_path": "macos/tests/memory-resources/interactive_before.py",
+      "sha256": "fb53268e5e59a77129a7cde271ccb88d2c82a3855628aaade7fd9470fed9f553"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/local-results.json",
+      "repository_path": "macos/tests/memory-resources/local-results.json",
+      "sha256": "c4398f2f4f249fa712395fce34342ece300bc66abc53c80edc5ef2966c0c0974"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/local_contracts.py",
+      "repository_path": "macos/tests/memory-resources/local_contracts.py",
+      "sha256": "97bd442a358b6376fcae3465ee417f56ab31f2c104cd6f22057094a02e8822ca"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/minmax-results.json",
+      "repository_path": "macos/tests/memory-resources/minmax-results.json",
+      "sha256": "6040d14764f25690fef82f1cd02e79b4903001ee6b39c586dfbfec7fd4700bb9"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/minmax_before.py",
+      "repository_path": "macos/tests/memory-resources/minmax_before.py",
+      "sha256": "7ceb514940a769f53b7c593cf39c5b42c626a5235d61f2d4fbb6c5304d736591"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/minmax_contract.py",
+      "repository_path": "macos/tests/memory-resources/minmax_contract.py",
+      "sha256": "c64b7827772a382ca7f4632c69ac7e318235ca2c8a473592af0893fb4961bb1c"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/more-local-results.json",
+      "repository_path": "macos/tests/memory-resources/more-local-results.json",
+      "sha256": "dc94f9b0c6ed2bc5399bd83d52afce8e724b63ab510e3de86c99077e28d5bd01"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/more_local_contracts.py",
+      "repository_path": "macos/tests/memory-resources/more_local_contracts.py",
+      "sha256": "c134af37229d15a89b3e1904590517b8b4b9d3494f8d81de5e3e38c9fd71cacf"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/noise_before.py",
+      "repository_path": "macos/tests/memory-resources/noise_before.py",
+      "sha256": "9e89eef8758e7802935ae743a0f804a2bd3d575063b8786b6c2a24e061dbd15d"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/pixel_stats_before.py",
+      "repository_path": "macos/tests/memory-resources/pixel_stats_before.py",
+      "sha256": "39d11c791d778fb9d828469dcca48acf3a1cd227204403983c20e57489c7f8fd"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/results.json",
+      "repository_path": "macos/tests/memory-resources/results.json",
+      "sha256": "13197d9e90bd25bcef89fd17ac50d413b6548169361a7e827d7abb5919c56db7"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/retry-results.json",
+      "repository_path": "macos/tests/memory-resources/retry-results.json",
+      "sha256": "55afa9a9948d2d9e5b9da70055767b36cf70d8f16bfa1f10c04f1f0750500bb9"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/retry_contract.py",
+      "repository_path": "macos/tests/memory-resources/retry_contract.py",
+      "sha256": "0435465c0a4facfd573e19049876f73599ac1158202f26d17bcbdd524d063626"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/viewer-results.json",
+      "repository_path": "macos/tests/memory-resources/viewer-results.json",
+      "sha256": "1fd3a19f547efeddd88565cf3376f61ee07d8077a7000ce2f17afe20b624ea48"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/viewer_before.py",
+      "repository_path": "macos/tests/memory-resources/viewer_before.py",
+      "sha256": "97cca6cedbb9d207bffb840f00bfe475bc49bbc516c9066208c8294fb2eae35e"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/viewer_contract.py",
+      "repository_path": "macos/tests/memory-resources/viewer_contract.py",
+      "sha256": "eda4e0d34975577d53a2e9f25a17cebbd71c3a225a9ba3fc20f9ddcbb63edd80"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/worker-buffers-results.json",
+      "repository_path": "macos/tests/memory-resources/worker-buffers-results.json",
+      "sha256": "d77568ecb172fd0312975b73abe62a0df1c263d67040db9c1170512b09b22b2c"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/worker_buffers_contract.py",
+      "repository_path": "macos/tests/memory-resources/worker_buffers_contract.py",
+      "sha256": "4ad7b15664b38006a5a3f8e823b8dae98eb8cd0fc06a9b682f071c548466e641"
+    }
+  ]
+}

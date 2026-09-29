@@ -27,12 +27,18 @@
     "after": "a9ad6cef65fed00209147d2c2c257aaf9420ea058ffb064a2ad5edeefef1b00c"
   },
   "gui/sherloq_app/core/dense_copy.py": {
-    "before": "1bc0c01292de9d55741f1d91813b00079fcdbec6b76ebffbaebc937a690a1bbc",
-    "after": "a053c370a6a401f8a2da890451d85004a9dc46d68f776d3bc82cfd6280304aa0"
+    "before": [
+      "1bc0c01292de9d55741f1d91813b00079fcdbec6b76ebffbaebc937a690a1bbc",
+      "a053c370a6a401f8a2da890451d85004a9dc46d68f776d3bc82cfd6280304aa0"
+    ],
+    "after": "888cbde965b937b45b72b77855e47d3d9b0f440b4ecac831abc5f6900aff6df8"
   },
   "gui/sherloq_app/core/dense_parallel.py": {
-    "before": "620c4c81793b7ef9b6689529f92f28866b613b879b7e913ab27ca52b54702559",
-    "after": "8cee988613eec13b44cfab6a6b37dad341d00e1e018310e750b2c744df751aea"
+    "before": [
+      "620c4c81793b7ef9b6689529f92f28866b613b879b7e913ab27ca52b54702559",
+      "8cee988613eec13b44cfab6a6b37dad341d00e1e018310e750b2c744df751aea"
+    ],
+    "after": "81a8d6e07b6d0ade9fe8c1aab2c94da3a9433beeac66c9c1d27ebd8206cca581"
   },
   "gui/sherloq_app/core/metal_dense.py": {
     "before": "09401731aa780d75bdb7f01efff89f9a29698366884b3fcdbda9bc3d3fc75dba",
@@ -41,5 +47,147 @@
   "gui/sherloq_app/core/sift_frames.py": {
     "before": "ecba1b4da9904e8bad75d41f7eda8afbf75e18e0eea135324c09187e43fad7a8",
     "after": "9924025352642284fccceb800b47a6856675b6905fff71be3a52aa308943b79d"
+  },
+  "macos/packaging/build_patchmatch.py": {
+    "before": "ce749975b5c5f8190aedb10741befe1ccf6a5b1b4c5f17db7e9bbfb1c4d74154",
+    "after": "b360b5b0b1914dc3006c26ae52fdf410674d700d730eff93c0734286d825b7e3",
+    "target": "packaging/build_patchmatch.py",
+    "native_build": true
+  },
+  "gui/sherloq_app/core/adjust.py": {
+    "before": "563e378cb532c0f4f787e7f6dd1228fde0bec436309b9105ccf8519c25163b52",
+    "after": "22ec57d31a06e7b2285bc020cd182bf6a3fa74f9176653fa5b62a18b1cc9d299"
+  },
+  "gui/sherloq_app/core/adjust_bounded.py": {
+    "before": null,
+    "after": "9403f7c8b266961c923243455b4aa89d194fb79170e73702ce2f67645bee7c8e"
+  },
+  "gui/sherloq_app/core/bit_planes.py": {
+    "before": "02af51ccdec62c30ee86d6236722e01adede1f2da26b43d9ce29360439928a41",
+    "after": "3adcc94a4ef29afb583d06e29d2f4df9f3bee513994e0f1cc483e2d42931b7fe"
+  },
+  "gui/sherloq_app/core/bounded_ops.py": {
+    "before": null,
+    "after": "9c2866923b5e66b790680e9b78d5f2f5274b8dd705024294e583b0a087250d67"
+  },
+  "gui/sherloq_app/core/cache_budget.py": {
+    "before": "58e6fe50f8613db6fa9ef7475e10fdcf81d142af538880b802973a42c443c887",
+    "after": "529bd0423447065ac49f10d1def5ddcb072b59d7d2d4ea5d6b3838f86e8f903b"
+  },
+  "gui/sherloq_app/core/clone_detector_worker.py": {
+    "before": "5ad33d4108e0ec6c98f741b92229534b3a49842aaa4591964d472ebc1ae100a8",
+    "after": "f79ea762fe7106e013f8c708b725eae010354026e228bd8a4944ffe5375af073"
+  },
+  "gui/sherloq_app/core/color_spaces.py": {
+    "before": "5f6bfcca1cb487c0814d31f24742df08f2a5c23e168887092b14bf4ad1062a4d",
+    "after": "c144dcde45f3bd60ade82856fc862de2d0eddea1377ff14e9171d76e631a0577"
+  },
+  "gui/sherloq_app/core/defect_pixels.py": {
+    "before": "5b2b72688977935fb2f2b2508d3dd5d11ee5f556c80714ccc01b396b86c950e0",
+    "after": "fa932eb01781bf03a2cc621b474dfa8cd3cd015e21e5becb78d42272ce4ab517"
+  },
+  "gui/sherloq_app/core/dense_links.py": {
+    "before": null,
+    "after": "54807c09baf6e6a2b5f063931d15ceadec8fba77fd13b7fb6a82815ccf0883d2"
+  },
+  "gui/sherloq_app/core/dense_streaming.py": {
+    "before": null,
+    "after": "969733d49340cac8e2550bb49cae7ac83ec71307e9dd5eba21fb6d7d3215c8e9"
+  },
+  "gui/sherloq_app/core/echo_bounded.py": {
+    "before": null,
+    "after": "181300fbfb0d4fb98ba5be2d33c826049a6117ac5a5140c241724146caf258c9"
+  },
+  "gui/sherloq_app/core/focal.py": {
+    "before": "447127f996352299fabf4e7cd8a8688a7eb071e1c63fd6a321ba00c8e09a1b93",
+    "after": "ae757c7f31a6c60fa896c84e7d85ee08b915a23d58189cff8ef597c184aad416"
+  },
+  "gui/sherloq_app/core/gradient.py": {
+    "before": "04dcc1a77cbccc1d1ec5cf10d8d1eccde3ca21cb8954cc63375d3acad175e470",
+    "after": "b57df161ae36d42926f03bf370cea66f22faa5f4a622ccee23b9f2abcb7b31c7"
+  },
+  "gui/sherloq_app/core/gradient_bounded.py": {
+    "before": null,
+    "after": "43326df174628b05c796bd50df6345df75a19e7af4f39389ca70a849a98511ac"
+  },
+  "gui/sherloq_app/core/image_buffers.py": {
+    "before": null,
+    "after": "b565c6f4d4ee4fd837f90d03e6a883ff8aad383acf103d9d4c1225b096d039cd"
+  },
+  "gui/sherloq_app/core/interactive.py": {
+    "before": "fb53268e5e59a77129a7cde271ccb88d2c82a3855628aaade7fd9470fed9f553",
+    "after": "4ffb8a578f95c04740841c61ad43307922de21c1b3aa8c64e1e0109679ddae3b"
+  },
+  "gui/sherloq_app/core/memory_resources.py": {
+    "before": null,
+    "after": "acaefd05e3eb52cafdd6720337cac99aa994c6fb8900268580b77222519d2bae"
+  },
+  "gui/sherloq_app/core/minmax.py": {
+    "before": "7ceb514940a769f53b7c593cf39c5b42c626a5235d61f2d4fbb6c5304d736591",
+    "after": "d05512c99fc355d5e00baa5d5d4a28e1ba09584e6bd4d8b38240225a58367ea7"
+  },
+  "gui/sherloq_app/core/minmax_bounded.py": {
+    "before": null,
+    "after": "5553db8f9c6c34b8bc852aef842cdd4a5fca8669632b76b016b48a04bd58230b"
+  },
+  "gui/sherloq_app/core/noise.py": {
+    "before": "9e89eef8758e7802935ae743a0f804a2bd3d575063b8786b6c2a24e061dbd15d",
+    "after": "41d5ef6bdd4e8df1b2e4635c3be5c0954fb6324f6b9cd533b1809cb632ae24d6"
+  },
+  "gui/sherloq_app/core/noise_bounded.py": {
+    "before": null,
+    "after": "620e739bee597e7d770f1d71cc6f2d4150977a40fae40a3b897af0386368a57a"
+  },
+  "gui/sherloq_app/core/pixel_stats.py": {
+    "before": "39d11c791d778fb9d828469dcca48acf3a1cd227204403983c20e57489c7f8fd",
+    "after": "5e9273adc10b1442e9e6d8c0137401b93f3350a5754f240d6f10cb9a90b87890"
+  },
+  "gui/sherloq_app/core/research_worker.py": {
+    "before": "a5c441c28c7786f564c8735316a90d9b7ca830fe2c1aef0b0d3ea5659126f21e",
+    "after": "a29473a357c58c21d3f6a2c59799f4f2cb18fca380b088a462c996a1c91b25b6"
+  },
+  "gui/sherloq_app/core/safire.py": {
+    "before": "796c2bf13e8ebc8841f294b8de5d9fc1a5391d7a0a5a0d3797a4b628eba48d58",
+    "after": "84dba2cce7f126f4c8e1020ac00d007d59ab293bd0fdcf876733f6735fdf41c6"
+  },
+  "gui/sherloq_app/ui/jobs.py": {
+    "before": "12a3624bd2cf3d96850886eec8a697d41e25ddd957da2f5ccd1eb063dcc857da",
+    "after": "03b7d919c9fa2dca7b105b297c7aeac95a058255018d7f82e67ab2ad39ae9505"
+  },
+  "gui/sherloq_app/ui/research_job.py": {
+    "before": "da04927f62b68ff6a5763b1f11c81a3396072ec3bb5aa6f29eedf72a21a93383",
+    "after": "574604a69ac5efe07cf874c27ca5d8ff1312003da18362648f3305d9333152e6"
+  },
+  "gui/sherloq_app/ui/tiled_image.py": {
+    "before": null,
+    "after": "1d2af49c69db178e8727ff5c72441ab6295170968eb1711b5d8bba880fe51f15"
+  },
+  "gui/sherloq_app/ui/trufor_job.py": {
+    "before": "009c67f83365d4cabb41a97375ad9d5b7f697f46dbad30d65bad96fada92db4c",
+    "after": "f973eceec6a6e80ec9a3a6a5b6cba47c3c1f58c0f96b524513404c8d4b51571e"
+  },
+  "gui/sherloq_app/ui/viewer.py": {
+    "before": "97cca6cedbb9d207bffb840f00bfe475bc49bbc516c9066208c8294fb2eae35e",
+    "after": "494f0908d80da5c6155f1dc3959412dafba7a1f89f52766c90cff6f9359123f4"
+  },
+  "gui/sherloq_app/vendor/patchmatch/bridge.cpp": {
+    "before": "9dcc8f8bfbedbabfca9fdf3d6516ffff8151882a8b413889e95f3dc974381847",
+    "after": "c88109e032d1e35e0c4d78298da7a6724ca77046f5f505b6cd148450a83c3a15"
+  },
+  "gui/sherloq_app/vendor/patchmatch/candidate_pool.h": {
+    "before": null,
+    "after": "e469ab4e80c596483ed0b6e06dee6651b6aebac84d6cfd51de6713bcb8a41e12"
+  },
+  "gui/sherloq_app/vendor/patchmatch/compact_sift.h": {
+    "before": null,
+    "after": "864a07af49edea66bf19a49bd04a8da8a4de326dd9207502f77439ae7e54402b"
+  },
+  "gui/sherloq_app/vendor/patchmatch/dsift_gpu.c": {
+    "before": "db9af4d952f9ad315d7e56bdd7c04f725294e6ddd9f04507c63ea359d7ad77f8",
+    "after": "54bce761544eea6bec4697f93c35692722e10da37bdd7799eb01eceda352bfff"
+  },
+  "gui/sherloq_app/vendor/patchmatch/metal_stream.mm": {
+    "before": null,
+    "after": "c8ed935ef53395d2037c1ddb918a62359e480e680df6352edaa8246eee5d6884"
   }
 }

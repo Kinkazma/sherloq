@@ -1,5 +1,9 @@
 # PatchMatch: large-image memory on Apple Silicon
 
+This note records the earlier correction published in commit `7992b90`. The later
+[adaptive-memory changes](ADAPTIVE-MEMORY.md) extend the CPU/Metal paths and supersede
+its installation procedure; the measurements below describe that earlier state.
+
 I fixed an early memory-budget refusal in the extended + mirror PatchMatch
 profile. A 3510 × 4387 image was rejected before SIFT matching because the Metal
 path was charged for copies used by the older CPU implementation. A pair of
@@ -48,25 +52,8 @@ their run logs are not included.
 
 ## Update an installed RC1
 
-The six-part RC1 archive is unchanged. Close SHERLOQ and run this command from
-the current repository, using Python 3.11 or newer:
-
-```sh
-python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
-```
-
-Run `restore_installation.py` first for a freshly extracted installation. This
-cumulative updater accepts original RC1 and installations already carrying the
-whole-image and/or ELA slider fixes. It validates ten source files before
-replacement, adds the new `dense_memory.py` module, and leaves files already at
-the expected version alone. Unknown local edits are refused.
-
-Backups are saved under `.updates/rc1-patchmatch-memory-20260929/`; an empty
-`.absent` marker records that a newly added module did not previously exist.
-Earlier update backups are retained. If replacement fails, completed changes
-are rolled back, including removal of a module just created by this update.
-Reopen the application afterwards. No model download or application rebuild
-is needed.
+The current cumulative updater also installs the later adaptive-memory paths and
+rebuilds the native bridge. Follow [the current update instructions](ADAPTIVE-MEMORY.md#install-the-cumulative-rc1-update).
 
 ## Reproduce the checks
 

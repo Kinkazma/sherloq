@@ -37,6 +37,8 @@ These are substantial additions to usability even though they reuse existing men
 
 ### Responsiveness and measured improvements
 
+I added adaptive memory paths for nine engines, compact/mapped dense Zernike and SIFT, and tiled display of large images. The RAM path remains preferred, analysis resolution is retained, and the validated scope is partial. Disk-backed execution can be slower. [Validated engines, measurements, numerical correction and RC1 update](macos/docs/ADAPTIVE-MEMORY.md).
+
 I separated computation from display updates, added bounded caches and background jobs, and improved cancellation and reuse of completed work. This lets many display changes reuse an existing result instead of repeating an expensive analysis. I also added native kernels where the tests supported their use, while keeping CPU paths where GPU transfers or numerical differences made them unsuitable.
 
 The following are **recorded development measurements from 27 September 2026 on my Apple Silicon Mac, using 20-megapixel test images**. They describe those measured operations, not a universal speed multiplier for SHERLOQ.
@@ -331,13 +333,13 @@ The supported packaged target is **macOS on Apple Silicon (ARM64)**. The complet
    python3 restore_installation.py
    ```
 
-5. The frozen RC1 archive predates the whole-image button, ELA slider correction and PatchMatch memory fix. Close SHERLOQ and, from the current **repository** folder, apply the verified cumulative update:
+5. The frozen RC1 archive predates the whole-image button, ELA slider correction and adaptive-memory changes. Close SHERLOQ and, from the current **repository** folder, apply the verified cumulative update:
 
    ```sh
    python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
    ```
 
-   Replace the quoted path with your restored installation folder, then open its `build/SHERLOQ.app`. [Update details](macos/docs/WHOLE-IMAGE.md).
+   This cumulative update also rebuilds the native PatchMatch bridge using Apple’s command-line developer tools. Replace the quoted path with your restored installation folder, then open its `build/SHERLOQ.app`. [Update details](macos/docs/WHOLE-IMAGE.md).
 
 Restoration needs **Apple's command-line developer tools**. It verifies the manifest, relocates the supplied environments and native libraries, signs modified binaries locally, and builds `build/SHERLOQ.app`. This app uses the surrounding installation directory; it is not a self-contained app to move on its own.
 

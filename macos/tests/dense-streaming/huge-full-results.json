@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "image_pixels": 96000000,
+  "all_pixel_matching": true,
+  "automatic_mode": "compact",
+  "reservation": 12556435456,
+  "iterations": 1,
+  "extended_profile": false,
+  "seconds": 1492.7433879169985,
+  "peak_rss_bytes": 7362494464,
+  "comparisons": 2179905460,
+  "matched_count": 90390,
+  "coherent_count": 39853,
+  "display_links": 20000
+}

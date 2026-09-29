@@ -27,6 +27,19 @@ class AdjustEngine:
         self.cache = ArrayCache(megabytes)
 
     def compute(self, params):
+        from .memory_resources import MEMORY,MiB
+        pixels=self.image.shape[0]*self.image.shape[1]
+        # CLAHE/Otsu keep the original global OpenCV kernels. Their mapped
+        # source/destination passes have no per-tile Python checkpoint.
+        bounded=64*MiB+(pixels*3 if params[10]>=2 or params[9]==0 else 0)
+        def adapted():
+            cached=self.cache.get(('bounded',params))
+            if cached is not None:return cached
+            from .adjust_bounded import compute
+            return self.cache.put(('bounded',params),compute(self.image,params))
+        return MEMORY.execute(pixels*48,bounded,lambda:self._compute(params),adapted)
+
+    def _compute(self, params):
         bright, saturation, hue, gamma, shadows, highlights, sweep, width, sharp, threshold, equalize, invert = params
         sharp //= 4
         if width == 255:

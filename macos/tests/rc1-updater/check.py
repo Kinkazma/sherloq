@@ -34,7 +34,8 @@ def fixture(root):
 
 def contents(installation):
     return {str(p.relative_to(installation)): p.read_bytes()
-            for p in (installation / 'source').rglob('*') if p.is_file()}
+            for folder in ('source', 'native', 'packaging')
+            for p in (installation / folder).rglob('*') if p.is_file()}
 
 
 cases = []
@@ -51,7 +52,7 @@ for case in ('success', 'unknown-existing', 'unknown-new', 'missing-existing',
         elif case == 'bad-source':
             (repository / 'gui/last.py').write_bytes(b'wrong delivery')
         elif case == 'conflicting-backup':
-            backup = installation / updater.BACKUP_ROOT / 'gui/first.py'
+            backup = installation / updater.BACKUP_ROOT / 'files/source/gui/first.py'
             backup.parent.mkdir(parents=True)
             backup.write_bytes(b'different backup')
         elif case == 'symlink':
@@ -72,7 +73,7 @@ for case in ('success', 'unknown-existing', 'unknown-new', 'missing-existing',
                 assert updater.apply(installation) == 0
                 for name in ('first.py', 'added.py', 'last.py'):
                     assert (installation / 'source/gui' / name).read_bytes() == b'new-' + name.encode()
-                backup = installation / updater.BACKUP_ROOT / 'gui'
+                backup = installation / updater.BACKUP_ROOT / 'files/source/gui'
                 assert (backup / 'first.py').read_bytes() == b'old-first'
                 assert (backup / 'last.py').read_bytes() == b'old-last'
                 assert (backup / 'added.py.absent').read_bytes() == b''
@@ -85,5 +86,56 @@ for case in ('success', 'unknown-existing', 'unknown-new', 'missing-existing',
                     else:
                         raise AssertionError('Expected refusal: ' + case)
                 assert contents(installation) == before, case
+        cases.append(case)
+for case in ('native-success', 'native-build-failure', 'native-incomplete',
+             'native-rollback', 'receipt-failure'):
+    with tempfile.TemporaryDirectory() as directory:
+        repository, installation = fixture(Path(directory).resolve())
+        manifest_path = repository / 'macos/whole-image-update.json'
+        manifest = json.loads(manifest_path.read_text())
+        # A packaging target uses the same validated preimage mechanism.
+        (installation / 'packaging').mkdir()
+        (installation / 'source/gui/first.py').rename(installation / 'packaging/first.py')
+        manifest['gui/first.py'].update(target='packaging/first.py', native_build=True)
+        manifest_path.write_text(json.dumps(manifest))
+        (installation / 'native/runtime').mkdir(parents=True)
+        (installation / updater.NATIVE_FILES[0]).write_bytes(b'old native library')
+        payload = {name: ('compiled fixture ' + name).encode() for name in updater.NATIVE_FILES}
+        before = contents(installation)
+        original_replace = updater.replace
+
+        def fail_native(path, data, mode):
+            if case == 'native-rollback' and path.name == 'libsherloq_dense_stream.dylib':
+                raise OSError('injected native replacement failure')
+            if case == 'receipt-failure' and path.name == 'native-build.json':
+                raise OSError('injected receipt failure')
+            original_replace(path, data, mode)
+
+        def compile_fixture():
+            if case == 'native-build-failure':
+                raise ValueError('injected compiler failure')
+            if case == 'native-incomplete':
+                return {updater.NATIVE_FILES[0]: b'incomplete'}
+            return payload
+
+        with patch.object(updater, 'SUPPORT', repository / 'macos'), \
+             patch.object(updater, 'build_native_payload', side_effect=compile_fixture) as build, \
+             patch.object(updater, 'replace', fail_native):
+            if case == 'native-success':
+                assert updater.apply(installation) == 5
+                assert updater.apply(installation) == 0
+                assert build.call_count == 1
+                for name, data in payload.items():
+                    assert (installation / name).read_bytes() == data
+                assert (installation / 'packaging/first.py').read_bytes() == b'new-first.py'
+            else:
+                try:
+                    updater.apply(installation)
+                except (ValueError, OSError):
+                    pass
+                else:
+                    raise AssertionError('Expected refusal: ' + case)
+                assert contents(installation) == before, case
+                assert not (installation / updater.RECEIPT).exists()
         cases.append(case)
 print(json.dumps({'passed': True, 'cases': cases}))

@@ -8,6 +8,8 @@ from .trufor_job import _Files,_prepare
 from .research_service import ResearchCommand
 from .jobs import LatestJob,STAGING_POOL
 from ..core.interactive import ArrayCache
+from ..core.image_buffers import all_finite
+from ..core.memory_resources import require_disk_space
 
 def prepare(files):
     _prepare(files)
@@ -16,7 +18,7 @@ def prepare(files):
             target=root/'source.image'
             if not target.exists():
                 source=Path(files.source_filename);before=source.stat()
-                if before.st_size>512*1024**2:raise ValueError('Source file exceeds 512 MiB.')
+                require_disk_space(before.st_size,root)
                 partial=root/'source.partial';shutil.copyfile(source,partial);after=source.stat()
                 if (before.st_size,before.st_mtime_ns,before.st_ino)!=(after.st_size,after.st_mtime_ns,after.st_ino):raise ValueError('Source changed during copying. Reload the image.')
                 partial.replace(target)
@@ -28,8 +30,8 @@ def read_result(request):
         folder=root/key;metadata=json.loads((folder/'result.json').read_text());result={'metadata':metadata}
         for name,info in metadata['arrays'].items():
             if not name.isidentifier():raise ValueError('Invalid output array name.')
-            array=np.load(folder/f'{name}.npy',allow_pickle=False)
-            if list(array.shape)!=info['shape'] or str(array.dtype)!=info['dtype'] or not np.isfinite(array).all():raise ValueError('Invalid analysis array: '+name)
+            array=np.load(folder/f'{name}.npy',allow_pickle=False,mmap_mode='r')
+            if list(array.shape)!=info['shape'] or str(array.dtype)!=info['dtype'] or not all_finite(array):raise ValueError('Invalid analysis array: '+name)
             result[name]=array
         return key,result
 

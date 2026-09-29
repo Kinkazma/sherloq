@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "exact_translation": true,
+  "old_spurious_residual_max": 4.019193147541955e-05,
+  "old_rejected_exact_pixels": 83411,
+  "new_spurious_residual_max": 0.0
+}

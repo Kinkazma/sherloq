@@ -43,6 +43,7 @@ def run(request,models):
     if device=='mps' and not torch.backends.mps.is_available():raise ValueError('Metal is unavailable. Select CPU.')
     folder=Path(request['output_dir']);folder.mkdir(parents=True,exist_ok=True)
     if (folder/'result.json').exists():raise ValueError('A completed analysis already exists.')
+    from gui.sherloq_app.core.image_buffers import image_sha256
     image=np.load(request['input'],mmap_mode='r',allow_pickle=False)
     if image.dtype!=np.uint8 or image.ndim!=3 or image.shape[2]!=3:raise ValueError('Expected an 8-bit BGR image.')
     started=time.perf_counter();method=request['method'];params=request['params'];print('Loading model',flush=True)
@@ -62,7 +63,7 @@ def run(request,models):
         from importlib import import_module
         result=import_module('gui.sherloq_app.core.'+method).predict(image,model)
     else:raise ValueError('Unknown analysis method.')
-    metadata=result.pop('metadata');metadata.update(method=method,params=params,device=device,model_reused=reused,weights=models.hashes,model_seconds=loaded-started,inference_seconds=time.perf_counter()-loaded,seconds=time.perf_counter()-started,image_sha256=hashlib.sha256(image.tobytes()).hexdigest(),arrays={})
+    metadata=result.pop('metadata');metadata.update(method=method,params=params,device=device,model_reused=reused,weights=models.hashes,model_seconds=loaded-started,inference_seconds=time.perf_counter()-loaded,seconds=time.perf_counter()-started,image_sha256=image_sha256(image),arrays={})
     for name,array in result.items():
         array=np.asarray(array)
         if not np.isfinite(array).all():raise ValueError(f'Invalid output {name}.')

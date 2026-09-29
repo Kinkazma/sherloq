@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "actual_native_build": true,
+  "cases": [
+    {
+      "baseline_commit": "fc08617fc3f98e134bfa27cc732e2670f60cd68f",
+      "changed_files": 47,
+      "idempotent": true,
+      "native_signatures_valid": true
+    },
+    {
+      "baseline_commit": "b56f1d60109185e35cb7ded7a08de6ba48308198",
+      "changed_files": 45,
+      "idempotent": true,
+      "native_signatures_valid": true
+    },
+    {
+      "baseline_commit": "0ea97f373dbf9cea41f8ee7d2c053839ef8a53e0",
+      "changed_files": 42,
+      "idempotent": true,
+      "native_signatures_valid": true
+    },
+    {
+      "baseline_commit": "7992b90d2819261a23fc0e0c5dc1f3fcda45cf32",
+      "changed_files": 39,
+      "idempotent": true,
+      "native_signatures_valid": true
+    }
+  ]
+}

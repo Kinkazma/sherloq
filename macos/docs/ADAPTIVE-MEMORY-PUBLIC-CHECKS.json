@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "test": "memory-resources/contracts.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 2.45
+    },
+    {
+      "test": "memory-resources/gradient_contract.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 9.463
+    },
+    {
+      "test": "memory-resources/local_contracts.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 6.672
+    },
+    {
+      "test": "memory-resources/more_local_contracts.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 7.98
+    },
+    {
+      "test": "memory-resources/minmax_contract.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 16.488
+    },
+    {
+      "test": "memory-resources/adjust_contract.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 8.969
+    },
+    {
+      "test": "memory-resources/retry_contract.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 4.182
+    },
+    {
+      "test": "memory-resources/viewer_contract.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 1.499
+    },
+    {
+      "test": "memory-resources/image_buffers_contract.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 3.628
+    },
+    {
+      "test": "memory-resources/worker_buffers_contract.py",
+      "args": [],
+      "exit_code": 0,
+      "seconds": 2.287
+    },
+    {
+      "test": "dense-streaming/integration.py",
+      "args": [
+        "--production"
+      ],
+      "exit_code": 0,
+      "seconds": 26.571
+    }
+  ],
+  "snapshot_sha256": "589dc0ded4d6a7562f8845c19c95ee3c5acf60f7fa847bbd3b45bb54aff81faf",
+  "native_bridge_rebuilt": true,
+  "native_integrated_cases": 44,
+  "coherence": {
+    "passed": true,
+    "exact_translation": true,
+    "old_spurious_residual_max": 4.019193147541955e-05,
+    "old_rejected_exact_pixels": 83411,
+    "new_spurious_residual_max": 0.0
+  },
+  "dense_links": {
+    "passed": true,
+    "exact_cases": 72,
+    "benchmark_pixels": 1000000,
+    "old_seconds": 0.9906816249713302,
+    "new_seconds": 0.04930187499849126,
+    "speedup": 20.094197735920737,
+    "bounded_batch": 65536
+  },
+  "synthetic_ela": true,
+  "offscreen_main_window": true,
+  "all_panels_tested": false
+}

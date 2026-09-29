@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "finite_validation": true,
+  "readonly_results": true,
+  "mappings_survive_retirement": true,
+  "source_over_512MiB": true
+}

@@ -37,15 +37,15 @@ def predict(image,model,side=16,groups=3,kind='kmeans',eps=.2,minimum=1,binary=F
     from ..vendor.safire.segment_anything.predictor_safire import SamPredictor
     from ..vendor.safire.segment_anything.utils.amg import build_point_grid
     if side not in (4,8,16,24,32) or not 1<=groups<=16:raise ValueError('Invalid SAFIRE sampling settings.')
-    import hashlib
-    cache_key=(hashlib.sha256(image.tobytes()).hexdigest(),side,str(model.device))
+    from .image_buffers import image_sha256,resize_rgb
+    cache_key=(image_sha256(image),side,str(model.device))
     reused=cache is not None and cache.get('key')==cache_key
     if reused:
         points,features,ious,low_masks,areas,valid_ids=cache['value']
     else:
         predictor=SamPredictor(model);points=build_point_grid(side)*1024;features=[];ious=[];low_masks=[];areas=[];valid_ids=[]
         with torch.inference_mode():
-            predictor.set_image(cv.resize(image[:,:,::-1],(1024,1024)));progress(1,len(points)+1)
+            predictor.set_image(resize_rgb(image,(1024,1024)));progress(1,len(points)+1)
             for lo in range(0,len(points),16):
                 coords=torch.as_tensor(points[lo:lo+16],dtype=torch.float32,device=model.device);labels=torch.ones((len(coords),1),dtype=torch.int,device=model.device)
                 masks,confidence,low=predictor.predict_torch(coords[:,None],labels,multimask_output=False,return_logits=True)

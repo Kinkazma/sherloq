@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "image_pixels": 96000000,
+  "gradient_bit_exact": true,
+  "bounded_peak_rss_bytes": 617644032,
+  "bounded_seconds": 18.066956792026758,
+  "ram_seconds": 1.0075739579624496,
+  "histogram_count_exact": true,
+  "histogram_seconds": 1.1842527910484932,
+  "colors": 16722183
+}

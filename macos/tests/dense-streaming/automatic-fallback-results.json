@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "image_pixels": 4404201,
+  "all_pixel_matching": true,
+  "automatic_mode": "mapped",
+  "reservation_bytes": 281751506,
+  "outputs_exact": true,
+  "coherence_max_error": 0.0,
+  "normal_seconds": 12.15146091702627,
+  "mapped_seconds": 47.56621629203437,
+  "iterations": 1
+}

@@ -16,6 +16,11 @@ class GradientEngine:
         found = self.channels.get('channels')
         if found is not None:
             return found
+        from .memory_resources import MEMORY
+        plan = MEMORY.plan(self.image.shape[0]*self.image.shape[1]*36, 64*1024**2)
+        if plan.mode == 'bounded':
+            from .gradient_bounded import channels
+            return self.channels.put('channels', channels(self.image))
         dx, dy = cv.spatialGradient(cv.cvtColor(self.image, cv.COLOR_BGR2GRAY))
         dx, dy = dx.astype(np.float32), dy.astype(np.float32)
         ax, ay = np.abs(dx), np.abs(dy)
@@ -34,6 +39,14 @@ class GradientEngine:
         return self.channels.put('channels', (red, green, reverse_red, reverse_green, blue))
 
     def compute(self, params):
+        from .memory_resources import MEMORY,MiB
+        def bounded():
+            from .gradient_bounded import compute
+            return compute(self.image, params)
+        return MEMORY.execute(self.image.shape[0]*self.image.shape[1]*48,64*MiB,
+                              lambda:self._compute(params),bounded)
+
+    def _compute(self, params):
         percent, mode, invert, equalize = params
         intensity = 0 if equalize else int(percent / 100 * 127)
         key = intensity, mode, invert, equalize

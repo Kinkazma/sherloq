@@ -75,6 +75,20 @@ class MinMaxEngine:
         return self.masks.put(channel, (low, high))
 
     def compute(self, params):
+        cached=self.results.get(params)
+        if cached is not None:
+            masks=self.masks.get(params[0])
+            if masks is not None:return cached,*masks
+        from .memory_resources import MEMORY,MiB
+        def bounded():
+            from .minmax_bounded import compute
+            result,low,high=compute(self.image,params)
+            self.results.put(params,result);self.masks.put(params[0],(low,high))
+            return result,low,high
+        return MEMORY.execute(self.image.shape[0]*self.image.shape[1]*32,64*MiB,
+                              lambda:self._compute(params),bounded)
+
+    def _compute(self, params):
         channel, minimum, maximum, radius = params
         low, high = self.extrema(channel)
         result = self.results.get(params)

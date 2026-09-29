@@ -1,0 +1,164 @@
+[
+  {
+    "shape": [
+      83,
+      101
+    ],
+    "patch": 6,
+    "flip": false,
+    "exact": true
+  },
+  {
+    "shape": [
+      83,
+      101
+    ],
+    "patch": 6,
+    "flip": true,
+    "exact": true
+  },
+  {
+    "shape": [
+      83,
+      101
+    ],
+    "patch": 8,
+    "flip": false,
+    "exact": true
+  },
+  {
+    "shape": [
+      83,
+      101
+    ],
+    "patch": 8,
+    "flip": true,
+    "exact": true
+  },
+  {
+    "shape": [
+      83,
+      101
+    ],
+    "patch": 12,
+    "flip": false,
+    "exact": true
+  },
+  {
+    "shape": [
+      83,
+      101
+    ],
+    "patch": 12,
+    "flip": true,
+    "exact": true
+  },
+  {
+    "shape": [
+      205,
+      291
+    ],
+    "patch": 6,
+    "flip": false,
+    "exact": true
+  },
+  {
+    "shape": [
+      205,
+      291
+    ],
+    "patch": 6,
+    "flip": true,
+    "exact": true
+  },
+  {
+    "shape": [
+      205,
+      291
+    ],
+    "patch": 8,
+    "flip": false,
+    "exact": true
+  },
+  {
+    "shape": [
+      205,
+      291
+    ],
+    "patch": 8,
+    "flip": true,
+    "exact": true
+  },
+  {
+    "shape": [
+      205,
+      291
+    ],
+    "patch": 12,
+    "flip": false,
+    "exact": true
+  },
+  {
+    "shape": [
+      205,
+      291
+    ],
+    "patch": 12,
+    "flip": true,
+    "exact": true
+  },
+  {
+    "shape": [
+      531,
+      679
+    ],
+    "patch": 6,
+    "flip": false,
+    "exact": true
+  },
+  {
+    "shape": [
+      531,
+      679
+    ],
+    "patch": 6,
+    "flip": true,
+    "exact": true
+  },
+  {
+    "shape": [
+      531,
+      679
+    ],
+    "patch": 8,
+    "flip": false,
+    "exact": true
+  },
+  {
+    "shape": [
+      531,
+      679
+    ],
+    "patch": 8,
+    "flip": true,
+    "exact": true
+  },
+  {
+    "shape": [
+      531,
+      679
+    ],
+    "patch": 12,
+    "flip": false,
+    "exact": true
+  },
+  {
+    "shape": [
+      531,
+      679
+    ],
+    "patch": 12,
+    "flip": true,
+    "exact": true
+  }
+]

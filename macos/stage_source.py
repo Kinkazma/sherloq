@@ -28,10 +28,13 @@ def stage(destination):
     for name in ('app_start.py', 'build', 'integration', 'native', 'packaging', 'requirements-macos-arm64.lock', 'tests'):
         source = support / name
         target = destination / name
-        if source.is_dir():
+        if name in ('native', 'build') and not source.exists():
+            target.mkdir(parents=True)
+        elif source.is_dir():
             shutil.copytree(source, target, ignore=ignored)
         else:
             shutil.copy2(source, target)
+    (destination / 'native/runtime').mkdir(parents=True, exist_ok=True)
     return destination
 
 

@@ -10,6 +10,8 @@ from PySide6.QtCore import QObject, Signal
 from .jobs import LatestJob,STAGING_POOL
 from .trufor_service import TruForCommand
 from gui.sherloq_app.core.jpeg_curve import Cancelled
+from gui.sherloq_app.core.image_buffers import all_finite
+from gui.sherloq_app.core.memory_resources import require_disk_space
 
 
 class _Files:
@@ -46,6 +48,7 @@ def _prepare(files):
     with files.borrow() as folder:
         path = folder/'image.npy'
         if not path.exists():
+            require_disk_space(files.image.nbytes+4096,folder)
             temporary = folder/'image.partial.npy'
             np.save(temporary, files.image, allow_pickle=False)
             temporary.replace(path)
@@ -62,7 +65,7 @@ def _load(request):
         result = {key: np.asarray(value) for key, value in metadata.items()}
         for key in ('map', 'conf', 'np++'):
             array = np.asarray(np.load(folder/(key+'.npy'), mmap_mode='r', allow_pickle=False))
-            if array.dtype != np.float32 or array.shape != tuple(metadata['imgsize']) or not np.isfinite(array).all():
+            if array.dtype != np.float32 or array.shape != tuple(metadata['imgsize']) or not all_finite(array):
                 raise ValueError('Invalid TruFor result array: '+key)
             result[key] = array
         if not np.isfinite(result['score']).all():

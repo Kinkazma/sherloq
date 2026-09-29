@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "public_allocation_failure_recovery_cases": 18,
+  "unrelated_errors_preserved": true,
+  "claims_released": true
+}

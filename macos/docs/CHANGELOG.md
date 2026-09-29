@@ -5,6 +5,23 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 29 September 2026 — adaptive memory, validated native paths
+
+I added exact bounded alternatives for nine engines, shared resource admission
+and cache pressure handling, compact/mapped Zernike and SIFT, and tiled display
+with full-resolution source/export data. The normal RAM path stays preferred;
+mapped execution has a measured cost. The rebuilt bridge passed 44 integrated
+combinations. Recorded capacity checks include nine exact engines at 96 MP,
+CMYK at one billion pixels, and all-pixel SIFT at 96 MP for one iteration only.
+These do not establish complete-tool coverage or a completed eleven-pass profile.
+
+A separate coherence fix restores mathematically integer filter sums, removing
+false rejections of perfect translations at zero tolerance. Dense-link
+deduplication remains exact. Worker input copies and result-map validation are
+also reduced. The cumulative RC1 updater now validates 45 source/build files and
+rebuilds the two native libraries before replacing installed files.
+[Scope, measured costs, proofs, limitations and update](ADAPTIVE-MEMORY.md).
+
 ## 29 September 2026 — PatchMatch large-image memory
 
 I reduced temporary allocations in the Metal SIFT extended + mirror path and

@@ -1,0 +1,330 @@
+[
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 6,
+    "flip": false,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 6,
+    "flip": false,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 6,
+    "flip": true,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 6,
+    "flip": true,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 8,
+    "flip": false,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 8,
+    "flip": false,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 8,
+    "flip": true,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 8,
+    "flip": true,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 12,
+    "flip": false,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 12,
+    "flip": false,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 12,
+    "flip": true,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "patch": 12,
+    "flip": true,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "compare": false,
+    "cache": 1,
+    "field_exact": true,
+    "direct_s": 0.017525834031403065,
+    "compact_s": 0.06232470803661272
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "compare": false,
+    "cache": 4096,
+    "field_exact": true,
+    "direct_s": 0.017525834031403065,
+    "compact_s": 0.02068920899182558
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "compare": true,
+    "cache": 1,
+    "field_exact": true,
+    "direct_s": 0.01684450003085658,
+    "compact_s": 0.05853654199745506
+  },
+  {
+    "shape": [
+      83,
+      97
+    ],
+    "compare": true,
+    "cache": 4096,
+    "field_exact": true,
+    "direct_s": 0.01684450003085658,
+    "compact_s": 0.0206194999627769
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 6,
+    "flip": false,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 6,
+    "flip": false,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 6,
+    "flip": true,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 6,
+    "flip": true,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 8,
+    "flip": false,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 8,
+    "flip": false,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 8,
+    "flip": true,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 8,
+    "flip": true,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 12,
+    "flip": false,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 12,
+    "flip": false,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 12,
+    "flip": true,
+    "quarter": false,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "patch": 12,
+    "flip": true,
+    "quarter": true,
+    "max_error": 0.0
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "compare": false,
+    "cache": 1,
+    "field_exact": true,
+    "direct_s": 0.19643487501889467,
+    "compact_s": 0.6733924589934759
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "compare": false,
+    "cache": 4096,
+    "field_exact": true,
+    "direct_s": 0.19643487501889467,
+    "compact_s": 0.4927320830174722
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "compare": true,
+    "cache": 1,
+    "field_exact": true,
+    "direct_s": 0.19017350004287437,
+    "compact_s": 0.6292174170375802
+  },
+  {
+    "shape": [
+      207,
+      251
+    ],
+    "compare": true,
+    "cache": 4096,
+    "field_exact": true,
+    "direct_s": 0.19017350004287437,
+    "compact_s": 0.4603272500098683
+  }
+]

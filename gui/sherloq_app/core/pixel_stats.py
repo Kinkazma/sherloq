@@ -53,6 +53,17 @@ class StatsEngine:
         return rank
 
     def compute(self, params):
+        cached=self.results.get(params)
+        if cached is not None:return cached
+        from .memory_resources import MEMORY,MiB
+        def bounded():
+            from .bounded_ops import local_result
+            result=local_result(self.image,lambda roi:StatsEngine(roi)._compute(params),halo=0)[0]
+            return self.results.put(params,result)
+        return MEMORY.execute(self.image.shape[0]*self.image.shape[1]*12,64*MiB,
+                              lambda:self._compute(params),bounded)
+
+    def _compute(self, params):
         result = self.results.get(params)
         if result is None:
             result = cv.applyColorMap(self.ranking(), TABLES[params])

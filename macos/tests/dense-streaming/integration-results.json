@@ -1,0 +1,436 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "all",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "all",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "search",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "search",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "compare",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "compare",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "all",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "all",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "search",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "search",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "compare",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "compare",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "all",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "all",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "search",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "search",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "compare",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": false,
+      "target": 8,
+      "mode": "compare",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "all",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "all",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "search",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "search",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "compare",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": false,
+      "target": 8,
+      "mode": "compare",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 8,
+      "mode": "all",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 8,
+      "mode": "all",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 8,
+      "mode": "search",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 8,
+      "mode": "search",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 8,
+      "mode": "compare",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 8,
+      "mode": "compare",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 6,
+      "mode": "all",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 6,
+      "mode": "all",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 6,
+      "mode": "search",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 6,
+      "mode": "search",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 6,
+      "mode": "compare",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": true,
+      "quarter": true,
+      "target": 6,
+      "mode": "compare",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": true,
+      "target": 10,
+      "mode": "all",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": true,
+      "target": 10,
+      "mode": "all",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": true,
+      "target": 10,
+      "mode": "search",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": true,
+      "target": 10,
+      "mode": "search",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": true,
+      "target": 10,
+      "mode": "compare",
+      "storage": "compact",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "flip": false,
+      "quarter": true,
+      "target": 10,
+      "mode": "compare",
+      "storage": "mapped",
+      "outputs_exact": true,
+      "coherence_error_max": 0.0
+    },
+    {
+      "algorithm": "PatchMatch Zernike",
+      "backend": "cpu",
+      "outputs_exact": true
+    },
+    {
+      "algorithm": "PatchMatch SIFT",
+      "backend": "cpu",
+      "outputs_exact": true
+    }
+  ],
+  "public_serial_parallel": true
+}

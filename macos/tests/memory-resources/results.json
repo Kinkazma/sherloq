@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "released_resident_bytes": 134217728,
+  "available": 24822382592,
+  "resident": 99647488,
+  "mapped_views_lifetime": true,
+  "pressure_lru": true,
+  "cancel_and_exception_release": true,
+  "admission_replan": true
+}

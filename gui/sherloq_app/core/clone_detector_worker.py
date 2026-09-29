@@ -14,9 +14,10 @@ def run(request,models):
     import torch
     torch.set_num_threads(8);start=time.perf_counter();folder=Path(request['output_dir']);folder.mkdir(parents=True,exist_ok=True)
     if (folder/'result.json').exists():raise ValueError('Résultat déjà terminé.')
+    from gui.sherloq_app.core.image_buffers import image_sha256
     image=np.load(request['input'],allow_pickle=False,mmap_mode='r');print('Loading model',flush=True)
     result=analyze(image,request['params'],request['device'],models,lambda d,n:print(f'Progress {d}/{n}',flush=True))
-    metadata=result.pop('metadata');metadata.update(seconds=time.perf_counter()-start,params=request['params'],image_sha256=hashlib.sha256(image.tobytes()).hexdigest(),arrays={})
+    metadata=result.pop('metadata');metadata.update(seconds=time.perf_counter()-start,params=request['params'],image_sha256=image_sha256(image),arrays={})
     for name,array in result.items():
         if not np.isfinite(array).all():raise ValueError('Résultat non fini : '+name)
         partial=folder/(name+'.partial.npy');np.save(partial,array,allow_pickle=False);partial.replace(folder/(name+'.npy'));metadata['arrays'][name]=dict(shape=list(array.shape),dtype=str(array.dtype))

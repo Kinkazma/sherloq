@@ -1,0 +1,15 @@
+{
+  "image_pixels": 96000000,
+  "shape": [
+    8000,
+    12000
+  ],
+  "prepared": true,
+  "full_matching_complete": false,
+  "seconds": 218.7674966250197,
+  "peak_rss_bytes": 648937472,
+  "peak_temp_bytes": 6432000000,
+  "compact_bytes": 4409288064,
+  "expanded_descriptor_bytes": 48906534912,
+  "copy_descriptor_max_error": 2.454034984111786e-05
+}

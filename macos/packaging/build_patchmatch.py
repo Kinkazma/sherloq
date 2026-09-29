@@ -1,6 +1,6 @@
 """Compile pinned IPOL dense descriptors for ARM64, without image codecs/CUDA."""
 from pathlib import Path
-import subprocess,json,hashlib
+import subprocess,json,hashlib,shutil
 ROOT=Path(__file__).resolve().parents[1]
 SRC=ROOT/'source/gui/sherloq_app/vendor/patchmatch';BUILD=ROOT/'build/patchmatch';BUILD.mkdir(parents=True,exist_ok=True)
 DEST=ROOT/'native/runtime/libsherloq_patchmatch.dylib'
@@ -14,10 +14,16 @@ objects=[]
 for i,p in enumerate(files):
  obj=BUILD/f'{i}.o';compiler='clang' if p.suffix=='.c' else 'clang++';standard='-std=c99' if p.suffix=='.c' else '-std=c++11'
  subprocess.run([compiler,standard,*common,'-c',str(p),'-o',str(obj)],check=True);objects.append(str(obj))
-for name in ('metal_zernike','metal_sift'):
+for name in ('metal_zernike','metal_sift','metal_stream'):
  obj=BUILD/(name+'.o')
  subprocess.run(['clang++','-std=c++11',*common,'-fobjc-arc','-c',str(SRC/(name+'.mm')),'-o',str(obj)],check=True);objects.append(str(obj))
 subprocess.run(['clang++','-dynamiclib',*objects,'-framework','Foundation','-framework','Metal','-o',str(STAGED),'-install_name','@rpath/'+DEST.name],check=True)
 subprocess.run(['codesign','--force','--sign','-',str(STAGED)],check=True)
 STAGED.replace(DEST)  # Atomic replacement leaves the running application's mapped inode intact.
+# An already-open process can still have the old base library mapped. The
+# streaming loader uses this complete companion library for the new symbols.
+ADDON=DEST.with_name('libsherloq_dense_stream.dylib')
+ADDON_STAGED=ADDON.with_suffix('.new.dylib')
+shutil.copyfile(DEST,ADDON_STAGED)
+ADDON_STAGED.replace(ADDON)
 print(json.dumps(dict(binary=str(DEST),sha256=hashlib.sha256(DEST.read_bytes()).hexdigest())))

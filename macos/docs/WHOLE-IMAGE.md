@@ -24,10 +24,10 @@ python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 Replace the quoted path with your extracted installation folder. For a fresh
 installation, run `restore_installation.py` there **before** applying this update.
 Then reopen its `build/SHERLOQ.app`, or run `venv/bin/python app_start.py` from the
-installation folder. No environment, model download or app rebuild is needed.
+installation folder. No environment, model download or app-bundle rebuild is needed. The current updater rebuilds the native bridge; see [adaptive-memory update details](ADAPTIVE-MEMORY.md).
 
-The updater verifies all ten source and destination files before replacement,
-keeps the original files under `.updates/rc1-patchmatch-memory-20260929/`, and refuses
+The updater verifies all 45 source/build files before replacement,
+keeps the original files under `.updates/rc1-adaptive-memory-v1-20260929/files/`, and refuses
 unrecognized local changes. Repeating the command leaves already updated files
 alone. Its baseline hashes were checked against the actual RC1 archive. The cumulative
 update also includes the [ELA manual-control correction](ELA-SLIDERS.md) and
@@ -55,3 +55,5 @@ results are ignored. An obsolete detection error is also rejected. The two
 injected detector-failure messages are expected test inputs.
 
 The check writes `results.json` and a synthetic interface capture next to itself.
+
+The current cumulative update also includes the [validated adaptive-memory paths](ADAPTIVE-MEMORY.md) and rebuilds their native bridge.

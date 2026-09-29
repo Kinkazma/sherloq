@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "tool": "noise",
+  "image_pixels": 96000000,
+  "bit_exact": true,
+  "bounded_seconds": 5.276418375025969,
+  "reference_seconds": 0.24470862501766533,
+  "bounded_peak_rss_bytes": 545849344
+}

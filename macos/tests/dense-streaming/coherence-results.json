@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "component_cases": 100,
+  "coherence": [
+    {
+      "shape": [
+        103,
+        151
+      ],
+      "radius": 2,
+      "selection_exact": true,
+      "error_max": 0.0
+    },
+    {
+      "shape": [
+        103,
+        151
+      ],
+      "radius": 6,
+      "selection_exact": true,
+      "error_max": 0.0
+    },
+    {
+      "shape": [
+        513,
+        727
+      ],
+      "radius": 2,
+      "selection_exact": true,
+      "error_max": 0.0
+    },
+    {
+      "shape": [
+        513,
+        727
+      ],
+      "radius": 6,
+      "selection_exact": true,
+      "error_max": 0.0
+    }
+  ]
+}

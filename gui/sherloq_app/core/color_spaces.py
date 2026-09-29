@@ -73,6 +73,17 @@ class SpaceEngine:
         return value if space == 'gray' else value[:, :, index]
 
     def compute(self, params):
+        cached=self.displays.get(params)
+        if cached is not None:return cached
+        from .memory_resources import MEMORY,MiB
+        def bounded():
+            from .bounded_ops import local_result
+            result=local_result(self.image,lambda roi:SpaceEngine(roi)._compute(params),halo=0)[0]
+            return self.displays.put(params,result)
+        return MEMORY.execute(self.image.shape[0]*self.image.shape[1]*40,64*MiB,
+                              lambda:self._compute(params),bounded)
+
+    def _compute(self, params):
         result = self.displays.get(params)
         if result is None:
             result = cv.cvtColor(self.channel(*params), cv.COLOR_GRAY2BGR)

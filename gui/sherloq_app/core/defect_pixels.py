@@ -93,6 +93,23 @@ class DefectEngine:
         return self.renders.put(key,output)
 
     def compute(self,params,cancel=lambda:False,progress=lambda *a:None):
+        from .memory_resources import MEMORY,MiB
+        def bounded():
+            from .bounded_ops import local_result
+            settings,mode=params
+            def one(roi):
+                engine=DefectEngine(roi,self.backend)
+                output,flags,_,median=engine._compute(params,cancel)
+                self.last_backend=engine.last_backend
+                return output,flags,median
+            output,flags,median=local_result(self.image,one,halo=settings[0],dtypes=(np.uint8,)*3,cancel=cancel)
+            count=sum(np.count_nonzero(np.any(flags[y:y+128],axis=2)) for y in range(0,len(flags),128))
+            progress(100,'Finding isolated pixel candidates')
+            return output,flags,int(count),median
+        return MEMORY.execute(self.image.shape[0]*self.image.shape[1]*40,64*MiB,
+                              lambda:self._compute(params,cancel,progress),bounded,cancel)
+
+    def _compute(self,params,cancel=lambda:False,progress=lambda *a:None):
         settings,mode=params;flags=self.analyze(settings,cancel,progress);output=self.render(settings,mode,flags,cancel)
         count=self.counts.get(settings)
         if count is None:

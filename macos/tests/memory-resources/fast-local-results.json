@@ -1,0 +1,50 @@
+{
+  "gradient": {
+    "old_seconds": 0.005878645490156487,
+    "current_seconds": 0.005984375020489097,
+    "ratio": 1.0179853557268674,
+    "outputs_exact": true
+  },
+  "pixel_stats": {
+    "old_seconds": 0.0027151045214850456,
+    "current_seconds": 0.0026609165070112795,
+    "ratio": 0.9800420153091832,
+    "outputs_exact": true
+  },
+  "bit_planes": {
+    "old_seconds": 0.005627208010992035,
+    "current_seconds": 0.0056335000263061374,
+    "ratio": 1.0011181415902544,
+    "outputs_exact": true
+  },
+  "defect_pixels": {
+    "old_seconds": 0.007498604507418349,
+    "current_seconds": 0.007375020999461412,
+    "ratio": 0.9835191324152812,
+    "outputs_exact": true
+  },
+  "color_spaces": {
+    "old_seconds": 0.0064285414991900325,
+    "current_seconds": 0.006732208508765325,
+    "ratio": 1.0472373103002528,
+    "outputs_exact": true
+  },
+  "noise": {
+    "old_seconds": 0.004101083002751693,
+    "current_seconds": 0.004179895971901715,
+    "ratio": 1.0192175991310444,
+    "outputs_exact": true
+  },
+  "interactive": {
+    "old_seconds": 0.026244875538395718,
+    "current_seconds": 0.014729416987393051,
+    "ratio": 0.5612302091447992,
+    "outputs_exact": true
+  },
+  "minmax": {
+    "old_seconds": 0.017000333522446454,
+    "current_seconds": 0.01759008297813125,
+    "ratio": 1.034690463860966,
+    "outputs_exact": true
+  }
+}

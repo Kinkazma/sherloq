@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "exact_cases": 72,
+  "benchmark_pixels": 1000000,
+  "old_seconds": 0.7087880420149304,
+  "new_seconds": 0.037850875000003725,
+  "speedup": 18.72580335368365,
+  "bounded_batch": 65536
+}

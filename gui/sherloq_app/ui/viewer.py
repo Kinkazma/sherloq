@@ -44,17 +44,28 @@ class DynamicView(QGraphicsView):
         self.zoom_fit()
 
     def set_image(self, image):
+        from gui.sherloq_app.ui.tiled_image import TiledImageItem
+        current=getattr(self,'image_item',None)
+        if isinstance(image,np.ndarray) and (isinstance(image,np.memmap)
+                or image.shape[0]*image.shape[1]>16_000_000 or max(image.shape[:2])>16384):
+            if isinstance(current,TiledImageItem):current.set_image(image)
+            else:
+                if current is not None:self.scene.removeItem(current)
+                self.image_item=TiledImageItem(image);self.scene.addItem(self.image_item)
+            self.scene.setSceneRect(self.image_item.boundingRect())
+            return
         if type(image) is QPixmap:
             pixmap = image
         elif type(image) is QImage:
             pixmap = QPixmap.fromImage(image)
-        elif type(image) is np.ndarray:
+        elif isinstance(image,np.ndarray):
             pixmap = QPixmap.fromImage(mat2img(image))
         else:
             raise TypeError(
                 self.tr(f"DynamicView.set_image: Unsupported type: {type(image)}")
             )
-        if not self.scene.items():
+        if current is None or isinstance(current,TiledImageItem):
+            if current is not None:self.scene.removeItem(current)
             self.image_item = self.scene.addPixmap(pixmap)
         else:
             self.image_item.setPixmap(pixmap)

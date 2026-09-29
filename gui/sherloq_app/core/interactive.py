@@ -128,6 +128,18 @@ class EchoEngine:
         self.results = ArrayCache(128)
 
     def compute(self, params):
+        cached=self.results.get(params)
+        if cached is not None:return cached
+        from .memory_resources import MEMORY,MiB
+        def bounded():
+            from .echo_bounded import compute
+            result=compute(self.image,params)
+            self.last_backend='cpu'
+            return self.results.put(params,result)
+        return MEMORY.execute(self.image.shape[0]*self.image.shape[1]*32,64*MiB,
+                              lambda:self._compute(params),bounded)
+
+    def _compute(self, params):
         radius, contrast, gray = params
         result = self.results.get(params)
         if result is not None:

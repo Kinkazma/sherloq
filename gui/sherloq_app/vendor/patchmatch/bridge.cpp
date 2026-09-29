@@ -4,6 +4,8 @@
 #include <memory>
 #include <exception>
 #include <cstring>
+#include "compact_sift.h"
+#include "candidate_pool.h"
 extern "C" int sherloq_dense_features(const float* image,int width,int height,int method,int patch,int flip,float* first,float* second,char* error) {
  try {
   if(width<=3*patch || height<=3*patch || patch<2 || patch>32 || (method==1 && patch<3) || method<0 || method>1)throw std::runtime_error("Invalid dense descriptor dimensions/settings");
@@ -24,16 +26,22 @@ extern "C" int sherloq_dense_features(const float* image,int width,int height,in
 // checked before descriptor distance; absent matches stay -1, never identity.
 // Specialize the SIFT loop bound without changing accumulation order. Keep
 // Zernike on the original runtime loop: specializing it can alter FP contraction.
-template<bool Early, int FixedDimensions=0> static int patchmatch_impl(const float* first,const float* second,const unsigned char* mask,
+template<bool Early, int FixedDimensions=0, bool Compact=false, bool Bounded=Compact> static int patchmatch_impl(const float* first,const float* second,const unsigned char* mask,
  int width,int height,int requested_dimensions,int compare,float minimum,float maximum,int iterations,
- uint32_t seed,int* matches,float* distances,uint64_t* comparisons,int (*cancel)(),char* error,float gapx,float gapy,const float* xmap,const float* ymap) {
+ uint32_t seed,int* matches,float* distances,uint64_t* comparisons,int (*cancel)(),char* error,float gapx,float gapy,const float* xmap,const float* ymap,const CompactSift* packed_first=nullptr,const CompactSift* packed_second=nullptr,size_t cache_slots=0) {
  const int dimensions=FixedDimensions?FixedDimensions:requested_dimensions;
  try {
+  if(width<=0||height<=0||int64_t(width)*height>std::numeric_limits<int>::max())throw std::runtime_error("Dense index range exceeds 32-bit addressing");
   const int count=width*height;
+  CompactSiftCache cache_a(packed_first,cache_slots),cache_b(packed_second,cache_slots);
   if(count<=0 || dimensions<=0 || iterations<1 || maximum<minimum)throw std::runtime_error("Invalid PatchMatch settings");
   const double lo=double(minimum)*minimum,hi=double(maximum)*maximum;
-  std::vector<int> pool[2];
-  for(int i=0;i<count;++i){matches[i]=-1;distances[i]=std::numeric_limits<float>::infinity();if(mask[i]&1)pool[0].push_back(i);if(mask[i]&2)pool[1].push_back(i);}
+  CandidatePool<Bounded> pool[2]={CandidatePool<Bounded>(count),CandidatePool<Bounded>(count)};
+  for(int i=0;i<count;++i){
+   if(Bounded && (i&65535)==0 && cancel && cancel())return 1;
+   matches[i]=-1;distances[i]=std::numeric_limits<float>::infinity();if(mask[i]&1)pool[0].add(i);if(mask[i]&2)pool[1].add(i);
+  }
+  pool[0].finish();pool[1].finish();
   *comparisons=0;
   auto random=[](uint32_t& state){state^=state<<13;state^=state>>17;state^=state<<5;return state;};
   auto allowed=[&](int i,int j){
@@ -49,7 +57,8 @@ template<bool Early, int FixedDimensions=0> static int patchmatch_impl(const flo
    // An already winning candidate cannot improve itself; zero is the lower
    // bound of this sum of squares. Preserve candidate accounting and ties.
    if(Early && (matches[i]==j || distances[i]==0.f)){++*comparisons;return;}
-   const float* a=first+size_t(i)*dimensions;const float* b=second+size_t(j)*dimensions;
+   const float* a=Compact?cache_a.get(i):first+size_t(i)*dimensions;
+   const float* b=Compact?cache_b.get(j):second+size_t(j)*dimensions;
    float distance=0;
    // Nonnegative partial sums cannot beat the current best once they reach it.
    // Keep the original operation order and tie rule; only skip rejected tails.
@@ -68,7 +77,7 @@ template<bool Early, int FixedDimensions=0> static int patchmatch_impl(const flo
    if(distance<distances[i]){distances[i]=distance;matches[i]=j;}
   };
   for(int i=0;i<count;++i){
-   if((i&4095)==0 && cancel && cancel())return 1;
+   if((i&(Bounded?127:4095))==0 && cancel && cancel())return 1;
    if(!mask[i])continue;
    const auto& candidates=pool[compare && (mask[i]&1)?1:0];if(candidates.empty())continue;
    uint32_t state=seed ^ (uint32_t(i)+1)*2654435761u;if(!state)state=1;
@@ -80,7 +89,7 @@ template<bool Early, int FixedDimensions=0> static int patchmatch_impl(const flo
   for(int iteration=0;iteration<iterations;++iteration){
    int sign=iteration%2?-1:1;
    for(int step=0;step<count;++step){
-    if((step&4095)==0 && cancel && cancel())return 1;
+    if((step&(Bounded?127:4095))==0 && cancel && cancel())return 1;
     int i=sign>0?step:count-1-step;if(!mask[i])continue;
     int x=i%width,y=i/width;
     // Neighbor displacements and their first-order extrapolation.
@@ -105,7 +114,10 @@ template<bool Early, int FixedDimensions=0> static int patchmatch_impl(const flo
     }
    }
    // Re-evaluate reverse descriptors too: reflection matching need not be symmetric.
-   for(int i=0;i<count;++i)if(matches[i]>=0)offer(matches[i],i);
+   for(int i=0;i<count;++i){
+    if(Bounded && (i&127)==0 && cancel && cancel())return 1;
+    if(matches[i]>=0)offer(matches[i],i);
+   }
   }
   return 0;
  }catch(const std::exception& e){std::strncpy(error,e.what(),1023);error[1023]=0;return -1;}
@@ -131,4 +143,63 @@ extern "C" int sherloq_patchmatch(const float* first,const float* second,const u
  uint32_t seed,int* matches,float* distances,uint64_t* comparisons,int (*cancel)(),char* error) {
  return sherloq_patchmatch_gap(first,second,mask,width,height,dimensions,compare,minimum,maximum,iterations,
    seed,matches,distances,comparisons,cancel,error,0.f,0.f);
+}
+
+// The direct-array specialization above is retained for the RAM fast path.
+extern "C" int sherloq_patchmatch_compact(const CompactSift* first,const CompactSift* second,const unsigned char* mask,
+ int width,int height,int compare,float minimum,float maximum,int iterations,
+ uint32_t seed,int* matches,float* distances,uint64_t* comparisons,int (*cancel)(),char* error,float gapx,float gapy,const float* xmap,const float* ymap,size_t cache_slots) {
+ return patchmatch_impl<true,128,true>(nullptr,nullptr,mask,width,height,128,compare,minimum,maximum,iterations,seed,matches,distances,comparisons,cancel,error,gapx,gapy,xmap,ymap,first,second,cache_slots);
+}
+extern "C" void sherloq_sift_unpack(const CompactSift* field,int first,int count,float* out){
+ for(int i=0;i<count;++i)compact_sift_read(*field,first+i,out+size_t(i)*128);
+}
+
+// Global 4-connected area filtering with a row frontier. Components crossing
+// arbitrary stripes remain connected. Only small undecided components retain
+// coordinates; accepted components no longer need their pixel lists.
+extern "C" int sherloq_dense_area_filter(unsigned char* mask,int width,int height,int minimum,int (*cancel)(),char* error){
+ struct Node{int parent;bool accepted;std::vector<size_t> pending;};
+ struct Run{int first,last,node;};
+ try{
+  if(width<=0||height<=0||minimum<1)throw std::runtime_error("Invalid component settings");
+  if(minimum==1)return 0;
+  std::vector<Node> nodes;std::vector<Run> previous;
+  auto root=[&](int i){while(nodes[i].parent!=i){nodes[i].parent=nodes[nodes[i].parent].parent;i=nodes[i].parent;}return i;};
+  auto join=[&](int a,int b){a=root(a);b=root(b);if(a==b)return a;
+   if(nodes[a].pending.size()<nodes[b].pending.size())std::swap(a,b);
+   nodes[b].parent=a;nodes[a].accepted=nodes[a].accepted||nodes[b].accepted;
+   if(!nodes[a].accepted){nodes[a].pending.insert(nodes[a].pending.end(),nodes[b].pending.begin(),nodes[b].pending.end());nodes[a].accepted=nodes[a].pending.size()>=size_t(minimum);}
+   nodes[b].pending.clear();if(nodes[a].accepted)nodes[a].pending.clear();return a;};
+  for(int y=0;y<height;++y){
+   if(cancel&&cancel())return 1;
+   std::vector<Run> current;size_t p=0;
+   for(int x=0;x<width;){if(!mask[size_t(y)*width+x]){++x;continue;}
+    int first=x;while(x<width&&mask[size_t(y)*width+x])++x;int last=x-1;
+    while(p<previous.size()&&previous[p].last<first)++p;
+    int id=-1;
+    for(size_t j=p;j<previous.size()&&previous[j].first<=last;++j)id=id<0?root(previous[j].node):join(id,previous[j].node);
+    if(id<0){id=int(nodes.size());nodes.push_back({id,false,{}});}
+    Node& n=nodes[id];
+    if(!n.accepted){
+     if(n.pending.size()+size_t(last-first+1)>=size_t(minimum)){n.accepted=true;n.pending.clear();}
+     else for(int col=first;col<=last;++col)n.pending.push_back(size_t(y)*width+col);
+    }
+    current.push_back({first,last,id});
+   }
+   std::vector<int> remap(nodes.size(),-1);std::vector<Node> next;
+   for(Run& r:current){int id=root(r.node);if(remap[id]<0){remap[id]=int(next.size());next.push_back({remap[id],nodes[id].accepted,std::move(nodes[id].pending)});}r.node=remap[id];}
+   for(size_t id=0;id<nodes.size();++id)if(nodes[id].parent==int(id)&&remap[id]<0&&!nodes[id].accepted)for(size_t pixel:nodes[id].pending)mask[pixel]=0;
+   nodes.swap(next);previous.swap(current);
+  }
+  for(const Node& n:nodes)if(!n.accepted)for(size_t pixel:n.pending)mask[pixel]=0;
+  return 0;
+ }catch(const std::exception& e){strncpy(error,e.what(),1023);error[1023]=0;return -1;}
+}
+
+extern "C" int sherloq_patchmatch_bounded(const float* first,const float* second,const unsigned char* mask,
+ int width,int height,int dimensions,int compare,float minimum,float maximum,int iterations,
+ uint32_t seed,int* matches,float* distances,uint64_t* comparisons,int (*cancel)(),char* error,float gapx,float gapy,const float* xmap,const float* ymap) {
+ if(dimensions==128)return patchmatch_impl<true,128,false,true>(first,second,mask,width,height,dimensions,compare,minimum,maximum,iterations,seed,matches,distances,comparisons,cancel,error,gapx,gapy,xmap,ymap);
+ return patchmatch_impl<false,0,false,true>(first,second,mask,width,height,dimensions,compare,minimum,maximum,iterations,seed,matches,distances,comparisons,cancel,error,gapx,gapy,xmap,ymap);
 }

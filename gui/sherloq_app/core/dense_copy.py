@@ -64,6 +64,16 @@ def field(first,second,mask,radius,minimum,iterations=8,compare=False,seed=729,c
     check(cancel);return matches,distances,comparisons.value
 
 
+def integer_sum_filter(values,kernel):
+    # Displacements, their squares and kernel weights are integers. OpenCV may
+    # use FFT convolution for large kernels; its round-off can create a false
+    # residual even for a perfect translation. Restore the integer sums before
+    # subtracting large terms in the least-squares residual.
+    result=cv.filter2D(values,-1,kernel,borderType=cv.BORDER_CONSTANT)
+    np.rint(result,out=result)
+    return result
+
+
 def coherent_mask(targets,squared,threshold,error_threshold,radius,minimum):
     """Full-field local affine residual before any display sampling.
 
@@ -80,10 +90,10 @@ def coherent_mask(targets,squared,threshold,error_threshold,radius,minimum):
         if axis==0:delta=(targets%w-np.arange(w)[None,:]).astype(np.float64)
         else:delta=(targets//w-np.arange(h)[:,None]).astype(np.float64)
         delta[~valid]=0
-        total=cv.filter2D(delta,-1,kernel,borderType=cv.BORDER_CONSTANT)
-        residual+=cv.filter2D(delta*delta,-1,kernel,borderType=cv.BORDER_CONSTANT)-total*total/count
+        total=integer_sum_filter(delta,kernel)
+        residual+=integer_sum_filter(delta*delta,kernel)-total*total/count
         for coords in (xx,yy):
-            linear=cv.filter2D(delta,-1,kernel*coords,borderType=cv.BORDER_CONSTANT)
+            linear=integer_sum_filter(delta,kernel*coords)
             residual-=linear*linear/moment
     error=np.sqrt(np.maximum(residual,0)/count)
     selected=complete&(error<=error_threshold)
@@ -97,10 +107,13 @@ class DenseCopyEngine:
     def __init__(self,image):
         self.image=image;self.descriptors=ArrayCache(2048);self.fields=ArrayCache(512);self.consistency=ArrayCache(256);self.counts=dict(detections=0,matchings=0)
 
-    def analyze(self,algorithm,limit,radius,minimum,threshold,regions,compare,options,cancel,progress,geometry=None,radii=None,gap=(0.,0.),excluded=(),guides=(),workers=1,backend="cpu",quarter_turn=False,target_patch=None):
+    def analyze(self,algorithm,limit,radius,minimum,threshold,regions,compare,options,cancel,progress,geometry=None,radii=None,gap=(0.,0.),excluded=(),guides=(),workers=1,backend="cpu",quarter_turn=False,target_patch=None,storage_modes=None):
         if workers>1:
             from .dense_parallel import parallel_fields
             return parallel_fields(self,algorithm,limit,radius,minimum,threshold,regions,compare,options,cancel,progress,geometry,radii,gap,excluded,guides,workers,backend,quarter_turn,target_patch)
+        if storage_modes is None:
+            from .dense_parallel import serial_fields
+            return serial_fields(self,algorithm,limit,radius,minimum,threshold,regions,compare,options,cancel,progress,geometry,radii,gap,excluded,guides,backend,quarter_turn,target_patch)
         from .cloning2 import polygon_mask
         from .auto_zones import compact_axes,compact_points
         axes=compact_axes(self.image.shape,guides)
@@ -118,81 +131,113 @@ class DenseCopyEngine:
             if job_regions:
                 xy=np.concatenate([np.asarray(r) for r in job_regions]);x0,y0=np.maximum(0,np.floor(xy.min(axis=0))-3*support_patch).astype(int);x1,y1=np.minimum([w,h],np.ceil(xy.max(axis=0))+3*support_patch+1).astype(int)
             else:x0=y0=0;x1=w;y1=h
-            crop=self.image[y0:y1,x0:x1];key=(method,patch,flip,x0,y0,x1,y1,backend,quarter_turn,target_patch)
+            storage_mode=storage_modes[job_index];store=None
+            if storage_mode!='ram':
+                from .memory_resources import TemporaryArrays
+                store=TemporaryArrays(256*1024**2,mapped=storage_mode=='mapped')
+            crop=self.image[y0:y1,x0:x1];key=(method,patch,flip,x0,y0,x1,y1,backend,quarter_turn,target_patch,storage_mode)
             shift=1.5*support_patch if method else 0.;border=3*support_patch if method else 0
             dh,dw=crop.shape[0]-border,crop.shape[1]-border
             if min(crop.shape[:2])<=3*support_patch:raise ValueError(f'Dense descriptors need dimensions above {3*support_patch} pixels.')
             fkey=(key,job_regions,compare,job_radius,minimum,iterations,texture,gap,excluded,guides);value=self.fields.get(fkey)
             if value is None:
                 local=tuple(tuple((x-x0,y-y0) for x,y in p) for p in job_regions)
-                allowed=np.ones((dh,dw),np.uint8) if not local else np.zeros((dh,dw),np.uint8)
-                index=np.rint(shift+np.arange(dh)).astype(int);columns=np.rint(shift+np.arange(dw)).astype(int)
-                for j,p in enumerate(local):allowed |= (polygon_mask(crop.shape[:2],(p,))[np.ix_(index,columns)]>0).astype(np.uint8)*(1<<j)
-                if excluded:
+                if store is not None:
+                    from .dense_streaming import allowed_mask
                     local_excluded=tuple(tuple((x-x0,y-y0) for x,y in p) for p in excluded)
-                    exclusion_mask=polygon_mask(crop.shape[:2],local_excluded)
-                    allowed[exclusion_mask[np.ix_(index,columns)]>0]=0
-                if texture>0:
-                    gray=crop.astype(np.float32).mean(axis=2);size=2*patch+1
-                    deviation=np.sqrt(np.maximum(cv.boxFilter(gray*gray,-1,(size,size))-cv.boxFilter(gray,-1,(size,size))**2,0))
-                    allowed[deviation[np.ix_(index,columns)]<texture]=0
+                    allowed=allowed_mask(crop,dh,dw,shift,local,local_excluded,texture,patch,store,cancel)
+                else:
+                    allowed=np.ones((dh,dw),np.uint8) if not local else np.zeros((dh,dw),np.uint8)
+                    index=np.rint(shift+np.arange(dh)).astype(int);columns=np.rint(shift+np.arange(dw)).astype(int)
+                    for j,p in enumerate(local):allowed |= (polygon_mask(crop.shape[:2],(p,))[np.ix_(index,columns)]>0).astype(np.uint8)*(1<<j)
+                    if excluded:
+                        local_excluded=tuple(tuple((x-x0,y-y0) for x,y in p) for p in excluded)
+                        exclusion_mask=polygon_mask(crop.shape[:2],local_excluded)
+                        allowed[exclusion_mask[np.ix_(index,columns)]>0]=0
+                    if texture>0:
+                        gray=crop.astype(np.float32).mean(axis=2);size=2*patch+1
+                        deviation=np.sqrt(np.maximum(cv.boxFilter(gray*gray,-1,(size,size))-cv.boxFilter(gray,-1,(size,size))**2,0))
+                        allowed[deviation[np.ix_(index,columns)]<texture]=0
                 check(cancel)
                 eligible=job_radius>=minimum and np.count_nonzero(allowed)>=2 and (not compare or (np.any(allowed&1) and np.any(allowed&2)))
                 if eligible:
                     cached=self.descriptors.get(key)
                     if cached is None:
                         progress(5,'Computing dense descriptors')
-                        if backend=='metal':
-                            from .metal_dense import features as metal_zernike,features_sift
-                            metal_features=features_sift if method else metal_zernike
-                            compute=lambda size,mirror:metal_features(crop,size,mirror)
-                        else:compute=lambda size,mirror:features(crop,method,size,mirror)
-                        if backend=='metal' and method==1 and target_patch!=patch:
-                            from .metal_dense import paired_sift
-                            cached=paired_sift(crop,patch,target_patch,flip)
-                        else:cached=compute(patch,flip if target_patch==patch else False)
-                        if target_patch!=patch and not (backend=='metal' and method==1):
-                            check(cancel)
-                            first,_,source_shift=cached
-                            _,second,target_shift=compute(target_patch,flip)
-                            source_offset=int(shift-source_shift);target_offset=int(shift-target_shift)
-                            cached=(np.ascontiguousarray(first[source_offset:source_offset+dh,source_offset:source_offset+dw]),
-                                    np.ascontiguousarray(second[target_offset:target_offset+dh,target_offset:target_offset+dw]),shift)
-                        if quarter_turn:
-                            if method!=1:raise ValueError('Quarter-turn frame is only available for SIFT.')
-                            from .sift_frames import quarter_turn_frame
-                            first,second,center=cached
-                            inplace=backend=='metal' and method==1
-                            transformed=quarter_turn_frame(first,cancel,inplace=inplace)
-                            cached=(transformed,transformed if first is second else quarter_turn_frame(second,cancel,inplace=inplace),center)
+                        if store is not None:
+                            from .dense_streaming import descriptors
+                            cached=descriptors(crop,method,patch,target_patch,flip,quarter_turn,store,cancel,backend)
+                        else:
+                            if backend=='metal':
+                                from .metal_dense import features as metal_zernike,features_sift
+                                metal_features=features_sift if method else metal_zernike
+                                compute=lambda size,mirror:metal_features(crop,size,mirror)
+                            else:compute=lambda size,mirror:features(crop,method,size,mirror)
+                            if backend=='metal' and method==1 and target_patch!=patch:
+                                from .metal_dense import paired_sift
+                                cached=paired_sift(crop,patch,target_patch,flip)
+                            else:cached=compute(patch,flip if target_patch==patch else False)
+                            if target_patch!=patch and not (backend=='metal' and method==1):
+                                check(cancel)
+                                first,_,source_shift=cached
+                                _,second,target_shift=compute(target_patch,flip)
+                                source_offset=int(shift-source_shift);target_offset=int(shift-target_shift)
+                                cached=(np.ascontiguousarray(first[source_offset:source_offset+dh,source_offset:source_offset+dw]),
+                                        np.ascontiguousarray(second[target_offset:target_offset+dh,target_offset:target_offset+dw]),shift)
+                            if quarter_turn:
+                                if method!=1:raise ValueError('Quarter-turn frame is only available for SIFT.')
+                                from .sift_frames import quarter_turn_frame
+                                first,second,center=cached
+                                inplace=backend=='metal' and method==1
+                                transformed=quarter_turn_frame(first,cancel,inplace=inplace)
+                                cached=(transformed,transformed if first is second else quarter_turn_frame(second,cancel,inplace=inplace),center)
                         check(cancel);self.descriptors.put(key,cached);self.counts['detections']+=1
                     a,b,_=cached
                     if quarter_turn:
                         from .sift_frames import orientation_diversity
-                        diverse=orientation_diversity(a,cancel)
-                        if b is not a:diverse &= orientation_diversity(b,cancel)
+                        diverse=a.diversity().copy() if hasattr(a,'diversity') else orientation_diversity(a,cancel)
+                        if b is not a:diverse &= b.diversity() if hasattr(b,'diversity') else orientation_diversity(b,cancel)
                         allowed[~diverse]=0
-                    progress(30,'Computing bounded dense correspondences');targets,squared,count=field(a,b,allowed,job_radius,minimum,iterations,compare,cancel=cancel,gap=gap,axes=None if axes is None else (np.interp(np.arange(dw)+shift+x0,np.arange(w),axes[0]),np.interp(np.arange(dh)+shift+y0,np.arange(h),axes[1])))
+                    progress(30,'Computing bounded dense correspondences')
+                    if store is None:
+                        targets,squared,count=field(a,b,allowed,job_radius,minimum,iterations,compare,cancel=cancel,gap=gap,axes=None if axes is None else (np.interp(np.arange(dw)+shift+x0,np.arange(w),axes[0]),np.interp(np.arange(dh)+shift+y0,np.arange(h),axes[1])))
+                    else:
+                        from .dense_streaming import field as streamed_field
+                        metric_axes=None if axes is None else (np.interp(np.arange(dw)+shift+x0,np.arange(w),axes[0]),np.interp(np.arange(dh)+shift+y0,np.arange(h),axes[1]))
+                        targets,squared,count=streamed_field(a,b,allowed,job_radius,minimum,iterations,compare,729,cancel,gap,metric_axes,store)
                 else:
-                    targets=np.full((dh,dw),-1,np.int32);squared=np.full((dh,dw),np.inf,np.float32);count=0
+                    if store is None:
+                        targets=np.full((dh,dw),-1,np.int32);squared=np.full((dh,dw),np.inf,np.float32)
+                    else:
+                        targets=store.array((dh,dw),np.int32);squared=store.array((dh,dw),np.float32)
+                        for y in range(0,dh,128):targets[y:y+128]=-1;squared[y:y+128]=np.inf;store.checkpoint()
+                    count=0
                 value=(targets,squared,count,allowed);self.fields.put(fkey,value);self.counts['matchings']+=1
             targets,squared,count,allowed=value;comparisons+=count
-            selection=(targets>=0)&(squared<=threshold*threshold)
-            full_count+=int(selection.sum())
+            if store is not None:store.watch(targets,squared,allowed)
+            if store is None:
+                selection=(targets>=0)&(squared<=threshold*threshold)
+                full_count+=int(selection.sum())
+            else:
+                selection=store.array((dh,dw),bool)
+                for y in range(0,dh,128):
+                    selection[y:y+128]=(targets[y:y+128]>=0)&(squared[y:y+128]<=threshold*threshold)
+                    full_count+=int(selection[y:y+128].sum());store.checkpoint()
             consistency_error=None
             if geometry and geometry[0]!='None':
                 ckey=(fkey,threshold,geometry[1],geometry[2],min(6,patch));coherence=self.consistency.get(ckey)
                 if coherence is None:
-                    progress(70,'Checking the full dense field');coherence=coherent_mask(targets,squared,threshold,geometry[1],min(6,patch),geometry[2]);check(cancel);self.consistency.put(ckey,coherence)
+                    progress(70,'Checking the full dense field')
+                    if store is None:coherence=coherent_mask(targets,squared,threshold,geometry[1],min(6,patch),geometry[2])
+                    else:
+                        from .dense_streaming import coherence as streamed_coherence
+                        coherence=streamed_coherence(targets,squared,threshold,geometry[1],min(6,patch),geometry[2],store,cancel)
+                    check(cancel);self.consistency.put(ckey,coherence)
                 selection,consistency_error=coherence
-            rows=np.flatnonzero(selection)
-            # Remove duplicate undirected links, keeping the smaller distance.
-            target=targets.ravel()[rows];ordered=np.column_stack((np.minimum(rows,target),np.maximum(rows,target)))
-            order=np.argsort(squared.ravel()[rows],kind='stable');_,unique=np.unique(ordered[order],axis=0,return_index=True);rows=rows[order[unique]]
-            consistent_count+=len(rows);maps.append(dict(consistent_mask=selection,coherence_error=consistency_error,origin=(int(x0),int(y0)),shift=shift,targets=targets,distances_squared=squared,zone=job_index))
-            # Explicit display cap distributed across all requested zones.
-            cap=max(1,limit//len(jobs));rows=np.sort(rows)
-            if len(rows)>cap:rows=rows[np.linspace(0,len(rows)-1,cap,dtype=int)]
+            from .dense_links import sample_unique_links
+            cap=max(1,limit//len(jobs))
+            rows,unique_count=sample_unique_links(targets,squared,selection,cap,cancel=cancel,checkpoint=store.checkpoint if store is not None else lambda:None,block_size=4096 if store is not None and store.mapped else 65536)
+            consistent_count+=unique_count;maps.append(dict(consistent_mask=selection,coherence_error=consistency_error,origin=(int(x0),int(y0)),shift=shift,targets=targets,distances_squared=squared,zone=job_index))
             target=targets.ravel()[rows];ids=np.unique(np.r_[rows,target]);points=np.zeros((len(ids),7),np.float32)
             points[:,0]=ids%dw+shift+x0;points[:,1]=ids//dw+shift+y0;points[:,2]=patch*(3 if method else 2)
             pa=np.searchsorted(ids,rows);pb=np.searchsorted(ids,target);delta=compact_points(points[pa,:2],axes)-compact_points(points[pb,:2],axes)

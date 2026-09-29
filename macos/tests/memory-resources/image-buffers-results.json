@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "exact_resize_cases": 27,
+  "large_pixels": 96000000,
+  "large_resize_bit_exact": true,
+  "sha256_exact": true,
+  "readonly_pages_released": 134217728,
+  "resize_seconds": 0.002801833034027368
+}

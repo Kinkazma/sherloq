@@ -9,9 +9,10 @@ from .cloning import check
 
 class WorkspaceBudget:
     def __init__(self):
-        try:physical=os.sysconf('SC_PAGE_SIZE')*os.sysconf('SC_PHYS_PAGES')
-        except (ValueError,OSError):physical=8*1024**3
-        self.limit=max(512*1024**2,min(24*1024**3,physical//3))
+        from .memory_resources import MEMORY
+        # Shared host-aware admission below is the effective cap. This ceiling
+        # no longer rejects a field simply because it exceeds 16/24 GiB.
+        self.limit=MEMORY.limit
         self.used=0;self.peak=0;self.active=0;self.max_active=0;self.condition=Condition()
     @contextmanager
     def claim(self,size,cancel):
@@ -28,6 +29,43 @@ class WorkspaceBudget:
 BUDGET=WorkspaceBudget()
 
 
+def _job_shape(engine,zone,patch):
+    h,w=engine.image.shape[:2]
+    if zone:
+        xy=np.concatenate(zone);lo=np.maximum(0,np.floor(xy.min(0))-3*patch).astype(int);hi=np.minimum([w,h],np.ceil(xy.max(0))+3*patch+1).astype(int)
+        w,h=map(int,np.maximum(0,hi-lo))
+    return h,w
+
+
+def _plans(engine,algorithm,regions,compare,options,backend,target_patch,quarter,cap=None):
+    from .dense_streaming import memory_plan
+    jobs=[regions] if compare or not regions else [(region,) for region in regions]
+    support=max(options[0],target_patch or options[0])
+    shapes=[_job_shape(engine,zone,support) for zone in jobs]
+    plans=[memory_plan(h,w,int(algorithm=='PatchMatch SIFT'),options[0],options[2],backend,target_patch,quarter,cap) for h,w in shapes]
+    minimum=max(256*1024**2+h*w*2+max(h,w)*2048 for h,w in shapes)
+    return plans,minimum
+
+
+@contextmanager
+def _admission(engine,algorithm,regions,compare,options,backend,target_patch,quarter,cancel):
+    from .memory_resources import MEMORY,MemoryPlan
+    plans,minimum=_plans(engine,algorithm,regions,compare,options,backend,target_patch,quarter)
+    estimate=max(size for mode,size in plans)
+    # Never raise the old descriptor cap to force a raw allocation. Choose a
+    # compact/global provider, then reserve its actual bounded working set.
+    with BUDGET.claim(estimate,cancel):
+        with MEMORY.claim(MemoryPlan('selected',estimate,estimate,0,min(estimate,minimum)),cancel) as admitted:
+            if admitted.reservation<estimate:
+                plans,_=_plans(engine,algorithm,regions,compare,options,backend,target_patch,quarter,admitted.reservation)
+            yield tuple(mode for mode,size in plans)
+
+
+def serial_fields(engine,algorithm,limit,radius,minimum,threshold,regions,compare,options,cancel,progress,geometry,radii,gap,excluded,guides,backend,quarter_turn,target_patch):
+    with _admission(engine,algorithm,regions,compare,options,backend,target_patch,quarter_turn,cancel) as modes:
+        return engine.analyze(algorithm,limit,radius,minimum,threshold,regions,compare,options,cancel,progress,geometry,radii,gap,excluded,guides,workers=1,backend=backend,quarter_turn=quarter_turn,target_patch=target_patch,storage_modes=modes)
+
+
 def parallel_fields(engine,algorithm,limit,radius,minimum,threshold,regions,compare,options,cancel,progress,geometry,radii,gap,excluded,guides,workers,backend="cpu",quarter_turn=False,target_patch=None):
     from .dense_copy import DenseCopyEngine
     from threading import Lock,Event
@@ -39,18 +77,13 @@ def parallel_fields(engine,algorithm,limit,radius,minimum,threshold,regions,comp
         engine._parallel_key=key;engine._parallel_engines=[DenseCopyEngine(engine.image) for _ in jobs]
     abort=Event();stopped=lambda:cancel() or abort.is_set();lock=Lock();done=[0]*len(jobs)
     def task(index):
-        child=engine._parallel_engines[index];zone=jobs[index];h,w=engine.image.shape[:2];patch=max(options[0],target_patch or options[0])
-        if zone:
-            xy=np.concatenate(zone);lo=np.maximum(0,np.floor(xy.min(0))-3*patch).astype(int);hi=np.minimum([w,h],np.ceil(xy.max(0))+3*patch+1).astype(int)
-            w,h=map(int,hi-lo)
-        from .dense_memory import workspace_bytes
-        estimate=workspace_bytes(h,w,int(algorithm=='PatchMatch SIFT'),options[0],options[2],backend,target_patch,quarter_turn)
+        child=engine._parallel_engines[index];zone=jobs[index]
         before=child.counts.copy()
         def updated(n,text):
             with lock:
                 done[index]=n;progress(int(sum(done)/len(done)),text)
-        with BUDGET.claim(estimate,stopped):
-            result=child.analyze(algorithm,max(1,limit//len(jobs)),radius if compare or radii is None else radii[index],minimum,threshold,zone,compare,options,stopped,updated,geometry=geometry,gap=gap,excluded=excluded,guides=guides,workers=1,backend=backend,quarter_turn=quarter_turn,target_patch=target_patch)
+        with _admission(child,algorithm,zone,compare,options,backend,target_patch,quarter_turn,stopped) as modes:
+            result=child.analyze(algorithm,max(1,limit//len(jobs)),radius if compare or radii is None else radii[index],minimum,threshold,zone,compare,options,stopped,updated,geometry=geometry,gap=gap,excluded=excluded,guides=guides,workers=1,backend=backend,quarter_turn=quarter_turn,target_patch=target_patch,storage_modes=modes)
         updated(100,'Zone dense conservée')
         return result,{name:child.counts[name]-before[name] for name in before}
     results=[]

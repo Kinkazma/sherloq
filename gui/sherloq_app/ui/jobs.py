@@ -37,6 +37,8 @@ class _Work(QRunnable):
         result = error = None
         try:
             with user_activity():
+                from ..core.memory_resources import release_idle_caches_under_pressure
+                release_idle_caches_under_pressure()
                 result = self.compute(self.params)
         except Exception as exc:
             logging.exception('Interactive analysis failed')

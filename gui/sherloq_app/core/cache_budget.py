@@ -50,6 +50,17 @@ class CacheBudget:
                 owner._remove_local(key)
             self.evictions += 1
 
+    def trim(self, target):
+        """Release least-recently-used retained buffers under host pressure."""
+        with self.lock:
+            while self.entries and self.bytes > max(0, int(target)):
+                (reference, key), count = self.entries.popitem(last=False)
+                self.bytes -= count
+                owner = reference()
+                if owner is not None:
+                    owner._remove_local(key)
+                self.evictions += 1
+
     def snapshot(self):
         with self.lock:
             return dict(limit=self.limit, bytes=self.bytes, peak=self.peak,
@@ -92,6 +103,12 @@ class ArrayCache:
                 if isinstance(item.base, np.ndarray):
                     return count(item.base)
                 return max(item.nbytes, getattr(item.base, 'nbytes', 0))
+            if hasattr(item, 'memory_arrays'):
+                return count(item.memory_arrays)
+            if callable(getattr(item, 'sizeInBytes', None)):
+                # QImage tiles share the same global retained-memory budget.
+                # Duck typing keeps the numerical core independent of Qt.
+                return int(item.sizeInBytes())
             if isinstance(item, dict):
                 return sum(count(v) for v in item.values())
             if isinstance(item, (tuple, list)):
@@ -124,6 +141,8 @@ class ArrayCache:
                 self.budget.reserve(size)
 
     def put(self, key, value):
+        from .memory_resources import release_idle_caches_under_pressure
+        release_idle_caches_under_pressure()
         size = self.size(value)
         with self.budget.lock:
             self._remove(key)
