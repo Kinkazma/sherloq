@@ -1,0 +1,12 @@
+{
+  "": "808",
+  "Class": "Biological",
+  "DatasetRef": "BBBC039",
+  "License": "CC0",
+  "Link": "https://data.broadinstitute.org/bbbc/BBBC039/images.zip",
+  "ObjectMaskPath": "BBBC039/cvt_masks/IXMtest_K03_s5_w1DC4CE558-042C-482E-8CAE-FCCB57AA9A55_part1.png",
+  "RealDataPath": "BBBC039/cvt_images/IXMtest_K03_s5_w1DC4CE558-042C-482E-8CAE-FCCB57AA9A55_part1.png",
+  "subset_tag": "obj_map",
+  "dataGTPath": "srcDataset/00809_gt.png",
+  "dataPath": "srcDataset/00809.png"
+}

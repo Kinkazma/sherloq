@@ -69,7 +69,61 @@ See the [complete inventory](macos/docs/TOOLS.md) for all inherited and added en
 
 ## Screenshots
 
-The screenshots below come from [Guido Bartoli’s original repository](https://github.com/GuidoBartoli/sherloq#screenshots). I have kept them here to illustrate the inherited tools. They are not screenshots of my additions; the [tool inventory](macos/docs/TOOLS.md) describes those separately.
+The galleries below show results and tool views from my version of SHERLOQ, followed by the screenshots from [Guido Bartoli’s original repository](https://github.com/GuidoBartoli/sherloq#screenshots), credited separately.
+
+<details>
+<summary>My examples — Complete Automatic Analysis</summary>
+
+### Microscopy figure
+
+An exported result from Complete Automatic Analysis, with the analysis overlays displayed across the figure.
+
+![Complete Automatic Analysis result on a microscopy figure](screenshots/fork/automatic-analysis-microscopy.png)
+
+### Edited texture
+
+For this example, I modified the texture shown below and ran Complete Automatic Analysis. The first image shows the analysis overlays on my edited version; the second is the original before my edits, for visual comparison.
+
+**Analysis of my edited version**
+
+![Complete Automatic Analysis result on my edited texture](screenshots/fork/automatic-analysis-texture.png)
+
+**Original before my edits**
+
+![Original texture before my edits](screenshots/fork/texture-original.png)
+
+</details>
+
+<details>
+<summary>My examples — histogram, noise, frequencies and bit planes</summary>
+
+These views use the actual SHERLOQ tools, with the source image shown where useful. The microscopy image comes from BBBC039 via RSIID; the texture is the original shown above. [Sources, settings and reproduction instructions](examples/README.md).
+
+### Channel Histogram
+
+Intensity distribution and pixel statistics for a fluorescence microscopy image.
+
+![Channel Histogram with the microscopy source and intensity statistics](screenshots/fork/histogram-microscopy.png)
+
+### Noise Separation
+
+Median-filter residuals, with equalization enabled to make their spatial structure visible.
+
+![Noise Separation with the microscopy source and equalized residual](screenshots/fork/noise-microscopy.png)
+
+### Frequency Split
+
+Low and high frequencies, Fourier magnitude and phase on the original texture.
+
+![Frequency Split showing four complementary views of the texture](screenshots/fork/frequency-texture.png)
+
+### Bit Planes Values
+
+Bit 5 of the luminance channel, alongside the original texture.
+
+![Bit Planes Values showing luminance bit 5 and the source texture](screenshots/fork/bit-planes-texture.png)
+
+</details>
 
 <details>
 <summary>Original SHERLOQ screenshots — credited to the upstream project</summary>
