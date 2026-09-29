@@ -20,9 +20,9 @@ The upstream labels are retained to make the comparison explicit. â€œInheritedâ€
 ## Adaptations to existing entries
 
 - **Error Level Analysis:** absolute linear differences, caching, layered exploration and extended display controls.
-- **Multiple Compression:** additional double-JPEG analysis work under an existing entry.
+- **Multiple Compression:** disabled launch path restored, recompression-curve exports and cancellation/resume, plus an experimental aligned double-JPEG analysis tab.
 - **TruFor:** environment, worker and interface integration; TruFor itself was already present upstream.
-- **Illuminant Map and Dead/Hot Pixels:** implementation work under existing upstream labels.
+- **Illuminant Map and Dead/Hot Pixels:** newly implemented tools under existing upstream labels that had no working dispatch or implementation in the comparison baseline.
 - **Inspection and copy-move tools:** computation helpers, region/display controls and responsiveness changes; the separate Copy-Move Forgery 2 panel is counted among additions.
 - **Shared interface:** background jobs and cancellation, bounded caching, language support, favorites and region/layer interaction.
 

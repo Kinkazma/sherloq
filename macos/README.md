@@ -1,6 +1,6 @@
 # macOS Apple Silicon contribution — 29 September 2026
 
-This is an independent, AI-assisted contribution to SHERLOQ by Guido Bartoli.
+I maintain this independent fork of SHERLOQ by Guido Bartoli, with AI-assisted development.
 The original GPLv3 license and author credits are preserved. Third-party
 components retain their individual licenses. This is a release candidate, not
 an official upstream release. See [attribution](docs/ATTRIBUTION.md),
@@ -111,6 +111,6 @@ installation. Reports are in `docs/`.
 
 This is not a test on a second Mac or a validation of every analysis/model.
 Missing optional checkpoints are listed in `MISSING-WEIGHTS.md` inside the
-installation. The browser port is separate and is not included here.
+installation.
 Private photographs, settings, logs, correspondence and private Git history
 are excluded. Analysis outputs are investigative signals, not authenticity proofs.

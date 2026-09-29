@@ -2,7 +2,7 @@
 
 SHERLOQ: Guido Bartoli and the contributors credited in the original source.
 The original GPLv3 text is retained in `source/LICENSE`. Existing author names,
-notices and upstream contact addresses are not anonymized. The local contribution is published by Kinkazma on 29 September 2026.
+notices and upstream contact addresses are not anonymized. I publish this contribution under my GitHub account, Kinkazma, on 29 September 2026.
 The source/ paths below refer to the staged native installation layout.
 
 The following is an inventory of license files inspected in this snapshot,

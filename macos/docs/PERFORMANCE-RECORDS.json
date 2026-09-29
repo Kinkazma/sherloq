@@ -1,0 +1,198 @@
+{
+  "recorded_date": "2026-09-27",
+  "kind": "historical local development measurements, not a new release benchmark",
+  "records": {
+    "f10": {
+      "before": {
+        "record_sha256": "b0b2a581e65af15c1742e23c4f4cfb47c5860a2439be83805205fa3b3e3b2e93",
+        "measurement": {
+          "mode": "before",
+          "constructor_seconds": 14.648763208009768,
+          "ready_with_draw_seconds": 14.85772862500744,
+          "peak_parent_rss_bytes": 528793600,
+          "unique_colors": 348849,
+          "method": "isolated parent process, same 20 MP JPEG, QApplication construction excluded, widget show/draw included"
+        }
+      },
+      "after": {
+        "record_sha256": "e8ed053c29ebde944910e721dd04638973f8a55969dca0a39a37542b74d36c94",
+        "measurement": {
+          "mode": "after",
+          "constructor_seconds": 0.107744500041008,
+          "ready_with_draw_seconds": 0.49309958302183077,
+          "peak_parent_rss_bytes": 390217728,
+          "unique_colors": 348849,
+          "method": "isolated parent process, same 20 MP JPEG, QApplication construction excluded, widget show/draw included"
+        }
+      }
+    },
+    "f16": {
+      "before": {
+        "record_sha256": "30a783830e7118092b456c130826c4963083cc955dd7e71852c7f8ce98ab1770",
+        "measurement": {
+          "mode": "before",
+          "constructor_seconds": 10.592378875007853,
+          "initial_ready_seconds": 10.805264958995394,
+          "threshold_changes_seconds": [
+            10.03227337502176,
+            9.962634458031971,
+            9.898355958983302
+          ],
+          "display_filter_seconds": [
+            0.017167166981380433,
+            0.021755042020231485,
+            0.00737470795866102
+          ],
+          "peak_parent_rss_bytes": 2263121920,
+          "heartbeat_ticks": 7,
+          "method": "isolated20MP defaultsplit/smooth; GUI update and debounce included"
+        }
+      },
+      "after": {
+        "record_sha256": "c6fa5207a822b5f22d1b0786f51055ca27cae39bfa6918c59ec4d70749cdbbd6",
+        "measurement": {
+          "mode": "after",
+          "constructor_seconds": 0.13123929197899997,
+          "initial_ready_seconds": 3.1639234999893233,
+          "threshold_changes_seconds": [
+            0.8686388329952024,
+            0.8464766250108369,
+            0.8176653329865076
+          ],
+          "display_filter_seconds": [
+            0.0236550840199925,
+            0.027033124992158264,
+            0.014929541968740523
+          ],
+          "peak_parent_rss_bytes": 2216935424,
+          "heartbeat_ticks": 540,
+          "method": "isolated20MP defaultsplit/smooth; GUI update and adaptive debounce (40ms analysis, 0ms display-only) included"
+        }
+      }
+    },
+    "f19": {
+      "before": {
+        "record_sha256": "5d114789ee9575c37aadb45793c44228893d42ff5a29158a9621c7dc9e8d1a61",
+        "measurement": {
+          "mode": "before",
+          "constructor_seconds": 2.275453624955844,
+          "initial_ready_seconds": 2.4338649589917623,
+          "changes": [
+            {
+              "component": 1,
+              "mode": "distance",
+              "invert": false,
+              "equalize": false,
+              "seconds": 0.04651954100700095
+            },
+            {
+              "component": 0,
+              "mode": "project",
+              "invert": false,
+              "equalize": false,
+              "seconds": 0.008459625008981675
+            },
+            {
+              "component": 0,
+              "mode": "crossprod",
+              "invert": false,
+              "equalize": false,
+              "seconds": 0.00700516696088016
+            },
+            {
+              "component": 0,
+              "mode": "crossprod",
+              "invert": true,
+              "equalize": false,
+              "seconds": 0.04095166700426489
+            },
+            {
+              "component": 0,
+              "mode": "crossprod",
+              "invert": true,
+              "equalize": true,
+              "seconds": 0.08422112499829382
+            },
+            {
+              "component": 0,
+              "mode": "crossprod",
+              "invert": true,
+              "equalize": false,
+              "seconds": 0.011352417001035064
+            },
+            {
+              "component": 0,
+              "mode": "distance",
+              "invert": false,
+              "equalize": false,
+              "seconds": 0.007903208024799824
+            }
+          ],
+          "peak_rss_bytes": 5288624128,
+          "heartbeat_ticks": 6
+        }
+      },
+      "after": {
+        "record_sha256": "dfedf2ecc2d39c8c662cbb1fba6b589d0d2ca79436d57dea0265a5f15a41aa8d",
+        "measurement": {
+          "mode": "after",
+          "constructor_seconds": 0.11421475000679493,
+          "initial_ready_seconds": 1.1470415419898927,
+          "changes": [
+            {
+              "component": 1,
+              "mode": "distance",
+              "invert": false,
+              "equalize": false,
+              "seconds": 0.14739229198312387
+            },
+            {
+              "component": 0,
+              "mode": "project",
+              "invert": false,
+              "equalize": false,
+              "seconds": 0.3403428330202587
+            },
+            {
+              "component": 0,
+              "mode": "crossprod",
+              "invert": false,
+              "equalize": false,
+              "seconds": 0.1461055830004625
+            },
+            {
+              "component": 0,
+              "mode": "crossprod",
+              "invert": true,
+              "equalize": false,
+              "seconds": 0.011582209030166268
+            },
+            {
+              "component": 0,
+              "mode": "crossprod",
+              "invert": true,
+              "equalize": true,
+              "seconds": 0.04467879101866856
+            },
+            {
+              "component": 0,
+              "mode": "crossprod",
+              "invert": true,
+              "equalize": false,
+              "seconds": 0.009428124991245568
+            },
+            {
+              "component": 0,
+              "mode": "distance",
+              "invert": false,
+              "equalize": false,
+              "seconds": 0.010113083990290761
+            }
+          ],
+          "peak_rss_bytes": 3009069056,
+          "heartbeat_ticks": 153
+        }
+      }
+    }
+  }
+}

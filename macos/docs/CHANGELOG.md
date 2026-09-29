@@ -5,6 +5,47 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## Tools made usable under existing menu entries
+
+I implemented **Illuminant Map** and **Dead/Hot Pixels**, whose menu labels existed in the baseline but had no working dispatch or implementation. Illuminant Map estimates local illuminant colour with Gray World, Shades of Gray and White Patch; Dead/Hot Pixels detects isolated candidates and offers overlays, correction previews and coordinate exports. These are new implementations under inherited labels, not just interface adjustments.
+
+I restored the disabled **Multiple Compression** launch path, added cancellation/resume and CSV/PNG exports to its recompression curve, and integrated an experimental aligned double-JPEG analysis tab. **TruFor** was already an upstream method; my work connects its model, CPU/Metal inference, exports, worker process and large-image memory handling to the macOS application.
+
+## Correctness and stability fixes
+
+| Area | Problem addressed | Result |
+| --- | --- | --- |
+| Linear ELA | Unsigned subtraction discarded negative compression errors | Absolute differences include errors in both directions |
+| ELA contrast | Endpoints crossed at 100% | Monotone bounded contrast mapping |
+| Reference Comparison | PSNR used a doubled factor | Correct power-ratio formula; individual metric errors handled separately |
+| Histograms | Large float32 counts lost units; point/empty ranges and fullness were misleading | Blockwise exact counts, corrected range endpoints and percentages |
+| Frequency Split | FFT shifting included the real/imaginary component axis | Explicit spatial axes preserve component order and correct phase |
+| Wavelets | Odd-sized reconstruction retained an extra row/column; zero bands needed guards | Original dimensions retained, zero-band handling explicit |
+| Colour conversion | Pure black produced incorrect CMYK values | Black maps to the expected zero-CMY/full-K representation |
+| Bit planes | An all-one plane normalized to black | Constant active plane displayed as white |
+| PCA and neighbourhood tools | Tiny images could fail in decomposition or neighbourhood operations | Explicit small-image handling |
+| Copy-move | Uniform/no-feature images could fail without descriptors | Explicit no-descriptor handling |
+| JPEG ghost normalization | Constant ranges caused division by zero | Defined masked normalization |
+| Noiseprint | Removed NumPy aliases and changed SciPy interfaces broke compatibility | Compatible type and eigenvalue calls |
+| File opening and UI lifetime | Cancelled openings, drag/drop, Finder events and closing workers needed handling | Current image preserved on failed/cancelled opening; worker/window cleanup improved |
+
+## Performance and interaction
+
+I separated expensive computation from display-only changes, retained intermediate results in bounded caches, added background jobs and improved cancellation and stale-result handling. Histogram counting avoids sorting millions of RGB triplets; comparison work uses separate processes; transform and reconstruction work is reused where applicable. Selected native CPU/Metal paths have fallbacks; prototypes that changed results or lost their gains to transfers were not adopted merely for being GPU-based.
+
+[Recorded measurements](PERFORMANCE.md) include histogram readiness of 14.858 → 0.493 seconds, Frequency Split readiness of 10.805 → 3.164 seconds, and PCA peak process memory of 5.29 → 3.01 GB in specific local 20 MP profiles. The accompanying records state what was timed and the cases that became slower. These are historical development measurements, not a universal release-performance claim.
+
+## Added analysis and everyday use
+
+- Twelve additional menu entries: C2PA Validation, Noisesniffer, ZERO JPEG Grids, Copy-Move Forgery 2, Adaptive CFA, Clone Detectors, Automatic Clone Search, Complete Automatic Analysis, CAT-Net v2, SAFIRE, FOCAL and AdaIFL.
+- Research-method integrations retain their original authors and licenses; my contribution includes the surrounding workers, parameters, displays and exports.
+- Copy-move workflows add region selection, dense descriptors, constrained learned matching, mirror/overlap handling and grouped overlays.
+- Automatic analysis combines clone-search branches with ELA/JPEG-ghost views; sources and result groups can be shown separately.
+- Interface work adds language switching, persistent favorites, layered ELA views, profiles, region controls and zoom/gesture handling.
+- macOS support includes native launch/build sources, ARM64 dependencies, bundled environments, restoration and locally signed application builds.
+
+## Code map
+
 | Area | Changes visible in source | Principal paths under source/gui/sherloq_app |
 | --- | --- | --- |
 | Correctness | absolute linear ELA differences; contrast endpoint bound; explicit decoding/display ownership; one-based JPEG quality selection for splicing | core/ela.py, core/image_io.py, core/utility.py, core/splicing.py |

@@ -1,26 +1,14 @@
-# Proposed upstream contribution batches
+# Contribution reference
 
-The author may take any part of the archive without a public fork. The included
-native.patch is a verified transfer patch; the following are review proposals,
-not independently verified patch series yet.
+I have retained SHERLOQ’s public upstream history and the original licenses. This fork contains the native application changes and installation support; its Release contains the frozen complete macOS environment.
 
-1. Correctness: linear ELA signed-error loss, endpoint handling, decode ownership
-   and quality-index fixes, with minimal synthetic regressions. Extract the
-   required helpers with each fix; adapt to upstream layout before submission.
-2. Shared performance architecture: cache budgets, retained computations, job
-   lifecycle, cancellation and worker services. This is a dependency for several
-   later tools, so do not split its consumers into broken intermediate revisions.
-3. Tool families: JPEG/ELA, noise, comparison, copy-move and extra analysis as
-   coherent families, each with parameter documentation and redistributable tests.
-4. Native acceleration: build sources, CPU fallback, Metal paths and measured
-   numerical comparisons. Keep optional kernels and their license boundaries clear.
-5. Desktop interface: profiles, localization, gestures and region/display controls,
-   together with their required computation/display contracts.
-6. Browser interface and engines: a later, separately tested delivery from the web
-   work; no placeholder implementation or demo claim belongs in these PRs.
+| Area available for review | Reference |
+| --- | --- |
+| Implemented and restored tools | [Tool inventory](TOOLS.md) and [changelog](CHANGELOG.md) |
+| Correctness fixes | Application helpers in `gui/sherloq_app/core/` and their calling widgets |
+| Responsiveness and computation reuse | Caches, job lifecycle and worker services under `gui/sherloq_app/` |
+| Recorded performance changes | [Measurements and scope](PERFORMANCE.md) |
+| Native builds and restoration | [macOS guide](../README.md), `macos/packaging/` and vendor sources |
+| Original project and component credits | [Attribution](ATTRIBUTION.md) and the retained license files |
 
-Before each real PR: choose the contributor identity with the user, check the
-current upstream base, extract and test the batch in order, and agree on author
-preference (archive, targeted fork PRs, or an authorized branch). Nothing has been
-pushed, sent or committed under an invented identity. The local repository uses
-an unborn main branch with staged reviewed files and no remote.
+The application changes share computation helpers and worker services. Copying individual modified files may omit required dependencies. The [file-level index](NATIVE-CHANGE-INDEX.md) maps the frozen contribution, and the original source-kit archive contains its transfer patch and upstream preimages. The complete candidate has not been presented as a set of independently validated patches.

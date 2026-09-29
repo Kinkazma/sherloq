@@ -2,19 +2,56 @@
 
 **SHERLOQ is the work of [Guido Bartoli and the original contributors](https://github.com/GuidoBartoli/sherloq).** Start with the [original project](https://github.com/GuidoBartoli/sherloq) for its introduction, history, research references and upstream development.
 
-This independent fork is maintained by [Kinkazma](https://github.com/Kinkazma). It brings together macOS Apple Silicon installation work, fixes and interface improvements, additional analysis workflows, and integrations of existing research methods. Development was assisted by AI. The original project and research authors retain their credits; adding a method to this interface does not make its underlying algorithm our invention.
+I started this fork to get SHERLOQ running on my Apple Silicon Mac. With help from AI tools, I then worked through installation problems, bugs, slow or blocking operations, and tools that were listed but not usable. I have also added analysis workflows and integrated additional research methods.
+
+Here I share the version I use, its source code and its complete macOS installation. My contribution is the adaptation, implementation and integration work described below. SHERLOQ remains Guido's project, and the research methods retain their original authors and licenses. For the project's introduction, history and scientific references, I refer you to [Guido's repository](https://github.com/GuidoBartoli/sherloq#readme).
 
 [Download the complete macOS installation](https://github.com/Kinkazma/sherloq/releases/tag/native-macos-arm64-2026.09.29-rc1) · [Installation guide](macos/README.md) · [Full tool inventory](macos/docs/TOOLS.md) · [Changes](macos/docs/CHANGELOG.md) · [Credits and licenses](macos/docs/ATTRIBUTION.md)
 
-## What comes from the original project
+## What I have changed
 
-The comparison baseline is [upstream revision `3fe95fc`](https://github.com/GuidoBartoli/sherloq/tree/3fe95fcb56037e47e2eefbc2d3785804a31a74f5). It already provides **38 tool entries**, including image inspection, metadata, colour and noise analysis, ELA, JPEG ghosts, copy-move detection, resampling, PRNU and **TruFor**. These are retained here, with adaptations in several areas.
+I have worked on three areas: making existing tools usable, improving correctness and responsiveness, and adding new analysis workflows. The comparison baseline is [upstream revision `3fe95fc`](https://github.com/GuidoBartoli/sherloq/tree/3fe95fcb56037e47e2eefbc2d3785804a31a74f5).
 
-For the original descriptions and scientific references, please use [Guido's README](https://github.com/GuidoBartoli/sherloq#readme). The original [source history](https://github.com/GuidoBartoli/sherloq/commits/master/) and [GPLv3 license](LICENSE) are preserved in this fork.
+### Existing tools I implemented or brought back into use
 
-## What this fork adds
+| Tool | State in the baseline | What is available here |
+| --- | --- | --- |
+| Illuminant Map | Listed in the menu, with no working dispatch or implementation | Local illuminant-colour estimation using Gray World, Shades of Gray or White Patch; views, validity masks and CSV/PNG exports |
+| Dead/Hot Pixels | Listed in the menu, with no working dispatch or implementation | Isolated-pixel candidate detection, overlays, masks, a correction preview and coordinate exports; the original image is retained |
+| Multiple Compression | The launch branch was commented out | Restored recompression curves, cancellation/resume and CSV/PNG exports, plus a separate experimental aligned double-JPEG analysis tab |
+| TruFor | Already part of SHERLOQ; required adaptation for my macOS environment | CPU/Metal selection, a separate inference process, progress/cancellation, map and score exports, and memory-management changes for large images |
 
-The current source defines **50 distinct tool entries: 38 inherited and 12 added**. Favorites are shortcuts and are not counted twice. This is an interface inventory, not a count of independently validated detectors.
+These are substantial additions to usability even though they reuse existing menu entries. Illuminant Map estimates colour, not a 3D light direction; isolated-pixel candidates are not a hardware diagnosis; a recompression curve alone cannot establish the number of JPEG compressions.
+
+### Bugs I fixed
+
+- **ELA:** preserve both signs of compression differences in linear mode; correct the inverted contrast endpoint at 100%.
+- **Reference Comparison:** correct a doubled PSNR calculation and improve handling of individual metric failures and cancellation.
+- **Histogram:** correct large-image counting precision, single-level ranges, empty ranges and percentages exceeding 100%.
+- **Frequency Split:** restrict the FFT shift to spatial axes so it no longer swaps real and imaginary components and corrupts the phase.
+- **Image and colour edge cases:** correct odd-sized wavelet reconstruction, CMYK black, constant bit-plane display and tiny-image failures.
+- **Opening and processing:** improve Finder/file-drop handling, preserve the current image after a cancelled or failed opening, handle images without copy-move descriptors, and update incompatible NumPy/SciPy calls in Noiseprint.
+
+### Responsiveness and measured improvements
+
+I separated computation from display updates, added bounded caches and background jobs, and improved cancellation and reuse of completed work. This lets many display changes reuse an existing result instead of repeating an expensive analysis. I also added native kernels where the tests supported their use, while keeping CPU paths where GPU transfers or numerical differences made them unsuitable.
+
+The following are **recorded development measurements from 27 September 2026 on my Apple Silicon Mac, using 20-megapixel test images**. They describe those measured operations, not a universal speed multiplier for SHERLOQ.
+
+| Measured operation | Before | After |
+| --- | ---: | ---: |
+| Channel Histogram: panel ready, including drawing | 14.858 s | 0.493 s |
+| Frequency Split: initial panel ready | 10.805 s | 3.164 s |
+| PCA Projection: initial panel ready | 2.434 s | 1.147 s |
+| PCA Projection: peak process memory during the measured session | 5.29 GB | 3.01 GB |
+
+[Measurement records and interpretation](macos/docs/PERFORMANCE.md) explain the protocols and tradeoffs. Some first visits to deferred views became slower, and caches or GPU buffers can increase retained memory. I do not claim that every operation is faster or that a faster display makes a detector more accurate.
+
+I have also added language switching, persistent favorites, layered ELA views and profiles, region selection, zoom/gesture improvements, and automatic workflows that bring several analysis outputs into one interface. The [detailed changelog](macos/docs/CHANGELOG.md) connects these changes to the source.
+
+## Additional tools I integrated
+
+The current source defines **50 distinct tool entries: 38 inherited labels and 12 added entries**. The three restored or newly implemented entries described above belong to those 38, so the menu count alone understates the implementation work. Favorites are shortcuts and are not counted twice. This is an interface inventory, not a count of independently validated detectors.
 
 | Added entry or group | Contribution in this fork |
 | --- | --- |
@@ -30,15 +67,9 @@ The current source defines **50 distinct tool entries: 38 inherited and 12 added
 
 See the [complete inventory](macos/docs/TOOLS.md) for all inherited and added entries and their current categories. Dependencies and model availability vary; optional missing checkpoints are recorded in the installation's `MISSING-WEIGHTS.md`.
 
-### Changes to existing tools and the interface
-
-The contribution also includes ELA correctness and caching work; additional JPEG-analysis behavior; comparison and inspection controls; background processing and cancellation; region and layer views; localization and favorites; and native macOS build and launcher support. **TruFor is adapted from the original project, not a newly introduced method.** Illuminant Map and Dead/Hot Pixels also had entries upstream; implementation work on them is listed as an improvement to existing tools.
-
-The [change index](macos/docs/CHANGELOG.md) and [file-level index](macos/docs/NATIVE-CHANGE-INDEX.md) describe the code changes. Colored outlines in historical test captures mark additions or extensions; they are not a scientific confidence rating or a complete authorship map.
-
 ## Screenshots
 
-The gallery below preserves screenshots from the original SHERLOQ project, with attribution. It illustrates the inherited interface; the [tool inventory](macos/docs/TOOLS.md) describes the additional tools in this fork.
+The screenshots below come from [Guido Bartoli’s original repository](https://github.com/GuidoBartoli/sherloq#screenshots). I have kept them here to illustrate the inherited tools. They are not screenshots of my additions; the [tool inventory](macos/docs/TOOLS.md) describes those separately.
 
 <details>
 <summary>Original SHERLOQ screenshots — credited to the upstream project</summary>
@@ -85,6 +116,6 @@ Allow roughly **37 GB** for downloaded parts, the assembled ZIP and the extracte
 
 The release candidate was extracted, checked and restored on the same Apple Silicon Mac. Synthetic ELA, caching, QImage ownership and offscreen startup tests passed; both supplied Python environments imported NumPy/OpenCV/PyTorch, and native PatchMatch/ZERO libraries were rebuilt from retained sources. These checks do not establish scientific accuracy for every method or validation on another machine. See [validation details](macos/README.md#validation-and-limits).
 
-The current packaged release is a native desktop candidate. Browser work is separate. For SHERLOQ's scientific background and upstream roadmap, return to [the original project](https://github.com/GuidoBartoli/sherloq). For this fork's code, start with `gui/` and `macos/`, or the [proposed contribution groups](macos/docs/PR-PLAN.md).
+For SHERLOQ’s scientific background, please visit [the original project](https://github.com/GuidoBartoli/sherloq). My source changes are in `gui/`, with installation support in `macos/`; the [contribution reference](macos/docs/PR-PLAN.md) maps the available material. I welcome review and corrections.
 
 SHERLOQ retains its [GPLv3 license](LICENSE). Third-party implementations, models and images retain their applicable notices and rights; see [attribution](macos/docs/ATTRIBUTION.md). This is an independent contribution, not an official release or endorsement by Guido Bartoli.

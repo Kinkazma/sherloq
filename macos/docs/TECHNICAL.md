@@ -26,8 +26,3 @@ These tests do not measure false positives or scientific efficacy. They do not
 validate all 50 tool entries, a physical GPU, excluded weights or every native backend.
 Timing values from a small synthetic test are not end-to-end speedups. No legacy
 performance claim is carried into this candidate without a redistributable test.
-
-The separate browser/WordPress work is not included. Future inclusion needs its
-own frozen manifest, execution matrix, licenses and tests. CPU/GPU parity should
-state units, absolute/relative errors, repeats and impact on final decisions.
-An accepted 1e-4 numerical threshold is not evidence of equal detection outcomes.
