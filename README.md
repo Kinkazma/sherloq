@@ -81,8 +81,8 @@ versus 401.42 seconds for the initial MPS port, with identical raw maps. CPU and
 GPU can produce different results; this is not a general accuracy or speed claim.
 [Protocol, measurements, limits and required external files](macos/docs/D2PRL-INTEGRATION.md).
 
-I added [Forgeryscope Auto](macos/docs/FORGERYSCOPE-AUTO.md) as a green choice in
-AI Clone Detection. It follows the public upstream pipeline for microscopy, western
+I added [Forgeryscope Auto](macos/docs/FORGERYSCOPE-AUTO.md) as a choice in
+AI Clone Detection, optionally highlighted in green. It follows the public upstream pipeline for microscopy, western
 blots and lanes, with separate branch views and NPZ exports. Geometric matches
 remain distinguishable from similarity-based candidates. It reuses the seven
 existing Forgeryscope weights and shared matching dependencies.
@@ -97,6 +97,10 @@ SIFT Panels + Text and D2PRL on each active subimage and enclosing image.
 Corroboration counts distinct method/region contexts without size weighting;
 D2PRL's interactive filter, view changes and relation filters reuse cached results.
 Each tab keeps its view choices, and updates preserve the zoom.
+
+New-feature outlines are hidden by default. Enable **View > Highlight new features**
+to show the red, green and blue markers; the application remembers this choice.
+[Display controls](macos/docs/NEW-FEATURE-HIGHLIGHTS.md).
 
 ## Screenshots
 

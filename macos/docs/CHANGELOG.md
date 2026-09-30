@@ -5,6 +5,14 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 30 September 2026 — optional new-feature outlines
+
+I hid red, green and blue new-feature outlines by default and added **View >
+Highlight new features**, with a persistent global choice. Existing and newly
+opened panels follow it without recomputing results or changing layout/parameters.
+Scientific overlays and keyboard focus are preserved.
+[Controls and display checks](NEW-FEATURE-HIGHLIGHTS.md).
+
 ## 30 September 2026 — automatic analyses, mirrored SIFT and D2PRL regions
 
 I added the full mirrored SIFT panels/text profile and D2PRL to both automatic

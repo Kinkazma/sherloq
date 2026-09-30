@@ -24,9 +24,10 @@
       "f6d68e47e9e72405dbb9e8866fdb487c3f5fa6c795a5e3864609900c02bbd9ee",
       "94c2162ef70ea9f2dc10344781028acc466ef25480a28de7b83f8d6565eaf377",
       "1b0db9d868557f4f0d7d0e0ac4307cf76a09b9be2d538d78c018b323c1984c37",
-      "10c4523e03489e1f8a2df8801b811aa25eef09a1b97f9be3429e6d50fe5d24e7"
+      "10c4523e03489e1f8a2df8801b811aa25eef09a1b97f9be3429e6d50fe5d24e7",
+      "25d077734ff0e4a48b1ae2a60ec2399158517e9422e843ab5764865f061baf0d"
     ],
-    "after": "25d077734ff0e4a48b1ae2a60ec2399158517e9422e843ab5764865f061baf0d"
+    "after": "2b6f7d525a328676d19ac82ae4ff7822285fde37832691986aecbc40088158e2"
   },
   "gui/sherloq_app/ui/ela_profiles.py": {
     "before": "dbe28231d9489b51ccf25be27b6fa887f7527b90f75178cf42f669e0b44d564e",
@@ -835,5 +836,13 @@
   "gui/sherloq_app/core/sift_reflection.py": {
     "before": null,
     "after": "0aa8e044332da5002cf0d22d53425b2da2d4bcbfe02844e17899692e796f4062"
+  },
+  "gui/sherloq_app/main.py": {
+    "before": "927b275c5458b56d32deaec37cc7dd6ac4a59b1ed2d3804692f853dbda8008a9",
+    "after": "b7fa1a2c8134d9030a25a5f61caa1f58533d747e44ad0152f0d1df03e867b119"
+  },
+  "gui/sherloq_app/ui/extensions.py": {
+    "before": "44f3bb22f722602e42d9e425e833bfdcc33e7550b96009069c135cda96073718",
+    "after": "5920c9c8099a9b8b474bd556a6d06c2ca6c0a46a63db2138b0f2cfad065668f8"
   }
 }

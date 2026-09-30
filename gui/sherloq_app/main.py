@@ -273,6 +273,10 @@ class MainWindow(QMainWindow):
         view_menu = self.menuBar().addMenu(self.tr("&View"))
         view_menu.addAction(tools_action)
         view_menu.addAction(help_action)
+        from gui.sherloq_app.ui.extensions import highlight_action
+        view_menu.addSeparator()
+        self.highlight_new_action=highlight_action(self)
+        view_menu.addAction(self.highlight_new_action)
         view_menu.addSeparator()
         view_menu.addAction(self.full_action)
         view_menu.addAction(self.normal_action)

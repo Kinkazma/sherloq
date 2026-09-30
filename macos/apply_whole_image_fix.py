@@ -15,7 +15,7 @@ import sys
 import tempfile
 
 SUPPORT = Path(__file__).resolve().parent
-BACKUP_ROOT = '.updates/rc1-automatic-v2-20260930/'
+BACKUP_ROOT = '.updates/rc1-highlights-20260930/'
 RECEIPT = BACKUP_ROOT + 'native-build.json'
 NATIVE_FILES = ('native/runtime/libsherloq_patchmatch.dylib',
                 'native/runtime/libsherloq_dense_stream.dylib')

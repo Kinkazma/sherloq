@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "default_off": true,
+  "tree_combo_popup_tabs_controls": true,
+  "three_colors": true,
+  "immediate_repaint": true,
+  "geometry_unchanged": true,
+  "no_value_signals": true,
+  "persistent_choice": true,
+  "live_translation": true
+}

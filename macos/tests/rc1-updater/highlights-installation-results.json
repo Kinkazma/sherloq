@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "source_inventory_files": 166,
+  "real_isolated_native_build": true,
+  "cases": [
+    {
+      "base_commit": "fc08617fc3f98e134bfa27cc732e2670f60cd68f",
+      "files_changed": 168,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "2751d0ebb9f2e118ac857e416f1cc3c49c7105d9",
+      "files_changed": 22,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "1247ac4dcecddbab4941479b7bdcca32e68786db",
+      "files_changed": 5,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    }
+  ]
+}
