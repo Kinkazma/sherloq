@@ -7,7 +7,8 @@ The browser implementation uses the same planning contract with a different
 storage backend; native mmap is not a browser API.
 """
 from contextlib import contextmanager
-from dataclasses import dataclass
+from contextvars import ContextVar
+from dataclasses import dataclass,replace
 from functools import lru_cache
 from pathlib import Path
 from threading import Condition, RLock
@@ -24,6 +25,7 @@ import numpy as np
 
 MiB=1024**2
 GiB=1024**3
+_PAGE_ALLOWANCE=ContextVar('sherloq_page_allowance',default=0)
 
 
 @lru_cache(1)
@@ -104,8 +106,17 @@ class MemoryCoordinator:
         with self.condition:
             while self.used+plan.reservation>self.capacity():
                 check(cancel)
+                if plan.mode=='bounded' and plan.bounded_bytes is not None:
+                    # Optional hot pages must never make a minimum-sized job
+                    # wait behind another job when its real scratch fits.
+                    room=max(plan.bounded_bytes,self.capacity()-self.used)
+                    plan=replace(plan,reservation=min(plan.reservation,room))
                 if plan.reservation>self.capacity():
-                    plan=self.plan(plan.full_bytes,plan.bounded_bytes,plan.temporary_bytes)
+                    if plan.mode=='bounded':
+                        if plan.bounded_bytes is None or plan.bounded_bytes>self.capacity():
+                            raise MemoryError('The minimum working buffers exceed currently available memory.')
+                        plan=replace(plan,reservation=self.capacity())
+                    else:plan=self.plan(plan.full_bytes,plan.bounded_bytes,plan.temporary_bytes)
                 if self.used+plan.reservation<=self.capacity():break
                 self.condition.wait(.1)
             check(cancel);self.used+=plan.reservation;self.peak=max(self.peak,self.used)
@@ -122,8 +133,17 @@ class MemoryCoordinator:
         parameters. An OS process kill cannot be caught by this mechanism.
         """
         plan=self.plan(full_bytes,bounded_bytes)
+        def with_page_allowance(plan):
+            with self.condition:
+                room=max(int(bounded_bytes),self.capacity()-self.used)
+                return replace(plan,reservation=min(room,int(bounded_bytes)+256*MiB))
+        def run_bounded(admitted):
+            token=_PAGE_ALLOWANCE.set(max(0,admitted.reservation-int(bounded_bytes)))
+            try:return bounded()
+            finally:_PAGE_ALLOWANCE.reset(token)
+        if plan.mode=='bounded':plan=with_page_allowance(plan)
         with self.claim(plan,cancel) as admitted:
-            if admitted.mode=='bounded':return bounded()
+            if admitted.mode=='bounded':return run_bounded(admitted)
             try:return ram()
             except Exception as error:
                 if not isinstance(error,MemoryError):
@@ -135,7 +155,7 @@ class MemoryCoordinator:
         from .cache_budget import GLOBAL_CACHE_BUDGET
         GLOBAL_CACHE_BUDGET.trim(0);gc.collect()
         plan=MemoryPlan('bounded',int(bounded_bytes),int(full_bytes),0,int(bounded_bytes))
-        with self.claim(plan,cancel):return bounded()
+        with self.claim(with_page_allowance(plan),cancel) as admitted:return run_bounded(admitted)
 
 
 MEMORY=MemoryCoordinator()
@@ -163,7 +183,7 @@ class TemporaryArrays:
     last view release, including exceptions and cancellation.
     """
     def __init__(self,working_bytes=256*MiB,directory=None,*,mapped=True):
-        self.working_bytes=int(working_bytes);self.directory=directory;self.mapped=bool(mapped)
+        self.working_bytes=int(working_bytes)+_PAGE_ALLOWANCE.get();self.directory=directory;self.mapped=bool(mapped)
         self.arrays=[];self.base_rss=resident_memory();self.peak_bytes=0;self.bytes=0
         self.last_check=0.;self.lock=RLock()
     def array(self,shape,dtype=np.float32,*,zero=False):

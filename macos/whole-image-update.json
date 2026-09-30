@@ -115,12 +115,18 @@
     "after": "b565c6f4d4ee4fd837f90d03e6a883ff8aad383acf103d9d4c1225b096d039cd"
   },
   "gui/sherloq_app/core/interactive.py": {
-    "before": "fb53268e5e59a77129a7cde271ccb88d2c82a3855628aaade7fd9470fed9f553",
-    "after": "4ffb8a578f95c04740841c61ad43307922de21c1b3aa8c64e1e0109679ddae3b"
+    "before": [
+      "fb53268e5e59a77129a7cde271ccb88d2c82a3855628aaade7fd9470fed9f553",
+      "4ffb8a578f95c04740841c61ad43307922de21c1b3aa8c64e1e0109679ddae3b"
+    ],
+    "after": "5b1e48444582a5073f768728ae9222d2549b39fc120225b4847f73f274ba9c42"
   },
   "gui/sherloq_app/core/memory_resources.py": {
-    "before": null,
-    "after": "acaefd05e3eb52cafdd6720337cac99aa994c6fb8900268580b77222519d2bae"
+    "before": [
+      null,
+      "acaefd05e3eb52cafdd6720337cac99aa994c6fb8900268580b77222519d2bae"
+    ],
+    "after": "43cf0297454a08fce85e62ec9ad599a0c4cf379fd57df90504f1c2edd94dc2e4"
   },
   "gui/sherloq_app/core/minmax.py": {
     "before": "7ceb514940a769f53b7c593cf39c5b42c626a5235d61f2d4fbb6c5304d736591",
@@ -189,5 +195,94 @@
   "gui/sherloq_app/vendor/patchmatch/metal_stream.mm": {
     "before": null,
     "after": "c8ed935ef53395d2037c1ddb918a62359e480e680df6352edaa8246eee5d6884"
+  },
+  "gui/sherloq_app/core/bounded_wavelets.py": {
+    "before": null,
+    "after": "5323d3008f42a230016ef0cd87042c1cdfe28191462d1cc12b0c5e5a6417896d"
+  },
+  "gui/sherloq_app/core/contrast.py": {
+    "before": "4d14e8ca0cdc5b22e7892c302fc0b7a2807f8cbc104518be45557b5f66d223f5",
+    "after": "373cf73beb7a94ff6b5f2a6face118bf3f8e12495ac3c94e3c55f8e7d0008be1"
+  },
+  "gui/sherloq_app/core/contrast_bounded.py": {
+    "before": null,
+    "after": "6f96d4705c1aca2a4a7de50dfb3e73d19a351b82cad08b6030636cfd7aa4eb1d"
+  },
+  "gui/sherloq_app/core/illuminant.py": {
+    "before": "b2e02fec4b01153a3ce6f8f62d47d4564a4f0b8aa515e983cd21455e2dd7003f",
+    "after": "1d8eb3a94484831d2c63deb142b3d880b307150618229d06546baf3df3253a02"
+  },
+  "gui/sherloq_app/core/illuminant_bounded.py": {
+    "before": null,
+    "after": "3827e658c21bcf1e3f4ab876b3b3578ff96ef37c50970852582c58a95b25ca21"
+  },
+  "gui/sherloq_app/core/wavelet_blocking.py": {
+    "before": "68fc3f4e7743dd640f26ba2fea51bdb0b10ca8d330605ed86083d584ca617aec",
+    "after": "231914707e520b9b9ca8de5b299f51735a58bd4759c31b3c0662042b964dcf63"
+  },
+  "gui/sherloq_app/core/wavelet_blocking_bounded.py": {
+    "before": null,
+    "after": "524830701e37514a5c5b243154cf4571c644a7b4d99ec0aac96b7388ae8dc0f3"
+  },
+  "macos/integration/clone_detectors/build_runtime.py": {
+    "before": "51ec9ef1dfe189c3d3858a3b71e110ec232308482c1b17c1db66b3817069771e",
+    "after": "708c2df05183b646f95107d7fddee592d85c579f5fe4ae36d50dbb6dec6590a5",
+    "target": "integration/clone_detectors/build_runtime.py"
+  },
+  "macos/integration/clone_detectors/sherloq_clone_models/d2prl/__init__.py": {
+    "before": null,
+    "after": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/__init__.py"
+  },
+  "macos/integration/clone_detectors/sherloq_clone_models/d2prl/deep_PM.py": {
+    "before": null,
+    "after": "6733c97441238801200588d526d8064fe7c8b21a5a204af3f065bad523074b48",
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/deep_PM.py"
+  },
+  "macos/integration/clone_detectors/sherloq_clone_models/d2prl/models_D2PRL.py": {
+    "before": null,
+    "after": "bf54d64924fda4a1603643ca3197a86b3d88226b752ac11fac2c842b66e7401d",
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/models_D2PRL.py"
+  },
+  "macos/integration/clone_detectors/sherloq_clone_models/d2prl/scse.py": {
+    "before": null,
+    "after": "8b5d0ddf11023fd58a41812cca811b476e5253113c6acc01cfacda70000754a9",
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/scse.py"
+  },
+  "macos/integration/clone_detectors/sherloq_clone_models/d2prl/senet.py": {
+    "before": null,
+    "after": "81a8fe53826f5853a2f02710a4eeaf110addd5f7b50da747d4af889e893db428",
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/senet.py"
+  },
+  "gui/sherloq_app/core/clone_detectors.py": {
+    "before": "87fa17dff53fccd5081fc4940942c26915f3edff654f2c981a2ab788f59a3be6",
+    "after": "b465f6d3ecc4634cd92b58fa20da83fb3690858fe2d5231e046609133f9e4616"
+  },
+  "gui/sherloq_app/core/d2prl.py": {
+    "before": null,
+    "after": "e4399429d5723031ee1df6a50aa096482b337608f2e20d6f477945b665381764"
+  },
+  "gui/sherloq_app/core/d2prl_ops.py": {
+    "before": null,
+    "after": "474be45e4d8d4665fdd46b82b355d59cbf0fbcc303a4f46077dbe738f87efca5"
+  },
+  "gui/sherloq_app/tools/tampering/clone_detectors.py": {
+    "before": "2edcc8aff3f7105e4e27622756cb2f1532281dc1e5494add3445c7523e418837",
+    "after": "c7cbeca1601051341b9072af58348375136db25ffa5c8cddcaca43ac7083c72b"
+  },
+  "macos/integration/clone_detectors/assets.json": {
+    "before": "651fe1e8ab88614f14beda6ca367dc53c278f08e89c55321d9ddfae84144109e",
+    "after": "7ce55d5f2625a618d50cf179c623a91d40ed6e561bf108b6d63876600fea7c6e",
+    "target": "integration/clone_detectors/assets.json"
+  },
+  "macos/integration/clone_detectors/files.sha256.json": {
+    "before": "947f3002bb4ab1d0472073ac824cd7ca7b152a3e42e0986fd0149b3d93af7a0a",
+    "after": "779ca7c75cdeab49e5ee4239f56cd497f1551a028fbf91a6adc2530388ffd3fe",
+    "target": "integration/clone_detectors/files.sha256.json"
+  },
+  "macos/integration/clone_detectors/runtime-manifest.json": {
+    "before": "24c03b707f45bd2dc0c942c4bcc7aeb9c524a1a3a69aff3e465e820afc140d90",
+    "after": "f3950224cbbf3e3ebddd8992714bb4355c01c69b9aa8f3b29634bf9efbdf1987",
+    "target": "integration/clone_detectors/runtime-manifest.json"
   }
 }

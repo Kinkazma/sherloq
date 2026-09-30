@@ -51,5 +51,15 @@ for source,target in [('third_party/research/clone_detectors/02_forgeryscope/LIC
  make(source,target)
 for path in [DEST/'__init__.py']+[DEST/package/'__init__.py' for package in ('cmsegnet','mgcfdn','mgcfdn/model','mgcfdn/backbones')]:
  records.append(dict(target=str(path.relative_to(ROOT)),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),generated='empty namespace initializer'))
+# D2PRL: device-neutral original inference with explicit local filter paths.
+p=DEST/'d2prl';p.mkdir(exist_ok=True);(p/'__init__.py').write_text('')
+base='third_party/research/clone_detectors/01_d2prl/'
+replacements=[('from deep_PM import PatchMatch','from .deep_PM import PatchMatch'),('from scse import SCSEUnet','from .scse import SCSEUnet'),('def __init__(self, size, batch_size, pmiter):','def __init__(self, size, batch_size, pmiter, assets_dir):'),("ZM_polar_conv('ZM_polar_k13.mat'", "ZM_polar_conv(str(assets_dir / 'ZM_polar_k13.mat')")]
+replacements += [(f"DLFerror('VV_mvf{k}.mat'",f"DLFerror(str(assets_dir / 'VV_mvf{k}.mat')") for k in (7,9,11)]
+make(base+'models_D2PRL.py','d2prl/models_D2PRL.py',replacements)
+make(base+'deep_PM.py','d2prl/deep_PM.py',[['.get_device()', '.device'], ('F.grid_sample(features, samples[:,i,:,:,:].half(), align_corners=True)', 'sample_half(features, samples[:,i,:,:,:].half())'), ('import torch.nn.functional as F', 'import torch.nn.functional as F\nfrom gui.sherloq_app.core.d2prl_ops import sample_half')])
+make(base+'scse.py','d2prl/scse.py',[('from senet import SCSEModule, senet154','from .senet import SCSEModule, senet154')])
+make(base+'senet.py','d2prl/senet.py')
+records.append(dict(target=str((p/'__init__.py').relative_to(ROOT)),sha256=hashlib.sha256(b'').hexdigest(),generated='empty namespace initializer'))
 (BASE/'runtime-manifest.json').write_text(json.dumps(records,indent=2)+'\n')
 print('Prepared',len(records),'verified local adaptations')

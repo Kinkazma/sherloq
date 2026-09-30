@@ -1,6 +1,6 @@
 # Adaptive memory: validated native paths
 
-I added a shared memory coordinator, exact bounded-memory alternatives for nine
+I added a shared memory coordinator, exact bounded-memory alternatives for thirteen
 engines, compact and disk-backed dense descriptors, and tiled display of large
 images. The normal RAM path remains the first choice when it fits. These changes
 preserve the analysis resolution, selected iterations and global search domain;
@@ -11,11 +11,11 @@ function can process arbitrarily large images. Resource reservations apply withi
 a process and are not a strict application-wide RSS ceiling. Temporary disk
 space, codecs and native index sizes still impose real limits.
 
-## Nine engines with exact bounded alternatives
+## Thirteen engines with exact bounded alternatives
 
 The public entry points for Gradient, Pixel Statistics, Bit Planes, Dead/Hot
-Pixels, Space Conversion, Signal Separation, Echo, Min/Max and Global Adjustments
-select between their RAM implementation and an exact bounded alternative.
+Pixels, Space Conversion, Signal Separation, Echo, Min/Max, Global Adjustments, Wavelet Threshold, Wavelet Blocking,
+Illuminant Map and Contrast Enhancement select between their RAM implementation and an exact bounded alternative.
 Finite-support operations retain the necessary border overlap; global statistics,
 equalisation, CLAHE and Otsu operations preserve their global calculations.
 
@@ -34,6 +34,10 @@ though the images fitted in RAM on the test machine:
 | Echo Edge Filter | 564,772,864 | 36.46 / 1.24 |
 | Min/Max Deviation | 529,563,648 | 17.96 / 2.81 |
 | Global Adjustments | 616,316,928 | 77.30 / 1.52 |
+| Wavelet Threshold | 845,791,232 | 134.70 / 6.94 |
+| Wavelet Blocking | 585,138,176 | 20.01 / 2.76 |
+| Illuminant Map | 707,821,568 | 9.27 / 5.74 |
+| Contrast Enhancement | 668,221,440 | 8.58 / 4.75 |
 
 These are capacity measurements, **not speed gains**. Their source image was in
 RAM. Disk-backed execution can be substantially slower and is not selected just
@@ -41,6 +45,16 @@ because an image has 96 MP. Variant and boundary tests include 72 Gradient,
 54 Stats/Planes/Defects, 71 Color/Noise/Echo, 135 Min/Max and 90 Adjustments cases.
 The public numerical checks were rerun from the exported repository before
 publication. [Recorded cases and scripts](../tests/memory-resources/).
+
+The wavelet paths retain transforms along the complete image axes; they do not
+replace the global transform with independent tile transforms. The second set
+adds 288 Illuminant, 216 Contrast, 96 Threshold, 16 global-transform and 24
+Blocking cases. A layout change reduced the recorded mapped Wavelet Blocking
+run from 185 to 20 seconds, still slower than its 2.76-second RAM reference.
+
+When resources permit, bounded jobs can reserve extra resident pages. This is
+optional capacity beyond their minimum scratch requirement, and does not require
+a user benchmark or calibration.
 
 CMYK conversion also completed on one billion noisy pixels in 66.64 seconds at
 245,153,792 bytes peak RSS. Every output pixel was checked against the earlier
@@ -84,8 +98,8 @@ mapped paths. It is not an overall application speed multiplier.
 ## Shared resources, display and worker inputs
 
 Inactive caches and display tiles share an LRU budget. Memory reservations are
-rechecked at admission, and the nine adapted entry points retry their bounded
-path once after a reported NumPy/OpenCV allocation failure. Eighteen injected
+rechecked at admission, and the thirteen adapted entry points retry their bounded
+path once after a reported NumPy/OpenCV allocation failure. Twenty-six injected
 failures preserve the expected results. This cannot recover a process killed by
 the operating system.
 
@@ -110,21 +124,26 @@ close SHERLOQ, and run from the current repository with Python 3.11 or newer:
 python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 ```
 
-This now validates **45 source/build files** and rebuilds the native PatchMatch
+This now validates **65 source/build/inventory files** and rebuilds the native PatchMatch
 library plus its dense companion in a temporary directory, before replacing any
 installed file. Apple's command-line developer tools are required. A compiler
 failure leaves the installation unchanged. The older whole-image, ELA-slider
-and PatchMatch-memory corrections are included.
+and PatchMatch-memory corrections are included, alongside the D2PRL adapter.
+The memory v2 code uses the same native bridge as v1; the cumulative installer
+rebuilds that bridge in isolation.
 
 The updater accepts original RC1 and the previously published source versions;
 unknown local source edits are refused. Source files and existing native libraries
-are backed up under `.updates/rc1-adaptive-memory-v1-20260929/files/`. Empty
+are backed up under `.updates/rc1-native-20260930/files/`. Empty
 `.absent` markers record newly added files. A replacement failure rolls back both
 source and native files. Earlier update backups remain intact. A verified build
 receipt avoids recompilation when the same update is run again.
 
-No model download or app-bundle rebuild is needed. Reopen the application after
-the update. Each native library file is replaced atomically.
+The memory changes need no model download or app-bundle rebuild. D2PRL
+requires its separately obtained checkpoint and four MAT filters; see the
+[D2PRL installation instructions](D2PRL-INTEGRATION.md). The updater does not
+download or redistribute them. Reopen the application after the update. Each
+native library file is replaced atomically.
 
 ## Reproduce the public checks
 
@@ -140,6 +159,12 @@ python tests/memory-resources/more_local_contracts.py
 python tests/memory-resources/minmax_contract.py
 python tests/memory-resources/adjust_contract.py
 python tests/memory-resources/retry_contract.py
+python tests/memory-resources/contrast_contract.py
+python tests/memory-resources/illuminant_contract.py
+python tests/memory-resources/wavelets_contract.py
+python tests/memory-resources/wavelet_blocking_contract.py
+python tests/memory-resources/retry_extended.py
+python tests/memory-resources/page_allowance_contract.py
 QT_QPA_PLATFORM=offscreen python tests/memory-resources/viewer_contract.py
 python tests/memory-resources/image_buffers_contract.py
 python tests/memory-resources/worker_buffers_contract.py
@@ -158,3 +183,9 @@ From the repository, `python3 macos/tests/rc1-updater/check.py` exercises source
 and native replacement failures on temporary fixtures. The
 [installation checks](../tests/rc1-updater/adaptive-installation-results.json)
 cover four previous source versions and a real isolated native build.
+
+The [30 September public checks](NATIVE-SEPT30-PUBLIC-CHECKS.json) record the
+second verification separately. The [v2 source manifest](ADAPTIVE-MEMORY-V2-SOURCE-MANIFEST.json)
+identifies the files that extend or supersede v1. The
+[cumulative installation checks](../tests/rc1-updater/sept30-installation-results.json)
+cover the five previous published source versions, including v1.

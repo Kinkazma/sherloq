@@ -1,0 +1,138 @@
+[
+  {
+    "image_id": 1,
+    "shape": [
+      3510,
+      4387,
+      3
+    ],
+    "seconds": 22.75988029200016,
+    "mask_pixels": 0,
+    "mask_fraction": 0.0,
+    "metadata": {
+      "method": "clone_detectors",
+      "variant": "D2PRL",
+      "device": "mps",
+      "requested_device": "mps",
+      "weights": {
+        "third_party/research/clone_detectors/01_d2prl/ZM_polar_k13.mat": "7692a50926259fb963d7090e9e475f8a19c62944b293f6f991f97957983c8a93",
+        "third_party/research/clone_detectors/01_d2prl/VV_mvf7.mat": "aca122a7527645f74551cdaa4b44dbc2a50b87a74e784e935a4f060d2ef474e2",
+        "third_party/research/clone_detectors/01_d2prl/VV_mvf9.mat": "67937cda8cf52e3718801a5e254248bd5aed2129f6547627a1df2ff21ed0fe9a",
+        "third_party/research/clone_detectors/01_d2prl/VV_mvf11.mat": "5dc2acf945e625d1389a4a6525d8abe069a97e64b8f12aa3d1903e4a53b4c9bd",
+        "models/external/clone_detectors/01_d2prl/d2prl.pth": "2749c7436169ce689deaeb197ce5dae3d1a4533999833928168ec0b0d703df36"
+      },
+      "model_reused": false,
+      "engines": {
+        "segmentation": "mps"
+      },
+      "boxes": [
+        [
+          0,
+          0,
+          4387,
+          3510
+        ]
+      ],
+      "compare": false,
+      "zones": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "analysis_shape": [
+            3,
+            448,
+            448
+          ],
+          "status": "empty",
+          "input_side": 448,
+          "patchmatch_iterations": 40,
+          "seed": 22,
+          "min_component": 500,
+          "role_filter": 50
+        }
+      ],
+      "threshold": 0.5,
+      "probability_interpolation": "bilinear",
+      "mask_interpolation": "nearest",
+      "status": "empty",
+      "radius_supported": false,
+      "segmentation": true,
+      "channel_order": [
+        "union_probability",
+        "target_residual",
+        "source_residual"
+      ],
+      "role_threshold": 0.0
+    }
+  },
+  {
+    "image_id": 2,
+    "shape": [
+      1254,
+      1254,
+      3
+    ],
+    "seconds": 19.503877124999235,
+    "mask_pixels": 0,
+    "mask_fraction": 0.0,
+    "metadata": {
+      "method": "clone_detectors",
+      "variant": "D2PRL",
+      "device": "mps",
+      "requested_device": "mps",
+      "weights": {
+        "third_party/research/clone_detectors/01_d2prl/ZM_polar_k13.mat": "7692a50926259fb963d7090e9e475f8a19c62944b293f6f991f97957983c8a93",
+        "third_party/research/clone_detectors/01_d2prl/VV_mvf7.mat": "aca122a7527645f74551cdaa4b44dbc2a50b87a74e784e935a4f060d2ef474e2",
+        "third_party/research/clone_detectors/01_d2prl/VV_mvf9.mat": "67937cda8cf52e3718801a5e254248bd5aed2129f6547627a1df2ff21ed0fe9a",
+        "third_party/research/clone_detectors/01_d2prl/VV_mvf11.mat": "5dc2acf945e625d1389a4a6525d8abe069a97e64b8f12aa3d1903e4a53b4c9bd",
+        "models/external/clone_detectors/01_d2prl/d2prl.pth": "2749c7436169ce689deaeb197ce5dae3d1a4533999833928168ec0b0d703df36"
+      },
+      "model_reused": true,
+      "engines": {
+        "segmentation": "mps"
+      },
+      "boxes": [
+        [
+          0,
+          0,
+          1254,
+          1254
+        ]
+      ],
+      "compare": false,
+      "zones": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "analysis_shape": [
+            3,
+            448,
+            448
+          ],
+          "status": "empty",
+          "input_side": 448,
+          "patchmatch_iterations": 40,
+          "seed": 22,
+          "min_component": 500,
+          "role_filter": 50
+        }
+      ],
+      "threshold": 0.5,
+      "probability_interpolation": "bilinear",
+      "mask_interpolation": "nearest",
+      "status": "empty",
+      "radius_supported": false,
+      "segmentation": true,
+      "channel_order": [
+        "union_probability",
+        "target_residual",
+        "source_residual"
+      ],
+      "role_threshold": 0.0
+    }
+  }
+]

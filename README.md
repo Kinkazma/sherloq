@@ -37,7 +37,7 @@ These are substantial additions to usability even though they reuse existing men
 
 ### Responsiveness and measured improvements
 
-I added adaptive memory paths for nine engines, compact/mapped dense Zernike and SIFT, and tiled display of large images. The RAM path remains preferred, analysis resolution is retained, and the validated scope is partial. Disk-backed execution can be slower. [Validated engines, measurements, numerical correction and RC1 update](macos/docs/ADAPTIVE-MEMORY.md).
+I added adaptive memory paths for thirteen engines, compact/mapped dense Zernike and SIFT, and tiled display of large images. The RAM path remains preferred, analysis resolution is retained, and the validated scope is partial. Disk-backed execution can be slower. [Validated engines, measurements, numerical correction and RC1 update](macos/docs/ADAPTIVE-MEMORY.md).
 
 I separated computation from display updates, added bounded caches and background jobs, and improved cancellation and reuse of completed work. This lets many display changes reuse an existing result instead of repeating an expensive analysis. I also added native kernels where the tests supported their use, while keeping CPU paths where GPU transfers or numerical differences made them unsuitable.
 
@@ -65,12 +65,18 @@ The current source defines **50 distinct tool entries: 38 inherited labels and 1
 | ZERO JPEG Grids | Integration of the existing ZERO method for JPEG-grid analysis |
 | Copy-Move Forgery 2 | Additional matching workflow with regions, dense descriptors, geometric controls and grouped results |
 | Adaptive CFA | Integration of an existing colour-filter-array analysis method |
-| Clone Detectors | Interface to additional research backends; availability depends on the included backend and weights |
+| Clone Detectors | Additional research backends, including D2PRL with GPU/CPU selection and union/source/target views; external weights are required |
 | Automatic Clone Search | Combined clone-search workflow, including microscopy and PatchMatch branches |
 | Complete Automatic Analysis | Combined workflow with clone-search results and ELA/JPEG-ghost views |
 | CAT-Net v2, SAFIRE, FOCAL, AdaIFL | Four additional research-method integrations, with original component credits and licenses |
 
 See the [complete inventory](macos/docs/TOOLS.md) for all inherited and added entries and their current categories. Dependencies and model availability vary; optional missing checkpoints are recorded in the installation's `MISSING-WEIGHTS.md`.
+
+D2PRL now runs natively with GPU selected by default and CPU available explicitly.
+On the recorded author example, the optimized MPS adaptation took 25.76 seconds
+versus 401.42 seconds for the initial MPS port, with identical raw maps. CPU and
+GPU can produce different results; this is not a general accuracy or speed claim.
+[Protocol, measurements, limits and required external files](macos/docs/D2PRL-INTEGRATION.md).
 
 ## Screenshots
 

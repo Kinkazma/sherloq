@@ -376,5 +376,85 @@
     "target": "integration/clone_detectors/sherloq_clone_models/mgcfdn/backbones/__init__.py",
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "generated": "empty namespace initializer"
+  },
+  {
+    "source": "third_party/research/clone_detectors/01_d2prl/models_D2PRL.py",
+    "source_sha256": "2af044fed0590563d5f5827bbee41d1e815fb49326cdada5a082574330ab9b5e",
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/models_D2PRL.py",
+    "sha256": "bf54d64924fda4a1603643ca3197a86b3d88226b752ac11fac2c842b66e7401d",
+    "replacements": [
+      [
+        "from deep_PM import PatchMatch",
+        "from .deep_PM import PatchMatch"
+      ],
+      [
+        "from scse import SCSEUnet",
+        "from .scse import SCSEUnet"
+      ],
+      [
+        "def __init__(self, size, batch_size, pmiter):",
+        "def __init__(self, size, batch_size, pmiter, assets_dir):"
+      ],
+      [
+        "ZM_polar_conv('ZM_polar_k13.mat'",
+        "ZM_polar_conv(str(assets_dir / 'ZM_polar_k13.mat')"
+      ],
+      [
+        "DLFerror('VV_mvf7.mat'",
+        "DLFerror(str(assets_dir / 'VV_mvf7.mat')"
+      ],
+      [
+        "DLFerror('VV_mvf9.mat'",
+        "DLFerror(str(assets_dir / 'VV_mvf9.mat')"
+      ],
+      [
+        "DLFerror('VV_mvf11.mat'",
+        "DLFerror(str(assets_dir / 'VV_mvf11.mat')"
+      ]
+    ]
+  },
+  {
+    "source": "third_party/research/clone_detectors/01_d2prl/deep_PM.py",
+    "source_sha256": "9f2f8ed87d111390366f474e75fc07db70986ed7572db373cb82e25d468b22be",
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/deep_PM.py",
+    "sha256": "6733c97441238801200588d526d8064fe7c8b21a5a204af3f065bad523074b48",
+    "replacements": [
+      [
+        ".get_device()",
+        ".device"
+      ],
+      [
+        "F.grid_sample(features, samples[:,i,:,:,:].half(), align_corners=True)",
+        "sample_half(features, samples[:,i,:,:,:].half())"
+      ],
+      [
+        "import torch.nn.functional as F",
+        "import torch.nn.functional as F\nfrom gui.sherloq_app.core.d2prl_ops import sample_half"
+      ]
+    ]
+  },
+  {
+    "source": "third_party/research/clone_detectors/01_d2prl/scse.py",
+    "source_sha256": "a18eb734c50060682cd782d58646de3b15e864a6f30af7a29b7de0c58fde5c43",
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/scse.py",
+    "sha256": "8b5d0ddf11023fd58a41812cca811b476e5253113c6acc01cfacda70000754a9",
+    "replacements": [
+      [
+        "from senet import SCSEModule, senet154",
+        "from .senet import SCSEModule, senet154"
+      ]
+    ]
+  },
+  {
+    "source": "third_party/research/clone_detectors/01_d2prl/senet.py",
+    "source_sha256": "78cd29c63cb99db1d4d8209a6c027a98494b61762d9a4064b34e88fa37464d08",
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/senet.py",
+    "sha256": "81a8fe53826f5853a2f02710a4eeaf110addd5f7b50da747d4af889e893db428",
+    "replacements": []
+  },
+  {
+    "target": "integration/clone_detectors/sherloq_clone_models/d2prl/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generated": "empty namespace initializer"
   }
 ]

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "exact_cases": 96,
+  "exact_global_transforms": 16,
+  "public_dispatch": true
+}

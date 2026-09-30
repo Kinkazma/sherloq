@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "date": "2026-09-30",
+  "scope": "Independent staged public source, native v2 and D2PRL",
+  "contracts": [
+    {
+      "test": "memory-resources/contrast_contract.py",
+      "exit_code": 0,
+      "seconds": 7.759
+    },
+    {
+      "test": "memory-resources/illuminant_contract.py",
+      "exit_code": 0,
+      "seconds": 8.735
+    },
+    {
+      "test": "memory-resources/wavelets_contract.py",
+      "exit_code": 0,
+      "seconds": 42.629
+    },
+    {
+      "test": "memory-resources/wavelet_blocking_contract.py",
+      "exit_code": 0,
+      "seconds": 2.618
+    },
+    {
+      "test": "memory-resources/retry_extended.py",
+      "exit_code": 0,
+      "seconds": 1.925
+    },
+    {
+      "test": "memory-resources/page_allowance_contract.py",
+      "exit_code": 0,
+      "seconds": 0.396
+    },
+    {
+      "test": "memory-resources/contracts.py",
+      "exit_code": 0,
+      "seconds": 1.208
+    },
+    {
+      "test": "memory-resources/retry_contract.py",
+      "exit_code": 0,
+      "seconds": 1.251
+    },
+    {
+      "test": "memory-resources/more_local_contracts.py",
+      "exit_code": 0,
+      "seconds": 5.043
+    },
+    {
+      "test": "dense-streaming/integration.py --production",
+      "exit_code": 0,
+      "seconds": 13.885
+    },
+    {
+      "test": "d2prl/contracts.py",
+      "exit_code": 0,
+      "seconds": 0.538
+    },
+    {
+      "test": "d2prl/evaluator.py",
+      "exit_code": 0,
+      "seconds": 14.202
+    }
+  ],
+  "updater_fixtures": {
+    "passed": true,
+    "cases": [
+      "success",
+      "unknown-existing",
+      "unknown-new",
+      "missing-existing",
+      "bad-source",
+      "conflicting-backup",
+      "symlink",
+      "rollback",
+      "native-success",
+      "native-build-failure",
+      "native-incomplete",
+      "native-rollback",
+      "receipt-failure",
+      "new-package",
+      "new-package-rollback",
+      "new-package-symlink",
+      "new-package-parent-file"
+    ]
+  },
+  "d2prl_public_mps": {
+    "seconds": 23.193053457999667,
+    "passed": true,
+    "raw_maps_equal_delivered_native_reference": true,
+    "all_result_array_max_errors": {
+      "map": 0.0,
+      "mask": 0.0,
+      "candidates": 0.0,
+      "analyzed": 0.0,
+      "raw_probabilities": 0.0,
+      "source": 0.0,
+      "target": 0.0
+    },
+    "mask_iou_to_upstream_example": 0.8924845995893224
+  },
+  "runtime_manifest_entries_verified": 39,
+  "provenance": "Original large-image and CPU/Qt D2PRL measurements are supplied records, not rerun here. Public MPS inference, 12 contract scripts and 17 updater fixtures were rerun. No user photographs or checkpoints are distributed."
+}

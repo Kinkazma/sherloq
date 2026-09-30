@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "optional_pages_use_free_capacity": true,
+  "minimum_job_not_blocked": true,
+  "context_restored": true,
+  "minimum_bound_enforced": true
+}

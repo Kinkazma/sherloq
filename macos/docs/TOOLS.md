@@ -1,6 +1,6 @@
 # Tool inventory: inherited, added and adapted
 
-Compared with Guido Bartoli's upstream revision `3fe95fcb56037e47e2eefbc2d3785804a31a74f5`, the frozen fork defines **50 canonical tool entries: 38 inherited and 12 added**. Favorite shortcuts do not create additional tools. This inventory is derived from `gui/sherloq_app/ui/tools.py`, including the move of Complete Automatic Analysis into Inspection. It counts panels/workflows, not validated scientific methods; a panel may offer several backends or depend on optional components.
+Compared with Guido Bartoli's upstream revision `3fe95fcb56037e47e2eefbc2d3785804a31a74f5`, the fork defines **50 canonical tool entries: 38 inherited and 12 added**. Favorite shortcuts do not create additional tools. This inventory is derived from `gui/sherloq_app/ui/tools.py`, including the move of Complete Automatic Analysis into Inspection. It counts panels/workflows, not validated scientific methods; a panel may offer several backends or depend on optional components.
 
 The upstream labels are retained to make the comparison explicit. “Inherited” means the entry existed upstream; it does not imply its implementation is unchanged. “Added” means an interface entry was added by this fork; research-method integrations remain credited to their original authors.
 
@@ -27,3 +27,7 @@ The upstream labels are retained to make the comparison explicit. “Inherited�
 - **Shared interface:** background jobs and cancellation, bounded caching, language support, favorites and region/layer interaction.
 
 The colored outlines in the interface group additions and extensions, so an outlined entry is not necessarily a newly added tool. Neither entry counts nor outline colors establish validation or authorship of the underlying algorithms. See [changes](CHANGELOG.md), [component attribution](ATTRIBUTION.md) and [installation/validation limits](../README.md).
+
+D2PRL is an additional backend inside **Clone Detectors**, so it does not change
+the 50-entry menu count. It provides GPU/CPU selection and union/source/target
+views with external model files. [Protocol and requirements](D2PRL-INTEGRATION.md).

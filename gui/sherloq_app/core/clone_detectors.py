@@ -3,7 +3,7 @@ import gc,time
 import numpy as np
 import cv2 as cv
 from .clone_models import ROOT,load_segmentation,segment
-SEGMENTERS=('CMSeg-Net generalization','CMSeg-Net addnoise','MGCFDN','MGCFDN source/cible','MGCFDN 16×16','MGCFDN EffNet 16×16','MGCFDN MPDN 16×16','MGCFDN TNT 16×16','MGCFDN VIG 16×16')
+SEGMENTERS=('CMSeg-Net generalization','CMSeg-Net addnoise','MGCFDN','MGCFDN source/cible','MGCFDN 16×16','MGCFDN EffNet 16×16','MGCFDN MPDN 16×16','MGCFDN TNT 16×16','MGCFDN VIG 16×16','D2PRL')
 FORGERYSCOPE=('Forgeryscope microscopie','Forgeryscope blots complets','Forgeryscope chevauchements','Forgeryscope pistes')
 VARIANTS=SEGMENTERS+FORGERYSCOPE
 
@@ -37,6 +37,9 @@ class Models:
         self.clear()
         if variant in FORGERYSCOPE:
             from .forgeryscope_adapter import load
+            value=load(device)
+        elif variant == 'D2PRL':
+            from .d2prl import load
             value=load(device)
         else:value=load_segmentation(variant,device)
         self.value=value;self.key=key;self.signatures=signature(value['weights']);return value,False
@@ -72,6 +75,15 @@ def analyze(image,params,requested,models,progress=lambda *x:None):
                     crop=crop.copy();crop[allowed[y0:y1,x0:x1]==0]=0
                 extra={'excluded_boxes':local_excluded} if local_excluded else {}
                 r=predict(crop,loaded,variant,progress=progress,**extra);value=r['map'];binary=r['mask'];candidates[y0:y1,x0:x1]|=r['candidates'];metadata.append(dict(origin=[x0,y0],**r['metadata']))
+            elif variant == 'D2PRL':
+                from .d2prl import predict, SIDE, ITERATIONS, SEED
+                r=predict(crop,loaded,progress);raw.append(r['raw'])
+                size=(x1-x0,y1-y0)
+                value=cv.resize(r['map'],size,interpolation=cv.INTER_LINEAR)
+                binary=cv.resize(r['mask'],size,interpolation=cv.INTER_NEAREST)
+                for name,destination in (('source',source),('target',target)):
+                    destination[y0:y1,x0:x1]=np.maximum(destination[y0:y1,x0:x1],cv.resize(r[name],size,interpolation=cv.INTER_NEAREST))
+                metadata.append(dict(origin=[x0,y0],analysis_shape=list(r['raw'].shape),status='ok' if binary.any() else 'empty',input_side=SIDE,patchmatch_iterations=ITERATIONS,seed=SEED,min_component=500,role_filter=50))
             else:
                 p=segment(crop,loaded);raw.append(p)
                 size=(x1-x0,y1-y0)
@@ -85,8 +97,11 @@ def analyze(image,params,requested,models,progress=lambda *x:None):
     score*=allowed;mask*=allowed;candidates*=allowed;analyzed*=allowed
     result=dict(map=score,mask=mask,candidates=candidates,analyzed=analyzed)
     if raw:result['raw_probabilities']=np.stack(raw)
-    if variant=='MGCFDN source/cible':result.update(source=source,target=target)
+    if variant in ('MGCFDN source/cible','D2PRL'):result.update(source=source,target=target)
     result['metadata']=dict(method='clone_detectors',variant=variant,device=loaded['device'],requested_device=requested,weights=loaded['weights'],model_reused=reused,engines=loaded.get('engines',{'segmentation':loaded['device']}),boxes=boxes,compare=compare,zones=metadata,threshold=.5,probability_interpolation='bilinear',mask_interpolation='nearest',status='ok' if mask.any() else 'candidates' if candidates.any() else 'no_panels' if all(m['status']=='no_panels' for m in metadata) else 'insufficient_panels' if all(m['status'] in ('no_panels','insufficient_panels') for m in metadata) else 'empty',radius_supported=False,segmentation=variant in SEGMENTERS)
     if variant=='MGCFDN source/cible':result['metadata']['channel_order']=['target','source','background']
+    if variant=='D2PRL':
+        result['metadata']['channel_order']=['union_probability','target_residual','source_residual']
+        result['metadata']['role_threshold']=0.0
     if excluded:result['metadata']['excluded_boxes']=excluded
     return result

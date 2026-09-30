@@ -138,4 +138,41 @@ for case in ('native-success', 'native-build-failure', 'native-incomplete',
                 assert contents(installation) == before, case
                 assert not (installation / updater.RECEIPT).exists()
         cases.append(case)
+for case in ('new-package', 'new-package-rollback', 'new-package-symlink',
+             'new-package-parent-file'):
+    with tempfile.TemporaryDirectory() as directory:
+        repository, installation = fixture(Path(directory).resolve())
+        manifest_path = repository / 'macos/whole-image-update.json'
+        manifest = json.loads(manifest_path.read_text())
+        manifest['gui/added.py']['target'] = 'integration/models/d2prl/added.py'
+        manifest_path.write_text(json.dumps(manifest))
+        if case == 'new-package-symlink':
+            (installation / 'integration').symlink_to(repository, target_is_directory=True)
+        elif case == 'new-package-parent-file':
+            (installation / 'integration').write_bytes(b'not a directory')
+        original_replace = updater.replace
+
+        def fail_after_package(path, data, mode):
+            if case == 'new-package-rollback' and path.name == 'last.py':
+                raise OSError('failure after creating package')
+            original_replace(path, data, mode)
+
+        with patch.object(updater, 'SUPPORT', repository / 'macos'), \
+             patch.object(updater, 'replace', fail_after_package):
+            if case == 'new-package':
+                assert updater.apply(installation) == 3
+                assert updater.apply(installation) == 0
+                assert (installation / 'integration/models/d2prl/added.py').read_bytes() == b'new-added.py'
+            else:
+                try:
+                    updater.apply(installation)
+                except (ValueError, OSError):
+                    pass
+                else:
+                    raise AssertionError('Expected refusal: ' + case)
+                assert (installation / 'source/gui/first.py').read_bytes() == b'old-first'
+                assert (installation / 'source/gui/last.py').read_bytes() == b'old-last'
+                if case == 'new-package-rollback':
+                    assert not (installation / 'integration').exists()
+        cases.append(case)
 print(json.dumps({'passed': True, 'cases': cases}))

@@ -5,6 +5,30 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 30 September 2026 — D2PRL and four more bounded-memory engines
+
+I integrated the original D2PRL inference into Clone Detectors, with GPU as the
+default, an explicit CPU choice, independent regions and union/source/target
+views and exports. The optimized MPS path preserved the initial MPS port's raw
+maps on the recorded author example (401.42 to 25.76 seconds); CPU/GPU differences
+remain documented. The original 448-pixel grid and 40 iterations are retained.
+Weights are external and are not added to the frozen RC1 archive.
+[Protocol, dependencies and measured limits](D2PRL-INTEGRATION.md).
+
+I added exact bounded alternatives for Wavelet Threshold, Wavelet Blocking,
+Illuminant Map and Contrast Enhancement, bringing the validated engine coverage
+to thirteen. All four matched their previous reference on noisy 96 MP inputs.
+Wavelet transforms keep their global axes. Optional resident pages use spare
+capacity without a preliminary benchmark. The mapped Wavelet Blocking layout
+improved from 185 to 20 seconds in its recorded test; RAM remained faster.
+[Memory scope and measurements](ADAPTIVE-MEMORY.md).
+
+The cumulative updater validates 65 source/build/inventory files, preserves
+previous backups, adds the D2PRL package transactionally, and merges its inventory
+entries while retaining the other detectors. I also restored the baseline hash
+inventory and three runtime license files omitted from the earlier source export.
+No checkpoints are downloaded by the updater.
+
 ## 29 September 2026 — adaptive memory, validated native paths
 
 I added exact bounded alternatives for nine engines, shared resource admission

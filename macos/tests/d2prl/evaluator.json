@@ -1,0 +1,110 @@
+[
+  {
+    "device": "cpu",
+    "side": 32,
+    "candidates": 5,
+    "channels": 36,
+    "maximum_error": 0.0,
+    "old_seconds": 0.004137165999964054,
+    "new_seconds": 0.005573709000600502
+  },
+  {
+    "device": "cpu",
+    "side": 32,
+    "candidates": 5,
+    "channels": 96,
+    "maximum_error": 0.0,
+    "old_seconds": 0.01149329200052307,
+    "new_seconds": 0.012109584000427276
+  },
+  {
+    "device": "cpu",
+    "side": 64,
+    "candidates": 13,
+    "channels": 36,
+    "maximum_error": 0.0,
+    "old_seconds": 0.03669320799963316,
+    "new_seconds": 0.013894957999582402
+  },
+  {
+    "device": "cpu",
+    "side": 64,
+    "candidates": 13,
+    "channels": 96,
+    "maximum_error": 0.0,
+    "old_seconds": 0.0540194999994128,
+    "new_seconds": 0.024319542000739602
+  },
+  {
+    "device": "cpu",
+    "side": 448,
+    "candidates": 13,
+    "channels": 36,
+    "maximum_error": 0.0,
+    "old_seconds": 1.2841381249991173,
+    "new_seconds": 1.1916779169996516
+  },
+  {
+    "device": "cpu",
+    "side": 448,
+    "candidates": 13,
+    "channels": 96,
+    "maximum_error": 0.0,
+    "old_seconds": 3.565904375000173,
+    "new_seconds": 3.491130040999451
+  },
+  {
+    "device": "mps",
+    "side": 32,
+    "candidates": 5,
+    "channels": 36,
+    "maximum_error": 0.0,
+    "old_seconds": 0.20531341700007033,
+    "new_seconds": 0.30731979200027126
+  },
+  {
+    "device": "mps",
+    "side": 32,
+    "candidates": 5,
+    "channels": 96,
+    "maximum_error": 0.0,
+    "old_seconds": 0.03075562499998341,
+    "new_seconds": 0.12383362499986106
+  },
+  {
+    "device": "mps",
+    "side": 64,
+    "candidates": 13,
+    "channels": 36,
+    "maximum_error": 0.0,
+    "old_seconds": 0.15106891599953087,
+    "new_seconds": 0.05693808299929515
+  },
+  {
+    "device": "mps",
+    "side": 64,
+    "candidates": 13,
+    "channels": 96,
+    "maximum_error": 0.0,
+    "old_seconds": 0.09515995899982954,
+    "new_seconds": 0.029604625000501983
+  },
+  {
+    "device": "mps",
+    "side": 448,
+    "candidates": 13,
+    "channels": 36,
+    "maximum_error": 0.0,
+    "old_seconds": 3.218701124999825,
+    "new_seconds": 0.08413870800086443
+  },
+  {
+    "device": "mps",
+    "side": 448,
+    "candidates": 13,
+    "channels": 96,
+    "maximum_error": 0.0,
+    "old_seconds": 3.430875707999803,
+    "new_seconds": 0.34541437500047323
+  }
+]

@@ -1,0 +1,173 @@
+{
+  "snapshot_sha256": "f191951e46bb8c0d66dd2b0c3e886678d4607da9d24ff45724ad135da35646a3",
+  "files": [
+    {
+      "snapshot_path": "integration/clone_detectors/build_runtime.py",
+      "repository_path": "macos/integration/clone_detectors/build_runtime.py",
+      "sha256": "708c2df05183b646f95107d7fddee592d85c579f5fe4ae36d50dbb6dec6590a5"
+    },
+    {
+      "snapshot_path": "integration/clone_detectors/sherloq_clone_models/d2prl/__init__.py",
+      "repository_path": "macos/integration/clone_detectors/sherloq_clone_models/d2prl/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "snapshot_path": "integration/clone_detectors/sherloq_clone_models/d2prl/deep_PM.py",
+      "repository_path": "macos/integration/clone_detectors/sherloq_clone_models/d2prl/deep_PM.py",
+      "sha256": "6733c97441238801200588d526d8064fe7c8b21a5a204af3f065bad523074b48"
+    },
+    {
+      "snapshot_path": "integration/clone_detectors/sherloq_clone_models/d2prl/models_D2PRL.py",
+      "repository_path": "macos/integration/clone_detectors/sherloq_clone_models/d2prl/models_D2PRL.py",
+      "sha256": "bf54d64924fda4a1603643ca3197a86b3d88226b752ac11fac2c842b66e7401d"
+    },
+    {
+      "snapshot_path": "integration/clone_detectors/sherloq_clone_models/d2prl/scse.py",
+      "repository_path": "macos/integration/clone_detectors/sherloq_clone_models/d2prl/scse.py",
+      "sha256": "8b5d0ddf11023fd58a41812cca811b476e5253113c6acc01cfacda70000754a9"
+    },
+    {
+      "snapshot_path": "integration/clone_detectors/sherloq_clone_models/d2prl/senet.py",
+      "repository_path": "macos/integration/clone_detectors/sherloq_clone_models/d2prl/senet.py",
+      "sha256": "81a8fe53826f5853a2f02710a4eeaf110addd5f7b50da747d4af889e893db428"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/clone_detectors.py",
+      "repository_path": "gui/sherloq_app/core/clone_detectors.py",
+      "sha256": "b465f6d3ecc4634cd92b58fa20da83fb3690858fe2d5231e046609133f9e4616"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/d2prl.py",
+      "repository_path": "gui/sherloq_app/core/d2prl.py",
+      "sha256": "e4399429d5723031ee1df6a50aa096482b337608f2e20d6f477945b665381764"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/d2prl_ops.py",
+      "repository_path": "gui/sherloq_app/core/d2prl_ops.py",
+      "sha256": "474be45e4d8d4665fdd46b82b355d59cbf0fbcc303a4f46077dbe738f87efca5"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/tools/tampering/clone_detectors.py",
+      "repository_path": "gui/sherloq_app/tools/tampering/clone_detectors.py",
+      "sha256": "c7cbeca1601051341b9072af58348375136db25ffa5c8cddcaca43ac7083c72b"
+    },
+    {
+      "snapshot_path": "tests/clone-detectors/integration-contracts.py",
+      "repository_path": "macos/tests/clone-detectors/integration-contracts.py",
+      "sha256": "2756b50149cdddbd606bde8635c5f99f59c05db21b102e74a429cc03a5280851"
+    },
+    {
+      "snapshot_path": "tests/d2prl/contracts.json",
+      "repository_path": "macos/tests/d2prl/contracts.json",
+      "sha256": "ab6ec1cb98c0cfab244ed9646d7557589d67312bfbcfad868c4bc2fca5be3134"
+    },
+    {
+      "snapshot_path": "tests/d2prl/contracts.py",
+      "repository_path": "macos/tests/d2prl/contracts.py",
+      "sha256": "b3bb2498539613cf22fdc3a83d946db081dbb840b47671d008103a1a241f42bb"
+    },
+    {
+      "snapshot_path": "tests/d2prl/device-comparison.json",
+      "repository_path": "macos/tests/d2prl/device-comparison.json",
+      "sha256": "ca5a4de9f1a5a301c39b5623ada7a7797d11e4819dae9137ef928e6f94593586"
+    },
+    {
+      "snapshot_path": "tests/d2prl/evaluator.json",
+      "repository_path": "macos/tests/d2prl/evaluator.json",
+      "sha256": "69a378bcb9e97f6d7b3fe18d3c4aa69a7f4eb7cb720e2f6871f91f1a6ae96ad3"
+    },
+    {
+      "snapshot_path": "tests/d2prl/evaluator.py",
+      "repository_path": "macos/tests/d2prl/evaluator.py",
+      "sha256": "b7aa3d46dcfae2f382883ea6a4b6f671b39ce67d754ce28829645a9e3184ef02"
+    },
+    {
+      "snapshot_path": "tests/d2prl/inference_probe.py",
+      "repository_path": "macos/tests/d2prl/inference_probe.py",
+      "sha256": "94bdd5d020c97dc3e1d9bdd1e3329675cdc0d3db446817c8b655e9769919f8a2"
+    },
+    {
+      "snapshot_path": "tests/d2prl/probe-cpu-448-40.json",
+      "repository_path": "macos/tests/d2prl/probe-cpu-448-40.json",
+      "sha256": "aeb3f4045da773b7a08e4af78545612a7a1318b7baa1c9db611110e41819d377"
+    },
+    {
+      "snapshot_path": "tests/d2prl/probe-mps-448-40.json",
+      "repository_path": "macos/tests/d2prl/probe-mps-448-40.json",
+      "sha256": "35c981b74ba3877b30d91b3a7f7d82042e734168b09be5cc0c5d17f32a07fa11"
+    },
+    {
+      "snapshot_path": "tests/d2prl/public-cpu.json",
+      "repository_path": "macos/tests/d2prl/public-cpu.json",
+      "sha256": "73f04463a107ec4937f4b42e6d8beba16af68050434bad44e0537ad2e1f8428d"
+    },
+    {
+      "snapshot_path": "tests/d2prl/public-mps.json",
+      "repository_path": "macos/tests/d2prl/public-mps.json",
+      "sha256": "20a6defa4c0fe03756b860e1ed31db2ab8626b1779022b15701e32cbd0e95ad9"
+    },
+    {
+      "snapshot_path": "tests/d2prl/public_inference.py",
+      "repository_path": "macos/tests/d2prl/public_inference.py",
+      "sha256": "ec12a0a1d6c198329ee201a1fd4c026ad9caec4c26c9edb43c720a8888d9fdba"
+    },
+    {
+      "snapshot_path": "tests/d2prl/shared_random.py",
+      "repository_path": "macos/tests/d2prl/shared_random.py",
+      "sha256": "e3f2bfa859afc7ef1e74f4fc0f8864626fad92af9409468a1665829f0a92851b"
+    },
+    {
+      "snapshot_path": "tests/d2prl/ui.json",
+      "repository_path": "macos/tests/d2prl/ui.json",
+      "sha256": "d858c1fef6e287be71a4d865dfda7dea3a5d8b65805b7456136f5b7d6cdc516e"
+    },
+    {
+      "snapshot_path": "tests/d2prl/ui.py",
+      "repository_path": "macos/tests/d2prl/ui.py",
+      "sha256": "dd5191bb6cc3464cf8c12c28136eb817cdcd8f887d3fa311295085e043af9a4c"
+    }
+  ],
+  "merged_inventories": [
+    "assets.json",
+    "files.sha256.json",
+    "runtime-manifest.json"
+  ],
+  "excluded": [
+    "private example board script and record",
+    "internal wording of integration report"
+  ],
+  "test_addendum": {
+    "snapshot_sha256": "f9ab8abc6c97415f939090ddef1dcb54df79f5507cee04cfe7a7f0c32d3c6bd0",
+    "files": [
+      {
+        "snapshot_path": "tests/d2prl/user_images.py",
+        "repository_path": "macos/tests/d2prl/user_images.py",
+        "sha256": "46d3678bf37123f502e11efac7e192fd4c6e1f88eade07a3d7c80860d9c5a1c8"
+      },
+      {
+        "snapshot_path": "tests/d2prl/user-images/results.json",
+        "repository_path": "macos/tests/d2prl/user-images/results.json",
+        "sha256": "b63855a8d1bc39f13fad049e1b10d06b37dcccda6a18b5ec256f761f7d822e78"
+      },
+      {
+        "snapshot_path": "tests/d2prl/user-images/diagnostics.json",
+        "repository_path": "macos/tests/d2prl/user-images/diagnostics.json",
+        "sha256": "88ee0e282f04cbfaa22de69d984e1d630dfb9f881ba003f5e998c12970fd1c53"
+      }
+    ]
+  },
+  "restored_from_rc1": [
+    {
+      "repository_path": "macos/integration/clone_detectors/sherloq_clone_models/forgeryscope/LICENSE",
+      "sha256": "143a9e89a9eb6e686401c86b1ae64ce62d3dbde28479763b39536d9ea660bd79"
+    },
+    {
+      "repository_path": "macos/integration/clone_detectors/sherloq_clone_models/mgcfdn/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "repository_path": "macos/integration/clone_detectors/sherloq_clone_models/mgcfdn/gcn_lib/License.txt",
+      "sha256": "1ee267680bc3e403a4027aac7bfec7ae3a2b730ad0e19be1208130bf828c049c"
+    }
+  ]
+}

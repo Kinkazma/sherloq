@@ -34,6 +34,14 @@ class WaveletBlockingEngine:
         return detail
 
     def compute(self, blocksize):
+        from .memory_resources import MEMORY,MiB
+        pixels=self.image.shape[0]*self.image.shape[1]
+        def bounded():
+            from .wavelet_blocking_bounded import compute
+            return compute(self,blocksize)
+        return MEMORY.execute(pixels*64,pixels*4+64*MiB,lambda:self._compute(blocksize),bounded)
+
+    def _compute(self, blocksize):
         detail = self.detail()
         if blocksize < 1 or blocksize > min(detail.shape):
             raise ValueError(f'Block size must be between 1 and {min(detail.shape)}')

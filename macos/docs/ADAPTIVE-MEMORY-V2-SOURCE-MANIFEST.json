@@ -1,0 +1,181 @@
+{
+  "base_commit": "ea9727e4886fc8f6d12111dcdfb0b8f66ecdc8fc",
+  "snapshot_sha256": "dde7c2db5fc2046badc6a90216410a5612a680918626ceb32d514a1e004793c6",
+  "files": [
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/bounded_wavelets.py",
+      "repository_path": "gui/sherloq_app/core/bounded_wavelets.py",
+      "sha256": "5323d3008f42a230016ef0cd87042c1cdfe28191462d1cc12b0c5e5a6417896d"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/contrast.py",
+      "repository_path": "gui/sherloq_app/core/contrast.py",
+      "sha256": "373cf73beb7a94ff6b5f2a6face118bf3f8e12495ac3c94e3c55f8e7d0008be1"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/contrast_bounded.py",
+      "repository_path": "gui/sherloq_app/core/contrast_bounded.py",
+      "sha256": "6f96d4705c1aca2a4a7de50dfb3e73d19a351b82cad08b6030636cfd7aa4eb1d"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/illuminant.py",
+      "repository_path": "gui/sherloq_app/core/illuminant.py",
+      "sha256": "1d8eb3a94484831d2c63deb142b3d880b307150618229d06546baf3df3253a02"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/illuminant_bounded.py",
+      "repository_path": "gui/sherloq_app/core/illuminant_bounded.py",
+      "sha256": "3827e658c21bcf1e3f4ab876b3b3578ff96ef37c50970852582c58a95b25ca21"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/interactive.py",
+      "repository_path": "gui/sherloq_app/core/interactive.py",
+      "sha256": "5b1e48444582a5073f768728ae9222d2549b39fc120225b4847f73f274ba9c42"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/memory_resources.py",
+      "repository_path": "gui/sherloq_app/core/memory_resources.py",
+      "sha256": "43cf0297454a08fce85e62ec9ad599a0c4cf379fd57df90504f1c2edd94dc2e4"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/wavelet_blocking.py",
+      "repository_path": "gui/sherloq_app/core/wavelet_blocking.py",
+      "sha256": "231914707e520b9b9ca8de5b299f51735a58bd4759c31b3c0662042b964dcf63"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/wavelet_blocking_bounded.py",
+      "repository_path": "gui/sherloq_app/core/wavelet_blocking_bounded.py",
+      "sha256": "524830701e37514a5c5b243154cf4571c644a7b4d99ec0aac96b7388ae8dc0f3"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/contrast-results.json",
+      "repository_path": "macos/tests/memory-resources/contrast-results.json",
+      "sha256": "4e987ccb903d5453e62029e606d741b04cb1e25c8b6f0b1e26ab64c09edfa73b"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/contrast_before.py",
+      "repository_path": "macos/tests/memory-resources/contrast_before.py",
+      "sha256": "4d14e8ca0cdc5b22e7892c302fc0b7a2807f8cbc104518be45557b5f66d223f5"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/contrast_contract.py",
+      "repository_path": "macos/tests/memory-resources/contrast_contract.py",
+      "sha256": "f7c52982a1c84a21d4527eecfc09ba0e25b16c8841bda01c16204f1ca7caaaa8"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-contrast-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-contrast-results.json",
+      "sha256": "32911063952f52b02e40383bff87f50b5f71ee738b69c1ac168b1026b1a11b2d"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-illuminant-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-illuminant-results.json",
+      "sha256": "b4152b47685c3b38a5ac0e60aaf5b837933c669a7f8f135e272d6506f055cc29"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-threshold-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-threshold-results.json",
+      "sha256": "953020d3ac303fe088065b695970f3ebc6edc05ce5567bc5c2edb4be38b82818"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-wavelet-before-layout-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-wavelet-before-layout-results.json",
+      "sha256": "ae13c70f284b509e3bb763cd08e3d87a31d7aebd96a5c99a193805d2c43d34ca"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-wavelet-layout-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-wavelet-layout-results.json",
+      "sha256": "b6d168dab43f987b3af50068e40498f1afaf0f62c9dbbe4fe84a66b3ab615a4b"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge-wavelet-results.json",
+      "repository_path": "macos/tests/memory-resources/huge-wavelet-results.json",
+      "sha256": "b6d168dab43f987b3af50068e40498f1afaf0f62c9dbbe4fe84a66b3ab615a4b"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge_contrast.py",
+      "repository_path": "macos/tests/memory-resources/huge_contrast.py",
+      "sha256": "b4189f740988251ac7898f4d0cec89e69eb5d208d34a5017391c1eaea49a15c7"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge_illuminant.py",
+      "repository_path": "macos/tests/memory-resources/huge_illuminant.py",
+      "sha256": "53bd478013c02ecb2389ac2948917e5c89586415a15cdd4cd7ddadbdd5ac8fef"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge_threshold.py",
+      "repository_path": "macos/tests/memory-resources/huge_threshold.py",
+      "sha256": "03f5540d2e642712cffb34287d6d780c297894f8b4a07e58af6dc7e55f47f46f"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/huge_wavelet.py",
+      "repository_path": "macos/tests/memory-resources/huge_wavelet.py",
+      "sha256": "5198799939847d1080188ac6145d31b27d6a67a8841ff58b9b044f034f91ceae"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/illuminant-results.json",
+      "repository_path": "macos/tests/memory-resources/illuminant-results.json",
+      "sha256": "ad05d5ffc50fb15230f2b4f115ce00665cabbacdc64a9ad43c73c7243ad9fb68"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/illuminant_before.py",
+      "repository_path": "macos/tests/memory-resources/illuminant_before.py",
+      "sha256": "b2e02fec4b01153a3ce6f8f62d47d4564a4f0b8aa515e983cd21455e2dd7003f"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/illuminant_contract.py",
+      "repository_path": "macos/tests/memory-resources/illuminant_contract.py",
+      "sha256": "2a4cede1041f4e4168b437376c4a194e107e5ec2dd62ffcd6830edefa0e45b8c"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/interactive_before_wavelet.py",
+      "repository_path": "macos/tests/memory-resources/interactive_before_wavelet.py",
+      "sha256": "4ffb8a578f95c04740841c61ad43307922de21c1b3aa8c64e1e0109679ddae3b"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/page-allowance-results.json",
+      "repository_path": "macos/tests/memory-resources/page-allowance-results.json",
+      "sha256": "2f229cd67ef71d2fc8ee1a3e5ac7c2395a26220a73825479d84ed1c9c68c4f4c"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/page_allowance_contract.py",
+      "repository_path": "macos/tests/memory-resources/page_allowance_contract.py",
+      "sha256": "26da807851f46ffb295e88e9cd75b87f4421fab22a3528b278738c8f2fc7832d"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/retry-extended-results.json",
+      "repository_path": "macos/tests/memory-resources/retry-extended-results.json",
+      "sha256": "f780e9693cdbf7dbbd069ca9af1eddb1743cf1bcf44299e1cd89f8d732177c8e"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/retry_extended.py",
+      "repository_path": "macos/tests/memory-resources/retry_extended.py",
+      "sha256": "33734d89d0fc1c355f56707ad077dca73edb2596f5926080f756a5c247caacd4"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/wavelet-blocking-results.json",
+      "repository_path": "macos/tests/memory-resources/wavelet-blocking-results.json",
+      "sha256": "38342856e9c121441eb802d29b06d9ae414828ec161f5d8ad7fe49e623453cc3"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/wavelet_blocking_before.py",
+      "repository_path": "macos/tests/memory-resources/wavelet_blocking_before.py",
+      "sha256": "68fc3f4e7743dd640f26ba2fea51bdb0b10ca8d330605ed86083d584ca617aec"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/wavelet_blocking_contract.py",
+      "repository_path": "macos/tests/memory-resources/wavelet_blocking_contract.py",
+      "sha256": "654005149c0ce8353be3705955c74e4b4aab14cd2be7fa100fac41c98c82bcd4"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/wavelets-results.json",
+      "repository_path": "macos/tests/memory-resources/wavelets-results.json",
+      "sha256": "02416fc8b446f9c5087fe59ac9370e6ddbb9ee101db3fa6896f95762fabf2a10"
+    },
+    {
+      "snapshot_path": "tests/memory-resources/wavelets_contract.py",
+      "repository_path": "macos/tests/memory-resources/wavelets_contract.py",
+      "sha256": "cdb42616df2a6d462f5046a990bc2579e3171f33fb5011a4d1fd4b472039119f"
+    }
+  ]
+}

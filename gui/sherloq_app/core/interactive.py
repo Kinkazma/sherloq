@@ -85,6 +85,19 @@ class WaveletEngine:
         self.results = ArrayCache(128)
 
     def compute(self, params):
+        wavelet,threshold,level,mode=params
+        if threshold==0 or level==0:threshold,level,mode=0,0,'soft'
+        cached=self.results.get((wavelet,threshold,level,mode))
+        if cached is not None:return cached
+        from .memory_resources import MEMORY,MiB
+        def bounded():
+            from .bounded_wavelets import compute
+            return compute(self,params)
+        return MEMORY.execute(self.image.shape[0]*self.image.shape[1]*64,
+                              64*MiB+max(self.image.shape[:2])*64,
+                              lambda:self._compute(params),bounded)
+
+    def _compute(self, params):
         wavelet, threshold, level, mode = params
         if threshold == 0 or level == 0:
             threshold, level, mode = 0, 0, 'soft'

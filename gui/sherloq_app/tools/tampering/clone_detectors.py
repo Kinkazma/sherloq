@@ -61,7 +61,7 @@ class CloneDetectorsWidget(ToolWidget):
         with QSignalBlocker(self.cpu):self.cpu.setChecked(forced)
         self.cpu.setEnabled(not forced)
         self.view_mode.model().item(3).setEnabled(variant in FORGERYSCOPE)
-        for i in (4,5):self.view_mode.model().item(i).setEnabled(variant=='MGCFDN source/cible')
+        for i in (4,5):self.view_mode.model().item(i).setEnabled(variant in ('MGCFDN source/cible','D2PRL'))
         self.view_mode.setCurrentIndex(3 if variant.endswith('pistes') else 0)
         self.note.setText('Compare des panneaux, pas les retouches internes d’un panneau. Rechercher traite chaque zone séparément ; Ensemble couvre la planche. Comparer utilise deux rectangles. Suggestions = similarité sans confirmation géométrique.' if variant in FORGERYSCOPE else 'Carte de segmentation. Chaque rectangle est analysé séparément à la résolution du modèle ; comparaison entre zones et rayon de recherche non disponibles.')
         self.changed()

@@ -1,0 +1,45 @@
+{
+  "device": "cpu",
+  "side": 448,
+  "iterations": 40,
+  "seconds": 241.84671983299995,
+  "peak_rss": 16112959488,
+  "arrays": [
+    {
+      "shape": [
+        1,
+        1,
+        448,
+        448
+      ],
+      "finite": true,
+      "min": 1.794885962948245e-12,
+      "max": 1.0,
+      "positive": 48913
+    },
+    {
+      "shape": [
+        1,
+        1,
+        448,
+        448
+      ],
+      "finite": true,
+      "min": -0.0,
+      "max": 0.28375864028930664,
+      "positive": 0
+    },
+    {
+      "shape": [
+        1,
+        1,
+        448,
+        448
+      ],
+      "finite": true,
+      "min": -0.0,
+      "max": 0.2690410017967224,
+      "positive": 0
+    }
+  ]
+}

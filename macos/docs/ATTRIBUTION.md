@@ -43,3 +43,13 @@ are explicitly recorded; no replacement model is trained or downloaded.
 Personal photographs, application settings, logs, screenshots of the workstation,
 private Git/chat history, email and website/NAS data are excluded. Tests use
 synthetic inputs. This does not remove installed analysis components.
+
+## D2PRL native adapter — 30 September 2026
+
+D2PRL inference is adapted from [byc33/D2PRL](https://github.com/byc33/D2PRL/tree/a4314b614ea3186b4fac98e9e96939e37f275fc5),
+with the original file notices retained. The additional
+[nPr0nn/D2PRLu reference](https://github.com/nPr0nn/D2PRLu/tree/70b804a16575fe160695ec6c4740e6f10337d3b1)
+does not replace the inference implementation. Its Apache-2.0 license does not
+establish distribution rights for the original checkpoint. The checkpoint stays
+external to this source update and is absent from the frozen RC1 archive.
+[Runtime requirements, protocol and measurements](D2PRL-INTEGRATION.md).

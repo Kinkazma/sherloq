@@ -15,7 +15,7 @@ import sys
 import tempfile
 
 SUPPORT = Path(__file__).resolve().parent
-BACKUP_ROOT = '.updates/rc1-adaptive-memory-v1-20260929/'
+BACKUP_ROOT = '.updates/rc1-native-20260930/'
 RECEIPT = BACKUP_ROOT + 'native-build.json'
 NATIVE_FILES = ('native/runtime/libsherloq_patchmatch.dylib',
                 'native/runtime/libsherloq_dense_stream.dylib')
@@ -90,9 +90,13 @@ def planned_file(root, relative, source, before, default_mode=0o644):
         backup_data = before
     if backup.exists() and backup.read_bytes() != backup_data:
         raise ValueError(f'Existing backup differs: {backup}')
-    # New Python modules use existing package directories; no arbitrary paths.
-    if not target.parent.is_dir():
-        raise ValueError(f'Missing installation directory: {target.parent}')
+    # New model packages may add directories. Validate their existing ancestors
+    # now; create them only after every source and native build has passed.
+    for parent in target.parents:
+        if parent == root:
+            break
+        if parent.exists() and not parent.is_dir():
+            raise ValueError(f'Installation parent is not a directory: {parent}')
     mode = target.stat().st_mode & 0o777 if before is not None else default_mode
     return target, source, before, backup, backup_data, mode
 
@@ -142,8 +146,17 @@ def apply(installation):
             with backup.open('xb') as stream:
                 stream.write(backup_data)
     changed = []
+    created_directories = []
     try:
         for target, source, before, backup, backup_data, mode in plan:
+            missing = []
+            parent = target.parent
+            while not parent.exists():
+                missing.append(parent)
+                parent = parent.parent
+            for parent in reversed(missing):
+                parent.mkdir()
+                created_directories.append(parent)
             replace(target, source, mode)
             changed.append((target, before, mode))
         if receipt_data is not None:
@@ -156,6 +169,8 @@ def apply(installation):
                 target.unlink()
             else:
                 replace(target, before, mode)
+        for parent in reversed(created_directories):
+            parent.rmdir()
         raise
     return len(changed)
 

@@ -104,6 +104,14 @@ class IlluminantEngine:
         return self.renders.put(key,output)
 
     def compute(self,params,cancel=lambda:False,progress=lambda *a:None):
+        from .memory_resources import MEMORY,MiB
+        def bounded():
+            from .illuminant_bounded import compute
+            return compute(self,params,cancel,progress)
+        return MEMORY.execute(self.image.shape[0]*self.image.shape[1]*64,64*MiB,
+                              lambda:self._compute(params,cancel,progress),bounded,cancel)
+
+    def _compute(self,params,cancel=lambda:False,progress=lambda *a:None):
         settings,mode=params
         result=self.analyze(*settings,cancel,progress)
         output=self.render(settings,mode,result)

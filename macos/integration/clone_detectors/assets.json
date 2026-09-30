@@ -160,14 +160,11 @@
       "url": "https://pan.baidu.com/s/1m_FU5fqBl5J50uKs9Vu7Ng",
       "access_code": "xhwq",
       "access_code_source": "https://github.com/byc33/D2PRL/issues/3",
-      "path": "models/external/clone_detectors/01_d2prl/pretrain.pth",
-      "status": "missing",
-      "reason": "Baidu blocked by browser site-safety policy; user offered manual download.",
-      "contact_status": "Chinese email sent after user approval from EHESS to Yuanman Li on 2026-09-28 at 17:09 Europe/Paris; English email sent after user approval to Joao Phillipe Cardenuto at 17:24 Europe/Paris. Both verified in Sent. Weights remain missing.",
-      "correspondence": "integration/clone_detectors/correspondence/03-d2prl-email.txt",
-      "additional_correspondence": [
-        "integration/clone_detectors/correspondence/04-cardenuto-email.txt"
-      ]
+      "path": "models/external/clone_detectors/01_d2prl/d2prl.pth",
+      "status": "downloaded",
+      "size": 540533481,
+      "sha256": "2749c7436169ce689deaeb197ce5dae3d1a4533999833928168ec0b0d703df36",
+      "original_filename": "d2prl.pth"
     },
     {
       "id": "05_luc_pub_yolo",
@@ -199,6 +196,24 @@
       "reason": "Pinned SOLUTION.md explicitly describes simplified public release; exact additional filenames and segmentation checkpoint count not established.",
       "contact_status": "Request sent from user EHESS mailbox on 2026-09-28; no additional received files recorded locally.",
       "correspondence": "integration/clone_detectors/correspondence/01-leketush-email.txt"
+    },
+    {
+      "id": "01_d2prl_osn_received",
+      "kind": "weights",
+      "path": "models/external/clone_detectors/01_d2prl/osn.pth",
+      "size": 516690299,
+      "sha256": "63440fc1f50873eb93d77eac3cc56df8456b959f9c0a4bef8616ef941c77eeaf",
+      "status": "downloaded",
+      "purpose": "Training only; final D2PRL checkpoint includes the network weights."
+    },
+    {
+      "id": "01_d2prlu_reference",
+      "kind": "reference_repository",
+      "repo": "nPr0nn/D2PRLu",
+      "commit": "70b804a16575fe160695ec6c4740e6f10337d3b1",
+      "path": "third_party/research/clone_detectors/d2prlu",
+      "status": "cloned",
+      "purpose": "Author-supplied training code, inspected as a reference; not runtime inference."
     }
   ],
   "last_local_review_date": "2026-09-28"

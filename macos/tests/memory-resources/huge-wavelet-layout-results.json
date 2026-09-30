@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "pixels": 96000000,
+  "outputs_and_coefficients_bit_exact": true,
+  "bounded_seconds": 20.010783042002004,
+  "reference_seconds": 2.761015333002433,
+  "bounded_peak_rss_bytes": 585138176
+}

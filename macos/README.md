@@ -62,7 +62,7 @@ python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 ```
 
 Replace the quoted path with your restored installation folder. The updater
-validates 45 source/build files, rebuilds the native PatchMatch libraries, and backs up replaced files; it refuses unknown local changes and can be
+validates 65 source/build/inventory files, rebuilds the native PatchMatch libraries, and backs up replaced files; it refuses unknown local changes and can be
 rerun safely. Then open `build/SHERLOQ.app` in the installation folder, or run
 `venv/bin/python app_start.py` there. Existing restored installations use the
 same update command without repeating restoration. [Whole-image behaviour](docs/WHOLE-IMAGE.md) · [ELA controls](docs/ELA-SLIDERS.md) · [Adaptive-memory scope and update details](docs/ADAPTIVE-MEMORY.md).

@@ -1,0 +1,40 @@
+[
+  {
+    "image_id": "1",
+    "probability_max": 0.9999971389770508,
+    "probability_mean": 0.0011706684017553926,
+    "model_pixels_above_half": 196,
+    "components": [
+      77,
+      26,
+      16,
+      12,
+      7,
+      5,
+      5,
+      4,
+      4,
+      3
+    ],
+    "retained_original_pixels": 0
+  },
+  {
+    "image_id": "2",
+    "probability_max": 0.9999990463256836,
+    "probability_mean": 0.002933783456683159,
+    "model_pixels_above_half": 517,
+    "components": [
+      58,
+      56,
+      54,
+      45,
+      33,
+      24,
+      19,
+      18,
+      16,
+      15
+    ],
+    "retained_original_pixels": 0
+  }
+]

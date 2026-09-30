@@ -26,8 +26,8 @@ installation, run `restore_installation.py` there **before** applying this updat
 Then reopen its `build/SHERLOQ.app`, or run `venv/bin/python app_start.py` from the
 installation folder. No environment, model download or app-bundle rebuild is needed. The current updater rebuilds the native bridge; see [adaptive-memory update details](ADAPTIVE-MEMORY.md).
 
-The updater verifies all 45 source/build files before replacement,
-keeps the original files under `.updates/rc1-adaptive-memory-v1-20260929/files/`, and refuses
+The updater verifies all 65 source/build/inventory files before replacement,
+keeps the original files under `.updates/rc1-native-20260930/files/`, and refuses
 unrecognized local changes. Repeating the command leaves already updated files
 alone. Its baseline hashes were checked against the actual RC1 archive. The cumulative
 update also includes the [ELA manual-control correction](ELA-SLIDERS.md) and
