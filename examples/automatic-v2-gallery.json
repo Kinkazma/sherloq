@@ -1,0 +1,58 @@
+{
+  "images": [
+    {
+      "path": "screenshots/fork/corroboration-within.png",
+      "sha256": "9c0b566ad12ce049bec00b8330c17345e145be0501d261a3d2dc875439fa864b",
+      "bytes": 4249432,
+      "width": 3226,
+      "height": 936,
+      "label": "Corroboration — within zones",
+      "unchanged_supplied_export": true
+    },
+    {
+      "path": "screenshots/fork/corroboration-between.png",
+      "sha256": "bf321ffc389ac28928eeeb759e02bd94af843be51c1197db5df2d08bbb5bcd59",
+      "bytes": 4408183,
+      "width": 3226,
+      "height": 936,
+      "label": "Corroboration — between zones",
+      "unchanged_supplied_export": true
+    },
+    {
+      "path": "screenshots/fork/corroboration-all.png",
+      "sha256": "9dddaaedb669e337a9cdd73402209dcb5103d7e8b4414a7a65197b74b43905f6",
+      "bytes": 4434230,
+      "width": 3226,
+      "height": 936,
+      "label": "Corroboration — all relations",
+      "unchanged_supplied_export": true
+    },
+    {
+      "path": "screenshots/fork/biomes-within.png",
+      "sha256": "0cac9eaf5196b337c5e9d27955031a5da8d40c801aae42dde944a7426b849b66",
+      "bytes": 4467275,
+      "width": 3226,
+      "height": 936,
+      "label": "Biomes — within zones",
+      "unchanged_supplied_export": true
+    },
+    {
+      "path": "screenshots/fork/biomes-between.png",
+      "sha256": "602f4a3f5c6cc017b1b4b0a8308c455c54930aec075f709b191c5068cd92758d",
+      "bytes": 4500071,
+      "width": 3226,
+      "height": 936,
+      "label": "Biomes — between zones",
+      "unchanged_supplied_export": true
+    },
+    {
+      "path": "screenshots/fork/biomes-all.png",
+      "sha256": "5588f2b4997088f3fd495b5f214518acdc17207e4956a15bb913d885177fc5bc",
+      "bytes": 4514575,
+      "width": 3226,
+      "height": 936,
+      "label": "Biomes — all relations",
+      "unchanged_supplied_export": true
+    }
+  ]
+}

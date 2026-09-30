@@ -35,6 +35,63 @@ retained geometric correspondences. The method details explain panel selection,
 text exclusion and regrouping after RANSAC. No inference settings beyond the named
 profile were supplied with this image. [Method and controls](../macos/docs/SIFT-PANELS-TEXT.md).
 
+## Corroboration and biomes on the microscopy figure
+
+I supplied six more exports from Complete Automatic Analysis on the microscopy
+figure: three corroboration maps and three Biomes views. All six PNGs are retained
+unchanged at 3226 × 936 pixels. They show the within-zone, between-zone and
+all-relations displays. No new inference was run to prepare this gallery.
+
+The relation selection filters classical matches. Enabled Forgeryscope and D2PRL
+masks remain visible and counted across these selections. Corroboration counts
+method/search-region contexts; the union of D2PRL passes contributes at most one
+vote per pixel. ELA is shown only in Biomes when enabled and never casts a vote.
+
+<details>
+<summary>My examples — corroboration maps: within, between and all relations</summary>
+
+I exported these three views from Complete Automatic Analysis on the same
+microscopy figure. The map shows how many distinct method/search-region contexts
+cover each pixel. Its colours show corroboration counts, not probabilities.
+
+**Within zones**
+
+![Corroboration map within zones](../screenshots/fork/corroboration-within.png)
+
+**Between zones**
+
+![Corroboration map between zones](../screenshots/fork/corroboration-between.png)
+
+**All relations**
+
+![Corroboration map with all relations](../screenshots/fork/corroboration-all.png)
+
+</details>
+
+<details>
+<summary>My examples — biomes: within, between and all relations</summary>
+
+These views show the detected groups and masks on the same figure. The relation
+filter applies to classical matches; the enabled AI masks remain visible. ELA
+can appear in the Biomes view, but does not contribute to corroboration maps.
+
+**Within zones**
+
+![Biomes within zones](../screenshots/fork/biomes-within.png)
+
+**Between zones**
+
+![Biomes between zones](../screenshots/fork/biomes-between.png)
+
+**All relations**
+
+![Biomes with all relations](../screenshots/fork/biomes-all.png)
+
+[View controls and counting rules](../macos/docs/AUTOMATIC-ANALYSIS-V2.md) ·
+[Unchanged export inventory](automatic-v2-gallery.json).
+
+</details>
+
 ## Individual tool views
 
 The four additional illustrations are actual SHERLOQ tool widgets rendered

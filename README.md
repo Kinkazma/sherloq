@@ -156,6 +156,51 @@ their extent. This is the image I exported from my application, displayed unchan
 </details>
 
 <details>
+<summary>My examples — corroboration maps: within, between and all relations</summary>
+
+I exported these three views from Complete Automatic Analysis on the same
+microscopy figure. The map shows how many distinct method/search-region contexts
+cover each pixel. Its colours show corroboration counts, not probabilities.
+
+**Within zones**
+
+![Corroboration map within zones](screenshots/fork/corroboration-within.png)
+
+**Between zones**
+
+![Corroboration map between zones](screenshots/fork/corroboration-between.png)
+
+**All relations**
+
+![Corroboration map with all relations](screenshots/fork/corroboration-all.png)
+
+</details>
+
+<details>
+<summary>My examples — biomes: within, between and all relations</summary>
+
+These views show the detected groups and masks on the same figure. The relation
+filter applies to classical matches; the enabled AI masks remain visible. ELA
+can appear in the Biomes view, but does not contribute to corroboration maps.
+
+**Within zones**
+
+![Biomes within zones](screenshots/fork/biomes-within.png)
+
+**Between zones**
+
+![Biomes between zones](screenshots/fork/biomes-between.png)
+
+**All relations**
+
+![Biomes with all relations](screenshots/fork/biomes-all.png)
+
+[View controls and counting rules](macos/docs/AUTOMATIC-ANALYSIS-V2.md) ·
+[Example details](examples/README.md#corroboration-and-biomes-on-the-microscopy-figure).
+
+</details>
+
+<details>
 <summary>My examples — histogram, noise, frequencies and bit planes</summary>
 
 These views use the actual SHERLOQ tools, with the source image shown where useful. The microscopy image comes from BBBC039 via RSIID; the texture is the original shown above. [Sources, settings and reproduction instructions](examples/README.md).
