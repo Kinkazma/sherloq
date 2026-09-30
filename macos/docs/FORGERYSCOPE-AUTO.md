@@ -42,6 +42,26 @@ Changing views reuses the computed results. NPZ export includes the branch
 arrays, panels, scores, thresholds, decision provenance, merged groups and lane
 pairs. The existing D2PRL controls remain available when that backend is selected.
 
+## Automatic Clone Search and Complete Automatic Analysis
+
+Both combined analyses use Forgeryscope Auto on the enabled enclosing zone.
+Disabled subimages remain excluded; disabling the enclosing zone disables the
+Forgeryscope branch. PatchMatch retains its extended mirror-and-scale profile,
+and Complete Automatic Analysis retains its ELA/Ghosts branch.
+
+The combined region legend identifies microscopy, blots and lanes, and labels
+geometric evidence separately from similarity evidence. Lane regions follow
+the upstream whole-panel expansion while retaining the original lane rectangles
+in metadata. These regions represent pairs; original masks and merged clique
+groups remain available in exports.
+
+A branch selector filters only the Forgeryscope display, without recomputing
+models or hiding the other engines. Hidden regions, identifiers and colours
+remain stable. The existing display defaults remain 10 pixels minimum and an
+80% overlap exclusion; these are display filters, not detector thresholds.
+Complete Analysis keeps its independent source checkboxes and ELA controls.
+Exports record the selected branch and hidden-region state.
+
 ## Installation
 
 Apply the [cumulative RC1 update](../README.md#apply-the-cumulative-rc1-updates)
@@ -58,8 +78,9 @@ identity with a CUDA implementation.
 
 ## Validation and provenance
 
-The [source manifest](FORGERYSCOPE-AUTO-SOURCE-MANIFEST.json) identifies the
-delivered source and merged translations. The
+The [standalone source manifest](FORGERYSCOPE-AUTO-SOURCE-MANIFEST.json) and
+[combined-analysis source manifest](FORGERYSCOPE-AUTOMATIC-SOURCE-MANIFEST.json)
+identify the two delivered steps and merged translations. The
 [public integration checks](FORGERYSCOPE-AUTO-PUBLIC-CHECKS.json) distinguish
 tests rerun on the exported source from the native delivery's recorded trial.
 
@@ -77,7 +98,16 @@ tests rerun on the exported source from the native delivery's recorded trial.
   and concurrent activity and is not a speed guarantee.
 - D2PRL postprocessing and cached-filter UI regression checks pass. The
   cumulative updater passes transactional failure checks and migration from
-  seven prior public revisions, including safe repeated application.
+  prior public revisions, including safe repeated application.
+
+The [combined-analysis checks](FORGERYSCOPE-AUTOMATIC-PUBLIC-CHECKS.json) cover
+both panels, branch routing, evidence labels, lane expansion, display-only
+filtering, hidden-state persistence, exclusions and exports. A real combined
+run on a synthetic 256 × 128 image exercised PatchMatch, Forgeryscope Auto and
+ELA/Ghosts together and checked exact exported arrays. The test checks wiring;
+Forgeryscope retained no matches on that input, so it does not demonstrate detection
+quality on scientific figures. Mirror matching and all four SIFT scales were
+verified. The cumulative updater was exercised from eight prior public revisions.
 
 The native trial image and its maps are not included. Test programs and recorded
 results are under [forgeryscope-auto](../tests/forgeryscope-auto); their layout

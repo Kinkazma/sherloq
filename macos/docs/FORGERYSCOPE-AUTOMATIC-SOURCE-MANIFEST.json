@@ -1,0 +1,62 @@
+{
+  "snapshot_sha256": "550dd2a812eed8274a294f1a8217d94b572690b8224aae53234fdfe6a59f732b",
+  "requires_snapshot": "fbae85694edf64f2023184d391899c362f8af5c325cef872ac3b6f635a409eec",
+  "files": [
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/automatic_clones.py",
+      "repository_path": "gui/sherloq_app/core/automatic_clones.py",
+      "sha256": "976c7c1ed200461cfb100518bc4e01387be206d66b6e8ed13e2107e0749f72da"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/forgeryscope_auto.py",
+      "repository_path": "gui/sherloq_app/core/forgeryscope_auto.py",
+      "sha256": "60cdbd21bb1793551dac7be2a405d5bbbea438a5a033ad65d520dc0e4292a697"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/tools/tampering/automatic_clones.py",
+      "repository_path": "gui/sherloq_app/tools/tampering/automatic_clones.py",
+      "sha256": "813d392c67c2b27a4cf104891e5cd592f68e6becc82a69b87c3489ff5b095840"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/tools/tampering/complete_analysis.py",
+      "repository_path": "gui/sherloq_app/tools/tampering/complete_analysis.py",
+      "sha256": "9fa2cf589fdfeab92ac763d1a1595a0bc08bdf76369e0980be2f611d490bf5a1"
+    },
+    {
+      "snapshot_path": "tests/forgeryscope-auto/automatic.py",
+      "repository_path": "macos/tests/forgeryscope-auto/automatic.py",
+      "sha256": "d929fcd09a36b05905589adccc92c873d4c432cd793e8e04da986edb8cd15c2b"
+    },
+    {
+      "snapshot_path": "tests/forgeryscope-auto/automatic-results.json",
+      "repository_path": "macos/tests/forgeryscope-auto/automatic-results.json",
+      "sha256": "5d43eb3134a63f70d41eba64cde9ddea70a0d0dfa46b525ece5201bfef0d5af1"
+    },
+    {
+      "snapshot_path": "tests/forgeryscope-auto/combined_native.py",
+      "repository_path": "macos/tests/forgeryscope-auto/combined_native.py",
+      "sha256": "39e502a1b5030283b0fe9b3a92ea0c11eb117b207e726c88270a1348bf395693"
+    },
+    {
+      "snapshot_path": "tests/forgeryscope-auto/combined-native-results.json",
+      "repository_path": "macos/tests/forgeryscope-auto/combined-native-results.json",
+      "sha256": "2a5b2c036caf5a982e726eac11eb40d174ced88ed4c5c9fbd88e550a3eb34422"
+    }
+  ],
+  "locale_merge": {
+    "repository_path": "gui/sherloq_app/ui/locales/fr.json",
+    "entries": {
+      "Forgeryscope: all branches": "Forgeryscope : toutes les branches",
+      "Filter Forgeryscope display only; other analyses stay visible.": "Filtrer uniquement l’affichage Forgeryscope ; les autres analyses restent visibles.",
+      "Forgeryscope Auto: {0} similarity pairs; {1} lane pairs.": "Forgeryscope Auto : {0} paires similaires ; {1} paires de pistes.",
+      "Biome {0} · {1} pairs": "Biome {0} · {1} paires",
+      "Forgeryscope Auto · Microscopy · Geometry": "Forgeryscope Auto · Microscopie · Géométrie",
+      "Forgeryscope Auto · Microscopy · Similarity": "Forgeryscope Auto · Microscopie · Similarité",
+      "Forgeryscope Auto · Western blots · Geometry": "Forgeryscope Auto · Western blots · Géométrie",
+      "Forgeryscope Auto · Western blots · Similarity": "Forgeryscope Auto · Western blots · Similarité",
+      "Forgeryscope Auto · Lanes · Geometry": "Forgeryscope Auto · Pistes · Géométrie",
+      "Forgeryscope Auto · Lanes · Similarity": "Forgeryscope Auto · Pistes · Similarité"
+    },
+    "sha256": "1b0db9d868557f4f0d7d0e0ac4307cf76a09b9be2d538d78c018b323c1984c37"
+  }
+}

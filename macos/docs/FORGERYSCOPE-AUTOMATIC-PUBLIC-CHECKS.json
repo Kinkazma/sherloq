@@ -1,0 +1,195 @@
+{
+  "passed": true,
+  "scope": "Exported native automatic analysis integration in an isolated installation",
+  "archive_sha256": "550dd2a812eed8274a294f1a8217d94b572690b8224aae53234fdfe6a59f732b",
+  "rerun": {
+    "combined_ui": {
+      "passed": true,
+      "panels": 2,
+      "all_branches": true,
+      "evidence_distinct": true,
+      "lane_expansion": true,
+      "display_minimum10": true,
+      "overlap80": true,
+      "mirror_scale_profile_preserved": true,
+      "enclosing_only": true,
+      "exclusions": true,
+      "display_changes_no_inference": true,
+      "hidden_state_persists": true,
+      "export": true
+    },
+    "combined_real_engines": {
+      "passed": true,
+      "real_patchmatch": true,
+      "real_forgeryscope_auto": true,
+      "real_ela_ghosts": true,
+      "seconds": 8.296082083000329,
+      "shape": [
+        128,
+        256,
+        3
+      ],
+      "mirror_scales": true,
+      "export_exact": true,
+      "patchmatch_pairs": 806,
+      "forgeryscope_status": "empty"
+    },
+    "standalone_contracts": {
+      "passed": true,
+      "best_pair_fusion": true,
+      "clique_merge": true,
+      "blot_fallback_distinct": true,
+      "independent_zones": true,
+      "branch_arrays_propagated": true,
+      "manual_comparison_not_misclassified": true,
+      "lane_fallback": true,
+      "whole_panel_lane_rule": true,
+      "excluded_panels": true,
+      "microscopy_rejection": true
+    },
+    "standalone_real_worker_ui": {
+      "passed": true,
+      "worker": true,
+      "green": true,
+      "default_gpu": true,
+      "branch_views": true,
+      "npz_export": true,
+      "extended_mirror_profile_unchanged": true
+    },
+    "automatic_clones_contracts": {
+      "passed": true,
+      "subimages": 16,
+      "total_zones": 17,
+      "numerical_preset_preserved": true,
+      "normal_plus_mirrors": true,
+      "three_sources": true,
+      "forgeryscope_envelope_only": true,
+      "envelope_disabled_skips_forgeryscope": true,
+      "persistent_hidden_biomes": true,
+      "tab_filter_only": true,
+      "disabled_regions_excluded_inside_envelope": true,
+      "export_arrays_exact": true,
+      "close_cancels": true
+    },
+    "display_bounds": {
+      "passed": true,
+      "default_display_minimum_10": true,
+      "detection_minimum_still_5": true,
+      "maximum_adjustable": true,
+      "overlap_80_percent_excluded": true,
+      "overlap_threshold_adjustable": true,
+      "sliders_do_not_rerun_detectors": true,
+      "hidden_state_preserved": true
+    },
+    "complete_analysis_contracts": {
+      "passed": true,
+      "platform": "offscreen",
+      "exact_cell_geometry": true,
+      "holes_and_exclusions": true,
+      "autostart": true,
+      "defaults_32_2_3": true,
+      "clones_stand_ins": true,
+      "ela_real": true,
+      "threshold_cache": true,
+      "cell_auto": true,
+      "clones_not_restarted_for_ela_settings": true,
+      "source_isolation": true,
+      "persistent_hidden": true,
+      "npz_roundtrip": true,
+      "blue_marker": true,
+      "shutdown": true,
+      "tab_checkboxes": true,
+      "master_checkbox": true,
+      "ela_views": true,
+      "raw_ela_exact": true,
+      "no_recalculation_for_display": true,
+      "display_state_exported": true
+    }
+  },
+  "supplementary_native_test_sources": {
+    "automatic-clones/contracts.py": "56dc96cdacacb2e000f3dbb678eddb14b8a61f33835382b752f5d3ae328ffb0c",
+    "automatic-clones/display_bounds.py": "0c8bf9c65572df2b7c0bb9c91a8d4713554a1eda8a0ccc7a9cf4a2357b143f70",
+    "complete-analysis/contracts.py": "12c747f01be597e5db93204deae72172ff33be524284c241a18cbc482b4c8510"
+  },
+  "updater_transaction_cases": 17,
+  "installation_migrations": {
+    "passed": true,
+    "source_inventory_files": 69,
+    "real_isolated_native_build": true,
+    "cases": [
+      {
+        "base_commit": "fc08617fc3f98e134bfa27cc732e2670f60cd68f",
+        "files_changed": 71,
+        "repeated_changes": 0,
+        "all_source_hashes_match": true,
+        "native_signatures_valid": true,
+        "previous_backups_preserved": true
+      },
+      {
+        "base_commit": "b56f1d60109185e35cb7ded7a08de6ba48308198",
+        "files_changed": 71,
+        "repeated_changes": 0,
+        "all_source_hashes_match": true,
+        "native_signatures_valid": true,
+        "previous_backups_preserved": true
+      },
+      {
+        "base_commit": "0ea97f373dbf9cea41f8ee7d2c053839ef8a53e0",
+        "files_changed": 69,
+        "repeated_changes": 0,
+        "all_source_hashes_match": true,
+        "native_signatures_valid": true,
+        "previous_backups_preserved": true
+      },
+      {
+        "base_commit": "7992b90d2819261a23fc0e0c5dc1f3fcda45cf32",
+        "files_changed": 66,
+        "repeated_changes": 0,
+        "all_source_hashes_match": true,
+        "native_signatures_valid": true,
+        "previous_backups_preserved": true
+      },
+      {
+        "base_commit": "ea9727e4886fc8f6d12111dcdfb0b8f66ecdc8fc",
+        "files_changed": 31,
+        "repeated_changes": 0,
+        "all_source_hashes_match": true,
+        "native_signatures_valid": true,
+        "previous_backups_preserved": true
+      },
+      {
+        "base_commit": "07093f2031eeee2257e7d348dcd82ee172b64ace",
+        "files_changed": 13,
+        "repeated_changes": 0,
+        "all_source_hashes_match": true,
+        "native_signatures_valid": true,
+        "previous_backups_preserved": true
+      },
+      {
+        "base_commit": "4b7b9d4af08e23964705ba1d23126787b6e45caa",
+        "files_changed": 11,
+        "repeated_changes": 0,
+        "all_source_hashes_match": true,
+        "native_signatures_valid": true,
+        "previous_backups_preserved": true
+      },
+      {
+        "base_commit": "40bf829a8c7053f6b96d54d2572e1cd62af3f238",
+        "files_changed": 7,
+        "repeated_changes": 0,
+        "all_source_hashes_match": true,
+        "native_signatures_valid": true,
+        "previous_backups_preserved": true
+      }
+    ]
+  },
+  "unchanged_sources": {
+    "gui/sherloq_app/core/copy_mirror.py": "f44628022c031ea5f568ab4a54e7e757f666ffdbec581a17ae8d80400c8ac7e1",
+    "gui/sherloq_app/core/d2prl.py": "58305a3e16a754e023cb37926c642c754c227dca11c554d1777e919352e6a9bb",
+    "gui/sherloq_app/tools/tampering/clone_detectors.py": "22b29352de8fc84c9762bf0a5890919542509d778060ef5424fe4aa7ccefc08a",
+    "gui/sherloq_app/tools/jpeg/ela.py": "fa0134a4bec443459ff384004ee8b6c739d6ef94945a0207cd8127e01ca43f55",
+    "gui/sherloq_app/core/ela.py": "9705aa0b08344457bf2439e972b114e31f401ed4653e3d6d78cb9df106803acf",
+    "gui/sherloq_app/core/ela_ghosts.py": "18f655dc51ccaaf2f8795b2028fed52a71f9645e07a6c3489217ce953fec8c44"
+  },
+  "all_previous_translations_preserved": true
+}

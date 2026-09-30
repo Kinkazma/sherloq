@@ -929,5 +929,15 @@
   "Lanes": "Pistes",
   "Geometric matches": "Correspondances géométriques",
   " Lane pairs: {0}.": " Paires de pistes : {0}.",
-  "Public Forgeryscope pipeline: microscopy, western blots and lane fallback. Search analyzes each zone independently; include an enclosing zone for cross-panel matches. Suggestions identifies similarity evidence without geometric confirmation.": "Chaîne publique Forgeryscope : microscopie, western blots et recherche de pistes en secours. Rechercher analyse chaque zone séparément ; inclure une zone englobante pour comparer les panneaux. Suggestions identifie les ressemblances sans confirmation géométrique."
+  "Public Forgeryscope pipeline: microscopy, western blots and lane fallback. Search analyzes each zone independently; include an enclosing zone for cross-panel matches. Suggestions identifies similarity evidence without geometric confirmation.": "Chaîne publique Forgeryscope : microscopie, western blots et recherche de pistes en secours. Rechercher analyse chaque zone séparément ; inclure une zone englobante pour comparer les panneaux. Suggestions identifie les ressemblances sans confirmation géométrique.",
+  "Forgeryscope: all branches": "Forgeryscope : toutes les branches",
+  "Filter Forgeryscope display only; other analyses stay visible.": "Filtrer uniquement l’affichage Forgeryscope ; les autres analyses restent visibles.",
+  "Forgeryscope Auto: {0} similarity pairs; {1} lane pairs.": "Forgeryscope Auto : {0} paires similaires ; {1} paires de pistes.",
+  "Biome {0} · {1} pairs": "Biome {0} · {1} paires",
+  "Forgeryscope Auto · Microscopy · Geometry": "Forgeryscope Auto · Microscopie · Géométrie",
+  "Forgeryscope Auto · Microscopy · Similarity": "Forgeryscope Auto · Microscopie · Similarité",
+  "Forgeryscope Auto · Western blots · Geometry": "Forgeryscope Auto · Western blots · Géométrie",
+  "Forgeryscope Auto · Western blots · Similarity": "Forgeryscope Auto · Western blots · Similarité",
+  "Forgeryscope Auto · Lanes · Geometry": "Forgeryscope Auto · Pistes · Géométrie",
+  "Forgeryscope Auto · Lanes · Similarity": "Forgeryscope Auto · Pistes · Similarité"
 }

@@ -62,12 +62,12 @@ python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 ```
 
 Replace the quoted path with your restored installation folder. The updater
-validates 68 source/build/inventory files, rebuilds the native PatchMatch libraries, and backs up replaced files; it refuses unknown local changes and can be
+validates 69 source/build/inventory files, rebuilds the native PatchMatch libraries, and backs up replaced files; it refuses unknown local changes and can be
 rerun safely. Then open `build/SHERLOQ.app` in the installation folder, or run
 `venv/bin/python app_start.py` there. Existing restored installations use the
-same update command without repeating restoration. This includes the standalone
-[Forgeryscope Auto choice](docs/FORGERYSCOPE-AUTO.md) in Clone Detectors, with
-branch views and NPZ exports using the existing weights.
+same update command without repeating restoration. This includes
+[Forgeryscope Auto](docs/FORGERYSCOPE-AUTO.md) in Clone Detectors and both combined
+automatic analyses, with branch views and exports using the existing weights.
 [Whole-image behaviour](docs/WHOLE-IMAGE.md) · [ELA controls](docs/ELA-SLIDERS.md) · [Adaptive-memory scope and update details](docs/ADAPTIVE-MEMORY.md).
 
 ### Manual download and assembly

@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "panels": 2,
+  "all_branches": true,
+  "evidence_distinct": true,
+  "lane_expansion": true,
+  "display_minimum10": true,
+  "overlap80": true,
+  "mirror_scale_profile_preserved": true,
+  "enclosing_only": true,
+  "exclusions": true,
+  "display_changes_no_inference": true,
+  "hidden_state_persists": true,
+  "export": true
+}

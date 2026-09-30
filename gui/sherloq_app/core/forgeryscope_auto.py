@@ -96,10 +96,21 @@ def predict(image,loaded,progress=lambda *args:None,excluded_boxes=()):
             for item in create_lane_match_masks(image.shape,matches,lanes=lanes):
                 branches['lanes']|=item.astype(np.uint8)
             candidates|=branches['lanes'];mask|=branches['lanes']
+            # Carry the same >50% whole-panel expansion into automatic biomes.
+            from collections import Counter
+            totals=Counter(l.panel_idx for l in lanes)
+            matched=Counter(p for m in matches for p in (m.panel_idx1,m.panel_idx2))
+            whole={p for p,n in totals.items() if matched[p]>.5*n}
+            panel_boxes={}
+            for lane in lanes:panel_boxes.setdefault(lane.panel_idx,lane.panel_bbox)
+            def display_box(panel,box):
+                return panel_boxes[panel][-4:] if panel in whole and panel_boxes.get(panel) is not None else box
             # Export lane evidence independently of geometric panel matches.
             meta['lane_pairs']=[dict(panel0=int(m.panel_idx1),panel1=int(m.panel_idx2),
                 score=float(m.similarity),polygon0=_polygon(m.bbox1_absolute),
-                polygon1=_polygon(m.bbox2_absolute),evidence='embedding') for m in matches]
+                polygon1=_polygon(m.bbox2_absolute),evidence='embedding',
+                display_polygon0=_polygon(display_box(m.panel_idx1,m.bbox1_absolute)),
+                display_polygon1=_polygon(display_box(m.panel_idx2,m.bbox2_absolute))) for m in matches]
     for x0,y0,x1,y1 in excluded_boxes:
         for item in (mask,candidates,geometric,*branches.values()):item[y0:y1,x0:x1]=0
     meta['status']='ok' if mask.any() else 'empty' if panels else 'no_panels'

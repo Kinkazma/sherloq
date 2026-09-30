@@ -12,7 +12,7 @@ from PySide6.QtCore import (Qt, QTimer, Signal, QEvent, QAbstractListModel,
                             QModelIndex, QSignalBlocker)
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import (QApplication, QWidget, QLabel, QPushButton,
-    QCheckBox, QVBoxLayout, QHBoxLayout, QTabWidget, QTabBar, QFileDialog, QSlider, QDoubleSpinBox)
+    QCheckBox, QComboBox, QVBoxLayout, QHBoxLayout, QTabWidget, QTabBar, QFileDialog, QSlider, QDoubleSpinBox)
 
 from ...core.automatic_clones import SOURCES, parameters, entries, visible, render, export
 from ...core.auto_zones import enclosing, diagonal
@@ -91,7 +91,7 @@ class Biomes(QAbstractListModel):
             return None
         e = self.rows[index.row()]
         if role == Qt.DisplayRole:
-            unit='pixels' if 'pixel_mask' in e else 'cells' if 'cells' in e else 'matches'
+            unit=e.get('count_kind','pixels' if 'pixel_mask' in e else 'cells' if 'cells' in e else 'matches')
             return f"Biome {index.row()+1} · {e['count']} {unit}\n{t(e.get('label',e['source']))}"
         if role == Qt.CheckStateRole:
             return Qt.Unchecked if e['id'] in self.hidden else Qt.Checked
@@ -140,6 +140,10 @@ class AutomaticClonesWidget(ToolWidget):
         for label in ('Overlay', *self.sources):
             self.tabs.addTab(label)
         self.cpu = QCheckBox('CPU')
+        self.forge_branch=QComboBox()
+        for label,key in (('Forgeryscope: all branches',''),('Microscopy','microscopy'),('Western blots','blots'),('Lanes','lanes')):
+            self.forge_branch.addItem(label,key)
+        self.forge_branch.setToolTip('Filter Forgeryscope display only; other analyses stay visible.')
         self.detect = QPushButton('Detect subimages')
         self.run = QPushButton('Run again')
         self.run_whole = QPushButton('Run on whole image')
@@ -170,6 +174,7 @@ class AutomaticClonesWidget(ToolWidget):
         for w in (self.detect, self.run, self.run_whole, self.stop_button, self.cpu, self.show_zones, self.save):
             controls.addWidget(w)
         controls.addStretch(); layout.addLayout(controls)
+        layout.addWidget(self.forge_branch)
         self.clone_intervals=QWidget()
         intervals = QHBoxLayout(self.clone_intervals);intervals.setContentsMargins(0,0,0,0)
         for widget in (QLabel('Displayed length — minimum'), self.low, self.minimum,
@@ -214,6 +219,7 @@ class AutomaticClonesWidget(ToolWidget):
         self.model.changed.connect(self.redraw)
         self.viewer.view.biomeClicked.connect(self.pick)
         self.tabs.currentChanged.connect(self.tab_changed)
+        self.forge_branch.currentIndexChanged.connect(self.tab_changed)
         self.low.valueChanged.connect(self.minimum.setValue); self.high.valueChanged.connect(self.maximum.setValue)
         self.minimum.valueChanged.connect(lambda v: self.length_changed(True, v))
         self.maximum.valueChanged.connect(lambda v: self.length_changed(False, v))
@@ -240,7 +246,7 @@ class AutomaticClonesWidget(ToolWidget):
         return {'patchmatch': 'Waiting', 'forgeryscope': 'Waiting'}
 
     def state_labels(self):
-        return {'patchmatch': t(EXTENDED_SYMMETRIC), 'forgeryscope': 'Forgeryscope microscopy'}
+        return {'patchmatch': t(EXTENDED_SYMMETRIC), 'forgeryscope': 'Forgeryscope Auto'}
 
     def source(self):
         return self.sources[self.tabs.currentIndex()-1] if self.tabs.currentIndex() else None
@@ -383,10 +389,15 @@ class AutomaticClonesWidget(ToolWidget):
             candidates = sum(len(z.get('embedding_candidates', ())) for z in meta['zones'])
             accepted = sum(bool(m['supported']) for z in meta['zones'] for m in z.get('comparisons', ()))
             notes.append(f'Forgeryscope: {accepted} geometrically supported pairs / {candidates} candidate pairs.')
+            similarities=sum(m.get('accepted',False) and not m.get('supported',False) for z in meta['zones'] for m in z.get('comparisons',()))
+            lanes=sum(z.get('lane_matches',0) for z in meta['zones'])
+            notes.append(t('Forgeryscope Auto: {0} similarity pairs; {1} lane pairs.').replace('{0}',str(similarities)).replace('{1}',str(lanes)))
         self.detail.setText(' '.join(notes))
 
     def display_entries(self):
-        return tuple(e for e in self.biomes if not self.source() or e['source'] == self.source())
+        branch=self.forge_branch.currentData()
+        return tuple(e for e in self.biomes if (not self.source() or e['source'] == self.source())
+                     and (not branch or e['source']!=SOURCES[0] or e['provenance'].get('branch')==branch))
 
     def rebuild_legend(self):
         with QSignalBlocker(self.legend.selectionModel()):
@@ -399,6 +410,7 @@ class AutomaticClonesWidget(ToolWidget):
                     break
 
     def tab_changed(self, *_):
+        self.forge_branch.setVisible(self.source() in (None,SOURCES[0]))
         self.focused = None; self.rebuild_legend(); self.redraw()
 
     def choose(self, *_):
@@ -431,7 +443,7 @@ class AutomaticClonesWidget(ToolWidget):
     def redraw(self):
         if self.closed:
             return
-        shown = visible(self.biomes, self.source(), self.model.hidden, self.focused)
+        shown = visible(self.display_entries(), None, self.model.hidden, self.focused)
         self.viewer.view.biomes = shown
         excluded = tuple(r for i,r in enumerate(self.viewer.view.snapshot())
                          if i in self.zone_model.disabled and r != self.envelope)
@@ -444,7 +456,7 @@ class AutomaticClonesWidget(ToolWidget):
         if path:
             snapshot = dict(version=1, configuration=self.submitted, results=dict(self.results),
                 states=dict(self.states), errors=dict(self.errors), biomes=self.biomes,
-                display=dict(source=self.source(), hidden=sorted(self.model.hidden), focused=self.focused,
+                display=dict(source=self.source(), forgeryscope_branch=self.forge_branch.currentData(), hidden=sorted(self.model.hidden), focused=self.focused,
                              minimum_length_px=self.minimum.value(), maximum_length_px=self.maximum.value(),
                              maximum_overlap=self.overlap.value()/100),
                 image_shape=self.image.shape, decoded_bgr8_sha256=hashlib.sha256(memoryview(np.ascontiguousarray(self.image))).hexdigest())

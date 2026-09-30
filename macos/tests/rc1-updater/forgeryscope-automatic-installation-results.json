@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "source_inventory_files": 69,
+  "real_isolated_native_build": true,
+  "cases": [
+    {
+      "base_commit": "fc08617fc3f98e134bfa27cc732e2670f60cd68f",
+      "files_changed": 71,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "b56f1d60109185e35cb7ded7a08de6ba48308198",
+      "files_changed": 71,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "0ea97f373dbf9cea41f8ee7d2c053839ef8a53e0",
+      "files_changed": 69,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "7992b90d2819261a23fc0e0c5dc1f3fcda45cf32",
+      "files_changed": 66,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "ea9727e4886fc8f6d12111dcdfb0b8f66ecdc8fc",
+      "files_changed": 31,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "07093f2031eeee2257e7d348dcd82ee172b64ace",
+      "files_changed": 13,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "4b7b9d4af08e23964705ba1d23126787b6e45caa",
+      "files_changed": 11,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "40bf829a8c7053f6b96d54d2572e1cd62af3f238",
+      "files_changed": 7,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    }
+  ]
+}

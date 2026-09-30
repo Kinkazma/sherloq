@@ -5,6 +5,17 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 30 September 2026 — Forgeryscope Auto in both automatic analyses
+
+I connected the validated Auto pipeline to Automatic Clone Search and Complete
+Automatic Analysis on the enabled enclosing zone, retaining subimage exclusions.
+The region legend distinguishes microscopy, blots and lanes, with geometric or
+similarity evidence. A display-only branch selector preserves hidden regions and
+does not rerun models; exports retain this display state and the original maps.
+PatchMatch keeps its extended mirror-and-scale profile and Complete Analysis
+keeps ELA/Ghosts. The updater now validates 69 source/build/inventory files.
+[Behaviour and validation](FORGERYSCOPE-AUTO.md#automatic-clone-search-and-complete-automatic-analysis).
+
 ## 30 September 2026 — standalone Forgeryscope Auto
 
 I added a green Forgeryscope Auto choice in Clone Detectors, following the public

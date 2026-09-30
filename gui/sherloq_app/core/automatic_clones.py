@@ -14,7 +14,7 @@ from .cloning2 import EXTENDED_SYMMETRIC, biome_sides, supported_selection
 from .auto_zones import diagonal as zone_diagonal
 from .copy_overlap import overlap
 
-SOURCES = ('Forgeryscope microscopy', 'PatchMatch Zernike', 'PatchMatch SIFT')
+SOURCES = ('Forgeryscope Auto', 'PatchMatch Zernike', 'PatchMatch SIFT')
 
 
 def parameters(shape, regions, envelope, disabled, cpu=False):
@@ -26,7 +26,7 @@ def parameters(shape, regions, envelope, disabled, cpu=False):
     radius = round(max((zone_diagonal(r) for r in active), default=diagonal), 2)
     params = (EXTENDED_SYMMETRIC, 6000, radius, 5., .3, min(50., diagonal),
               'Similarity', 3., 6, 8, 8, True, 2., cpu, True, True, excluded, guides)
-    forge = dict(variant='Forgeryscope microscopie', regions=(envelope,) if envelope in active else (),
+    forge = dict(variant='Forgeryscope Auto', regions=(envelope,) if envelope in active else (),
                  selection_present=True, compare=False, excluded=excluded)
     return params, active, forge
 
@@ -40,7 +40,9 @@ def _entry(source, polygons, count, provenance):
         return None
     # Stable identifiers preserve hidden states across incremental branch results.
     canonical = sorted(tuple(sorted(map(tuple, np.round(p, 3).tolist()))) for p in polygons)
-    key = hashlib.sha256(json.dumps([source, canonical]).encode()).hexdigest()[:24]
+    identity=[source,canonical]
+    if 'branch' in provenance:identity.append(provenance['branch'])
+    key = hashlib.sha256(json.dumps(identity).encode()).hexdigest()[:24]
     hue = (int(key[:8], 16) / 2**32 + SOURCES.index(source) / 3) % 1
     color = tuple(round(v * 255) for v in colorsys.hsv_to_rgb(hue, .8, .95)[::-1])
     return dict(id=key, source=source, polygons=[p.tolist() for p in polygons],
@@ -69,12 +71,20 @@ def entries(patchmatch=None, forgeryscope=None, low=10., high=float('inf'), maxi
     if forgeryscope is not None:
         for zone_index, zone in enumerate(forgeryscope['metadata']['zones']):
             offset = np.asarray(zone.get('origin', [0, 0]))
-            for index, match in enumerate(zone.get('comparisons', ())):
-                if not match['supported']:
+            matches=[(i,m,m.get('branch','microscopy')) for i,m in enumerate(zone.get('comparisons',()))]
+            matches += [(i,{**m,'accepted':True,'supported':False},'lanes') for i,m in enumerate(zone.get('lane_pairs',()))]
+            for index, match, branch in matches:
+                supported=bool(match.get('supported',False))
+                if not match.get('accepted',supported):
                     continue
-                item = _entry(SOURCES[0], [np.asarray(match[f'polygon{i}']) + offset for i in (0, 1)],
-                              match['inliers'], dict(zone=zone_index, comparison=index, score=match['score']))
+                polygons=[np.asarray(match.get(f'display_polygon{i}',match[f'polygon{i}']))+offset for i in (0,1)]
+                item = _entry(SOURCES[0], polygons, match.get('inliers',0) if supported else 1,
+                              dict(zone=zone_index,comparison=index,score=match['score'],branch=branch,
+                                   evidence='geometry' if supported else 'similarity',accepted=True))
                 if item:
+                    title={'microscopy':'Microscopy','blots':'Western blots','lanes':'Lanes'}[branch]
+                    item['label']=f"Forgeryscope Auto · {title} · {'Geometry' if supported else 'Similarity'}"
+                    if not supported:item['count_kind']='pairs'
                     centers = []
                     for polygon in item['polygons']:
                         moments = cv.moments(np.asarray(polygon, np.float32))

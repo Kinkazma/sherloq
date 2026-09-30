@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "real_patchmatch": true,
+  "real_forgeryscope_auto": true,
+  "real_ela_ghosts": true,
+  "seconds": 8.649643499999911,
+  "shape": [
+    128,
+    256,
+    3
+  ],
+  "mirror_scales": true,
+  "export_exact": true,
+  "patchmatch_pairs": 806,
+  "forgeryscope_status": "empty"
+}

@@ -224,7 +224,7 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
                 display=dict(background='ela' if self.effective_ela_mode() and self.current_ela_preview() is not None else 'original',
                     energy_biomes=self.ela_energy_visible.isChecked(),legacy_biomes=self.ela_legacy_visible.isChecked(),
                     ela_view=('image','ela_biomes','ela','energy_low','energy_high')[self.ela_mode.currentIndex()],
-                    enabled_sources=self.enabled_sources(),source=self.source(),hidden=sorted(self.model.hidden),focused=self.focused,
+                    enabled_sources=self.enabled_sources(),source=self.source(),forgeryscope_branch=self.forge_branch.currentData(),hidden=sorted(self.model.hidden),focused=self.focused,
                     minimum_length_px=self.minimum.value(),maximum_length_px=self.maximum.value(),maximum_overlap=self.overlap.value()/100),
                 image_shape=self.image.shape,decoded_bgr8_sha256=hashlib.sha256(memoryview(np.ascontiguousarray(self.image))).hexdigest())
             self.export_job.request((str(Path(path).with_suffix('.npz')),snapshot))

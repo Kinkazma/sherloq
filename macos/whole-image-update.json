@@ -1,22 +1,27 @@
 {
   "gui/sherloq_app/tools/tampering/automatic_clones.py": {
-    "before": "3094e48aebcdb79296fea4c09059c62aee680ce96aa460047c1e8d4bf76c719e",
-    "after": "a6b602a46a0f660dd99214ca141a15580c9e472be2cb82d34c270e7f314ec0d2"
+    "before": [
+      "3094e48aebcdb79296fea4c09059c62aee680ce96aa460047c1e8d4bf76c719e",
+      "a6b602a46a0f660dd99214ca141a15580c9e472be2cb82d34c270e7f314ec0d2"
+    ],
+    "after": "813d392c67c2b27a4cf104891e5cd592f68e6becc82a69b87c3489ff5b095840"
   },
   "gui/sherloq_app/tools/tampering/complete_analysis.py": {
     "before": [
       "6520442f8c5fea0abe9c36b6ef3cc75bbf45de96564ea89ea343b64139e49e15",
-      "8a3f10af6d8b4138fd37f943c7a3fd0a7773fb3a69e911f62a757264bc23f68a"
+      "8a3f10af6d8b4138fd37f943c7a3fd0a7773fb3a69e911f62a757264bc23f68a",
+      "6449d27f7b4680bcea9291c76ccea9952b24c510f7dcec9b2242b1d6a4e998c9"
     ],
-    "after": "6449d27f7b4680bcea9291c76ccea9952b24c510f7dcec9b2242b1d6a4e998c9"
+    "after": "9fa2cf589fdfeab92ac763d1a1595a0bc08bdf76369e0980be2f611d490bf5a1"
   },
   "gui/sherloq_app/ui/locales/fr.json": {
     "before": [
       "f0db26bbb86bae7bd308ede21bc62b9ca295438641486f4132feace1eaa77e6d",
       "ecab56f64b2ba78819b7c7c1ea5beb57a2ec559391e5bef089a54b49d3a06f93",
-      "f6d68e47e9e72405dbb9e8866fdb487c3f5fa6c795a5e3864609900c02bbd9ee"
+      "f6d68e47e9e72405dbb9e8866fdb487c3f5fa6c795a5e3864609900c02bbd9ee",
+      "94c2162ef70ea9f2dc10344781028acc466ef25480a28de7b83f8d6565eaf377"
     ],
-    "after": "94c2162ef70ea9f2dc10344781028acc466ef25480a28de7b83f8d6565eaf377"
+    "after": "1b0db9d868557f4f0d7d0e0ac4307cf76a09b9be2d538d78c018b323c1984c37"
   },
   "gui/sherloq_app/ui/ela_profiles.py": {
     "before": "dbe28231d9489b51ccf25be27b6fa887f7527b90f75178cf42f669e0b44d564e",
@@ -303,8 +308,11 @@
     "target": "integration/clone_detectors/runtime-manifest.json"
   },
   "gui/sherloq_app/core/forgeryscope_auto.py": {
-    "before": null,
-    "after": "0d5f53d75a899c089adaa88b7d93ee780b8fcee7a4513b3b77359f858c404d84"
+    "before": [
+      null,
+      "0d5f53d75a899c089adaa88b7d93ee780b8fcee7a4513b3b77359f858c404d84"
+    ],
+    "after": "60cdbd21bb1793551dac7be2a405d5bbbea438a5a033ad65d520dc0e4292a697"
   },
   "gui/sherloq_app/core/forgeryscope_adapter.py": {
     "before": "3ec6faea3ef312cfcefe7e0f715891c10be02e4559f2def6fc7adc3025a9ad5d",
@@ -317,5 +325,11 @@
     ],
     "after": "9e7d83c0b331f3afd936baef3c717026f76fb383693a8875ad1fa167e6c0dfed",
     "target": "integration/clone_detectors/checkpoint-inspection.json"
+  },
+  "gui/sherloq_app/core/automatic_clones.py": {
+    "before": [
+      "35fb23a5cadcc898b0ad46748c8c3efbc9ff568d749e25fd655e002e060f0318"
+    ],
+    "after": "976c7c1ed200461cfb100518bc4e01387be206d66b6e8ed13e2107e0749f72da"
   }
 }
