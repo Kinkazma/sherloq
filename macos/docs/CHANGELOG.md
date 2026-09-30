@@ -5,6 +5,18 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 30 September 2026 — standalone Forgeryscope Auto
+
+I added a green Forgeryscope Auto choice in Clone Detectors, following the public
+upstream pipeline for microscopy, western blots and lanes. It merges blot
+candidate pairs by maximum score, preserves the public lane fallback ordering
+and whole-panel rule, and exposes branch maps and distinct geometric/similarity
+evidence in views and NPZ exports. Search classifies panels within each active
+zone; Auto does not infer classes for manual Compare rectangles.
+The seven existing weights are reused. The cumulative updater includes the new
+module and checkpoint class inventory, with merged French translations.
+[Usage, pipeline details and validation](FORGERYSCOPE-AUTO.md).
+
 ## 30 September 2026 — interactive D2PRL region filtering
 
 I added a 0–5,000 region-size slider and synchronized numeric field, measured on

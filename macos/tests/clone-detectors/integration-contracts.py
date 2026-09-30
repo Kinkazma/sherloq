@@ -25,6 +25,7 @@ for variant in (() if os.environ.get('FORGERYSCOPE_ONLY') else SEGMENTERS):
  records.append(rec);print(rec,flush=True);(ROOT/'tests/clone-detectors/integration-results.json').write_text(json.dumps(records,indent=2))
 models.clear()
 for variant in FORGERYSCOPE:
+ if variant=='Forgeryscope Auto':continue # Classified pipeline covered in tests/forgeryscope-auto/.
  p=dict(variant=variant,regions=zones,selection_present=True,compare=True);t=time.perf_counter();r=analyze(im,p,'cpu',models)
  assert not r['mask'][:,176:240].any() and not r['candidates'][:,176:240].any()
  rec=dict(variant=variant,seconds=time.perf_counter()-t,status=r['metadata']['status'],mask_pixels=int(r['mask'].sum()),candidate_pixels=int(r['candidates'].sum()),zones=r['metadata']['zones']);records.append(rec);print({k:v for k,v in rec.items() if k!='zones'},flush=True)

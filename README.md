@@ -65,7 +65,7 @@ The current source defines **50 distinct tool entries: 38 inherited labels and 1
 | ZERO JPEG Grids | Integration of the existing ZERO method for JPEG-grid analysis |
 | Copy-Move Forgery 2 | Additional matching workflow with regions, dense descriptors, geometric controls and grouped results |
 | Adaptive CFA | Integration of an existing colour-filter-array analysis method |
-| Clone Detectors | Additional research backends, including D2PRL with GPU/CPU selection and union/source/target views; external weights are required |
+| Clone Detectors | Additional research backends, including Forgeryscope Auto for microscopy, western blots and lanes, and D2PRL with GPU/CPU selection and union/source/target views; external weights are required |
 | Automatic Clone Search | Combined clone-search workflow, including microscopy and PatchMatch branches |
 | Complete Automatic Analysis | Combined workflow with clone-search results and ELA/JPEG-ghost views |
 | CAT-Net v2, SAFIRE, FOCAL, AdaIFL | Four additional research-method integrations, with original component credits and licenses |
@@ -80,6 +80,12 @@ On the recorded author example, the optimized MPS adaptation took 25.76 seconds
 versus 401.42 seconds for the initial MPS port, with identical raw maps. CPU and
 GPU can produce different results; this is not a general accuracy or speed claim.
 [Protocol, measurements, limits and required external files](macos/docs/D2PRL-INTEGRATION.md).
+
+I added [Forgeryscope Auto](macos/docs/FORGERYSCOPE-AUTO.md) as a green choice in
+Clone Detectors. It follows the public upstream pipeline for microscopy, western
+blots and lanes, with separate branch views and NPZ exports. Geometric matches
+remain distinguishable from similarity-based candidates. It reuses the seven
+existing Forgeryscope weights and shared matching dependencies.
 
 ## Screenshots
 

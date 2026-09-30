@@ -4,7 +4,7 @@ import numpy as np
 import cv2 as cv
 from .clone_models import ROOT,load_segmentation,segment
 SEGMENTERS=('CMSeg-Net generalization','CMSeg-Net addnoise','MGCFDN','MGCFDN source/cible','MGCFDN 16×16','MGCFDN EffNet 16×16','MGCFDN MPDN 16×16','MGCFDN TNT 16×16','MGCFDN VIG 16×16','D2PRL')
-FORGERYSCOPE=('Forgeryscope microscopie','Forgeryscope blots complets','Forgeryscope chevauchements','Forgeryscope pistes')
+FORGERYSCOPE=('Forgeryscope microscopie','Forgeryscope blots complets','Forgeryscope chevauchements','Forgeryscope pistes','Forgeryscope Auto')
 VARIANTS=SEGMENTERS+FORGERYSCOPE
 
 def boxes_for(shape,regions):
@@ -50,6 +50,7 @@ def analyze(image,params,requested,models,progress=lambda *x:None):
     if requested not in ('cpu','mps'):raise ValueError('Device invalide.')
     if params.get('selection_present') and not regions:raise ValueError('Aucune zone active.')
     if compare and (variant not in FORGERYSCOPE or len(regions)!=2):raise ValueError('Comparer exige deux zones et un profil Forgeryscope.')
+    if compare and variant=='Forgeryscope Auto':raise ValueError('Forgeryscope Auto classifies panels automatically; use Search.')
     if image.dtype!=np.uint8 or image.ndim!=3 or image.shape[2]!=3:raise ValueError('Image BGR 8 bits attendue.')
     if image.shape[0]*image.shape[1]>64_000_000:raise ValueError('Image au-delà du budget de 64 mégapixels.')
     boxes=boxes_for(image.shape,regions);loaded,reused=models.get(variant,requested)
@@ -58,6 +59,7 @@ def analyze(image,params,requested,models,progress=lambda *x:None):
     allowed=np.ones(image.shape[:2],np.uint8)
     for x0,y0,x1,y1 in excluded:allowed[y0:y1,x0:x1]=0
     score=np.zeros(image.shape[:2],np.float32);mask=np.zeros(image.shape[:2],np.uint8);candidates=np.zeros_like(mask);analyzed=np.zeros_like(mask);source=np.zeros_like(score);target=np.zeros_like(score);raw=[];metadata=[]
+    branches={name:np.zeros_like(mask) for name in ('branch_microscopy','branch_blots','branch_lanes','geometric')} if variant=='Forgeryscope Auto' else {}
     if compare:
         # Context outside the two panels is never passed to either matcher or embedder.
         label='Microscopy' if 'microscopie' in variant else 'Blots';panels=[(label,1.,*b) for b in boxes]
@@ -75,6 +77,7 @@ def analyze(image,params,requested,models,progress=lambda *x:None):
                     crop=crop.copy();crop[allowed[y0:y1,x0:x1]==0]=0
                 extra={'excluded_boxes':local_excluded} if local_excluded else {}
                 r=predict(crop,loaded,variant,progress=progress,**extra);value=r['map'];binary=r['mask'];candidates[y0:y1,x0:x1]|=r['candidates'];metadata.append(dict(origin=[x0,y0],**r['metadata']))
+                for name,destination in branches.items():destination[y0:y1,x0:x1]|=r[name]
             elif variant == 'D2PRL':
                 from .d2prl import predict, SIDE, ITERATIONS, SEED
                 r=predict(crop,loaded,progress);raw.append(r['raw'])
@@ -96,6 +99,7 @@ def analyze(image,params,requested,models,progress=lambda *x:None):
             score[y0:y1,x0:x1]=np.maximum(score[y0:y1,x0:x1],value);mask[y0:y1,x0:x1]|=binary;progress(index+1,len(boxes))
     score*=allowed;mask*=allowed;candidates*=allowed;analyzed*=allowed
     result=dict(map=score,mask=mask,candidates=candidates,analyzed=analyzed)
+    result.update({name:value*allowed for name,value in branches.items()})
     if raw:result['raw_probabilities']=np.stack(raw)
     if variant in ('MGCFDN source/cible','D2PRL'):result.update(source=source,target=target)
     result['metadata']=dict(method='clone_detectors',variant=variant,device=loaded['device'],requested_device=requested,weights=loaded['weights'],model_reused=reused,engines=loaded.get('engines',{'segmentation':loaded['device']}),boxes=boxes,compare=compare,zones=metadata,threshold=.5,probability_interpolation='bilinear',mask_interpolation='nearest',status='ok' if mask.any() else 'candidates' if candidates.any() else 'no_panels' if all(m['status']=='no_panels' for m in metadata) else 'insufficient_panels' if all(m['status'] in ('no_panels','insufficient_panels') for m in metadata) else 'empty',radius_supported=False,segmentation=variant in SEGMENTERS)

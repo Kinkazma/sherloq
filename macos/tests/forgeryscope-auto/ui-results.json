@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "worker": true,
+  "green": true,
+  "default_gpu": true,
+  "branch_views": true,
+  "npz_export": true,
+  "extended_mirror_profile_unchanged": true
+}

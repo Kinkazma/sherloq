@@ -101,6 +101,10 @@ def predict(image,loaded,profile,panels=None,progress=lambda *args: None,exclude
     Embedding-only full-box fallbacks are exported as candidates, separately
     from geometrically supported masks. No cross-job/ROI matching is possible.
     """
+    if profile=='Forgeryscope Auto':
+        if panels is not None:raise ValueError('Forgeryscope Auto classifies panels automatically; use Search.')
+        from .forgeryscope_auto import predict as auto_predict
+        return auto_predict(image,loaded,progress,excluded_boxes)
     import pandas as pd
     from sherloq_clone_models.forgeryscope import Embedder,PanelExtractor
     from sherloq_clone_models.forgeryscope.matcher.geometry import get_intersections

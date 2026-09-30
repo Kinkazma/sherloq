@@ -922,5 +922,12 @@
   "Run on whole image": "Exécuter sur toute l’image",
   "Ignore detected subimages and excluded zones, then restart all analyses on the whole image.": "Ignorer les sous-images détectées et les zones exclues, puis relancer toutes les analyses sur l’image entière.",
   "Minimum region size (448 × 448 grid)": "Taille minimale des régions (grille 448 × 448)",
-  "0 = no size filter": "0 = aucun filtre de taille"
+  "0 = no size filter": "0 = aucun filtre de taille",
+  "Forgeryscope Auto": "Forgeryscope Auto",
+  "Microscopy": "Microscopie",
+  "Western blots": "Western blots",
+  "Lanes": "Pistes",
+  "Geometric matches": "Correspondances géométriques",
+  " Lane pairs: {0}.": " Paires de pistes : {0}.",
+  "Public Forgeryscope pipeline: microscopy, western blots and lane fallback. Search analyzes each zone independently; include an enclosing zone for cross-panel matches. Suggestions identifies similarity evidence without geometric confirmation.": "Chaîne publique Forgeryscope : microscopie, western blots et recherche de pistes en secours. Rechercher analyse chaque zone séparément ; inclure une zone englobante pour comparer les panneaux. Suggestions identifie les ressemblances sans confirmation géométrique."
 }

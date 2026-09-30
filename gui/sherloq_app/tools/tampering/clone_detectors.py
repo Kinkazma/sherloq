@@ -18,15 +18,17 @@ from ..noise.noisesniffer import export
 
 def render(request):
     image,result,mode=request;mask=result['analyzed'].astype(bool)
-    if mode=='Suggestions':values=result['candidates'].astype(np.float32)
+    branch={'Microscopy':'branch_microscopy','Western blots':'branch_blots','Lanes':'branch_lanes','Geometric matches':'geometric'}.get(mode)
+    if branch:values=result.get(branch,np.zeros(image.shape[:2],np.uint8)).astype(np.float32);mask &= values.astype(bool)
+    elif mode=='Suggestions':values=result['candidates'].astype(np.float32)
     elif mode=='Source':values=result.get('source',np.zeros(image.shape[:2],np.float32))
     elif mode=='Cible':values=result.get('target',np.zeros(image.shape[:2],np.float32))
     elif mode=='Masque':return np.repeat((result['mask']*255)[:,:,None],3,2)
     else:values=result['map']
-    if mode=='Superposition' and result['metadata']['variant']=='D2PRL':
+    if mode=='Superposition' and result['metadata']['variant'] in ('D2PRL','Forgeryscope Auto'):
         mask &= result['mask'].astype(bool)
     heat=cv.applyColorMap(np.rint(np.clip(values,0,1)*255).astype(np.uint8),cv.COLORMAP_INFERNO)
-    output=image.copy();output[mask]=cv.addWeighted(image,.55,heat,.45,0)[mask] if mode=='Superposition' else heat[mask]
+    output=image.copy();output[mask]=cv.addWeighted(image,.55,heat,.45,0)[mask] if mode=='Superposition' or branch else heat[mask]
     return output
 
 class CloneDetectorsWidget(ToolWidget):
@@ -34,7 +36,7 @@ class CloneDetectorsWidget(ToolWidget):
         super().__init__(parent);self.image=image;self.result=None;self.raw_result=None;self.closed=False;self.submitted=None;self._rebuilding=False;self.envelope=None
         self.viewer=ImageViewer(image,image,view_class=SelectionView)
         self.variant=QComboBox();self.variant.addItems(VARIANTS);mark_combo(self.variant,[],green_items=VARIANTS)
-        self.cpu=QCheckBox('CPU');self.view_mode=QComboBox();self.view_mode.addItems(['Superposition','Carte','Masque','Suggestions','Source','Cible'])
+        self.cpu=QCheckBox('CPU');self.view_mode=QComboBox();self.view_mode.addItems(['Superposition','Carte','Masque','Suggestions','Source','Cible','Microscopy','Western blots','Lanes','Geometric matches'])
         self.search=QPushButton('Rechercher');self.compare=QPushButton('Comparer');self.save=QPushButton('Exporter NPZ');self.save.setEnabled(False)
         self.selection=QComboBox();self.selection.addItems(['Déplacer','Rectangle']);self.auto=QPushButton('Détecter les sous-images');self.delete=QPushButton('Supprimer la zone');self.clear=QPushButton('Effacer les zones')
         self.zones=QListWidget();self.zones.setMaximumWidth(220);self.zones.setMinimumWidth(160)
@@ -75,8 +77,10 @@ class CloneDetectorsWidget(ToolWidget):
         self.cpu.setEnabled(not forced)
         self.view_mode.model().item(3).setEnabled(variant in FORGERYSCOPE)
         for i in (4,5):self.view_mode.model().item(i).setEnabled(variant in ('MGCFDN source/cible','D2PRL'))
+        for i in range(6,10):self.view_mode.model().item(i).setEnabled(variant=='Forgeryscope Auto')
         self.view_mode.setCurrentIndex(3 if variant.endswith('pistes') else 0)
         self.note.setText('Compare des panneaux, pas les retouches internes d’un panneau. Rechercher traite chaque zone séparément ; Ensemble couvre la planche. Comparer utilise deux rectangles. Suggestions = similarité sans confirmation géométrique.' if variant in FORGERYSCOPE else 'Carte de segmentation. Chaque rectangle est analysé séparément à la résolution du modèle ; comparaison entre zones et rayon de recherche non disponibles.')
+        if variant=='Forgeryscope Auto':self.note.setText('Public Forgeryscope pipeline: microscopy, western blots and lane fallback. Search analyzes each zone independently; include an enclosing zone for cross-panel matches. Suggestions identifies similarity evidence without geometric confirmation.')
         self.changed()
     def regions_changed(self,regions):
         self.auto_job.invalidate()
@@ -110,7 +114,7 @@ class CloneDetectorsWidget(ToolWidget):
         self.draw.invalidate();self.result=None;self.save.setEnabled(False);self.viewer.set_busy(True)
         self.viewer.view.enabled_regions={i for i in range(self.zones.count()) if self.zones.item(i).checkState()==Qt.Checked};self.viewer.view.viewport().update();self.state(False)
     def state(self,busy):
-        self.search.setText('Annuler' if busy else 'Rechercher');self.compare.setEnabled(not busy and choice(self.variant) in FORGERYSCOPE and len(self.active())==2)
+        self.search.setText('Annuler' if busy else 'Rechercher');self.compare.setEnabled(not busy and choice(self.variant) in FORGERYSCOPE and choice(self.variant)!='Forgeryscope Auto' and len(self.active())==2)
         self.compare.setToolTip('Compare exactement deux rectangles avec Forgeryscope.')
         self.save.setEnabled(not busy and not self.filter_job.is_busy and self.result is not None)
     def start(self,compare):
@@ -138,6 +142,9 @@ class CloneDetectorsWidget(ToolWidget):
             candidates=sum(len(z.get('embedding_candidates',())) for z in m['zones'])
             kept=sum(sum(bool(c.get('supported')) for c in z.get('comparisons',())) for z in m['zones'])
             if not m['variant'].endswith('pistes'):detail=f' Paires candidates : {candidates} ; géométries retenues : {kept}.'
+            if m['variant']=='Forgeryscope Auto':
+                lanes=sum(z.get('lane_matches',0) for z in m['zones'])
+                detail+=t(' Lane pairs: {0}.').replace('{0}',str(lanes))
         self.status.setText(messages[m['status']]+detail+f" {m['seconds']:.2f} s.")
     def failed(self,error):self.status.setText(error);self.state(False)
     def redraw(self,*_):

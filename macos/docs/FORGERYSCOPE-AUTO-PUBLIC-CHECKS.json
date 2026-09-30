@@ -1,0 +1,140 @@
+{
+  "passed": true,
+  "scope": "Standalone Forgeryscope Auto on exported sources in an isolated installation layout",
+  "archive_sha256": "fbae85694edf64f2023184d391899c362f8af5c325cef872ac3b6f635a409eec",
+  "rerun": {
+    "auto_contracts": {
+      "passed": true,
+      "best_pair_fusion": true,
+      "clique_merge": true,
+      "blot_fallback_distinct": true,
+      "independent_zones": true,
+      "branch_arrays_propagated": true,
+      "manual_comparison_not_misclassified": true,
+      "lane_fallback": true,
+      "whole_panel_lane_rule": true,
+      "excluded_panels": true,
+      "microscopy_rejection": true
+    },
+    "auto_real_worker_ui": {
+      "passed": true,
+      "worker": true,
+      "green": true,
+      "default_gpu": true,
+      "branch_views": true,
+      "npz_export": true,
+      "extended_mirror_profile_unchanged": true
+    },
+    "d2prl_contracts": {
+      "passed": true,
+      "postprocess_cases": 12,
+      "independent_regions": 2,
+      "role_threshold": 0
+    },
+    "d2prl_cached_filter_ui": {
+      "passed": true,
+      "boundary_cases": 6,
+      "independent_zones": true,
+      "no_inference": true,
+      "last_slider_value_wins": true,
+      "invalidation": true,
+      "overlay_respects_mask": true
+    },
+    "updater_transaction_cases": 17,
+    "installation_migrations": {
+      "passed": true,
+      "source_inventory_files": 68,
+      "real_isolated_native_build": true,
+      "cases": [
+        {
+          "base_commit": "fc08617fc3f98e134bfa27cc732e2670f60cd68f",
+          "files_changed": 70,
+          "repeated_changes": 0,
+          "all_source_hashes_match": true,
+          "native_signatures_valid": true,
+          "previous_backups_preserved": true
+        },
+        {
+          "base_commit": "b56f1d60109185e35cb7ded7a08de6ba48308198",
+          "files_changed": 69,
+          "repeated_changes": 0,
+          "all_source_hashes_match": true,
+          "native_signatures_valid": true,
+          "previous_backups_preserved": true
+        },
+        {
+          "base_commit": "0ea97f373dbf9cea41f8ee7d2c053839ef8a53e0",
+          "files_changed": 66,
+          "repeated_changes": 0,
+          "all_source_hashes_match": true,
+          "native_signatures_valid": true,
+          "previous_backups_preserved": true
+        },
+        {
+          "base_commit": "7992b90d2819261a23fc0e0c5dc1f3fcda45cf32",
+          "files_changed": 63,
+          "repeated_changes": 0,
+          "all_source_hashes_match": true,
+          "native_signatures_valid": true,
+          "previous_backups_preserved": true
+        },
+        {
+          "base_commit": "ea9727e4886fc8f6d12111dcdfb0b8f66ecdc8fc",
+          "files_changed": 28,
+          "repeated_changes": 0,
+          "all_source_hashes_match": true,
+          "native_signatures_valid": true,
+          "previous_backups_preserved": true
+        },
+        {
+          "base_commit": "07093f2031eeee2257e7d348dcd82ee172b64ace",
+          "files_changed": 10,
+          "repeated_changes": 0,
+          "all_source_hashes_match": true,
+          "native_signatures_valid": true,
+          "previous_backups_preserved": true
+        },
+        {
+          "base_commit": "4b7b9d4af08e23964705ba1d23126787b6e45caa",
+          "files_changed": 8,
+          "repeated_changes": 0,
+          "all_source_hashes_match": true,
+          "native_signatures_valid": true,
+          "previous_backups_preserved": true
+        }
+      ]
+    }
+  },
+  "delivered_native_trial": {
+    "rerun_for_publication": false,
+    "result": {
+      "passed": true,
+      "public_reference_mask_exact": true,
+      "uniform_empty": true,
+      "seconds": 91.40687108300062,
+      "shape": [
+        936,
+        3226,
+        3
+      ],
+      "mask_pixels": 955182,
+      "candidate_pixels": 0,
+      "branches": {
+        "microscopy": 955182,
+        "blots": 0,
+        "lanes": 0
+      },
+      "panels": 16,
+      "pairs": 23,
+      "device": "mps"
+    }
+  },
+  "unchanged_sources": {
+    "gui/sherloq_app/core/automatic_clones.py": "35fb23a5cadcc898b0ad46748c8c3efbc9ff568d749e25fd655e002e060f0318",
+    "gui/sherloq_app/tools/tampering/automatic_clones.py": "a6b602a46a0f660dd99214ca141a15580c9e472be2cb82d34c270e7f314ec0d2",
+    "gui/sherloq_app/tools/tampering/complete_analysis.py": "6449d27f7b4680bcea9291c76ccea9952b24c510f7dcec9b2242b1d6a4e998c9",
+    "gui/sherloq_app/core/copy_mirror.py": "f44628022c031ea5f568ab4a54e7e757f666ffdbec581a17ae8d80400c8ac7e1"
+  },
+  "all_previous_translations_preserved": true,
+  "checkpoint_inventory_hashes_match_existing_assets": true
+}

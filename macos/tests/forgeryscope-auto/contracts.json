@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "best_pair_fusion": true,
+  "clique_merge": true,
+  "blot_fallback_distinct": true,
+  "independent_zones": true,
+  "branch_arrays_propagated": true,
+  "manual_comparison_not_misclassified": true,
+  "lane_fallback": true,
+  "whole_panel_lane_rule": true,
+  "excluded_panels": true,
+  "microscopy_rejection": true
+}

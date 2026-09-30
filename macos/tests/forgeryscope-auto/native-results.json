@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "public_reference_mask_exact": true,
+  "uniform_empty": true,
+  "seconds": 91.40687108300062,
+  "shape": [
+    936,
+    3226,
+    3
+  ],
+  "mask_pixels": 955182,
+  "candidate_pixels": 0,
+  "branches": {
+    "microscopy": 955182,
+    "blots": 0,
+    "lanes": 0
+  },
+  "panels": 16,
+  "pairs": 23,
+  "device": "mps"
+}

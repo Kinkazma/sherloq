@@ -1,0 +1,697 @@
+[
+  {
+    "path": "models/external/clone_detectors/02_forgeryscope/aliked_wblot.pth",
+    "size": 151145298,
+    "sha256": "e9ddeb9e87b96555a6db4a4fbfb5b99b31c36371bf4171765dce8f1f9ef95022",
+    "upstream_sha256_match": true,
+    "unsafe_globals": [],
+    "type": "dict",
+    "top_keys": [
+      "model",
+      "optimizer",
+      "lr_scheduler",
+      "conf",
+      "epoch",
+      "eval"
+    ],
+    "state_key": "model",
+    "tensors": 330,
+    "shapes": {
+      "extractor.block1.conv1.weight": [
+        16,
+        3,
+        3,
+        3
+      ],
+      "extractor.block1.bn1.weight": [
+        16
+      ],
+      "extractor.block1.bn1.bias": [
+        16
+      ],
+      "extractor.block1.bn1.running_mean": [
+        16
+      ],
+      "extractor.block1.bn1.running_var": [
+        16
+      ]
+    }
+  },
+  {
+    "path": "models/external/clone_detectors/02_forgeryscope/micro_overlap_embedder.ckpt",
+    "size": 124354059,
+    "sha256": "b91f3923a93705898c864324b5c5d70589499e208c45f622b6a447a31225ae2a",
+    "upstream_sha256_match": true,
+    "unsafe_globals": [],
+    "type": "dict",
+    "top_keys": [
+      "epoch",
+      "global_step",
+      "pytorch-lightning_version",
+      "state_dict",
+      "loops",
+      "hparams_name",
+      "hyper_parameters"
+    ],
+    "hyper_parameters": "{'model_name': 'nextvit_small.bd_ssld_6m_in1k', 'embedding_dim': 1024, 'temperature': 0.08, 'use_projection': False, 'pooling_type': 'attention', 'lr': 0.0005, 'weight_decay': 1e-05, 'warmup_steps': 50, 'max_epochs': 10, 'steps_per_epoch': None}",
+    "state_key": "state_dict",
+    "tensors": 474,
+    "shapes": {
+      "backbone.stem.0.conv.weight": [
+        64,
+        3,
+        3,
+        3
+      ],
+      "backbone.stem.0.norm.weight": [
+        64
+      ],
+      "backbone.stem.0.norm.bias": [
+        64
+      ],
+      "backbone.stem.0.norm.running_mean": [
+        64
+      ],
+      "backbone.stem.0.norm.running_var": [
+        64
+      ]
+    }
+  },
+  {
+    "path": "models/external/clone_detectors/02_forgeryscope/wblot_duplicate_embedder.ckpt",
+    "size": 123301843,
+    "sha256": "87e62f05cba4127357097d2f15f1401aed017ac0f6a64c67a57246aa33bfb02e",
+    "upstream_sha256_match": true,
+    "unsafe_globals": [],
+    "type": "dict",
+    "top_keys": [
+      "epoch",
+      "global_step",
+      "pytorch-lightning_version",
+      "state_dict",
+      "loops",
+      "hparams_name",
+      "hyper_parameters"
+    ],
+    "hyper_parameters": "{'model_name': 'nextvit_small.bd_ssld_6m_in1k', 'embedding_dim': 1024, 'temperature': 0.08, 'use_projection': False, 'lr': 0.0005, 'weight_decay': 1e-05, 'warmup_steps': 50, 'max_epochs': 6, 'steps_per_epoch': None}",
+    "state_key": "state_dict",
+    "tensors": 470,
+    "shapes": {
+      "backbone.stem.0.conv.weight": [
+        64,
+        3,
+        3,
+        3
+      ],
+      "backbone.stem.0.norm.weight": [
+        64
+      ],
+      "backbone.stem.0.norm.bias": [
+        64
+      ],
+      "backbone.stem.0.norm.running_mean": [
+        64
+      ],
+      "backbone.stem.0.norm.running_var": [
+        64
+      ]
+    }
+  },
+  {
+    "path": "models/external/clone_detectors/02_forgeryscope/wblot_lane_embedder.ckpt",
+    "size": 369457114,
+    "sha256": "6cee086eab4ead02a242cbcb584da1a7e30b84cfcfa43e97e466019e6f2f0849",
+    "upstream_sha256_match": true,
+    "unsafe_globals": [],
+    "type": "dict",
+    "top_keys": [
+      "epoch",
+      "global_step",
+      "pytorch-lightning_version",
+      "state_dict",
+      "loops",
+      "callbacks",
+      "optimizer_states",
+      "lr_schedulers",
+      "MixedPrecision",
+      "hparams_name"
+    ],
+    "hyper_parameters": "{'model_name': 'nextvit_small.bd_ssld_6m_in1k', 'embedding_dim': 1024, 'temperature': 0.08, 'use_projection': False, 'lr': 0.0005, 'weight_decay': 1e-05, 'warmup_steps': 50, 'max_epochs': 6, 'steps_per_epoch': None}",
+    "state_key": "state_dict",
+    "tensors": 470,
+    "shapes": {
+      "backbone.stem.0.conv.weight": [
+        64,
+        3,
+        3,
+        3
+      ],
+      "backbone.stem.0.norm.weight": [
+        64
+      ],
+      "backbone.stem.0.norm.bias": [
+        64
+      ],
+      "backbone.stem.0.norm.running_mean": [
+        64
+      ],
+      "backbone.stem.0.norm.running_var": [
+        64
+      ]
+    }
+  },
+  {
+    "path": "models/external/clone_detectors/02_forgeryscope/wblot_overlap_embedder.ckpt",
+    "size": 123301843,
+    "sha256": "afc8c81fd829f356c51be7f6df357c3d258879342f2739d64595522f55497929",
+    "upstream_sha256_match": true,
+    "unsafe_globals": [],
+    "type": "dict",
+    "top_keys": [
+      "epoch",
+      "global_step",
+      "pytorch-lightning_version",
+      "state_dict",
+      "loops",
+      "hparams_name",
+      "hyper_parameters"
+    ],
+    "hyper_parameters": "{'model_name': 'nextvit_small.bd_ssld_6m_in1k', 'embedding_dim': 1024, 'temperature': 0.08, 'use_projection': False, 'lr': 0.0005, 'weight_decay': 1e-05, 'warmup_steps': 50, 'max_epochs': 5, 'steps_per_epoch': None}",
+    "state_key": "state_dict",
+    "tensors": 470,
+    "shapes": {
+      "backbone.stem.0.conv.weight": [
+        64,
+        3,
+        3,
+        3
+      ],
+      "backbone.stem.0.norm.weight": [
+        64
+      ],
+      "backbone.stem.0.norm.bias": [
+        64
+      ],
+      "backbone.stem.0.norm.running_mean": [
+        64
+      ],
+      "backbone.stem.0.norm.running_var": [
+        64
+      ]
+    }
+  },
+  {
+    "path": "models/external/clone_detectors/02_forgeryscope/yolo_lane_extractor.pt",
+    "size": 19167194,
+    "sha256": "0061376bcb8895707ac8d052698c21849ee151c6c7bfc6d00de0939422571712",
+    "upstream_sha256_match": true,
+    "unsafe_globals": [
+      "ultralytics.nn.modules.block.SPPF",
+      "ultralytics.nn.modules.head.Detect",
+      "torch.nn.modules.linear.Identity",
+      "ultralytics.nn.modules.block.DFL",
+      "torch.nn.modules.pooling.MaxPool2d",
+      "ultralytics.nn.modules.block.Attention",
+      "torch.nn.modules.batchnorm.BatchNorm2d",
+      "torch.nn.modules.upsampling.Upsample",
+      "ultralytics.nn.modules.conv.DWConv",
+      "torch.nn.modules.activation.SiLU",
+      "ultralytics.nn.modules.conv.Concat",
+      "torch.nn.modules.container.ModuleList",
+      "ultralytics.nn.modules.block.Bottleneck",
+      "torch.nn.modules.container.Sequential",
+      "ultralytics.nn.modules.block.C2PSA",
+      "torch.nn.modules.conv.Conv2d",
+      "ultralytics.nn.modules.conv.Conv",
+      "ultralytics.nn.modules.block.C3k2",
+      "ultralytics.nn.modules.block.PSABlock",
+      "ultralytics.nn.modules.block.C3k",
+      "ultralytics.nn.tasks.DetectionModel"
+    ],
+    "weights_only_load_error": "Weights only load failed. This file can still be loaded, to do so you have two options, \u001b[1mdo those steps only if you trust the source of the checkpoint\u001b[0m. \n\t(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trus"
+  },
+  {
+    "path": "models/external/clone_detectors/02_forgeryscope/yolo_panel_extractor.pt",
+    "size": 119075905,
+    "sha256": "f686674cfb06e73c0e95791cd5ba73823a2cccc918b0bd67f6418e41f88d057f",
+    "upstream_sha256_match": true,
+    "unsafe_globals": [
+      "ultralytics.nn.modules.block.AAttn",
+      "ultralytics.nn.modules.head.Detect",
+      "torch.nn.modules.linear.Identity",
+      "ultralytics.nn.modules.block.DFL",
+      "torch.nn.modules.batchnorm.BatchNorm2d",
+      "torch.nn.modules.upsampling.Upsample",
+      "ultralytics.nn.tasks.DetectionModel",
+      "ultralytics.nn.modules.conv.DWConv",
+      "torch.nn.modules.activation.SiLU",
+      "ultralytics.nn.modules.conv.Concat",
+      "torch.nn.modules.container.ModuleList",
+      "ultralytics.nn.modules.block.A2C2f",
+      "torch.nn.modules.container.Sequential",
+      "ultralytics.nn.modules.block.ABlock",
+      "torch.nn.modules.conv.Conv2d",
+      "ultralytics.nn.modules.conv.Conv",
+      "ultralytics.nn.modules.block.C3k2",
+      "ultralytics.nn.modules.block.C3k",
+      "ultralytics.nn.modules.block.Bottleneck"
+    ],
+    "weights_only_load_error": "Weights only load failed. This file can still be loaded, to do so you have two options, \u001b[1mdo those steps only if you trust the source of the checkpoint\u001b[0m. \n\t(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trus"
+  },
+  {
+    "path": "models/external/clone_detectors/03_cmsegnet/predict_folder/mobilenet_v2.pth.tar",
+    "size": 14205652,
+    "sha256": "ecbe2b568c8602549fa9e1d5833c63848f490a48d92e5d224d1eb2063e152cf8",
+    "static_scan_error": "Expected input to be a checkpoint returned by torch.save",
+    "type": "OrderedDict",
+    "top_keys": [
+      "features.0.0.weight",
+      "features.0.1.weight",
+      "features.0.1.bias",
+      "features.0.1.running_mean",
+      "features.0.1.running_var",
+      "features.1.conv.0.weight",
+      "features.1.conv.1.weight",
+      "features.1.conv.1.bias",
+      "features.1.conv.1.running_mean",
+      "features.1.conv.1.running_var"
+    ],
+    "tensors": 262,
+    "shapes": {
+      "features.0.0.weight": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "features.0.1.weight": [
+        32
+      ],
+      "features.0.1.bias": [
+        32
+      ],
+      "features.0.1.running_mean": [
+        32
+      ],
+      "features.0.1.running_var": [
+        32
+      ]
+    }
+  },
+  {
+    "path": "models/external/clone_detectors/03_cmsegnet/predict_folder/weight/addnoise.pth",
+    "size": 26192696,
+    "sha256": "0f549f213e67712791e2778f4df005532dabd563a9fea3bafc851d4d449fb1ba",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "encoder.features.0.0.weight",
+      "encoder.features.0.1.weight",
+      "encoder.features.0.1.bias",
+      "encoder.features.0.1.running_mean",
+      "encoder.features.0.1.running_var",
+      "encoder.features.0.1.num_batches_tracked",
+      "encoder.features.1.conv.0.weight",
+      "encoder.features.1.conv.1.weight",
+      "encoder.features.1.conv.1.bias",
+      "encoder.features.1.conv.1.running_mean"
+    ],
+    "tensors": 598,
+    "shapes": {
+      "encoder.features.0.0.weight": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "encoder.features.0.1.weight": [
+        32
+      ],
+      "encoder.features.0.1.bias": [
+        32
+      ],
+      "encoder.features.0.1.running_mean": [
+        32
+      ],
+      "encoder.features.0.1.running_var": [
+        32
+      ]
+    }
+  },
+  {
+    "path": "models/external/clone_detectors/03_cmsegnet/predict_folder/weight/generalization.pth",
+    "size": 26192094,
+    "sha256": "a3351ae664fca9780c3ca56db708fe3fdc74878c07327dfdd6ed75f14537454b",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "encoder.features.0.0.weight",
+      "encoder.features.0.1.weight",
+      "encoder.features.0.1.bias",
+      "encoder.features.0.1.running_mean",
+      "encoder.features.0.1.running_var",
+      "encoder.features.0.1.num_batches_tracked",
+      "encoder.features.1.conv.0.weight",
+      "encoder.features.1.conv.1.weight",
+      "encoder.features.1.conv.1.bias",
+      "encoder.features.1.conv.1.running_mean"
+    ],
+    "tensors": 598,
+    "shapes": {
+      "encoder.features.0.0.weight": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "encoder.features.0.1.weight": [
+        32
+      ],
+      "encoder.features.0.1.bias": [
+        32
+      ],
+      "encoder.features.0.1.running_mean": [
+        32
+      ],
+      "encoder.features.0.1.running_var": [
+        32
+      ]
+    }
+  },
+  {
+    "path": "models/external/clone_detectors/04_mgcfdn/weight/EffNet_MGCFDN_16x16.pth",
+    "size": 73550311,
+    "sha256": "98b7fc9dbe935c7840799acd8273bec6f27dd7d7f33761b5090918e2be988773",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "visual_feature_extractor.layer1.0.0.0.weight",
+      "visual_feature_extractor.layer1.0.0.1.weight",
+      "visual_feature_extractor.layer1.0.0.1.bias",
+      "visual_feature_extractor.layer1.0.0.1.running_mean",
+      "visual_feature_extractor.layer1.0.0.1.running_var",
+      "visual_feature_extractor.layer1.0.0.1.num_batches_tracked",
+      "visual_feature_extractor.layer1.0.1.0.block.0.0.weight",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.weight",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.bias",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.running_mean",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.running_var",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.num_batches_tracked"
+    ],
+    "tensors": 909,
+    "last_shapes": {
+      "decode_head.12.weight": [
+        1,
+        256,
+        1,
+        1
+      ],
+      "decode_head.12.bias": [
+        1
+      ]
+    },
+    "weights_only_load": "passed"
+  },
+  {
+    "path": "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN.pth",
+    "size": 88898591,
+    "sha256": "53920b1cefe1e8c1e8c78dfe2f43e80251529d9e5ccc7be31f899a636357f563",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "visual_feature_extractor.layer1.0.0.0.weight",
+      "visual_feature_extractor.layer1.0.0.1.weight",
+      "visual_feature_extractor.layer1.0.0.1.bias",
+      "visual_feature_extractor.layer1.0.0.1.running_mean",
+      "visual_feature_extractor.layer1.0.0.1.running_var",
+      "visual_feature_extractor.layer1.0.0.1.num_batches_tracked",
+      "visual_feature_extractor.layer1.0.1.0.block.0.0.weight",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.weight",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.bias",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.running_mean",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.running_var",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.num_batches_tracked"
+    ],
+    "tensors": 945,
+    "last_shapes": {
+      "decode_head.12.weight": [
+        1,
+        256,
+        1,
+        1
+      ],
+      "decode_head.12.bias": [
+        1
+      ]
+    },
+    "weights_only_load": "passed"
+  },
+  {
+    "path": "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN_16x16.pth",
+    "size": 88959711,
+    "sha256": "d2657fac0191c54da090b8d0e44e24519bd9722b5b2b4b18fbe17cf00a7e4e65",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "visual_feature_extractor.layer1.0.0.0.weight",
+      "visual_feature_extractor.layer1.0.0.1.weight",
+      "visual_feature_extractor.layer1.0.0.1.bias",
+      "visual_feature_extractor.layer1.0.0.1.running_mean",
+      "visual_feature_extractor.layer1.0.0.1.running_var",
+      "visual_feature_extractor.layer1.0.0.1.num_batches_tracked",
+      "visual_feature_extractor.layer1.0.1.0.block.0.0.weight",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.weight",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.bias",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.running_mean",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.running_var",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.num_batches_tracked"
+    ],
+    "tensors": 945,
+    "last_shapes": {
+      "decode_head.12.weight": [
+        1,
+        256,
+        1,
+        1
+      ],
+      "decode_head.12.bias": [
+        1
+      ]
+    },
+    "weights_only_load": "passed"
+  },
+  {
+    "path": "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN_ST.pth",
+    "size": 88900639,
+    "sha256": "95fa449ba33a4718b66ddcbe948ddc57abdfb34594c43bf47e49515bc63cec98",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "visual_feature_extractor.layer1.0.0.0.weight",
+      "visual_feature_extractor.layer1.0.0.1.weight",
+      "visual_feature_extractor.layer1.0.0.1.bias",
+      "visual_feature_extractor.layer1.0.0.1.running_mean",
+      "visual_feature_extractor.layer1.0.0.1.running_var",
+      "visual_feature_extractor.layer1.0.0.1.num_batches_tracked",
+      "visual_feature_extractor.layer1.0.1.0.block.0.0.weight",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.weight",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.bias",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.running_mean",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.running_var",
+      "visual_feature_extractor.layer1.0.1.0.block.0.1.num_batches_tracked"
+    ],
+    "tensors": 945,
+    "last_shapes": {
+      "decode_head.12.weight": [
+        3,
+        256,
+        1,
+        1
+      ],
+      "decode_head.12.bias": [
+        3
+      ]
+    },
+    "weights_only_load": "passed"
+  },
+  {
+    "path": "models/external/clone_detectors/04_mgcfdn/weight/MPDN_MGCFDN_16x16.pth",
+    "size": 24004611,
+    "sha256": "9cea785aaba1612c55218f52c6bbe8c1419f3a1065b368066e8e3869a194e6ee",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "visual_feature_extractor.preprocessingBlock.net.0.weight",
+      "visual_feature_extractor.preprocessingBlock.net.0.bias",
+      "visual_feature_extractor.preprocessingBlock.net.1.weight",
+      "visual_feature_extractor.preprocessingBlock.net.1.bias",
+      "visual_feature_extractor.preprocessingBlock.net.1.running_mean",
+      "visual_feature_extractor.preprocessingBlock.net.1.running_var",
+      "visual_feature_extractor.preprocessingBlock.net.1.num_batches_tracked",
+      "visual_feature_extractor.featureExtractorBlock_1_left.net_1.net_1.0.weight",
+      "visual_feature_extractor.featureExtractorBlock_1_left.net_1.net_1.0.bias",
+      "visual_feature_extractor.featureExtractorBlock_1_left.net_1.net_1.1.weight",
+      "visual_feature_extractor.featureExtractorBlock_1_left.net_1.net_1.1.bias",
+      "visual_feature_extractor.featureExtractorBlock_1_left.net_1.net_1.1.running_mean"
+    ],
+    "tensors": 959,
+    "last_shapes": {
+      "decode_head.12.weight": [
+        1,
+        256,
+        1,
+        1
+      ],
+      "decode_head.12.bias": [
+        1
+      ]
+    },
+    "weights_only_load": "passed"
+  },
+  {
+    "path": "models/external/clone_detectors/04_mgcfdn/weight/TNT_MGCFDN_16x16.pth",
+    "size": 288819703,
+    "sha256": "c83f0d1a2840ebfdfafbf5c7ed842f8b5756c8975a6e6aff18cf73f95fbba56e",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "visual_feature_extractor.cls_token",
+      "visual_feature_extractor.outer_tokens",
+      "visual_feature_extractor.outer_pos",
+      "visual_feature_extractor.inner_pos",
+      "visual_feature_extractor.patch_embed.proj.weight",
+      "visual_feature_extractor.patch_embed.proj.bias",
+      "visual_feature_extractor.proj_norm1.weight",
+      "visual_feature_extractor.proj_norm1.bias",
+      "visual_feature_extractor.proj.weight",
+      "visual_feature_extractor.proj.bias",
+      "visual_feature_extractor.proj_norm2.weight",
+      "visual_feature_extractor.proj_norm2.bias"
+    ],
+    "tensors": 453,
+    "last_shapes": {
+      "decode_head.12.weight": [
+        1,
+        256,
+        1,
+        1
+      ],
+      "decode_head.12.bias": [
+        1
+      ]
+    },
+    "weights_only_load": "passed"
+  },
+  {
+    "path": "models/external/clone_detectors/04_mgcfdn/weight/VIG_MGCFDN_16x16.pth",
+    "size": 370483043,
+    "sha256": "63996d687b29e49f5c78f8f055395bb196ce37e31f1918817c2f197a88f1e7e6",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "visual_feature_extractor.pos_embed",
+      "visual_feature_extractor.stem.convs.0.weight",
+      "visual_feature_extractor.stem.convs.0.bias",
+      "visual_feature_extractor.stem.convs.1.weight",
+      "visual_feature_extractor.stem.convs.1.bias",
+      "visual_feature_extractor.stem.convs.1.running_mean",
+      "visual_feature_extractor.stem.convs.1.running_var",
+      "visual_feature_extractor.stem.convs.1.num_batches_tracked",
+      "visual_feature_extractor.stem.convs.3.weight",
+      "visual_feature_extractor.stem.convs.3.bias",
+      "visual_feature_extractor.stem.convs.4.weight",
+      "visual_feature_extractor.stem.convs.4.bias"
+    ],
+    "tensors": 687,
+    "last_shapes": {
+      "decode_head.12.weight": [
+        1,
+        256,
+        1,
+        1
+      ],
+      "decode_head.12.bias": [
+        1
+      ]
+    },
+    "weights_only_load": "passed"
+  },
+  {
+    "path": "models/external/clone_detectors/04_mgcfdn/weight/tnt_b_82.9.pth.tar",
+    "size": 262354363,
+    "sha256": "2cff07e445ff8e2e878837223d0e7102ff1fbb5a850edb477a2bab669345ccad",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "cls_token",
+      "outer_tokens",
+      "outer_pos",
+      "inner_pos",
+      "patch_embed.proj.weight",
+      "patch_embed.proj.bias",
+      "proj_norm1.weight",
+      "proj_norm1.bias",
+      "proj.weight",
+      "proj.bias",
+      "proj_norm2.weight",
+      "proj_norm2.bias"
+    ],
+    "tensors": 364,
+    "last_shapes": {
+      "head.weight": [
+        1000,
+        640
+      ],
+      "head.bias": [
+        1000
+      ]
+    },
+    "weights_only_load": "passed"
+  },
+  {
+    "path": "models/external/clone_detectors/04_mgcfdn/weight/vig_b_82.6.pth",
+    "size": 348353844,
+    "sha256": "40b0685d756de12e419ba9395f3a7a9d3e0cf0d4844403364fc7413ee3b6bec9",
+    "unsafe_globals": [],
+    "type": "OrderedDict",
+    "top_keys": [
+      "pos_embed",
+      "stem.convs.0.weight",
+      "stem.convs.0.bias",
+      "stem.convs.1.weight",
+      "stem.convs.1.bias",
+      "stem.convs.1.running_mean",
+      "stem.convs.1.running_var",
+      "stem.convs.1.num_batches_tracked",
+      "stem.convs.3.weight",
+      "stem.convs.3.bias",
+      "stem.convs.4.weight",
+      "stem.convs.4.bias"
+    ],
+    "tensors": 605,
+    "last_shapes": {
+      "prediction.4.weight": [
+        1000,
+        1024,
+        1,
+        1
+      ],
+      "prediction.4.bias": [
+        1000
+      ]
+    },
+    "weights_only_load": "passed"
+  },
+  {
+    "path": "models/external/clone_detectors/01_d2prl/d2prl.pth",
+    "size": 540533481,
+    "sha256": "2749c7436169ce689deaeb197ce5dae3d1a4533999833928168ec0b0d703df36",
+    "upstream_sha256_match": null,
+    "type": "OrderedDict",
+    "state_key": null,
+    "tensors": 1337,
+    "weights_only": true,
+    "strict_load": true,
+    "source": "Received from Joao Phillipe Cardenuto and Lucas on 2026-09-30"
+  }
+]

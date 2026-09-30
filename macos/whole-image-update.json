@@ -13,9 +13,10 @@
   "gui/sherloq_app/ui/locales/fr.json": {
     "before": [
       "f0db26bbb86bae7bd308ede21bc62b9ca295438641486f4132feace1eaa77e6d",
-      "ecab56f64b2ba78819b7c7c1ea5beb57a2ec559391e5bef089a54b49d3a06f93"
+      "ecab56f64b2ba78819b7c7c1ea5beb57a2ec559391e5bef089a54b49d3a06f93",
+      "f6d68e47e9e72405dbb9e8866fdb487c3f5fa6c795a5e3864609900c02bbd9ee"
     ],
-    "after": "f6d68e47e9e72405dbb9e8866fdb487c3f5fa6c795a5e3864609900c02bbd9ee"
+    "after": "94c2162ef70ea9f2dc10344781028acc466ef25480a28de7b83f8d6565eaf377"
   },
   "gui/sherloq_app/ui/ela_profiles.py": {
     "before": "dbe28231d9489b51ccf25be27b6fa887f7527b90f75178cf42f669e0b44d564e",
@@ -258,8 +259,11 @@
     "target": "integration/clone_detectors/sherloq_clone_models/d2prl/senet.py"
   },
   "gui/sherloq_app/core/clone_detectors.py": {
-    "before": "87fa17dff53fccd5081fc4940942c26915f3edff654f2c981a2ab788f59a3be6",
-    "after": "b465f6d3ecc4634cd92b58fa20da83fb3690858fe2d5231e046609133f9e4616"
+    "before": [
+      "87fa17dff53fccd5081fc4940942c26915f3edff654f2c981a2ab788f59a3be6",
+      "b465f6d3ecc4634cd92b58fa20da83fb3690858fe2d5231e046609133f9e4616"
+    ],
+    "after": "c416d5d5818e773caf8ae35d1016f509755547b09ae73e62658364d931a5b95d"
   },
   "gui/sherloq_app/core/d2prl.py": {
     "before": [
@@ -275,9 +279,10 @@
   "gui/sherloq_app/tools/tampering/clone_detectors.py": {
     "before": [
       "2edcc8aff3f7105e4e27622756cb2f1532281dc1e5494add3445c7523e418837",
-      "c7cbeca1601051341b9072af58348375136db25ffa5c8cddcaca43ac7083c72b"
+      "c7cbeca1601051341b9072af58348375136db25ffa5c8cddcaca43ac7083c72b",
+      "d02f967d5e0453335e5d398bcc14ce55adde9b5340bc2525b6f49e9fc8f0d499"
     ],
-    "after": "d02f967d5e0453335e5d398bcc14ce55adde9b5340bc2525b6f49e9fc8f0d499"
+    "after": "22b29352de8fc84c9762bf0a5890919542509d778060ef5424fe4aa7ccefc08a"
   },
   "macos/integration/clone_detectors/assets.json": {
     "before": [
@@ -296,5 +301,21 @@
     "before": "24c03b707f45bd2dc0c942c4bcc7aeb9c524a1a3a69aff3e465e820afc140d90",
     "after": "f3950224cbbf3e3ebddd8992714bb4355c01c69b9aa8f3b29634bf9efbdf1987",
     "target": "integration/clone_detectors/runtime-manifest.json"
+  },
+  "gui/sherloq_app/core/forgeryscope_auto.py": {
+    "before": null,
+    "after": "0d5f53d75a899c089adaa88b7d93ee780b8fcee7a4513b3b77359f858c404d84"
+  },
+  "gui/sherloq_app/core/forgeryscope_adapter.py": {
+    "before": "3ec6faea3ef312cfcefe7e0f715891c10be02e4559f2def6fc7adc3025a9ad5d",
+    "after": "0bcc9b52ee22b487d296df830fcc7259ea8c8d6faf8c311fc3d36aea436f7e55"
+  },
+  "macos/integration/clone_detectors/checkpoint-inspection.json": {
+    "before": [
+      null,
+      "9e7d83c0b331f3afd936baef3c717026f76fb383693a8875ad1fa167e6c0dfed"
+    ],
+    "after": "9e7d83c0b331f3afd936baef3c717026f76fb383693a8875ad1fa167e6c0dfed",
+    "target": "integration/clone_detectors/checkpoint-inspection.json"
   }
 }
