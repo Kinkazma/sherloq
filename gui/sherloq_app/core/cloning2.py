@@ -303,7 +303,9 @@ class Cloning2Engine:
                 groups,models,rejected=reject_self(packed,pairs,groups,models,minimum,cancel)
                 self_filter=dict(maximum_overlap=MAX_OVERLAP,metric='intersection_over_smaller_hull',minimum_model_displacement_px=minimum)
             colors,bases=palette(groups,pairs,threshold)
-            result=dict(feature_policy='independent_roi_v2' if per_zone else 'global',points=packed,pairs=pairs,groups=groups,colors=colors,bases=bases,params=params,regions=regions,compare=compare,total_features=total,candidate_comparisons=evaluated,models=models,backend=backend,self_match_filter=self_filter,rejected_biomes=rejected,distance_policy=dict(radii=radii,comparison_radius=radius,gap=gap,compact_guides=params[17] if len(params)>17 and params[15] and not compare else ()))
+            pair_ids=pairs[:,:2].astype(int)
+            owners=(members[pair_ids[:,0]] & members[pair_ids[:,1]]).argmax(1).astype(np.int32) if not compare else np.full(len(pairs),-1,np.int32)
+            result=dict(pair_search_regions=owners,feature_policy='independent_roi_v2' if per_zone else 'global',points=packed,pairs=pairs,groups=groups,colors=colors,bases=bases,params=params,regions=regions,compare=compare,total_features=total,candidate_comparisons=evaluated,models=models,backend=backend,self_match_filter=self_filter,rejected_biomes=rejected,distance_policy=dict(radii=radii,comparison_radius=radius,gap=gap,compact_guides=params[17] if len(params)>17 and params[15] and not compare else ()))
             check(cancel);self.results.put(resultkey,result)
         progress(100,'Analysis retained');return result
 
@@ -332,6 +334,7 @@ class Cloning2Engine:
         result=dict(points=points,pairs=pairs,groups=groups,models=models,colors=colors,bases=bases,params=params,regions=regions,compare=compare,total_features=len(points),candidate_comparisons=data['candidate_comparisons'],dense_count=data['dense_count'],dense_consistent_count=data['dense_consistent_count'],dense_maps=data['dense_maps'],backend='hybrid' if descriptor_backend=='metal' else 'cpu',descriptor_backend=descriptor_backend,distance_policy=dict(radii=radii,comparison_radius=radius,gap=gap,compact_guides=params[17] if len(params)>17 and params[15] and not compare else ()))
         ids=pairs[:,:2].astype(int)
         result['_pair_regions']=(data['members'][ids[:,0]] & data['members'][ids[:,1]]).argmax(1) if not compare else np.zeros(len(pairs),int)
+        result['pair_search_regions']=result['_pair_regions'].astype(np.int32) if not compare else np.full(len(pairs),-1,np.int32)
         result['_image_shape']=self.image.shape[:2]
         check(cancel);self.results.put(key,result);progress(100,'Dense field retained');return result
 
@@ -372,6 +375,7 @@ class Cloning2Engine:
                     if index_key in updated:updated[index_key]=[i+offset for i in updated[index_key]]
                 models.append(updated)
         result=dict(points=np.concatenate([a['points'],b['points']]),pairs=pairs,groups=groups,models=tuple(models),
+            pair_search_regions=np.concatenate((a['pair_search_regions'],b['pair_search_regions'])),
             colors=colors,bases=bases,params=params,regions=regions,compare=compare,
             total_features=a['total_features']+b['total_features'],candidate_comparisons=a['candidate_comparisons']+b['candidate_comparisons'],
             dense_count=a['dense_count']+b['dense_count'],dense_consistent_count=a['dense_consistent_count']+b['dense_consistent_count'],
@@ -449,6 +453,7 @@ class Cloning2Engine:
                     if name in updated:updated[name]=[i+point_offset for i in updated[name]]
                 updated['descriptor_frame']=frame;models.append(updated)
             result=dict(result,points=np.concatenate((result['points'],extra['points'])),pairs=pairs,
+                pair_search_regions=np.concatenate((result['pair_search_regions'],extra['pair_search_regions'])),
                 groups=groups,models=(*result['models'],*models),colors=colors,bases=bases,
                 total_features=result['total_features']+extra['total_features'],
                 candidate_comparisons=result['candidate_comparisons']+extra['candidate_comparisons'],

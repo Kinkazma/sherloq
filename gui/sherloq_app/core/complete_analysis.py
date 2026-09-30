@@ -9,25 +9,12 @@ from .ela_energy import energy_color
 from .sift_panels import NAME as SIFT_SOURCE
 
 ELA_SOURCE = 'ELA biomes'
-SOURCES = (*CLONE_SOURCES, SIFT_SOURCE, ELA_SOURCE)
+SOURCES = (*CLONE_SOURCES, ELA_SOURCE)
 
 
 def sift_entries(result, low, high, maximum_overlap):
-    if result is None:return ()
-    from .automatic_clones import _entry
-    from .cloning2 import biome_sides, supported_selection
-    from .copy_overlap import overlap
-    entries=[]
-    for index,group in enumerate(result['groups']):
-        selected=supported_selection(result,group,low,high,3,maximum_overlap=maximum_overlap)
-        if not len(selected):continue
-        item=_entry(SIFT_SOURCE,biome_sides(result['points'],result['pairs'],selected),len(selected),
-                    dict(group=index,partition=result.get('biome_partitions',())[index] if result.get('biome_partitions') else None))
-        original=_entry(SIFT_SOURCE,biome_sides(result['points'],result['pairs'],group),len(group),dict(group=index))
-        if item and original and overlap(*item['polygons'])<maximum_overlap:
-            item.update(id=original['id'],color=result['bases'][index])
-            entries.append(item)
-    return tuple(entries)
+    from .automatic_clones import point_entries
+    return () if result is None else point_entries(result,SIFT_SOURCE,low,high,maximum_overlap)
 
 
 def ela_entries(base, threshold, minimum, regions, excluded, image_shape, energy_thresholds=None):
@@ -76,7 +63,9 @@ def prepare(request):
     clones=clone_entries(patch,forge,low,high,overlap)
     ela,result=ela_entries(base,threshold,minimum,regions,excluded,shape,energy_thresholds)
     sift=request[12] if len(request)>12 else None
-    return clones+sift_entries(sift,low,high,overlap)+ela,result
+    from .d2prl_regions import regions as d2regions
+    d2=d2regions(request[13],request[14]) if len(request)>14 else ()
+    return clones+sift_entries(sift,low,high,overlap)+d2+ela,result
 
 
 class CompletePreparation:
@@ -90,6 +79,8 @@ class CompletePreparation:
         self.ela_key=None;self.ela_base=None;self.ela=((),None)
         self.counts=dict(clones=0,ela=0)
         self.sift_key=None;self.sift_input=None;self.sift=()
+        from .d2prl_regions import RegionCache
+        self.d2_regions=RegionCache()
     def __call__(self,request):
         patch,forge,base,low,high,overlap,threshold,minimum,regions,excluded,shape=request[:11]
         energy=request[11] if len(request)>11 else None
@@ -107,15 +98,20 @@ class CompletePreparation:
         key=(id(sift),low,high,overlap)
         if key!=self.sift_key:
             self.sift=sift_entries(sift,low,high,overlap);self.sift_input=sift;self.sift_key=key
-        return self.clones+self.sift+entries,result
+        d2=self.d2_regions(request[13],request[14]) if len(request)>14 else ()
+        return self.clones+self.sift+d2+entries,result
 
 
 def render(request):
     image,biomes,excluded=request[:3]
-    ela,mode=request[3:] if len(request)>3 else (None,0)
+    ela,mode=request[3:5] if len(request)>3 else (None,0)
+    presentation,opacity=request[5:7] if len(request)>5 else ('biomes',.45)
+    if presentation!='biomes':
+        mode=0;ela=None
+        biomes=tuple(e for e in biomes if e['source']!=ELA_SOURCE)
     if ela is not None and mode in (1,2,3,4):image=ela
     if mode==2:return image.copy()
-    out=render_clones((image,tuple(e for e in biomes if e['source']!=ELA_SOURCE),excluded))
+    out=render_clones((image,tuple(e for e in biomes if e['source']!=ELA_SOURCE),excluded,presentation,opacity,request[7] if len(request)>7 else None))
     cell_boundaries=[]
     for entry in biomes:
         if entry['source']!=ELA_SOURCE:continue

@@ -5,6 +5,23 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 30 September 2026 — automatic analyses, mirrored SIFT and D2PRL regions
+
+I added the full mirrored SIFT panels/text profile and D2PRL to both automatic
+workflows. D2PRL analyses every enabled subimage plus the enabled enclosing image;
+its native-grid size filter updates cached results without another inference.
+
+Corroboration now counts distinct method × search-region contexts, with no size
+weighting and at most one D2PRL vote per pixel. ELA is excluded from these maps.
+Relation filters apply only to classical biomes; AI layers remain independent.
+Tabs retain their own view/filter choices, display changes keep the zoom, and
+progress reports real group states and regional passes. Near-identical classical
+pairs are deduplicated visually while exact masks and raw results are retained.
+
+The validated ELA slider behaviour is preserved. The known 1,000 px compact-layout
+limit is documented. Download hooks, portable OCR and model files are preserved.
+[Behaviour, validation and limits](AUTOMATIC-ANALYSIS-V2.md).
+
 ## 30 September 2026 — SIFT panels/text, model acquisition and AI category
 
 I added SIFT + G2NN + RANSAC + Panels + Text to Copy-Move Forgery 2 and as a separate

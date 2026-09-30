@@ -97,7 +97,7 @@ def exact_mps_eligible(desc):
             np.array_equal(desc,np.floor(desc)) and np.max(np.abs(desc),initial=0)<=255 and
             np.max(np.sum(desc*desc,axis=1),initial=0)<2**21)
 
-def match(points,desc,members,radius,minimum,ratio,compare,cancel,progress,radii=None,gap=(0.,0.),axes=None,backend="cpu"):
+def match(points,desc,members,radius,minimum,ratio,compare,cancel,progress,radii=None,gap=(0.,0.),axes=None,backend="cpu",variants=None):
     """Exact OpenCV top-k, independently per search region before union.
 
     The enclosing rectangle must not suppress an inner rectangle's ratio.
@@ -117,6 +117,10 @@ def match(points,desc,members,radius,minimum,ratio,compare,cancel,progress,radii
         for zone in range(members.shape[1]):
             ids=np.flatnonzero(members[:,zone])
             jobs.append((ids,ids,min(radius,radii[zone]) if radii is not None else radius,np.zeros(2)))
+    if variants is not None:
+        # Cross-frame only, before nearest-neighbour selection. Same-position
+        # copies are still excluded by the original spatial minimum below.
+        jobs=[(q[variants[q]==v],t[variants[t]!=v],r,g) for q,t,r,g in jobs for v in (False,True)]
     total=sum(len(q) for q,t,r,g in jobs);done=0
     matcher=cv.BFMatcher(cv.NORM_L2SQR)
     gpu=backend=="mps" and exact_mps_eligible(desc)

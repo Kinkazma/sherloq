@@ -2,18 +2,20 @@
   "gui/sherloq_app/tools/tampering/automatic_clones.py": {
     "before": [
       "3094e48aebcdb79296fea4c09059c62aee680ce96aa460047c1e8d4bf76c719e",
-      "a6b602a46a0f660dd99214ca141a15580c9e472be2cb82d34c270e7f314ec0d2"
+      "a6b602a46a0f660dd99214ca141a15580c9e472be2cb82d34c270e7f314ec0d2",
+      "813d392c67c2b27a4cf104891e5cd592f68e6becc82a69b87c3489ff5b095840"
     ],
-    "after": "813d392c67c2b27a4cf104891e5cd592f68e6becc82a69b87c3489ff5b095840"
+    "after": "4d6b7f08b3af9fe8e7084e0dbadde5fb53d8f0a1fdecb8f22298ba3fe6d8f0b7"
   },
   "gui/sherloq_app/tools/tampering/complete_analysis.py": {
     "before": [
       "6520442f8c5fea0abe9c36b6ef3cc75bbf45de96564ea89ea343b64139e49e15",
       "8a3f10af6d8b4138fd37f943c7a3fd0a7773fb3a69e911f62a757264bc23f68a",
       "6449d27f7b4680bcea9291c76ccea9952b24c510f7dcec9b2242b1d6a4e998c9",
-      "9fa2cf589fdfeab92ac763d1a1595a0bc08bdf76369e0980be2f611d490bf5a1"
+      "9fa2cf589fdfeab92ac763d1a1595a0bc08bdf76369e0980be2f611d490bf5a1",
+      "aa7922d3c3ae45a4f14aaab75a9fcd375e254b4438035d5de8177be6808f31d9"
     ],
-    "after": "aa7922d3c3ae45a4f14aaab75a9fcd375e254b4438035d5de8177be6808f31d9"
+    "after": "a9b530951136f91288194dd1c833ea3080450002d7faa734ba0e1e7f18137d4b"
   },
   "gui/sherloq_app/ui/locales/fr.json": {
     "before": [
@@ -21,9 +23,10 @@
       "ecab56f64b2ba78819b7c7c1ea5beb57a2ec559391e5bef089a54b49d3a06f93",
       "f6d68e47e9e72405dbb9e8866fdb487c3f5fa6c795a5e3864609900c02bbd9ee",
       "94c2162ef70ea9f2dc10344781028acc466ef25480a28de7b83f8d6565eaf377",
-      "1b0db9d868557f4f0d7d0e0ac4307cf76a09b9be2d538d78c018b323c1984c37"
+      "1b0db9d868557f4f0d7d0e0ac4307cf76a09b9be2d538d78c018b323c1984c37",
+      "10c4523e03489e1f8a2df8801b811aa25eef09a1b97f9be3429e6d50fe5d24e7"
     ],
-    "after": "10c4523e03489e1f8a2df8801b811aa25eef09a1b97f9be3429e6d50fe5d24e7"
+    "after": "25d077734ff0e4a48b1ae2a60ec2399158517e9422e843ab5764865f061baf0d"
   },
   "gui/sherloq_app/ui/ela_profiles.py": {
     "before": "dbe28231d9489b51ccf25be27b6fa887f7527b90f75178cf42f669e0b44d564e",
@@ -40,16 +43,18 @@
   "gui/sherloq_app/core/dense_copy.py": {
     "before": [
       "1bc0c01292de9d55741f1d91813b00079fcdbec6b76ebffbaebc937a690a1bbc",
-      "a053c370a6a401f8a2da890451d85004a9dc46d68f776d3bc82cfd6280304aa0"
+      "a053c370a6a401f8a2da890451d85004a9dc46d68f776d3bc82cfd6280304aa0",
+      "888cbde965b937b45b72b77855e47d3d9b0f440b4ecac831abc5f6900aff6df8"
     ],
-    "after": "888cbde965b937b45b72b77855e47d3d9b0f440b4ecac831abc5f6900aff6df8"
+    "after": "de3e8b1fab9129d0cfc67ccd3b79fcd83ba2192823700f179333ce6ab9209cef"
   },
   "gui/sherloq_app/core/dense_parallel.py": {
     "before": [
       "620c4c81793b7ef9b6689529f92f28866b613b879b7e913ab27ca52b54702559",
-      "8cee988613eec13b44cfab6a6b37dad341d00e1e018310e750b2c744df751aea"
+      "8cee988613eec13b44cfab6a6b37dad341d00e1e018310e750b2c744df751aea",
+      "81a8d6e07b6d0ade9fe8c1aab2c94da3a9433beeac66c9c1d27ebd8206cca581"
     ],
-    "after": "81a8d6e07b6d0ade9fe8c1aab2c94da3a9433beeac66c9c1d27ebd8206cca581"
+    "after": "c152966b1e574117e4c2dbb3c7833e4ed0a6f378d24e820a219d6fc34bf4ced1"
   },
   "gui/sherloq_app/core/metal_dense.py": {
     "before": "09401731aa780d75bdb7f01efff89f9a29698366884b3fcdbda9bc3d3fc75dba",
@@ -190,8 +195,11 @@
     "after": "3d44eebb5c642c585422dac57bfa0b70f5eec9b2ec7c9f2fbbe2bd8c110870ed"
   },
   "gui/sherloq_app/ui/viewer.py": {
-    "before": "97cca6cedbb9d207bffb840f00bfe475bc49bbc516c9066208c8294fb2eae35e",
-    "after": "494f0908d80da5c6155f1dc3959412dafba7a1f89f52766c90cff6f9359123f4"
+    "before": [
+      "97cca6cedbb9d207bffb840f00bfe475bc49bbc516c9066208c8294fb2eae35e",
+      "494f0908d80da5c6155f1dc3959412dafba7a1f89f52766c90cff6f9359123f4"
+    ],
+    "after": "d1e2758ee657e4d1ce79c4aa108c514e3315a5d052001ebb1390e9654e664fc6"
   },
   "gui/sherloq_app/vendor/patchmatch/bridge.cpp": {
     "before": "9dcc8f8bfbedbabfca9fdf3d6516ffff8151882a8b413889e95f3dc974381847",
@@ -274,9 +282,10 @@
   "gui/sherloq_app/core/clone_detectors.py": {
     "before": [
       "87fa17dff53fccd5081fc4940942c26915f3edff654f2c981a2ab788f59a3be6",
-      "b465f6d3ecc4634cd92b58fa20da83fb3690858fe2d5231e046609133f9e4616"
+      "b465f6d3ecc4634cd92b58fa20da83fb3690858fe2d5231e046609133f9e4616",
+      "c416d5d5818e773caf8ae35d1016f509755547b09ae73e62658364d931a5b95d"
     ],
-    "after": "c416d5d5818e773caf8ae35d1016f509755547b09ae73e62658364d931a5b95d"
+    "after": "ae9ed9682c795a3d65778c7aac2a419c34f8d1744c9b901065dc1d9c3edc94a8"
   },
   "gui/sherloq_app/core/d2prl.py": {
     "before": [
@@ -337,17 +346,24 @@
   "gui/sherloq_app/core/automatic_clones.py": {
     "before": [
       "35fb23a5cadcc898b0ad46748c8c3efbc9ff568d749e25fd655e002e060f0318",
-      "976c7c1ed200461cfb100518bc4e01387be206d66b6e8ed13e2107e0749f72da"
+      "976c7c1ed200461cfb100518bc4e01387be206d66b6e8ed13e2107e0749f72da",
+      "f8cce7602c7a59149a671815fb091f79bcd44ae4360c63e0f0192e753782ada9"
     ],
-    "after": "f8cce7602c7a59149a671815fb091f79bcd44ae4360c63e0f0192e753782ada9"
+    "after": "826a68b9ffa6c71b6719dab91e0bc4a5e2a28ec109325edc2c41968ac9de1b3a"
   },
   "gui/sherloq_app/core/cloning2.py": {
-    "before": "3fc14d9ce6d6708ffcbdd5ddf539fed3f7be3d32f19bbdd66b19829093e648e5",
-    "after": "4f8b2c278ad2e0eb29aac3868d241b6c171add46b8a8928ab5c2c6dcf7d67552"
+    "before": [
+      "3fc14d9ce6d6708ffcbdd5ddf539fed3f7be3d32f19bbdd66b19829093e648e5",
+      "4f8b2c278ad2e0eb29aac3868d241b6c171add46b8a8928ab5c2c6dcf7d67552"
+    ],
+    "after": "54f0f38376cb394d5a0ecbbf720355a2363df2f8a0ae0f265fff2cad4a3bb12b"
   },
   "gui/sherloq_app/core/complete_analysis.py": {
-    "before": "8992b3bc606c96e932c5629077608d34515442b479fb09b0e141ec78737370a1",
-    "after": "e870839c38d6cdccf673f440133e84fecdd417bbe7861ad2a1fb2535aa4b92f9"
+    "before": [
+      "8992b3bc606c96e932c5629077608d34515442b479fb09b0e141ec78737370a1",
+      "e870839c38d6cdccf673f440133e84fecdd417bbe7861ad2a1fb2535aa4b92f9"
+    ],
+    "after": "dc5f91a233cf33b7c5b4c3cda1a8118540a11d8d9f748f9d763dfc0d95d1e0cf"
   },
   "gui/sherloq_app/core/copy_subbiomes.py": {
     "before": null,
@@ -362,8 +378,11 @@
     "after": "ad16dfaf6671aa8aafc9875b75a44adc70ced77a1eea38619e5ec2e47a3afd57"
   },
   "gui/sherloq_app/core/sift_panels.py": {
-    "before": null,
-    "after": "6ff50c0a17aacf25259954a8710f23739ddb564530903d15a8270b7bd43778a0"
+    "before": [
+      null,
+      "6ff50c0a17aacf25259954a8710f23739ddb564530903d15a8270b7bd43778a0"
+    ],
+    "after": "6e596d894cf51b21b4d3585b0773639e85793c568c62e955e63f6c9e730b8141"
   },
   "gui/sherloq_app/core/splicing_worker.py": {
     "before": "44b7d687896043944e44cf344d50647a847e88137885e62eb138ef54c418848c",
@@ -374,8 +393,11 @@
     "after": "0812b1f3e54966a08cf0017b45609f080e78c448c8a2ba429c2e79d60cc31b6f"
   },
   "gui/sherloq_app/tools/tampering/cloning2.py": {
-    "before": "869f7de90df58ac5bad8f6362a66ebaa15ad2c5d3f43b9b69a269c8a3a112669",
-    "after": "9f85b78d271129482213d8469da6348631f7645fcd60f0df0d622b644d0bb104"
+    "before": [
+      "869f7de90df58ac5bad8f6362a66ebaa15ad2c5d3f43b9b69a269c8a3a112669",
+      "9f85b78d271129482213d8469da6348631f7645fcd60f0df0d622b644d0bb104"
+    ],
+    "after": "cf1effc1669bc9b1899706e48dcdc5fac7b04f8dad608043f10acdc26a01dd76"
   },
   "gui/sherloq_app/tools/various/trufor.py": {
     "before": "f031e1bbbc1a27a997d0572ae82528d4ec14b1dad3992cbe9f5739ff38266bd2",
@@ -789,5 +811,29 @@
     "before": null,
     "after": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6",
     "target": "native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/README.ijg"
+  },
+  "gui/sherloq_app/core/clone_corroboration.py": {
+    "before": null,
+    "after": "fce0116795b80d2777ae2f91dbf6919ada57e45ff978c4ad243cc1ee8c94085a"
+  },
+  "gui/sherloq_app/core/clone_relations.py": {
+    "before": null,
+    "after": "3a6b14014a509a68ca050d033aca0826f02cc61f2d8e1f316e94782ba276d668"
+  },
+  "gui/sherloq_app/core/copy_mirror.py": {
+    "before": "f44628022c031ea5f568ab4a54e7e757f666ffdbec581a17ae8d80400c8ac7e1",
+    "after": "bc753e8b5254cca28e272418db395bf7bb9c6baefba5c9c8442a41bb01023136"
+  },
+  "gui/sherloq_app/core/d2prl_regions.py": {
+    "before": null,
+    "after": "dbdc9ad62d78f1b5986c4399ea68cb01d0da16d4bb7c216ed6518738a49dd011"
+  },
+  "gui/sherloq_app/core/sift_g2nn.py": {
+    "before": "587e07d0d206f59f1c57e1d2b790a38d1efcd6e84e0d5e074de022893e0137e3",
+    "after": "7fb2d2bf9947904f43183ba7978e6eaa98f8c3cde788c276767853f5b9f4b03c"
+  },
+  "gui/sherloq_app/core/sift_reflection.py": {
+    "before": null,
+    "after": "0aa8e044332da5002cf0d22d53425b2da2d4bcbfe02844e17899692e796f4062"
   }
 }

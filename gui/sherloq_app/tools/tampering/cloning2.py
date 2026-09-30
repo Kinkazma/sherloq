@@ -52,6 +52,8 @@ def write_export(request):
               self_match_filter=r.get('self_match_filter'),rejected_biomes=r.get('rejected_biomes',()),
               feature_policy=r.get('feature_policy'),backend=r.get('backend','cpu'),descriptor_backend=r.get('descriptor_backend'),descriptor_backends=r.get('descriptor_backends'),dense_correspondences=r.get('dense_count'),dense_consistent_correspondences=r.get('dense_consistent_count'),
               limits='Potential correspondences, not proof of forgery. Biome hulls are not exact segmentations.')
+    if 'pair_search_regions' in r:
+        data['pair_search_regions']=r['pair_search_regions'].tolist()
     if r.get('mirror_policy'):
         data.update(mirror_policy=r['mirror_policy'],group_variants=r['group_variants'])
     if r.get('extension'):
@@ -63,6 +65,7 @@ def write_export(request):
     try:
         if Path(filename).suffix.lower()=='.npz':
             arrays=dict(points=r['points'],pairs=r['pairs'],colors_bgr=r['colors'])
+            if 'pair_search_regions' in r:arrays['pair_search_regions']=r['pair_search_regions']
             descriptions=[]
             for i,field in enumerate(r.get('dense_maps',())):
                 for key,value in field.items():
@@ -287,7 +290,8 @@ class Cloning2Widget(ToolWidget):
         elif previous in (SYMMETRIC,EXTENDED_SYMMETRIC) and algorithm not in (SYMMETRIC,EXTENDED_SYMMETRIC):
             with QSignalBlocker(self.reflection):self.reflection.setChecked(self._manual_reflection)
         self._previous_algorithm=algorithm
-        self.reflection.setEnabled(dense and algorithm not in (SYMMETRIC,EXTENDED_SYMMETRIC))
+        self.reflection.setEnabled(algorithm==PANELS_TEXT or (dense and algorithm not in (SYMMETRIC,EXTENDED_SYMMETRIC)))
+        self.reflection.setText('Include reflections' if algorithm==PANELS_TEXT else 'Miroir dense')
         self.independent_sift.setVisible(algorithm=='SIFT + G2NN + RANSAC')
         self.show_text.setVisible(algorithm==PANELS_TEXT)
         self.patch.setMinimum(3 if algorithm in ('PatchMatch SIFT',COMBINED,EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC) else 2)
@@ -317,6 +321,8 @@ class Cloning2Widget(ToolWidget):
             self.support.setValue(2);self.low_spin.setValue(0);self.high_spin.setValue(self.high_spin.maximum())
             self.threshold.setToolTip('G2NN : rapport de rupture entre les voisins autorisés (défaut 0,725). Profil classique, sans YOLO.')
         if algorithm==PANELS_TEXT:
+            with QSignalBlocker(self.reflection):self.reflection.setChecked(True)
+            self.reflection.setToolTip('Keep normal SIFT matches and add geometrically verified reflected matches.')
             self.limit.setValue(6000);self.minimum.setValue(10);self.threshold.setValue(.725);self.tolerance.setValue(50)
             self.auto_radius.setChecked(True);self.ignore_gap.setChecked(False)
             self.geometry.setCurrentIndex(2);self.geometry_support.setValue(10);self.geometry_error.setValue(5.)

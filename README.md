@@ -63,11 +63,11 @@ The current source defines **50 distinct tool entries: 38 inherited labels and 1
 | C2PA Validation | Interface for checking signed provenance, asset integrity and local trust |
 | Noisesniffer | Integration of the existing research implementation for noise inconsistencies |
 | ZERO JPEG Grids | Integration of the existing ZERO method for JPEG-grid analysis |
-| Copy-Move Forgery 2 | Additional matching workflow with regions, dense descriptors and geometric controls; SIFT Panels + Text excludes labels and separates disconnected groups after RANSAC |
+| Copy-Move Forgery 2 | Additional matching workflow with regions, dense descriptors and geometric controls; SIFT Panels + Text excludes labels, verifies mirrored matches and separates disconnected groups after RANSAC |
 | Adaptive CFA | Integration of an existing colour-filter-array analysis method |
 | AI Clone Detection | Additional research backends, including Forgeryscope Auto for microscopy, western blots and lanes, and D2PRL with GPU/CPU selection and union/source/target views; external weights are required |
-| Automatic Clone Search | Combined clone-search workflow with Forgeryscope Auto microscopy/blot/lane branches and extended PatchMatch mirror/scale matching |
-| Complete Automatic Analysis | Combined workflow with clone-search results, an independent SIFT Panels + Text layer, and ELA/JPEG-ghost views |
+| Automatic Clone Search | Combined workflow with Forgeryscope Auto, extended PatchMatch mirror/scales, mirrored SIFT Panels + Text, multizone D2PRL and cached corroboration views |
+| Complete Automatic Analysis | All automatic clone methods plus ELA/JPEG-ghost views; ELA stays outside corroboration counts |
 | CAT-Net v2, SAFIRE, FOCAL, AdaIFL | Four additional research-method integrations, with original component credits and licenses |
 
 See the [complete inventory](macos/docs/TOOLS.md) for all inherited and added entries and their current categories. Dependencies and model availability vary; optional missing checkpoints are recorded in the installation's `MISSING-WEIGHTS.md`.
@@ -91,6 +91,12 @@ Automatic Clone Search and Complete Automatic Analysis also use this Auto
 pipeline on the enclosing zone. A branch selector filters its displayed results
 without another inference. PatchMatch keeps its extended mirror/scale matching,
 and Complete Automatic Analysis keeps its ELA/Ghosts controls.
+
+Both [automatic workflows](macos/docs/AUTOMATIC-ANALYSIS-V2.md) now include mirrored
+SIFT Panels + Text and D2PRL on each active subimage and enclosing image.
+Corroboration counts distinct method/region contexts without size weighting;
+D2PRL's interactive filter, view changes and relation filters reuse cached results.
+Each tab keeps its view choices, and updates preserve the zoom.
 
 ## Screenshots
 

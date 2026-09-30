@@ -14,7 +14,15 @@ from .cloning2 import EXTENDED_SYMMETRIC, biome_sides, supported_selection
 from .auto_zones import diagonal as zone_diagonal
 from .copy_overlap import overlap
 
-SOURCES = ('Forgeryscope Auto', 'PatchMatch Zernike', 'PatchMatch SIFT')
+from .sift_panels import NAME as SIFT_SOURCE
+
+D2PRL_SOURCE = 'D2PRL'
+CLASSICAL_SOURCES = ('PatchMatch Zernike', 'PatchMatch SIFT', SIFT_SOURCE)
+AI_SOURCES = ('Forgeryscope Auto', D2PRL_SOURCE)
+SOURCES = ('Forgeryscope Auto', *CLASSICAL_SOURCES, D2PRL_SOURCE)
+
+def source_label(source):
+    return 'SIFT + G2NN + RANSAC' if source == SIFT_SOURCE else source
 
 
 def parameters(shape, regions, envelope, disabled, cpu=False):
@@ -42,6 +50,7 @@ def _entry(source, polygons, count, provenance):
     canonical = sorted(tuple(sorted(map(tuple, np.round(p, 3).tolist()))) for p in polygons)
     identity=[source,canonical]
     if 'branch' in provenance:identity.append(provenance['branch'])
+    if 'search_context' in provenance:identity.append(provenance['search_context'])
     key = hashlib.sha256(json.dumps(identity).encode()).hexdigest()[:24]
     hue = (int(key[:8], 16) / 2**32 + (SOURCES.index(source) if source in SOURCES else 3) / 3) % 1
     color = tuple(round(v * 255) for v in colorsys.hsv_to_rgb(hue, .8, .95)[::-1])
@@ -49,25 +58,55 @@ def _entry(source, polygons, count, provenance):
                 count=int(count), color=color, provenance=provenance)
 
 
-def entries(patchmatch=None, forgeryscope=None, low=10., high=float('inf'), maximum_overlap=.8):
+def point_entries(result, source, low, high, maximum_overlap, split=False):
+    """Keep search contexts and panel relations before drawing endpoint hulls."""
+    from .cloning2 import biomes
+    from .clone_relations import pair_relations, polygon_key
+    found=[]
+    tolerance=result.get('params',(None,)*5+(50.,))[5]
+    models=result.get('models',());regions=result.get('regions',())
+    relations=pair_relations(result) if result['groups'] else np.empty((0,2),int)
+    owners=result.get('pair_search_regions')
+    if owners is None:owners=np.full(len(result.get('pairs',())), -2, np.int32)
+    partitions=result.get('biome_partitions',())
+    for index,group in enumerate(result['groups']):
+        model=models[index] if index<len(models) else {}
+        parts=(group,)
+        if split and not model.get('source_panels'):
+            parts=tuple(group[g] for g in biomes(result['points'],result['pairs'][group],tolerance))
+        name=source or result['group_algorithms'][index]
+        for part_number,part in enumerate(parts):
+            keys=np.column_stack((owners[part],relations[part]))
+            for key in np.unique(keys,axis=0):
+                subset=part[(keys==key).all(1)]
+                selected=supported_selection(result,subset,low,high,3,maximum_overlap=maximum_overlap)
+                if not len(selected):continue
+                owner=int(key[0]);origin=regions[owner] if 0<=owner<len(regions) else None
+                context=('roi:'+polygon_key(np.asarray(origin)) if origin is not None else
+                         'compare:'+':'.join(polygon_key(np.asarray(r)) for r in regions) if owner==-1 else
+                         'whole-image' if owner>=0 else 'unspecified')
+                provenance=dict(group=index,part=part_number,parts=len(parts),
+                                search_context=context,search_region=origin,
+                                search_region_index=owner,endpoint_region_indices=key[1:].tolist())
+                if partitions:provenance['partition']=partitions[index]
+                item=_entry(name,biome_sides(result['points'],result['pairs'],selected),len(selected),provenance)
+                original=_entry(name,biome_sides(result['points'],result['pairs'],subset),len(subset),provenance)
+                if item and original and overlap(*item['polygons'])<maximum_overlap:
+                    item.update(id=original['id'],color=original['color'],search_context=context)
+                    if source and result.get('bases'):item['color']=result['bases'][index]
+                    item['label']=source_label(name)
+                    found.append(item)
+    return tuple(found)
+
+
+def entries(patchmatch=None, forgeryscope=None, low=10., high=float('inf'), maximum_overlap=.8, sift=None, d2prl=None, d2prl_minimum=500):
     found = {}
     if patchmatch is not None:
-        for index, group in enumerate(patchmatch['groups']):
-            selected = supported_selection(patchmatch, group, low, high, 3, maximum_overlap=maximum_overlap)
-            if not len(selected):
-                continue
-            source = patchmatch['group_algorithms'][index]
-            item = _entry(source, biome_sides(patchmatch['points'], patchmatch['pairs'], selected),
-                          len(selected), dict(group=index))
-            if item:
-                if overlap(*item['polygons']) >= maximum_overlap:
-                    continue
-                # Slider changes alter the hull, not the identity/check state.
-                original = _entry(source, biome_sides(patchmatch['points'], patchmatch['pairs'], group),
-                                  len(group), dict(group=index))
-                if original:
-                    item.update(id=original['id'], color=original['color'])
-                found[item['id']] = item
+        for item in point_entries(patchmatch, None, low, high, maximum_overlap, split=True):
+            found[item['id']] = item
+    if sift is not None:
+        for item in point_entries(sift, SIFT_SOURCE, low, high, maximum_overlap):
+            found[item['id']] = item
     if forgeryscope is not None:
         for zone_index, zone in enumerate(forgeryscope['metadata']['zones']):
             offset = np.asarray(zone.get('origin', [0, 0]))
@@ -93,7 +132,10 @@ def entries(patchmatch=None, forgeryscope=None, low=10., high=float('inf'), maxi
                     if not low <= distance <= high or overlap(*item['polygons']) >= maximum_overlap:
                         continue
                     item['center_distance_px'] = distance
+                    item['search_context']='forgeryscope-zone:'+str(zone_index)
                     found[item['id']] = item
+    from .d2prl_regions import regions as d2prl_regions
+    for item in d2prl_regions(d2prl,d2prl_minimum):found[item['id']]=item
     return tuple(found.values())
 
 
@@ -103,10 +145,23 @@ def visible(entries, source, hidden, focused):
 
 
 def render(request):
-    image, biomes, excluded = request
+    image, biomes, excluded = request[:3]
+    mode, opacity = request[3:5] if len(request)>3 else ('biomes', .45)
+    if mode != 'biomes':
+        from .clone_corroboration import render_heat
+        return render_heat(image, biomes, excluded, mode, opacity, request[5] if len(request)>5 else None)
+    from .clone_corroboration import unique_envelopes
+    biomes = unique_envelopes(biomes)
+    # Paint broad regions first. Small retained evidence and its contour remain
+    # on top even when they belong to the same method and search context.
+    biomes = sorted(biomes,key=lambda e:sum(cv.contourArea(np.asarray(p,np.float32)) for p in e['polygons']),reverse=True)
     out = image.copy()
     for item in biomes:
-        for polygon in item['polygons']:
+        if 'pixel_mask' in item:
+            from .d2prl_regions import paint
+            paint(out,item)
+            continue
+        for side,polygon in enumerate(item['polygons']):
             points = np.rint(polygon).astype(np.int32)
             x, y, w, h = cv.boundingRect(points)
             x0, y0 = max(0, x), max(0, y)
@@ -115,8 +170,9 @@ def render(request):
                 continue
             roi = out[y0:y1, x0:x1]; overlay = roi.copy()
             cv.fillConvexPoly(overlay, points - (x0, y0), item['color'], cv.LINE_AA)
-            cv.addWeighted(overlay, .25, roi, .75, 0, dst=roi)
-            cv.polylines(out, [points], True, item['color'], 2, cv.LINE_AA)
+            alpha=item.get('biome_fill_alpha',[.25]*len(item['polygons']))[side]
+            cv.addWeighted(overlay, alpha, roi, 1-alpha, 0, dst=roi)
+            cv.polylines(out,[points],True,item['color'],2,cv.LINE_AA)
     # Hulls can bridge a disabled region; never paint its excluded pixels.
     for polygon in excluded:
         p = np.asarray(polygon, int); x0,y0 = p.min(0); x1,y1 = p.max(0) + 1
@@ -128,6 +184,10 @@ def render(request):
 def export(request):
     """Export complete detector arrays and the display snapshot without pickling."""
     filename, snapshot = request
+    if 'corroboration' in snapshot:
+        from .clone_corroboration import votes, unique_envelopes, context_counts
+        config=snapshot['corroboration']
+        snapshot=dict(snapshot,corroboration=dict(config,counts=votes(snapshot['image_shape'],config['entries'],config['excluded']),context_counts=context_counts(snapshot['image_shape'],config['entries'],config['excluded']),deduplicated_envelopes=unique_envelopes(config['entries'])))
     arrays = {}
     def encode(value, name='root'):
         if isinstance(value, np.ndarray):

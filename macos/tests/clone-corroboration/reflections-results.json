@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "kind": "mirror",
+      "groups": 1,
+      "matches": [
+        2000
+      ]
+    },
+    {
+      "kind": "vertical",
+      "groups": 1,
+      "matches": [
+        1482
+      ]
+    },
+    {
+      "kind": "rotate180",
+      "groups": 1,
+      "matches": [
+        744
+      ]
+    },
+    {
+      "kind": "normal",
+      "groups": 1,
+      "matches": [
+        1000
+      ]
+    },
+    {
+      "kind": "intact",
+      "groups": 0,
+      "matches": []
+    }
+  ]
+}

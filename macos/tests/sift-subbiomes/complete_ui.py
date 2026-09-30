@@ -13,6 +13,7 @@ from gui.sherloq_app.ui.jobs import _POOL
 app=QApplication([]);errors=[];sys.excepthook=lambda typ,value,tb:errors.append(str(value))
 im=cv.imread(str(ROOT/'tests/sift-panels/synthetic.png'))
 w=CompleteAnalysisWidget(im,autostart=False)
+w.relations.setCurrentIndex(2)
 w.job.compute=lambda _:dict(groups=(),group_algorithms=())
 w.forge.request=lambda *_:QTimer.singleShot(0,lambda:w.complete('forgeryscope',dict(metadata=dict(zones=[]))))
 regions=(((20,90),(299,90),(299,319),(20,319)),((360,90),(639,90),(639,319),(360,319)))
@@ -28,7 +29,7 @@ def wait():
 wait()
 assert w.results['sift']['groups'] and w.results['sift']['biome_partitions']
 assert w.submitted['sift_parameters'][0]==SIFT_SOURCE
-assert w.submitted['sift_parameters'][3]==10 and not w.submitted['sift_parameters'][11]
+assert w.submitted['sift_parameters'][3]==10 and w.submitted['sift_parameters'][11]
 rows=[e for e in w.biomes if e['source']==SIFT_SOURCE];assert rows
 tokens=(w.sift_job.token,w.job.token,w.ela_job.token,w.prepare.token)
 counts=w.sift_engine.counts.copy()

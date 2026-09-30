@@ -27,14 +27,17 @@ not general speed or detection-quality guarantees. The image and raw private
 reference are not part of the test fixtures. Envelopes illustrate match extent;
 they are not precise segmentation masks or proof of manipulation.
 
-## Complete Automatic Analysis
+## Both automatic analyses
 
-The complete workflow runs this profile as an independent layer, with a tab,
+Both automatic workflows run this profile as an independent layer, with a tab,
 visibility checkbox, cancellation, active regions and exclusions. Display changes
 reuse cached results. ELA settings do not restart SIFT. NPZ export retains SIFT
 results, parameters, text exclusions and group provenance.
 
-Automatic Clone Search alone keeps its previous sources. Extended PatchMatch
+The reflected-feature pass is enabled by default. The tab is abbreviated to
+SIFT + G2NN + RANSAC while retaining the full internal profile identity.
+[Multizone searches, corroboration and display behaviour](AUTOMATIC-ANALYSIS-V2.md).
+Extended PatchMatch
 retains both mirror and scale matching. Forgeryscope Auto and ELA/Ghosts keep their
 existing roles.
 

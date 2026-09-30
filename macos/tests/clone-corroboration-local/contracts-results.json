@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "local_only": true,
+  "no_size_weighting": true,
+  "distinct_search_contexts": true,
+  "intra_inter_separate": true,
+  "enclosing_retained": true,
+  "visual_attenuation_only": true,
+  "ia_retained": true,
+  "standalone_retained": true,
+  "raw_links_preserved": true,
+  "opacity_cache": true,
+  "exports_exact": true
+}

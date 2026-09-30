@@ -109,5 +109,7 @@ def parallel_fields(engine,algorithm,limit,radius,minimum,threshold,regions,comp
     points=np.concatenate(points);pairs=np.concatenate(pairs)
     if len(jobs)>1 and len(pairs):
         endpoints=points[pairs[:,:2].astype(int),:2];swap=(endpoints[:,0,0]>endpoints[:,1,0])|((endpoints[:,0,0]==endpoints[:,1,0])&(endpoints[:,0,1]>endpoints[:,1,1]));endpoints[swap]=endpoints[swap,::-1]
-        _,unique=np.unique(endpoints.reshape(-1,4),axis=0,return_index=True);pairs=pairs[np.sort(unique)]
+        # Identical geometry from distinct ROI searches remains distinct.
+        membership=np.concatenate(members);owner=membership[pairs[:,0].astype(int)].argmax(1)
+        _,unique=np.unique(np.column_stack((owner,endpoints.reshape(-1,4))),axis=0,return_index=True);pairs=pairs[np.sort(unique)]
     return dict(points=points,pairs=pairs,members=np.concatenate(members),dense_count=full,dense_consistent_count=consistent,dense_maps=maps,candidate_comparisons=evaluated)

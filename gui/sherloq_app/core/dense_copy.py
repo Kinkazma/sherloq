@@ -253,11 +253,13 @@ class DenseCopyEngine:
             all_members.append(members);offset+=len(points)
         points=np.concatenate(all_points);pairs=np.concatenate(all_pairs)
         if len(jobs)>1 and len(pairs):
-            # The enclosing zone overlaps its children. Do not double-count
-            # identical undirected correspondences already found in a child.
+            # Preserve independently searched overlapping ROIs. Only remove
+            # duplicate undirected links within the same originating search.
             endpoints=points[pairs[:,:2].astype(int),:2]
             swap=(endpoints[:,0,0]>endpoints[:,1,0])|((endpoints[:,0,0]==endpoints[:,1,0])&(endpoints[:,0,1]>endpoints[:,1,1]))
             endpoints[swap]=endpoints[swap,::-1]
-            _,unique=np.unique(endpoints.reshape(-1,4),axis=0,return_index=True)
+            membership=np.concatenate(all_members)
+            owner=membership[pairs[:,0].astype(int)].argmax(1)
+            _,unique=np.unique(np.column_stack((owner,endpoints.reshape(-1,4))),axis=0,return_index=True)
             pairs=pairs[np.sort(unique)]
         return dict(points=points,pairs=pairs,members=np.concatenate(all_members),dense_count=full_count,dense_consistent_count=consistent_count,dense_maps=maps,candidate_comparisons=comparisons)

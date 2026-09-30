@@ -53,11 +53,12 @@ calls=[]
 def request(params,device):
  calls.append((params,device));QTimer.singleShot(0,lambda:w.complete('forgeryscope',forge))
 w.forge.request=request
+w.d2_job.request=lambda *_:QTimer.singleShot(0,lambda:w.complete('d2prl',dict(mask=np.zeros(im.shape[:2],np.uint8),metadata=dict(boxes=[],zones=[]))))
 wait(w)
 assert w.ela_legacy_visible.isChecked()
 w.ela_legacy_visible.setChecked(True);wait(w)
 assert all(s=='Complete' for s in w.states.values()),w.states
-assert set(w.results)=={'ela','patchmatch','forgeryscope','sift'} and len(w.sources)==5
+assert set(w.results)=={'ela','patchmatch','forgeryscope','sift','d2prl'} and len(w.sources)==6
 assert any(e['source']==ELA_SOURCE for e in w.biomes)
 assert w.ela_params()==(32,0,True,False,True,.01,.99,False,'sensitive') and w.ela_threshold.value()==2 and w.ela_minimum.value()==3
 assert w.minimum.value()==10 and w.overlap.value()==80
@@ -96,7 +97,8 @@ w.overlay_check.click();wait(w)
 assert not w.enabled_sources() and not w.viewer.view.biomes
 assert np.array_equal(w.viewer.processed,w.image)
 w.overlay_check.click();wait(w)
-assert len(w.enabled_sources())==5
+assert len(w.enabled_sources())==6
+w.presentation.setCurrentIndex(0);wait(w) # ELA composition belongs to Biomes, not corroboration.
 w.ela_mode.setCurrentIndex(1);wait(w)
 expected=render((w.image,w.viewer.view.biomes,(),w.ela_base['ela'],1))
 assert np.array_equal(w.viewer.processed,expected)

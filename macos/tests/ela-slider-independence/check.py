@@ -6,6 +6,7 @@ import sys,time,json,tempfile
 from pathlib import Path
 from threading import Event
 import cv2 as cv
+import numpy as np
 from PySide6.QtWidgets import QApplication,QStyle,QStyleOptionSlider
 from PySide6.QtCore import Qt,QPoint,QPointF,QSettings
 from PySide6.QtGui import QWheelEvent
@@ -42,13 +43,22 @@ rows=[]
 with tempfile.TemporaryDirectory() as tmp:
  app._ela_profile_store=ProfileStore(QSettings(str(Path(tmp)/'settings.ini'),QSettings.IniFormat),app)
  lang=install();lang.set_mode('fr',persist=False)
- im=cv.imread(str(ROOT/'tests/sample.jpg'))
+ fixture=ROOT/'tests/sample.jpg'
+ if fixture.is_file():im=cv.imread(str(fixture))
+ else:
+  # Reproducible JPEG texture; no external photo is needed for input/race tests.
+  rng=np.random.default_rng(20260930)
+  texture=cv.GaussianBlur(rng.integers(0,256,(240,360,3),dtype=np.uint8),(3,3),0)
+  ok,jpeg=cv.imencode('.jpg',texture,[cv.IMWRITE_JPEG_QUALITY,85]);assert ok
+  im=cv.imdecode(jpeg,cv.IMREAD_COLOR)
+ assert im is not None
  p=ElaBiomesPanel(im);p.ghost.setChecked(False);p.resize(1400,850);p.show();wait((p.job,p.draw))
- w=CompleteAnalysisWidget(im,autostart=False);w.ela_ghost.setChecked(False);w.resize(1400,850);w.show();w.tabs.setCurrentIndex(4)
+ w=CompleteAnalysisWidget(im,autostart=False);w.ela_ghost.setChecked(False);w.resize(1400,850);w.show();w.tabs.setCurrentIndex(w.sources.index('ELA biomes')+1)
  zones=(((0,0),(im.shape[1]-1,0),(im.shape[1]-1,im.shape[0]-1),(0,im.shape[0]-1)),)
  w.viewer.view.set_regions(zones);w.zone_model.update(zones,None);w.sync_zones();w.queue_ela();wait((w.ela_job,w.prepare,w.draw))
  for panel,job,jobs in ((p,p.job,(p.job,p.draw)),(w,w.ela_job,(w.ela_job,w.prepare,w.draw))):
   profiles=panel.profiles
+  assert all(s.isVisible() and s.height()>=20 for s in profiles.sliders), geometry(profiles.sliders)
   saved=profiles.store.add('Input regression',[2,997,41,42])
   for profile in ('standard','conservative','sensitive',saved):
    for index,slider in enumerate(profiles.sliders):

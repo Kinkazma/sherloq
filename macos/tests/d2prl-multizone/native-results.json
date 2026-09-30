@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "real_d2prl": true,
+  "other_detectors_stubbed": true,
+  "regions": 3,
+  "native_grids": [
+    3,
+    3,
+    448,
+    448
+  ],
+  "seconds": 58.22813858399968,
+  "mask_pixels": 18567,
+  "zero_filter_pixels": 43876,
+  "zoom_preserved": true,
+  "refilter_without_inference": true
+}

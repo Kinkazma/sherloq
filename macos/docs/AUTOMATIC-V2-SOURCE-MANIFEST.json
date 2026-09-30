@@ -1,0 +1,288 @@
+{
+  "archive_sha256": "cd839b3d4d9402b1649a54ce540b7ddc2f8d4b3b0fb14fd6581a7ce55736ea84",
+  "base_commit": "2751d0ebb9f2e118ac857e416f1cc3c49c7105d9",
+  "files": [
+    {
+      "path": "gui/sherloq_app/core/automatic_clones.py",
+      "delivery_sha256": "826a68b9ffa6c71b6719dab91e0bc4a5e2a28ec109325edc2c41968ac9de1b3a",
+      "published_sha256": "826a68b9ffa6c71b6719dab91e0bc4a5e2a28ec109325edc2c41968ac9de1b3a",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/clone_corroboration.py",
+      "delivery_sha256": "fce0116795b80d2777ae2f91dbf6919ada57e45ff978c4ad243cc1ee8c94085a",
+      "published_sha256": "fce0116795b80d2777ae2f91dbf6919ada57e45ff978c4ad243cc1ee8c94085a",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/clone_detectors.py",
+      "delivery_sha256": "ae9ed9682c795a3d65778c7aac2a419c34f8d1744c9b901065dc1d9c3edc94a8",
+      "published_sha256": "ae9ed9682c795a3d65778c7aac2a419c34f8d1744c9b901065dc1d9c3edc94a8",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/clone_relations.py",
+      "delivery_sha256": "3a6b14014a509a68ca050d033aca0826f02cc61f2d8e1f316e94782ba276d668",
+      "published_sha256": "3a6b14014a509a68ca050d033aca0826f02cc61f2d8e1f316e94782ba276d668",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/cloning2.py",
+      "delivery_sha256": "54f0f38376cb394d5a0ecbbf720355a2363df2f8a0ae0f265fff2cad4a3bb12b",
+      "published_sha256": "54f0f38376cb394d5a0ecbbf720355a2363df2f8a0ae0f265fff2cad4a3bb12b",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/complete_analysis.py",
+      "delivery_sha256": "dc5f91a233cf33b7c5b4c3cda1a8118540a11d8d9f748f9d763dfc0d95d1e0cf",
+      "published_sha256": "dc5f91a233cf33b7c5b4c3cda1a8118540a11d8d9f748f9d763dfc0d95d1e0cf",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/copy_mirror.py",
+      "delivery_sha256": "bc753e8b5254cca28e272418db395bf7bb9c6baefba5c9c8442a41bb01023136",
+      "published_sha256": "bc753e8b5254cca28e272418db395bf7bb9c6baefba5c9c8442a41bb01023136",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/copy_subbiomes.py",
+      "delivery_sha256": "31cd01f2e65bd1bdbfc7dab490ea0a1474eb5994aaffd9d4c5fa47f2bb508e04",
+      "published_sha256": "31cd01f2e65bd1bdbfc7dab490ea0a1474eb5994aaffd9d4c5fa47f2bb508e04",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/d2prl.py",
+      "delivery_sha256": "58305a3e16a754e023cb37926c642c754c227dca11c554d1777e919352e6a9bb",
+      "published_sha256": "58305a3e16a754e023cb37926c642c754c227dca11c554d1777e919352e6a9bb",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/d2prl_ops.py",
+      "delivery_sha256": "474be45e4d8d4665fdd46b82b355d59cbf0fbcc303a4f46077dbe738f87efca5",
+      "published_sha256": "474be45e4d8d4665fdd46b82b355d59cbf0fbcc303a4f46077dbe738f87efca5",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/d2prl_regions.py",
+      "delivery_sha256": "dbdc9ad62d78f1b5986c4399ea68cb01d0da16d4bb7c216ed6518738a49dd011",
+      "published_sha256": "dbdc9ad62d78f1b5986c4399ea68cb01d0da16d4bb7c216ed6518738a49dd011",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/dense_copy.py",
+      "delivery_sha256": "de3e8b1fab9129d0cfc67ccd3b79fcd83ba2192823700f179333ce6ab9209cef",
+      "published_sha256": "de3e8b1fab9129d0cfc67ccd3b79fcd83ba2192823700f179333ce6ab9209cef",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/dense_parallel.py",
+      "delivery_sha256": "c152966b1e574117e4c2dbb3c7833e4ed0a6f378d24e820a219d6fc34bf4ced1",
+      "published_sha256": "c152966b1e574117e4c2dbb3c7833e4ed0a6f378d24e820a219d6fc34bf4ced1",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/ela_biomes.py",
+      "delivery_sha256": "717d361b3a1393a84e1df08c61d52365f1786eaff5993cd838e6ec655c666900",
+      "published_sha256": "717d361b3a1393a84e1df08c61d52365f1786eaff5993cd838e6ec655c666900",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/ela_energy.py",
+      "delivery_sha256": "ae24f9eef8e38ecb42cf807d25a92d132be76473328a03e9f0d1e04a7d85b992",
+      "published_sha256": "ae24f9eef8e38ecb42cf807d25a92d132be76473328a03e9f0d1e04a7d85b992",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/ela_energy_auto.py",
+      "delivery_sha256": "90dcaf350aed6ca133a1973f214d8cceba39f5078d3fbfc38cce900e69a7e815",
+      "published_sha256": "90dcaf350aed6ca133a1973f214d8cceba39f5078d3fbfc38cce900e69a7e815",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/ela_ghosts.py",
+      "delivery_sha256": "18f655dc51ccaaf2f8795b2028fed52a71f9645e07a6c3489217ce953fec8c44",
+      "published_sha256": "18f655dc51ccaaf2f8795b2028fed52a71f9645e07a6c3489217ce953fec8c44",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/forgeryscope_adapter.py",
+      "delivery_sha256": "0bcc9b52ee22b487d296df830fcc7259ea8c8d6faf8c311fc3d36aea436f7e55",
+      "published_sha256": "0bcc9b52ee22b487d296df830fcc7259ea8c8d6faf8c311fc3d36aea436f7e55",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/forgeryscope_auto.py",
+      "delivery_sha256": "60cdbd21bb1793551dac7be2a405d5bbbea438a5a033ad65d520dc0e4292a697",
+      "published_sha256": "60cdbd21bb1793551dac7be2a405d5bbbea438a5a033ad65d520dc0e4292a697",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/sift_g2nn.py",
+      "delivery_sha256": "7fb2d2bf9947904f43183ba7978e6eaa98f8c3cde788c276767853f5b9f4b03c",
+      "published_sha256": "7fb2d2bf9947904f43183ba7978e6eaa98f8c3cde788c276767853f5b9f4b03c",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/sift_panels.py",
+      "delivery_sha256": "6e596d894cf51b21b4d3585b0773639e85793c568c62e955e63f6c9e730b8141",
+      "published_sha256": "6e596d894cf51b21b4d3585b0773639e85793c568c62e955e63f6c9e730b8141",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/sift_reflection.py",
+      "delivery_sha256": "0aa8e044332da5002cf0d22d53425b2da2d4bcbfe02844e17899692e796f4062",
+      "published_sha256": "0aa8e044332da5002cf0d22d53425b2da2d4bcbfe02844e17899692e796f4062",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/core/text_regions.py",
+      "delivery_sha256": "0812b1f3e54966a08cf0017b45609f080e78c448c8a2ba429c2e79d60cc31b6f",
+      "published_sha256": "0812b1f3e54966a08cf0017b45609f080e78c448c8a2ba429c2e79d60cc31b6f",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/tools/tampering/automatic_clones.py",
+      "delivery_sha256": "4d6b7f08b3af9fe8e7084e0dbadde5fb53d8f0a1fdecb8f22298ba3fe6d8f0b7",
+      "published_sha256": "4d6b7f08b3af9fe8e7084e0dbadde5fb53d8f0a1fdecb8f22298ba3fe6d8f0b7",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/tools/tampering/cloning2.py",
+      "delivery_sha256": "cc4c8897e809031b445dfb0ccc4aef2cc06297436102f26ae382ca54ae5a4aab",
+      "published_sha256": "cf1effc1669bc9b1899706e48dcdc5fac7b04f8dad608043f10acdc26a01dd76",
+      "merge": "delivery plus existing model acquisition hook"
+    },
+    {
+      "path": "gui/sherloq_app/tools/tampering/complete_analysis.py",
+      "delivery_sha256": "a9b530951136f91288194dd1c833ea3080450002d7faa734ba0e1e7f18137d4b",
+      "published_sha256": "a9b530951136f91288194dd1c833ea3080450002d7faa734ba0e1e7f18137d4b",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/ui/ela_biomes.py",
+      "delivery_sha256": "ad010f61eafc546b5d63664b90f67fc93498b2f8cd4efa4dfe76d7f10553cac2",
+      "published_sha256": "ad010f61eafc546b5d63664b90f67fc93498b2f8cd4efa4dfe76d7f10553cac2",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/ui/ela_profiles.py",
+      "delivery_sha256": "1b0570233b0a765cdf2dcad821c42bd6cc338b132b63767bb84afc1be4878720",
+      "published_sha256": "1b0570233b0a765cdf2dcad821c42bd6cc338b132b63767bb84afc1be4878720",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/ui/ela_settings.py",
+      "delivery_sha256": "623546b651be1c2fae08a493cbcc60986c9407a84b68debbca73fa1b8529747f",
+      "published_sha256": "623546b651be1c2fae08a493cbcc60986c9407a84b68debbca73fa1b8529747f",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/ui/locales/fr.json",
+      "delivery_sha256": "6a03205b832352209d1a35a796502a715929e9570e50d3d5f45e75ea164a1a73",
+      "published_sha256": "25d077734ff0e4a48b1ae2a60ec2399158517e9422e843ab5764865f061baf0d",
+      "merge": "merged locale; existing keys retained"
+    },
+    {
+      "path": "gui/sherloq_app/ui/percentile_slider.py",
+      "delivery_sha256": "3ead05bd4c999651e43d30536984a2f5e14e9e9d949a7eb7af7c29ff6452e43e",
+      "published_sha256": "3ead05bd4c999651e43d30536984a2f5e14e9e9d949a7eb7af7c29ff6452e43e",
+      "merge": "exact delivery"
+    },
+    {
+      "path": "gui/sherloq_app/ui/viewer.py",
+      "delivery_sha256": "d1e2758ee657e4d1ce79c4aa108c514e3315a5d052001ebb1390e9654e664fc6",
+      "published_sha256": "d1e2758ee657e4d1ce79c4aa108c514e3315a5d052001ebb1390e9654e664fc6",
+      "merge": "exact delivery"
+    }
+  ],
+  "distribution_files_preserved": {
+    "gui/sherloq_app/core/model_store.py": "ad16dfaf6671aa8aafc9875b75a44adc70ced77a1eea38619e5ec2e47a3afd57",
+    "gui/sherloq_app/core/model_catalog.json": "7f968efdf4b676d71263c083a1c5fba54ffe16b90f4430b670e28b22081f9e6d",
+    "gui/sherloq_app/ui/model_job.py": "2f2b53a41de394ea4b6caeeb7ddcd84403375e5b44f53ae2b27b85be38af56b4",
+    "gui/sherloq_app/ui/research_job.py": "1cf41858d86f0967857e9e4bdb179fe96ed5f12edf83fffa26345c49ddc74a65",
+    "gui/sherloq_app/ui/trufor_job.py": "3d44eebb5c642c585422dac57bfa0b70f5eec9b2ec7c9f2fbbe2bd8c110870ed",
+    "gui/sherloq_app/tools/various/trufor.py": "9fa78ec776feec78ee40010268ad0d2503561a5244dcac8f1cad9e3d7a38fd8d",
+    "gui/sherloq_app/core/splicing_worker.py": "e6fbffd50e7a870bb2117ab477cd4d56c821f5996a194a4c18888c9fe7068ec1",
+    "gui/sherloq_app/ui/tools.py": "82eedbccac568b493e4ff3f63dc1d2c785dea08d079ebd0467139d0aaf087db5",
+    "macos/runtime/tesseract/manifest.json": "c046f6b804e0385821f118b360f4e1fa3e794d4ac660f6ef88b9a6644cdcb1c6",
+    "macos/runtime/tesseract/native/bin/tesseract": "b76998aba6caf125b0964f5a4f9a38814f6aab75c26dd5ef5065f32ec5c602a5",
+    "macos/runtime/tesseract/native/notices/tesseract/libtiff/4.7.2/LICENSE.md": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade",
+    "macos/runtime/tesseract/native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/LICENSE.md": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade",
+    "macos/runtime/tesseract/native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/_sources/project/license.rst.txt": "02e86af3b805e0f2075ebb5ac512831f6ab2a97ddeb186de076c418956418ba1",
+    "macos/runtime/tesseract/native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/project/license.html": "6c9436f8e9f58a79e044949e360291b9c910715fad31cdaed66bc61b0dcf33e6",
+    "macos/runtime/tesseract/native/notices/tesseract/libpng/1.6.58/LICENSE": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526",
+    "macos/runtime/tesseract/native/notices/tesseract/libpng/1.6.58/AUTHORS": "0c777e9f2a67bd4058ab91050eb7a56106c92ed038ba8fe5f54c83344f2d93ca",
+    "macos/runtime/tesseract/native/notices/tesseract/openjpeg/2.5.4/AUTHORS.md": "cf22e984f9fbb9be7550e9a94120595ba8c4a7de0d63f47d3725f4b2e28a4387",
+    "macos/runtime/tesseract/native/notices/tesseract/openjpeg/2.5.4/LICENSE": "a6af136f3e15038a666b61f376612a07d9a4e48cb7c01adbf3e33b3f14ab49b6",
+    "macos/runtime/tesseract/native/notices/tesseract/lz4/1.10.0/LICENSE": "4bc9c403f6b679cc076dee210e0e21c27b4e8f6d3fb43d85364c76657bfaaac5",
+    "macos/runtime/tesseract/native/notices/tesseract/libarchive/3.8.9/COPYING": "30e556b3959e3985d66efefec5eaac51d4995053caa1d3cffe6eb916f146f229",
+    "macos/runtime/tesseract/native/notices/tesseract/tesseract/5.5.3/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "macos/runtime/tesseract/native/notices/tesseract/tesseract/5.5.3/AUTHORS": "720862b7253993b348fe15f37ed6e0d4feb0fc8df8324284d75975d54dd29923",
+    "macos/runtime/tesseract/native/notices/tesseract/webp/1.6.0/AUTHORS": "f251be89fd442bd9d701360730aea163cc8e2076ff03528f59267dc2c4f8b60a",
+    "macos/runtime/tesseract/native/notices/tesseract/webp/1.6.0/COPYING": "5aec868f669e384a22372a4e8a1a6cd7d44c64cd451f960ca69cc170d1e13acf",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/AUTHORS": "01e6df90d71d591f4307db3f397a5a4fac93b18533f5a3862156f1a0a7dc8610",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING.LGPLv2.1": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING.0BSD": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING.GPLv2": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING.GPLv3": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/share/doc/xz/AUTHORS": "01e6df90d71d591f4307db3f397a5a4fac93b18533f5a3862156f1a0a7dc8610",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.0BSD": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1",
+    "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.GPLv2": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+    "macos/runtime/tesseract/native/notices/tesseract/giflib/6.1.3/COPYING": "ed5d90cb4a041bddad679470a071302ab05ae5d0ec2cf8f9c97ad7b2708751e6",
+    "macos/runtime/tesseract/native/notices/tesseract/libb2/0.98.1/COPYING": "6a1ee543e5282cd9061881edf462e6fdab181f328da71fc2c9a6950a80e94d01",
+    "macos/runtime/tesseract/native/notices/tesseract/zstd/1.5.7_1/LICENSE": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8",
+    "macos/runtime/tesseract/native/notices/tesseract/zstd/1.5.7_1/COPYING": "f9c375a1be4a41f7b70301dd83c91cb89e41567478859b77eef375a52d782505",
+    "macos/runtime/tesseract/native/notices/tesseract/leptonica/1.87.0/LICENSE-from-allheaders.txt": "ef6a840d7749d2d4a59175b7a9517c64a2a4dcbec164fe59c275a720f80f465a",
+    "macos/runtime/tesseract/native/notices/tesseract/jpeg-turbo/3.2.0/LICENSE.md": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+    "macos/runtime/tesseract/native/notices/tesseract/jpeg-turbo/3.2.0/README.ijg": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6",
+    "macos/runtime/tesseract/native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/LICENSE.md": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+    "macos/runtime/tesseract/native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/README.ijg": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6",
+    "macos/runtime/tesseract/native/lib/libwebp.7.2.0.dylib": "3bcaa7a64f92222d690a599ead6af097ad55fc1aae6034a46fd754c0535ae9c0",
+    "macos/runtime/tesseract/native/lib/liblz4.1.10.0.dylib": "c04f554eeec0c68f3ded0a932d86eb1e7bac4fd0d3e207b8d2517896c94d216b",
+    "macos/runtime/tesseract/native/lib/libpng16.16.dylib": "e782fdc794748b967b69e413273882d3a6f9e1cf9ed5c757d4ab9e37ac9f1456",
+    "macos/runtime/tesseract/native/lib/libgif.7.2.0.dylib": "f3bf33693fdacc7a418e339c6fb8556716bb0d39dd69238626d5080f90cbf268",
+    "macos/runtime/tesseract/native/lib/libopenjp2.2.5.4.dylib": "c974a770ddf29d52830248c23f02633b86dc396544ae46cfb9af79b7df11d473",
+    "macos/runtime/tesseract/native/lib/libtesseract.5.dylib": "ba1347f665022ee8909ca13e7350808c41f86dc0db37de3c87659d0740939f62",
+    "macos/runtime/tesseract/native/lib/libarchive.13.dylib": "ad4aec160746f8b4308447f1539b529f6c477378c23b683726b847a9062d9888",
+    "macos/runtime/tesseract/native/lib/liblzma.5.dylib": "adbea8c11257442ff2ecf2baa775dc1721258dd265256ed0ccb822baaa5f5d3d",
+    "macos/runtime/tesseract/native/lib/libjpeg.8.3.2.dylib": "268a485ad4054d7eaa7798841e4df9db95933390277c58d074a38ce9b7534a4c",
+    "macos/runtime/tesseract/native/lib/libleptonica.6.dylib": "898deb200d94f7e52781a06b39edd1cd0194957cedc75da4d62a720d258f7a79",
+    "macos/runtime/tesseract/native/lib/libwebpmux.3.1.2.dylib": "723a4760c1c91ee6472a86a212603ccd2711783dbd1c7edfa264ae9b02ec83b6",
+    "macos/runtime/tesseract/native/lib/libb2.1.dylib": "c3d5c6e44013a1ddd2cf4b67768335b78c851c77dd779cb7cd78cb427b98bc90",
+    "macos/runtime/tesseract/native/lib/libtiff.6.dylib": "215a332e8d0f531d8fba7957bdd760d411c36529782395e3ced95cac384c0389",
+    "macos/runtime/tesseract/native/lib/libzstd.1.5.7.dylib": "cf06b459ff92afbdd8d2227a6ad5a106d466e531232225f70d4e7b02364bfe1f",
+    "macos/runtime/tesseract/native/lib/libsharpyuv.0.1.2.dylib": "6c02bc47ce31f6f575da26098a666dfb4dc26ec782e7f923c5e8d2e1d7ff262d",
+    "macos/runtime/tesseract/native/share/tessdata/eng.traineddata": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+    "macos/runtime/tesseract/native/share/tessdata/configs/unlv": "1b02e7801de71f0757a26ba6d749e9182a0d9971929966bebb67f99db8733f40",
+    "macos/runtime/tesseract/native/share/tessdata/configs/page": "6e4b43f27a77124e66c87fce8de518ff81e918d3cc36fe71a3d01179c1856a07",
+    "macos/runtime/tesseract/native/share/tessdata/configs/linebox": "eb0279527b009a53432a9e1dde85bf42814901393546bc365bb61837f83355c9",
+    "macos/runtime/tesseract/native/share/tessdata/configs/txt": "9bcbdbe285fd3a024be563cb237751ceb3435d86610e231f08894023321af5d7",
+    "macos/runtime/tesseract/native/share/tessdata/configs/box.train.stderr": "3e62cd37d2383abf0c6dfa5ba39fd1187fcff6856c4f4f27ea1554cb4c1874d2",
+    "macos/runtime/tesseract/native/share/tessdata/configs/tsv": "59d079bb75d8b3d7c839a3564580cb559e362c93a9d70f234e421c0c3e767e04",
+    "macos/runtime/tesseract/native/share/tessdata/configs/bigram": "65e6583abc617a34d4091285181f2493d312c296a85629ac3c092d3b93b6e554",
+    "macos/runtime/tesseract/native/share/tessdata/configs/pdf": "54d56e81dfefe289b0d2e4c7bc9bbe662711f5b8255c128b73bcd66efb6bba1a",
+    "macos/runtime/tesseract/native/share/tessdata/configs/quiet": "8a93fad8251f61b5f17b8628203a0e068c71e0907cd63012ab22afb7b560fce3",
+    "macos/runtime/tesseract/native/share/tessdata/configs/inter": "46303bf83668e446f4966d1ebf7418ad9f0c5e08836bc59d98cae3bbfc3aee9d",
+    "macos/runtime/tesseract/native/share/tessdata/configs/box.train": "a421355e3488bf3fdfc14a1bdcca08c6f6414ec92c53f0eea22317c868c1a623",
+    "macos/runtime/tesseract/native/share/tessdata/configs/lstmbox": "61255d1b7c9df76b673ff43d2d91cda7f4c3c2e7d7f0643a71b212739833017e",
+    "macos/runtime/tesseract/native/share/tessdata/configs/rebox": "73ca35d7d71084fb88e2eb9a5c53ad91682754b3aecb918dece7591ec22a0b26",
+    "macos/runtime/tesseract/native/share/tessdata/configs/digits": "e757d95bb1e51444860ea10d7f2c8bb8a0c9c4ccc58a0e8c67e8dc2933a56e2e",
+    "macos/runtime/tesseract/native/share/tessdata/configs/logfile": "5eed5e41e5fbbf0862836c0e4cda7821f8e08441645858ec6821ab41d926e195",
+    "macos/runtime/tesseract/native/share/tessdata/configs/alto": "23a038ff290c7471a1a8aa4b5d23e310b0bf49f718480dad6b619a7d06eca330",
+    "macos/runtime/tesseract/native/share/tessdata/configs/kannada": "7d34fec99283142a3a22d157dc5cc8824b93ee923e576e6bfd1b026039c2e8f0",
+    "macos/runtime/tesseract/native/share/tessdata/configs/strokewidth": "ffb140aadd3e26d0d9b3b355d592b50cff8b2c3ce0394b4a6de4fabc1c0942c9",
+    "macos/runtime/tesseract/native/share/tessdata/configs/wordstrbox": "9d1787cdce085ad36dc9d6ba6b2702ac262beaf06a0bb4a0b84355f6458261e5",
+    "macos/runtime/tesseract/native/share/tessdata/configs/lstm.train": "3d1f8e5ab4e41467fdd938dc4d266eea081b477f8d74ab6b198dd1d854b5301c",
+    "macos/runtime/tesseract/native/share/tessdata/configs/hocr": "d6a7ec7c5143317a59fce2393054f6b7a8261824b934e7426fdd24febc929ad6",
+    "macos/runtime/tesseract/native/share/tessdata/configs/lstmdebug": "62d40d7a7d80315e10cdca2561d2ddf2981f53dfdbd567513b04d36f3add7f4e",
+    "macos/runtime/tesseract/native/share/tessdata/configs/get.images": "28c774c157a2f48d835a1d58f5a35dd70106c136e176572ee43bbf46f3d65c92",
+    "macos/runtime/tesseract/native/share/tessdata/configs/makebox": "a8fe20a2bc9ff1e9e8ed06d56845336c978627b8e965600abd63f1f412c18ffe",
+    "macos/runtime/tesseract/native/share/tessdata/configs/api_config": "2929bc0f1d2ba77f28cfc230f7b835b2b54038c0f9d2e8e4c5ada43803c999fd",
+    "macos/runtime/tesseract/native/share/tessdata/configs/ambigs.train": "717e534fd4330ed3f9bdb006f0465aa2633cca866786a8f8d469dbd4b01c10c2"
+  },
+  "source_files_changed": 18,
+  "updater_entries": 164,
+  "test_adjustment": "Import refilter unconditionally so generic D2PRL contracts run without optional private cached images; ELA input tests generate a deterministic JPEG fixture when sample.jpg is absent"
+}

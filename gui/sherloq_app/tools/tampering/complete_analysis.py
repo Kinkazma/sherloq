@@ -8,8 +8,7 @@ from PySide6.QtCore import QTimer,Qt,QSignalBlocker
 from PySide6.QtWidgets import QComboBox,QDoubleSpinBox,QSpinBox,QLabel,QHBoxLayout,QFileDialog,QCheckBox,QTabBar
 from .automatic_clones import AutomaticClonesWidget
 from ...core.complete_analysis import SOURCES, ELA_SOURCE, SIFT_SOURCE, prepare, render, CompletePreparation
-from ...core.cloning2 import Cloning2Engine
-from .cloning2 import analyze as analyze_clones, Progress
+from ...core.clone_corroboration import CachedRenderer
 from ...core.automatic_clones import visible
 from ...core.ela_biomes import ElaBiomeEngine,DEFAULT_BLOCK,DEFAULT_THRESHOLD,DEFAULT_MINIMUM_CELLS
 from ...ui.ela_biomes import analyze,energy_controls,histogram_controls,apply_automatic
@@ -27,17 +26,12 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.ela_cancel=Event();self.ela_base=None;self.ela_key=None
         super().__init__(image,parent,autostart=False)
         self.ela_engine=ElaBiomeEngine(image,filename)
-        self.sift_engine=Cloning2Engine(image);self.sift_updates=Progress()
-        self.sift_job=LatestJob(self,partial(analyze_clones,self.sift_engine,self.sift_updates),delay=0)
-        self.sift_job.result.connect(lambda result:self.complete('sift',result))
-        self.sift_job.failed.connect(lambda error:self.failed('sift',error))
-        self.sift_updates.changed.connect(lambda event,value,message:self.progress('sift',value)
-                                         if event is self.cancel and not event.is_set() else None)
         self.ela_job=LatestJob(self,partial(analyze,self.ela_engine),delay=120)
         self.ela_job.result.connect(self.ela_complete)
         self.ela_job.failed.connect(lambda error:self.failed('ela',error))
         # Reuse the proven automatic-clone controls, lifecycle and check state.
-        self.preparation=CompletePreparation();self.prepare.compute=self.preparation;self.draw.compute=render
+        self.preparation=CompletePreparation();self.prepare.compute=self.preparation
+        self.renderer=CachedRenderer(render,complete=True);self.draw.compute=self.renderer
         self.ela_block=QComboBox();self.ela_block.addItems(['16','32','64','96']);self.ela_block.setCurrentText(str(DEFAULT_BLOCK))
         self.ela_threshold=QDoubleSpinBox();self.ela_threshold.setRange(1,20);self.ela_threshold.setSingleStep(.25);self.ela_threshold.setValue(DEFAULT_THRESHOLD)
         self.ela_minimum=QSpinBox();self.ela_minimum.setRange(1,1000);self.ela_minimum.setValue(DEFAULT_MINIMUM_CELLS)
@@ -67,20 +61,6 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.ela_histogram_high.valueChanged.connect(self.manual_ela_bounds)
         self.ela_shadow_threshold.valueChanged.connect(self.manual_ela_deviation)
         self.ela_highlight_threshold.valueChanged.connect(self.manual_ela_deviation)
-        self.source_checks={}
-        for index,source in enumerate(self.sources,1):
-            check=QCheckBox();check.setChecked(True)
-            check.setAccessibleName(source)
-            check.setToolTip('Show or hide this source without recalculating')
-            self.source_checks[source]=check
-            self.tabs.setTabButton(index,QTabBar.LeftSide,check)
-            check.toggled.connect(self.sources_changed)
-        self.overlay_check=QCheckBox();self.overlay_check.setTristate(True)
-        self.overlay_check.setCheckState(Qt.Checked)
-        self.overlay_check.setAccessibleName('All sources')
-        self.overlay_check.setToolTip('Show or hide all sources')
-        self.tabs.setTabButton(0,QTabBar.LeftSide,self.overlay_check)
-        self.overlay_check.clicked.connect(self.toggle_all_sources)
         self.ela_mode.currentIndexChanged.connect(self.tab_changed)
         self.ela_ghost.toggled.connect(self.ela_changed);self.ela_grids.toggled.connect(self.ela_changed)
         self.ela_background.toggled.connect(self.ela_changed)
@@ -100,22 +80,8 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.ela_settings.setVisible(self.source()==ELA_SOURCE)
         self.clone_intervals.setVisible(self.source()!=ELA_SOURCE)
 
-    def enabled_sources(self):
-        return tuple(s for s in self.sources if not hasattr(self,'source_checks') or self.source_checks[s].isChecked())
-
-    def sources_changed(self,*_):
-        enabled=self.enabled_sources()
-        with QSignalBlocker(self.overlay_check):
-            self.overlay_check.setCheckState(Qt.Checked if len(enabled)==len(self.sources)
-                                             else Qt.PartiallyChecked if enabled else Qt.Unchecked)
-        self.tab_changed()
-
-    def toggle_all_sources(self,enabled):
-        for check in self.source_checks.values():
-            with QSignalBlocker(check):check.setChecked(enabled)
-        self.sources_changed()
-
     def effective_ela_mode(self):
+        if self.corroboration_active():return 0
         if (not hasattr(self,'ela_mode') or ELA_SOURCE not in self.enabled_sources()
                 or self.source() not in (None,ELA_SOURCE)):return 0
         return self.ela_mode.currentIndex()
@@ -126,6 +92,7 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         mode=self.effective_ela_mode()
         kind='low' if mode==3 else 'high' if mode==4 else None
         return tuple(e for e in super().display_entries() if e['source'] in enabled
+                     and (e['source']!=ELA_SOURCE or not self.corroboration_active())
                      and (e['source']!=ELA_SOURCE or (self.ela_energy_visible.isChecked() if 'kind' in e else self.ela_legacy_visible.isChecked()))
                      and (kind is None or e['source']!=ELA_SOURCE or e.get('kind')==kind))
 
@@ -146,33 +113,26 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         excluded=tuple(r for i,r in enumerate(self.viewer.view.snapshot())
                        if i in self.zone_model.disabled and r!=self.envelope)
         preview=self.current_ela_preview() if hasattr(self,'ela_block') else None
-        self.draw.request((self.image,shown,excluded,preview,mode))
+        self.draw.request((self.image,shown,excluded,preview,mode,*self.presentation_settings()))
 
     def toggle_zones(self,*_):
         self.redraw()
 
     def initial_states(self):
-        return {**super().initial_states(),'sift':'Waiting','ela':'Waiting'}
+        return {**super().initial_states(),'ela':'Waiting'}
 
     def state_labels(self):
-        return {**super().state_labels(),'sift':t(SIFT_SOURCE),'ela':ELA_SOURCE}
+        return {**super().state_labels(),'ela':ELA_SOURCE}
 
     def cancel_work(self):
         super().cancel_work()
         self.ela_cancel.set()
         if hasattr(self,'ela_job'):self.ela_job.invalidate()
-        if hasattr(self,'sift_job'):self.sift_job.invalidate()
 
     def ela_params(self):return int(choice(self.ela_block)),0,self.ela_ghost.isChecked(),self.ela_grids.isChecked(),self.ela_background.isChecked(),self.ela_histogram_low.value()/1000,self.ela_histogram_high.value()/1000,self.ela_auto_thresholds.isChecked(),compute_profile(self.ela_auto_profile)
 
     def start(self):
         super().start()
-        if not self.closed and self.states.get('sift')=='Running':
-            p=list(self.submitted['patchmatch_parameters']);p[0]=SIFT_SOURCE;p[3]=10.;p[4]=.725
-            p[6:9]=['Affine',5.,10];p[11]=False;p[15]=False
-            zones=tuple(r for i,r in enumerate(self.submitted['zones']) if i not in self.submitted['disabled_zones'])
-            self.submitted['sift_parameters']=tuple(p)
-            self.sift_job.request((tuple(p),zones,False,self.cancel))
         if not self.closed and self.states.get('ela')=='Running':self.queue_ela()
 
     def ela_profile_changed(self,*_):
@@ -200,6 +160,7 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.ela_cancel.set();self.ela_cancel=Event()
         self.ela_base=None;self.ela_key=None;self.results.pop('ela',None)
         self.states['ela']='Running';self.errors.pop('ela',None)
+        self.progress_messages['ela']='Computing ELA and JPEG Ghosts' if self.ela_ghost.isChecked() else 'Computing ELA'
         self.ela_job.request((self.ela_params(),self.ela_cancel))
         self.prepare_biomes();self.update_status()
 
@@ -220,7 +181,7 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.prepare.request((self.results.get('patchmatch'),self.results.get('forgeryscope'),base,
             self.minimum.value(),self.maximum.value(),self.overlap.value()/100,
             self.ela_threshold.value(),self.ela_minimum.value(),active,excluded,self.image.shape,
-            (self.ela_shadow_threshold.value()/10,self.ela_highlight_threshold.value()/10),self.results.get('sift')))
+            (self.ela_shadow_threshold.value()/10,self.ela_highlight_threshold.value()/10),self.results.get('sift'),self.results.get('d2prl'),self.d2_minimum.value()))
 
     def biomes_ready(self,answer):
         biomes,ela=answer
@@ -241,5 +202,6 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
                     ela_view=('image','ela_biomes','ela','energy_low','energy_high')[self.ela_mode.currentIndex()],
                     enabled_sources=self.enabled_sources(),source=self.source(),forgeryscope_branch=self.forge_branch.currentData(),hidden=sorted(self.model.hidden),focused=self.focused,
                     minimum_length_px=self.minimum.value(),maximum_length_px=self.maximum.value(),maximum_overlap=self.overlap.value()/100),
+                corroboration=self.corroboration_snapshot(),
                 image_shape=self.image.shape,decoded_bgr8_sha256=hashlib.sha256(memoryview(np.ascontiguousarray(self.image))).hexdigest())
             self.export_job.request((str(Path(path).with_suffix('.npz')),snapshot))

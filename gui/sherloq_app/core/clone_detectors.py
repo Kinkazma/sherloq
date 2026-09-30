@@ -55,7 +55,7 @@ def analyze(image,params,requested,models,progress=lambda *x:None):
     if image.shape[0]*image.shape[1]>64_000_000:raise ValueError('Image au-delà du budget de 64 mégapixels.')
     boxes=boxes_for(image.shape,regions);loaded,reused=models.get(variant,requested)
     excluded=boxes_for(image.shape,params['excluded']) if params.get('excluded') else []
-    if excluded and (compare or variant not in FORGERYSCOPE):raise ValueError('Exclusions require independent Forgeryscope search.')
+    if excluded and (compare or variant not in (*FORGERYSCOPE,'D2PRL')):raise ValueError('Exclusions require independent Forgeryscope or D2PRL search.')
     allowed=np.ones(image.shape[:2],np.uint8)
     for x0,y0,x1,y1 in excluded:allowed[y0:y1,x0:x1]=0
     score=np.zeros(image.shape[:2],np.float32);mask=np.zeros(image.shape[:2],np.uint8);candidates=np.zeros_like(mask);analyzed=np.zeros_like(mask);source=np.zeros_like(score);target=np.zeros_like(score);raw=[];metadata=[]
@@ -80,7 +80,9 @@ def analyze(image,params,requested,models,progress=lambda *x:None):
                 for name,destination in branches.items():destination[y0:y1,x0:x1]|=r[name]
             elif variant == 'D2PRL':
                 from .d2prl import predict, SIDE, ITERATIONS, SEED
-                r=predict(crop,loaded,progress);raw.append(r['raw'])
+                def zone_progress(done,total):
+                    progress(round((index+done/max(1,total))*1000),len(boxes)*1000)
+                r=predict(crop,loaded,zone_progress);raw.append(r['raw'])
                 size=(x1-x0,y1-y0)
                 value=cv.resize(r['map'],size,interpolation=cv.INTER_LINEAR)
                 binary=cv.resize(r['mask'],size,interpolation=cv.INTER_NEAREST)
@@ -101,7 +103,7 @@ def analyze(image,params,requested,models,progress=lambda *x:None):
     result=dict(map=score,mask=mask,candidates=candidates,analyzed=analyzed)
     result.update({name:value*allowed for name,value in branches.items()})
     if raw:result['raw_probabilities']=np.stack(raw)
-    if variant in ('MGCFDN source/cible','D2PRL'):result.update(source=source,target=target)
+    if variant in ('MGCFDN source/cible','D2PRL'):result.update(source=source*allowed,target=target*allowed)
     result['metadata']=dict(method='clone_detectors',variant=variant,device=loaded['device'],requested_device=requested,weights=loaded['weights'],model_reused=reused,engines=loaded.get('engines',{'segmentation':loaded['device']}),boxes=boxes,compare=compare,zones=metadata,threshold=.5,probability_interpolation='bilinear',mask_interpolation='nearest',status='ok' if mask.any() else 'candidates' if candidates.any() else 'no_panels' if all(m['status']=='no_panels' for m in metadata) else 'insufficient_panels' if all(m['status'] in ('no_panels','insufficient_panels') for m in metadata) else 'empty',radius_supported=False,segmentation=variant in SEGMENTERS)
     if variant=='MGCFDN source/cible':result['metadata']['channel_order']=['target','source','background']
     if variant=='D2PRL':

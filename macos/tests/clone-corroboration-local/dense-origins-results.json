@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "serial_parallel_exact": true,
+  "overlapping_searches_preserved": true,
+  "shared_links_kept_per_search": 418,
+  "pairs": 1200
+}

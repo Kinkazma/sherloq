@@ -361,7 +361,9 @@ class ImageViewer(QWidget):
         if image is None:
             return
         height, width = image.shape[:2]
-        old_rect = self.view.sceneRect()
+        # The view's rectangle includes navigation padding after cursor-centred
+        # zooming. Only the scene describes the actual image dimensions.
+        old_rect = self.view.scene.sceneRect()
         self.view.set_image(image)
         self.size_label.setText(self.tr(f"[{height}x{width} px]"))
         # A plot may have different dimensions from its source photograph.

@@ -62,7 +62,7 @@ python3 macos/apply_rc1_updates.py "/path/to/SHERLOQ-installation"
 ```
 
 Replace the quoted path with your restored installation folder. The updater
-validates 158 source/build/runtime files, rebuilds the native PatchMatch libraries, and backs up replaced files; it refuses unknown local changes and can be
+validates 164 source/build/runtime files, rebuilds the native PatchMatch libraries, and backs up replaced files; it refuses unknown local changes and can be
 rerun safely. Then open `build/SHERLOQ.app` in the installation folder, or run
 `venv/bin/python app_start.py` there. Existing restored installations use the
 same update command without repeating restoration. This includes
@@ -70,6 +70,10 @@ same update command without repeating restoration. This includes
 automatic analyses, with branch views and exports using the existing weights.
 [SIFT Panels + Text](docs/SIFT-PANELS-TEXT.md) and [first-use model downloads](docs/MODEL-DOWNLOADS.md) are included. AI Clone Detection is under AI Solutions, after AdaIFL.
 [Whole-image behaviour](docs/WHOLE-IMAGE.md) · [ELA controls](docs/ELA-SLIDERS.md) · [Adaptive-memory scope and update details](docs/ADAPTIVE-MEMORY.md).
+
+The update also includes [mirrored SIFT, multizone D2PRL and cached corroboration](docs/AUTOMATIC-ANALYSIS-V2.md)
+in both automatic workflows, with independent tab choices, preserved zoom and
+explicit progress states. The tested ELA controls remain unchanged.
 
 ### Manual download and assembly
 

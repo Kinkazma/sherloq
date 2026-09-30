@@ -1,5 +1,5 @@
 from gui.sherloq_app.ui.localization import localized_data, t
-"""Automatic panel selection and three-source clone exploration."""
+"""Automatic panel selection and independent classical/AI clone layers."""
 from functools import partial
 import hashlib
 from pathlib import Path
@@ -12,10 +12,12 @@ from PySide6.QtCore import (Qt, QTimer, Signal, QEvent, QAbstractListModel,
                             QModelIndex, QSignalBlocker)
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import (QApplication, QWidget, QLabel, QPushButton,
-    QCheckBox, QComboBox, QVBoxLayout, QHBoxLayout, QTabWidget, QTabBar, QFileDialog, QSlider, QDoubleSpinBox)
+    QCheckBox, QComboBox, QVBoxLayout, QHBoxLayout, QTabWidget, QTabBar, QFileDialog, QSlider, QDoubleSpinBox, QSpinBox, QSizePolicy)
 
-from ...core.automatic_clones import SOURCES, parameters, entries, visible, render, export
+from ...core.automatic_clones import SOURCES, CLASSICAL_SOURCES, D2PRL_SOURCE, SIFT_SOURCE, source_label, parameters, entries, visible, render, export
 from ...core.auto_zones import enclosing, diagonal
+from ...core.clone_corroboration import CachedRenderer
+from ...core.clone_relations import annotate
 from ...core.cloning2 import Cloning2Engine, EXTENDED_SYMMETRIC
 from ...ui.tools import ToolWidget
 from ...ui.check_list import CheckList
@@ -43,8 +45,9 @@ class AutomaticView(SelectionView):
         if (event.button() == Qt.LeftButton and self.press_position is not None
                 and (event.position().toPoint()-self.press_position).manhattanLength() < 4):
             p = self.mapToScene(event.position().toPoint())
-            match = next((e['id'] for e in reversed(self.biomes)
-                          if self.contains(e, p.x(), p.y())), None)
+            candidates=[e for e in self.biomes if self.contains(e,p.x(),p.y())]
+            smallest=min(candidates,key=lambda e:sum(cv.contourArea(np.asarray(poly,np.float32)) for poly in e['polygons'])) if candidates else None
+            match=smallest['id'] if smallest else None
             self.biomeClicked.emit(match)
 
 
@@ -98,6 +101,9 @@ class Biomes(QAbstractListModel):
         if role == Qt.DecorationRole:
             return QColor(*e['color'][::-1])
         if role == Qt.ToolTipRole:
+            if 'relation' in e:
+                zones=' ↔ '.join('?' if i is None else str(i+1) for i in e['endpoint_zones'])
+                return t({'within':'Within zones','between':'Between zones','unassigned':'Unassigned relations'}[e['relation']])+' · '+zones+'\n'+t('Search context')+': '+t(e.get('search_label','Unspecified search'))+'\n'+t('Check to show; click to isolate.')
             return ('Check to show; click to isolate.' if 'cells' in e or 'pixel_mask' in e else
                     'The same color links both parts. Check to show; click to isolate.')
 
@@ -130,6 +136,7 @@ class AutomaticClonesWidget(ToolWidget):
         self.results = {}
         self.states = self.initial_states()
         self.errors = {}
+        self.progress_messages = {}
         self.biomes = ()
         self.focused = None
         self.cancel = Event(); self.auto_cancel = Event()
@@ -138,7 +145,22 @@ class AutomaticClonesWidget(ToolWidget):
         self.viewer = ImageViewer(image, image, view_class=AutomaticView)
         self.tabs = QTabBar()
         for label in ('Overlay', *self.sources):
-            self.tabs.addTab(label)
+            index=self.tabs.addTab(source_label(label))
+            self.tabs.setTabToolTip(index,label)
+        self.source_checks={}
+        for index,source in enumerate(self.sources,1):
+            check=QCheckBox();check.setChecked(True)
+            check.setAccessibleName(source)
+            check.setToolTip(source+' — '+t('Show or hide this source without recalculating'))
+            self.source_checks[source]=check
+            self.tabs.setTabButton(index,QTabBar.LeftSide,check)
+            check.toggled.connect(self.sources_changed)
+        self.overlay_check=QCheckBox();self.overlay_check.setTristate(True)
+        self.overlay_check.setCheckState(Qt.Checked)
+        self.overlay_check.setAccessibleName('All sources')
+        self.overlay_check.setToolTip('Show or hide all sources')
+        self.tabs.setTabButton(0,QTabBar.LeftSide,self.overlay_check)
+        self.overlay_check.clicked.connect(self.toggle_all_sources)
         self.cpu = QCheckBox('CPU')
         self.forge_branch=QComboBox()
         for label,key in (('Forgeryscope: all branches',''),('Microscopy','microscopy'),('Western blots','blots'),('Lanes','lanes')):
@@ -167,14 +189,48 @@ class AutomaticClonesWidget(ToolWidget):
         self.zones = CheckList(); self.zone_model = EnglishZones(self.zones); self.zones.setModel(self.zone_model)
         self.side = QTabWidget(); self.side.setMinimumWidth(255); self.side.setMaximumWidth(420)
         self.side.addTab(self.legend, 'Biomes'); self.side.addTab(self.zones, 'Zones')
-        self.status = QLabel('Detecting subimages…' if autostart else 'Ready.'); self.status.setWordWrap(True)
-        self.detail = QLabel(); self.detail.setWordWrap(True)
+        self.status = QLabel('Detecting subimages…' if autostart else 'Ready.'); self.status.setWordWrap(False); self.status.setMinimumWidth(0); self.status.setFixedHeight(self.status.fontMetrics().height()+6)
+        self.detail = QLabel(); self.detail.setWordWrap(False)
+        self.detail.setFixedHeight(self.detail.fontMetrics().height())
+        for label in (self.status,self.detail):
+            label.setSizePolicy(QSizePolicy.Ignored,QSizePolicy.Fixed)
         layout = QVBoxLayout(self); layout.addWidget(self.tabs)
         controls = QHBoxLayout()
         for w in (self.detect, self.run, self.run_whole, self.stop_button, self.cpu, self.show_zones, self.save):
             controls.addWidget(w)
         controls.addStretch(); layout.addLayout(controls)
-        layout.addWidget(self.forge_branch)
+        self.presentation=QComboBox()
+        for label,key in (('Biomes','biomes'),('Corroboration heatmap','heat'),('Corroboration on image','overlay')):
+            self.presentation.addItem(label,key)
+        self.presentation.setCurrentIndex(2)
+        # Heatmap and overlay show the same evidence; biome browsing has its
+        # own scope. Switching views must not overwrite a user's scope choice.
+        self._relation_views={'biomes':'all','corroboration':'within'}
+        self._relation_view='corroboration'
+        self._display_tab=None;self._tab_displays={}
+        self.relations=QComboBox()
+        for label,key in (('Within zones','within'),('Between zones','between'),('All relations','all')):
+            self.relations.addItem(label,key)
+        self.relations.setCurrentIndex(0)
+        self.relations.setToolTip('Separate copies inside a subimage from correspondences between subimages. Display only.')
+        self.opacity=QSlider(Qt.Horizontal);self.opacity.setRange(0,100);self.opacity.setValue(70)
+        self.opacity.setMaximumWidth(160);self.opacity.setToolTip('Heatmap opacity')
+        self.heat_legend=QLabel('1 → 6+ search contexts · ELA excluded')
+        self.heat_legend.setToolTip('Integer count of methods and search zones. No size weighting; not a probability.')
+        display_row=QHBoxLayout();display_row.addWidget(self.forge_branch)
+        display_row.addWidget(self.presentation);display_row.addWidget(self.relations);display_row.addWidget(self.opacity);display_row.addWidget(self.heat_legend)
+        layout.addLayout(display_row)
+        self.d2_minimum=QSpinBox();self.d2_minimum.setRange(0,5000);self.d2_minimum.setValue(500)
+        self.d2_minimum.setToolTip('Minimum region size (448 × 448 grid)')
+        self.d2_minimum.setPrefix('D2PRL ≥ ');self.d2_minimum.setSuffix(' px')
+        self.d2_minimum.setAccessibleName('D2PRL minimum region size')
+        self.d2_slider=QSlider(Qt.Horizontal);self.d2_slider.setRange(0,5000);self.d2_slider.setValue(500)
+        self.d2_slider.setMaximumWidth(140);self.d2_slider.setMinimumWidth(60)
+        self.d2_slider.setAccessibleName('D2PRL minimum region size')
+        self.d2_slider.setToolTip('Minimum region size (448 × 448 grid)')
+        self.d2_controls=QWidget();d2_layout=QHBoxLayout(self.d2_controls);d2_layout.setContentsMargins(0,0,0,0)
+        d2_layout.addWidget(self.d2_minimum);d2_layout.addWidget(self.d2_slider)
+        controls.insertWidget(controls.indexOf(self.save)+1,self.d2_controls)
         self.clone_intervals=QWidget()
         intervals = QHBoxLayout(self.clone_intervals);intervals.setContentsMargins(0,0,0,0)
         for widget in (QLabel('Displayed length — minimum'), self.low, self.minimum,
@@ -186,10 +242,23 @@ class AutomaticClonesWidget(ToolWidget):
 
         self.updates = Progress(self)
         self.job = LatestJob(self, partial(analyze, self.engine, self.updates), delay=0)
+        self.sift_engine=Cloning2Engine(image);self.sift_updates=Progress()
+        self.sift_job=LatestJob(self,partial(analyze,self.sift_engine,self.sift_updates),delay=0)
+        self.sift_job.result.connect(lambda result:self.complete('sift',result))
+        self.sift_job.failed.connect(lambda error:self.failed('sift',error))
+        self.sift_updates.changed.connect(lambda event,value,message:self.progress('sift',value,message)
+                                         if event is self.cancel and not event.is_set() else None)
         self.forge = ResearchJob(self, image, 'clone_detectors')
+        self.d2_job=ResearchJob(self,image,'clone_detectors')
+        self.d2_job.result.connect(lambda r:self.complete('d2prl',r))
+        self.d2_job.failed.connect(lambda e:self.failed('d2prl',e))
+        self.d2_job.progress.connect(lambda n,message:self.progress('d2prl',n,message))
         self.auto_job = LatestJob(self, auto_detect, delay=0)
-        self.draw = LatestJob(self, render, delay=0)
-        self.prepare = LatestJob(self, lambda args: entries(*args), delay=60)
+        self.renderer=CachedRenderer(render)
+        self.draw = LatestJob(self, self.renderer, delay=0)
+        from ...core.d2prl_regions import RegionCache
+        self.d2_regions=RegionCache()
+        self.prepare = LatestJob(self, lambda args: entries(*args[:6])+self.d2_regions(*args[6:]), delay=60)
         self.export_job = LatestJob(self, export, delay=0)
         self.restart = QTimer(self); self.restart.setSingleShot(True); self.restart.setInterval(300)
         self.restart.timeout.connect(self.start)
@@ -198,7 +267,7 @@ class AutomaticClonesWidget(ToolWidget):
         self.job.failed.connect(lambda e: self.failed('patchmatch', e))
         self.forge.failed.connect(lambda e: self.failed('forgeryscope', e))
         self.updates.changed.connect(self.patch_progress)
-        self.forge.progress.connect(lambda n, _: self.progress('forgeryscope', n))
+        self.forge.progress.connect(lambda n, message: self.progress('forgeryscope', n, message))
         self.auto_job.result.connect(self.auto_ready)
         self.auto_job.failed.connect(self.auto_failed)
         self.draw.result.connect(self.viewer.update_processed)
@@ -218,16 +287,38 @@ class AutomaticClonesWidget(ToolWidget):
         self.legend.focusCleared.connect(self.clear_focus)
         self.model.changed.connect(self.redraw)
         self.viewer.view.biomeClicked.connect(self.pick)
-        self.tabs.currentChanged.connect(self.tab_changed)
+        self.relations.currentIndexChanged.connect(self.relation_changed)
+        self.presentation.currentIndexChanged.connect(self.presentation_changed)
+        self.opacity.valueChanged.connect(self.redraw)
+        self.tabs.currentChanged.connect(self.source_tab_changed)
         self.forge_branch.currentIndexChanged.connect(self.tab_changed)
         self.low.valueChanged.connect(self.minimum.setValue); self.high.valueChanged.connect(self.maximum.setValue)
         self.minimum.valueChanged.connect(lambda v: self.length_changed(True, v))
         self.maximum.valueChanged.connect(lambda v: self.length_changed(False, v))
         self.overlap.valueChanged.connect(self.prepare_biomes)
+        self.d2_minimum.valueChanged.connect(self.d2_filter_changed)
+        self.d2_slider.valueChanged.connect(self.d2_minimum.setValue)
+        self.prepare.busy.connect(self.update_status)
+        self.draw.busy.connect(self.update_status)
         QApplication.instance().installEventFilter(self)
         self.update_status()
         if autostart:
             QTimer.singleShot(0, self.initial_detection)
+
+    def enabled_sources(self):
+        return tuple(s for s in self.sources if not hasattr(self,'source_checks') or self.source_checks[s].isChecked())
+
+    def sources_changed(self,*_):
+        enabled=self.enabled_sources()
+        with QSignalBlocker(self.overlay_check):
+            self.overlay_check.setCheckState(Qt.Checked if len(enabled)==len(self.sources)
+                                             else Qt.PartiallyChecked if enabled else Qt.Unchecked)
+        self.tab_changed()
+
+    def toggle_all_sources(self,enabled):
+        for check in self.source_checks.values():
+            with QSignalBlocker(check):check.setChecked(enabled)
+        self.sources_changed()
 
     def initial_detection(self):
         # A user action before the queued startup must not be overwritten.
@@ -243,10 +334,10 @@ class AutomaticClonesWidget(ToolWidget):
         self.auto_ready(())
 
     def initial_states(self):
-        return {'patchmatch': 'Waiting', 'forgeryscope': 'Waiting'}
+        return {'patchmatch': 'Waiting', 'forgeryscope': 'Waiting', 'sift':'Waiting','d2prl':'Waiting'}
 
     def state_labels(self):
-        return {'patchmatch': t(EXTENDED_SYMMETRIC), 'forgeryscope': 'Forgeryscope Auto'}
+        return {'patchmatch': t(EXTENDED_SYMMETRIC), 'forgeryscope': 'Forgeryscope Auto', 'sift':source_label(SIFT_SOURCE),'d2prl':D2PRL_SOURCE}
 
     def source(self):
         return self.sources[self.tabs.currentIndex()-1] if self.tabs.currentIndex() else None
@@ -260,8 +351,8 @@ class AutomaticClonesWidget(ToolWidget):
 
     def cancel_work(self):
         self.restart.stop(); self.cancel.set(); self.auto_cancel.set()
-        self.job.invalidate(); self.auto_job.invalidate(); self.forge.cancel(); self.draw.invalidate()
-        self.prepare.invalidate()
+        self.job.invalidate(); self.auto_job.invalidate(); self.forge.cancel(); self.d2_job.cancel(); self.draw.invalidate()
+        self.prepare.invalidate();self.sift_job.invalidate()
 
     def stop(self):
         self.cancel_work()
@@ -311,7 +402,7 @@ class AutomaticClonesWidget(ToolWidget):
         self.restart.start()
 
     def clear_results(self):
-        self.results = {}; self.biomes = (); self.errors = {}; self.focused = None
+        self.results = {}; self.biomes = (); self.errors = {}; self.focused = None; self.progress_messages.clear()
         self.states = self.initial_states()
         self.model.update(()); self.viewer.view.biomes = ()
         self.save.setEnabled(False); self.viewer.update_processed(self.image)
@@ -338,14 +429,30 @@ class AutomaticClonesWidget(ToolWidget):
         self.job.request((params, regions, False, self.cancel))
         if forge['regions']:
             self.forge.request(forge, self.submitted['requested_device'])
+        # Each active subimage gets its own native 448px analysis, just as in
+        # AI Clone Detection. Keep the enclosing pass too when it is enabled.
+        d2=dict(forge,variant=D2PRL_SOURCE,regions=tuple(dict.fromkeys(regions)))
+        self.submitted['d2prl_parameters']=d2
+        self.d2_job.request(d2,self.submitted['requested_device'])
 
-    def patch_progress(self, event, value, _):
+        if not self.closed and self.states.get('sift')=='Running':
+            p=list(self.submitted['patchmatch_parameters']);p[0]=SIFT_SOURCE;p[3]=10.;p[4]=.725
+            p[6:9]=['Affine',5.,10];p[11]=True;p[15]=False
+            zones=tuple(r for i,r in enumerate(self.submitted['zones']) if i not in self.submitted['disabled_zones'])
+            self.submitted['sift_parameters']=tuple(p)
+            self.sift_job.request((tuple(p),zones,False,self.cancel))
+
+    def patch_progress(self, event, value, message):
         if event is self.cancel and not event.is_set():
-            self.progress('patchmatch', value)
+            self.progress('patchmatch', value, message)
 
-    def progress(self, key, value):
+    def progress(self, key, value, message=None):
         if self.states[key].startswith('Running'):
-            self.states[key] = f'Running {max(0,min(100,value))}%'; self.update_status()
+            self.states[key] = f'Running {max(0,min(100,value))}%'
+            if message:
+                self.progress_messages.pop(key,None)
+                self.progress_messages[key]=message
+            self.update_status()
 
     def complete(self, key, result):
         if result is None or self.closed:
@@ -366,21 +473,49 @@ class AutomaticClonesWidget(ToolWidget):
             self.draw.invalidate()
             self.save.setEnabled(False)
             self.prepare.request((self.results.get('patchmatch'), self.results.get('forgeryscope'),
-                                  self.minimum.value(), self.maximum.value(), self.overlap.value()/100))
+                                  self.minimum.value(), self.maximum.value(), self.overlap.value()/100, self.results.get('sift'),self.results.get('d2prl'),self.d2_minimum.value()))
 
     def biomes_ready(self, result):
-        self.biomes = result; self.rebuild_legend(); self.update_status(); self.redraw()
+        clones=tuple(e for e in result if e['source'] in SOURCES)
+        regions=self.viewer.view.snapshot()
+        key=(tuple(id(e) for e in clones),regions,self.envelope)
+        if key!=getattr(self,'_relation_key',None):
+            self._relation_rows=annotate(clones,regions,self.envelope,self.image.shape)
+            self._relation_inputs=clones;self._relation_key=key
+        self.biomes=self._relation_rows+tuple(e for e in result if e['source'] not in SOURCES)
+        self.rebuild_legend();self.update_status();self.redraw()
 
     def failed(self, key, error):
         self.states[key] = 'Failed'; self.errors[key] = error
         self.update_status()
 
-    def update_status(self):
+    def update_status(self, *_):
         pending = any(v.startswith('Running') for v in self.states.values())
         self.stop_button.setEnabled(pending)
         self.save.setEnabled(bool(self.results) and not pending and not self.prepare.is_busy)
         labels = self.state_labels()
-        self.status.setText(' | '.join(labels[k]+': '+v for k,v in self.states.items()) + f' | {len(self.biomes)} biomes')
+        details=' | '.join(labels[k]+': '+v for k,v in self.states.items())
+        waiting=any(v=='Waiting' for v in self.states.values())
+        finishing=self.prepare.is_busy or self.draw.is_busy
+        if pending or waiting:
+            title=t('Calculations in progress — partial results')
+        elif finishing:
+            title=t('Finalizing display — partial results')
+        elif self.errors:
+            title=t('Calculations finished — partial results (errors)')
+        elif any(v=='Cancelled' for v in self.states.values()):
+            title=t('Calculations stopped — partial results')
+        else:title=t('Calculations finished')
+        completed=sum(v=='Complete' for v in self.states.values())
+        total=sum(not v.startswith('Disabled') for v in self.states.values())
+        counter=t('{0}/{1} groups finished').replace('{0}',str(completed)).replace('{1}',str(total))
+        compact=dict(patchmatch='PatchMatch Zernike + SIFT',forgeryscope='Forgeryscope',
+                     sift='SIFT+G2NN+RANSAC',d2prl='D2PRL',ela='ELA')
+        states=' | '.join(compact.get(k,labels[k])+': '+(v[8:] if v.startswith('Running ') else t(v))
+                          for k,v in self.states.items())
+        self.status.setText(f'{title} · {counter} | {states}')
+        explanation=t('The counter tracks calculation groups, not individual algorithms or subimages.')
+        self.status.setToolTip(explanation+'\n'+details+f' | {len(self.biomes)} regions')
         notes = [labels[k]+': '+v for k,v in self.errors.items()]
         if self.results and any(v != 'Complete' and not v.startswith('Disabled') for v in self.states.values()):
             notes.insert(0, 'Partial results: not all methods have completed.')
@@ -392,11 +527,17 @@ class AutomaticClonesWidget(ToolWidget):
             similarities=sum(m.get('accepted',False) and not m.get('supported',False) for z in meta['zones'] for m in z.get('comparisons',()))
             lanes=sum(z.get('lane_matches',0) for z in meta['zones'])
             notes.append(t('Forgeryscope Auto: {0} similarity pairs; {1} lane pairs.').replace('{0}',str(similarities)).replace('{1}',str(lanes)))
-        self.detail.setText(' '.join(notes))
+        phases=[labels[k]+': '+t(message) for k,message in self.progress_messages.items()
+                if self.states.get(k,'').startswith('Running')]
+        # Reuse the existing detail line, prioritizing the latest active phase.
+        self.detail.setText(phases[-1] if phases else ' '.join(notes))
+        self.detail.setToolTip('\n'.join(phases+notes))
 
     def display_entries(self):
         branch=self.forge_branch.currentData()
-        return tuple(e for e in self.biomes if (not self.source() or e['source'] == self.source())
+        return tuple(e for e in self.biomes if (e['source'] not in CLASSICAL_SOURCES or self.relations.currentData()=='all' or e.get('relation','unassigned')==self.relations.currentData())
+
+                     and e['source'] in self.enabled_sources() and (not self.source() or e['source'] == self.source())
                      and (not branch or e['source']!=SOURCES[0] or e['provenance'].get('branch')==branch))
 
     def rebuild_legend(self):
@@ -411,7 +552,38 @@ class AutomaticClonesWidget(ToolWidget):
 
     def tab_changed(self, *_):
         self.forge_branch.setVisible(self.source() in (None,SOURCES[0]))
+        self.d2_controls.setVisible(self.source() in (None,D2PRL_SOURCE))
         self.focused = None; self.rebuild_legend(); self.redraw()
+
+    def d2_filter_changed(self, value):
+        with QSignalBlocker(self.d2_slider):self.d2_slider.setValue(value)
+        self.prepare_biomes()
+
+    def source_tab_changed(self, *_):
+        # Store controls under the tab being left, not the newly selected source.
+        self._tab_displays[self._display_tab]=(self.presentation.currentData(),
+                                               dict(self._relation_views),self.opacity.value())
+        self._display_tab=self.source()
+        mode,scopes,opacity=self._tab_displays.get(self._display_tab,
+            ('biomes',{'biomes':'all','corroboration':'all'},70))
+        self._relation_views=dict(scopes)
+        self._relation_view='biomes' if mode=='biomes' else 'corroboration'
+        with QSignalBlocker(self.presentation),QSignalBlocker(self.relations),QSignalBlocker(self.opacity):
+            self.presentation.setCurrentIndex(self.presentation.findData(mode))
+            self.relations.setCurrentIndex(self.relations.findData(scopes[self._relation_view]))
+            self.opacity.setValue(opacity)
+        self.tab_changed()
+
+    def relation_changed(self, *_):
+        self._relation_views[self._relation_view]=self.relations.currentData()
+        self.tab_changed()
+
+    def presentation_changed(self, *_):
+        self._relation_view=('biomes' if self.presentation.currentData()=='biomes'
+                             else 'corroboration')
+        with QSignalBlocker(self.relations):
+            self.relations.setCurrentIndex(self.relations.findData(self._relation_views[self._relation_view]))
+        self.tab_changed()
 
     def choose(self, *_):
         selected = self.legend.selectionModel().selectedIndexes()
@@ -440,6 +612,31 @@ class AutomaticClonesWidget(ToolWidget):
     def toggle_zones(self, enabled):
         self.viewer.view.show_regions = enabled; self.viewer.view.viewport().update()
 
+    def corroboration_active(self):
+        return (self.presentation.currentData()!='biomes' and
+                (self.source() is None or self.source() in SOURCES))
+
+    def presentation_settings(self):
+        clone_view=self.source() is None or self.source() in SOURCES
+        self.presentation.setEnabled(clone_view)
+        self.heat_legend.setToolTip(t('Integer counts without size weighting. Relation filters affect PatchMatch/SIFT only; AI sources remain included. ELA is hidden in this view.'))
+        self.relations.setEnabled(self.source() is None or self.source() in CLASSICAL_SOURCES)
+        mode=self.presentation.currentData() if clone_view else 'biomes'
+        self.opacity.setEnabled(mode=='overlay')
+        self.heat_legend.setVisible(mode!='biomes')
+        return mode,self.opacity.value()/100
+
+    def corroboration_snapshot(self):
+        shown=visible(self.display_entries(),None,self.model.hidden,self.focused)
+        excluded=tuple(r for i,r in enumerate(self.viewer.view.snapshot())
+                       if i in self.zone_model.disabled and r!=self.envelope)
+        return dict(entries=tuple(e for e in shown if e['source'] in SOURCES),excluded=excluded,
+                    sources=SOURCES,metric='integer_method_search_context_count_not_probability',
+                    relation_view=self.relations.currentData(),exclude_enclosing_search=False,
+                    presentation=self.presentation.currentData(),opacity=self.opacity.value()/100,
+                    biome_opacity_policy='visual_only_area_dependent_non_ai',
+                    ela_suppressed=self.corroboration_active(),d2prl_min_component=self.d2_minimum.value())
+
     def redraw(self):
         if self.closed:
             return
@@ -447,7 +644,7 @@ class AutomaticClonesWidget(ToolWidget):
         self.viewer.view.biomes = shown
         excluded = tuple(r for i,r in enumerate(self.viewer.view.snapshot())
                          if i in self.zone_model.disabled and r != self.envelope)
-        self.draw.request((self.image, shown, excluded))
+        self.draw.request((self.image, shown, excluded, *self.presentation_settings()))
 
     def export_results(self):
         if not self.save.isEnabled():
@@ -459,12 +656,13 @@ class AutomaticClonesWidget(ToolWidget):
                 display=dict(source=self.source(), forgeryscope_branch=self.forge_branch.currentData(), hidden=sorted(self.model.hidden), focused=self.focused,
                              minimum_length_px=self.minimum.value(), maximum_length_px=self.maximum.value(),
                              maximum_overlap=self.overlap.value()/100),
+                corroboration=self.corroboration_snapshot(),
                 image_shape=self.image.shape, decoded_bgr8_sha256=hashlib.sha256(memoryview(np.ascontiguousarray(self.image))).hexdigest())
             self.export_job.request((str(Path(path).with_suffix('.npz')), snapshot))
 
     def shutdown(self):
         if self.closed:
             return
-        self.closed = True; self.cancel_work(); self.forge.shutdown()
+        self.closed = True; self.cancel_work(); self.forge.shutdown(); self.d2_job.shutdown()
         QApplication.instance().removeEventFilter(self)
         super().shutdown()

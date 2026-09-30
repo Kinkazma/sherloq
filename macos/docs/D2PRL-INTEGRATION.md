@@ -146,3 +146,12 @@ QT_QPA_PLATFORM=offscreen python tests/d2prl/ui.py
 
 The evaluator uses both CPU and MPS and therefore requires an MPS-capable Mac.
 The [source manifest](D2PRL-SOURCE-MANIFEST.json) identifies the delivered files.
+
+
+## Both automatic workflows
+
+D2PRL also runs in Automatic Clone Search and Complete Automatic Analysis, once
+per active subimage and active enclosing image. Its 500-pixel default filter works
+on the separate cached native grids without repeating inference, before reprojection
+and union. The AI mask preserves holes and remains independent of classical relation
+filters. [Controls, corroboration, zoom and validation](AUTOMATIC-ANALYSIS-V2.md).

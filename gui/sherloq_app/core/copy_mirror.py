@@ -131,6 +131,7 @@ def analyze(engine, params, regions, compare, cancel, progress):
                 updated[key] = [j+point_offset for j in updated[key]]
             models.append(updated)
         result = dict(result,points=np.concatenate((result['points'],extra['points'])),pairs=pairs,
+                      pair_search_regions=np.concatenate((result['pair_search_regions'],extra['pair_search_regions'])),
                       groups=groups,models=(*result['models'],*models),colors=colors,bases=bases,
                       group_algorithms=(*result['group_algorithms'],*([names[i]]*len(extra['groups']))),
                       pair_algorithms=np.r_[result['pair_algorithms'],np.full(len(extra['pairs']),i,np.uint8)],
