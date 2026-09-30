@@ -134,15 +134,15 @@ rebuilds that bridge in isolation.
 
 The updater accepts original RC1 and the previously published source versions;
 unknown local source edits are refused. Source files and existing native libraries
-are backed up under `.updates/rc1-native-20260930/files/`. Empty
+are backed up under `.updates/rc1-d2prl-filter-20260930/files/`. Empty
 `.absent` markers record newly added files. A replacement failure rolls back both
 source and native files. Earlier update backups remain intact. A verified build
 receipt avoids recompilation when the same update is run again.
 
 The memory changes need no model download or app-bundle rebuild. D2PRL
-requires its separately obtained checkpoint and four MAT filters; see the
-[D2PRL installation instructions](D2PRL-INTEGRATION.md). The updater does not
-download or redistribute them. Reopen the application after the update. Each
+requires its separate GitHub model asset and four MAT filters; see the
+[D2PRL installation instructions](D2PRL-INTEGRATION.md). The source updater does not
+download them; the dedicated model installer retrieves and verifies the checkpoint. Reopen the application after the update. Each
 native library file is replaced atomically.
 
 ## Reproduce the public checks

@@ -73,6 +73,9 @@ The current source defines **50 distinct tool entries: 38 inherited labels and 1
 See the [complete inventory](macos/docs/TOOLS.md) for all inherited and added entries and their current categories. Dependencies and model availability vary; optional missing checkpoints are recorded in the installation's `MISSING-WEIGHTS.md`.
 
 D2PRL now runs natively with GPU selected by default and CPU available explicitly.
+The [checkpoint and verified installer](macos/docs/D2PRL-INTEGRATION.md#installation-and-model-files)
+are available through GitHub. Its [region-size slider](macos/docs/D2PRL-INTERACTIVE-FILTER.md) refilters cached
+results without rerunning inference; the original 500-pixel minimum is the default.
 On the recorded author example, the optimized MPS adaptation took 25.76 seconds
 versus 401.42 seconds for the initial MPS port, with identical raw maps. CPU and
 GPU can produce different results; this is not a general accuracy or speed claim.

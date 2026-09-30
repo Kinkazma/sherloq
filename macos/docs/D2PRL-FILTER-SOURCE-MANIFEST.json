@@ -1,0 +1,47 @@
+{
+  "snapshot_sha256": "c7899526e93cc2a0c938cc7774da65b5824f8adba57305e5fa89ce7c8ba2fff1",
+  "files": [
+    {
+      "snapshot_path": "source/gui/sherloq_app/core/d2prl.py",
+      "repository_path": "gui/sherloq_app/core/d2prl.py",
+      "sha256": "58305a3e16a754e023cb37926c642c754c227dca11c554d1777e919352e6a9bb"
+    },
+    {
+      "snapshot_path": "source/gui/sherloq_app/tools/tampering/clone_detectors.py",
+      "repository_path": "gui/sherloq_app/tools/tampering/clone_detectors.py",
+      "sha256": "d02f967d5e0453335e5d398bcc14ce55adde9b5340bc2525b6f49e9fc8f0d499"
+    },
+    {
+      "snapshot_path": "tests/d2prl/filter_ui.py",
+      "repository_path": "macos/tests/d2prl/filter_ui.py",
+      "sha256": "6f84c9dcf88cf9e57e4d1f1b042b8f91a323c02d386b65831d95d5a70650f507"
+    },
+    {
+      "snapshot_path": "tests/d2prl/filter-ui.json",
+      "repository_path": "macos/tests/d2prl/filter-ui.json",
+      "sha256": "fa5f6fbcb697a0df69e21ac150434ced5e957560ad969071157b3fac5598fbbf"
+    }
+  ],
+  "locale_merge": {
+    "repository_path": "gui/sherloq_app/ui/locales/fr.json",
+    "entries": {
+      "Minimum region size (448 × 448 grid)": "Taille minimale des régions (grille 448 × 448)",
+      "0 = no size filter": "0 = aucun filtre de taille"
+    },
+    "sha256": "f6d68e47e9e72405dbb9e8866fdb487c3f5fa6c795a5e3864609900c02bbd9ee"
+  },
+  "subsequent_coordinator_qt_confirmation": {
+    "date": "2026-09-30",
+    "files": [
+      {
+        "repository_path": "macos/tests/d2prl/ui.py",
+        "sha256": "e52c1da13e132999b4a1623f989b8afc7830e1f242bc8a171f8a64cea52c15fb"
+      },
+      {
+        "repository_path": "macos/tests/d2prl/ui.json",
+        "sha256": "52be149cf5110651aa74f38aa59a940284b6872fa22a995eb0d1774388d5aa44"
+      }
+    ],
+    "provenance": "Delivered confirmation after the immutable filter package; native Qt/worker test includes filter_job and default500."
+  }
+}

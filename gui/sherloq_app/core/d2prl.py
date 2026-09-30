@@ -47,20 +47,50 @@ def load(device):
                 kind='d2prl', weights=signatures, rng_state=rng_state)
 
 
-def postprocess(raw):
+def postprocess(raw, min_component=500):
     """Original post_1c/post_3c, on the native model grid before resizing."""
     from skimage.morphology import remove_small_objects
     union, target, source = raw
-    mask = remove_small_objects(np.rint(union) > .5, min_size=500)
+    if not 0 <= min_component <= SIDE * SIDE:
+        raise ValueError('Invalid minimum component size')
+    mask = remove_small_objects(np.rint(union) > .5, min_size=min_component)
     t = (target > 0).astype(np.float32)
     s = (source > 0).astype(np.float32)
-    both = remove_small_objects(t + s > 0, min_size=500)
+    both = remove_small_objects(t + s > 0, min_size=min_component)
     t = t * both
     s = both.astype(np.float32) - t
     signed = cv.filter2D(t - s, -1, np.ones((50, 50)), borderType=cv.BORDER_CONSTANT)
     t = (signed > 0) & both
     s = both & ~t
     return mask.astype(np.uint8), t.astype(np.float32), s.astype(np.float32)
+
+
+def refilter(request):
+    """Rebuild masks from cached native grids, never rerun neural inference.
+
+    Independent zones keep their own connected components, then combine in
+    original coordinates. Return fresh arrays so rendering/export can overlap.
+    """
+    result, minimum = request
+    from copy import deepcopy
+    updated = dict(result)
+    metadata = deepcopy(result['metadata'])
+    updated['metadata'] = metadata
+    for name in ('mask', 'target', 'source'):
+        updated[name] = np.zeros_like(result[name])
+    for raw, box, zone in zip(result['raw_probabilities'], metadata['boxes'], metadata['zones']):
+        x0, y0, x1, y1 = box
+        masks = postprocess(raw, minimum)
+        for name, values in zip(('mask', 'target', 'source'), masks):
+            area = updated[name][y0:y1, x0:x1]
+            np.maximum(area, cv.resize(values, (x1-x0, y1-y0), interpolation=cv.INTER_NEAREST), out=area)
+        zone['min_component'] = minimum
+        zone['status'] = 'ok' if masks[0].any() else 'empty'
+    for name in ('mask', 'target', 'source'):
+        updated[name] *= result['analyzed']
+    metadata['min_component'] = minimum
+    metadata['status'] = 'ok' if updated['mask'].any() else 'empty'
+    return updated
 
 
 def predict(image, loaded, progress=lambda *args: None):

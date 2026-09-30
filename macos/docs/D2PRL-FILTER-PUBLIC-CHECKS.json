@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "date": "2026-09-30",
+  "postprocessing": {
+    "passed": true,
+    "postprocess_cases": 12,
+    "independent_regions": 2,
+    "role_threshold": 0
+  },
+  "qt_filter": {
+    "passed": true,
+    "boundary_cases": 6,
+    "independent_zones": true,
+    "no_inference": true,
+    "last_slider_value_wins": true,
+    "invalidation": true,
+    "overlay_respects_mask": true
+  },
+  "updater_fixtures": {
+    "passed": true,
+    "cases": [
+      "success",
+      "unknown-existing",
+      "unknown-new",
+      "missing-existing",
+      "bad-source",
+      "conflicting-backup",
+      "symlink",
+      "rollback",
+      "native-success",
+      "native-build-failure",
+      "native-incomplete",
+      "native-rollback",
+      "receipt-failure",
+      "new-package",
+      "new-package-rollback",
+      "new-package-symlink",
+      "new-package-parent-file"
+    ]
+  },
+  "all_previous_translations_preserved": true,
+  "private_tiff_timing_rerun": false,
+  "neural_inference_rerun": false,
+  "model_installer_fixtures": {
+    "passed": true,
+    "cases": [
+      "download",
+      "local-file",
+      "wrong-hash",
+      "oversized",
+      "interrupted",
+      "unknown-existing",
+      "symlink",
+      "concurrent-file"
+    ]
+  },
+  "github_model_download": {
+    "passed": true,
+    "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/d2prl.pth",
+    "bytes": 540533481,
+    "sha256": "2749c7436169ce689deaeb197ce5dae3d1a4533999833928168ec0b0d703df36",
+    "release_asset_id": 601261600,
+    "server_digest_matches": true,
+    "live_download_verified": true,
+    "repeated_install_uses_existing_verified_file": true
+  }
+}

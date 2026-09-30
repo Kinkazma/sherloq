@@ -129,3 +129,11 @@ Missing optional checkpoints are listed in `MISSING-WEIGHTS.md` inside the
 installation.
 Private photographs, settings, logs, correspondence and private Git history
 are excluded. Analysis outputs are investigative signals, not authenticity proofs.
+
+### D2PRL model supplement
+
+After applying the cumulative source update, install the separately hosted GitHub
+checkpoint with `python3 macos/install_d2prl_model.py "/path/to/SHERLOQ-installation"`.
+The installer checks the exact size and SHA256 and reuses an already verified
+file. [Protocol, model files and terms](docs/D2PRL-INTEGRATION.md#installation-and-model-files).
+The frozen six-part ZIP is unchanged.

@@ -920,5 +920,7 @@
   "Energy": "Énergie",
   "Cells / Ghosts": "Cellules / Ghosts",
   "Run on whole image": "Exécuter sur toute l’image",
-  "Ignore detected subimages and excluded zones, then restart all analyses on the whole image.": "Ignorer les sous-images détectées et les zones exclues, puis relancer toutes les analyses sur l’image entière."
+  "Ignore detected subimages and excluded zones, then restart all analyses on the whole image.": "Ignorer les sous-images détectées et les zones exclues, puis relancer toutes les analyses sur l’image entière.",
+  "Minimum region size (448 × 448 grid)": "Taille minimale des régions (grille 448 × 448)",
+  "0 = no size filter": "0 = aucun filtre de taille"
 }

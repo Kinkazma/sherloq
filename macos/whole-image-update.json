@@ -11,8 +11,11 @@
     "after": "6449d27f7b4680bcea9291c76ccea9952b24c510f7dcec9b2242b1d6a4e998c9"
   },
   "gui/sherloq_app/ui/locales/fr.json": {
-    "before": "f0db26bbb86bae7bd308ede21bc62b9ca295438641486f4132feace1eaa77e6d",
-    "after": "ecab56f64b2ba78819b7c7c1ea5beb57a2ec559391e5bef089a54b49d3a06f93"
+    "before": [
+      "f0db26bbb86bae7bd308ede21bc62b9ca295438641486f4132feace1eaa77e6d",
+      "ecab56f64b2ba78819b7c7c1ea5beb57a2ec559391e5bef089a54b49d3a06f93"
+    ],
+    "after": "f6d68e47e9e72405dbb9e8866fdb487c3f5fa6c795a5e3864609900c02bbd9ee"
   },
   "gui/sherloq_app/ui/ela_profiles.py": {
     "before": "dbe28231d9489b51ccf25be27b6fa887f7527b90f75178cf42f669e0b44d564e",
@@ -259,20 +262,29 @@
     "after": "b465f6d3ecc4634cd92b58fa20da83fb3690858fe2d5231e046609133f9e4616"
   },
   "gui/sherloq_app/core/d2prl.py": {
-    "before": null,
-    "after": "e4399429d5723031ee1df6a50aa096482b337608f2e20d6f477945b665381764"
+    "before": [
+      null,
+      "e4399429d5723031ee1df6a50aa096482b337608f2e20d6f477945b665381764"
+    ],
+    "after": "58305a3e16a754e023cb37926c642c754c227dca11c554d1777e919352e6a9bb"
   },
   "gui/sherloq_app/core/d2prl_ops.py": {
     "before": null,
     "after": "474be45e4d8d4665fdd46b82b355d59cbf0fbcc303a4f46077dbe738f87efca5"
   },
   "gui/sherloq_app/tools/tampering/clone_detectors.py": {
-    "before": "2edcc8aff3f7105e4e27622756cb2f1532281dc1e5494add3445c7523e418837",
-    "after": "c7cbeca1601051341b9072af58348375136db25ffa5c8cddcaca43ac7083c72b"
+    "before": [
+      "2edcc8aff3f7105e4e27622756cb2f1532281dc1e5494add3445c7523e418837",
+      "c7cbeca1601051341b9072af58348375136db25ffa5c8cddcaca43ac7083c72b"
+    ],
+    "after": "d02f967d5e0453335e5d398bcc14ce55adde9b5340bc2525b6f49e9fc8f0d499"
   },
   "macos/integration/clone_detectors/assets.json": {
-    "before": "651fe1e8ab88614f14beda6ca367dc53c278f08e89c55321d9ddfae84144109e",
-    "after": "7ce55d5f2625a618d50cf179c623a91d40ed6e561bf108b6d63876600fea7c6e",
+    "before": [
+      "651fe1e8ab88614f14beda6ca367dc53c278f08e89c55321d9ddfae84144109e",
+      "7ce55d5f2625a618d50cf179c623a91d40ed6e561bf108b6d63876600fea7c6e"
+    ],
+    "after": "d030beb7f55daffb74857904fd422e7c3a80f3fa2395f59ee350c5398b7051ee",
     "target": "integration/clone_detectors/assets.json"
   },
   "macos/integration/clone_detectors/files.sha256.json": {

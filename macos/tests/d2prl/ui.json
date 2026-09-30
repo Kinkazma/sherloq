@@ -3,5 +3,8 @@
   "green_outline": true,
   "resident_worker": true,
   "source_target_views": true,
-  "cancellation": true
+  "cancellation": true,
+  "default_min_component": 500,
+  "interactive_filter_stage": true,
+  "installed_root_verified": true
 }

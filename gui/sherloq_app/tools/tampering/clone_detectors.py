@@ -4,7 +4,7 @@ from pathlib import Path
 import cv2 as cv
 import numpy as np
 from PySide6.QtCore import Qt,QSignalBlocker
-from PySide6.QtWidgets import (QLabel,QPushButton,QComboBox,QCheckBox,QVBoxLayout,QHBoxLayout,QFileDialog,QProgressBar,QListWidget,QListWidgetItem)
+from PySide6.QtWidgets import (QWidget,QSlider,QSpinBox,QLabel,QPushButton,QComboBox,QCheckBox,QVBoxLayout,QHBoxLayout,QFileDialog,QProgressBar,QListWidget,QListWidgetItem)
 from ...ui.tools import ToolWidget
 from ...ui.viewer import ImageViewer
 from ...ui.selection_view import SelectionView
@@ -13,6 +13,7 @@ from ...ui.research_job import ResearchJob
 from ...ui.jobs import LatestJob
 from ...core.clone_detectors import VARIANTS,FORGERYSCOPE
 from ...core.auto_zones import detect_panels,enclosing
+from ...core.d2prl import refilter
 from ..noise.noisesniffer import export
 
 def render(request):
@@ -22,13 +23,15 @@ def render(request):
     elif mode=='Cible':values=result.get('target',np.zeros(image.shape[:2],np.float32))
     elif mode=='Masque':return np.repeat((result['mask']*255)[:,:,None],3,2)
     else:values=result['map']
+    if mode=='Superposition' and result['metadata']['variant']=='D2PRL':
+        mask &= result['mask'].astype(bool)
     heat=cv.applyColorMap(np.rint(np.clip(values,0,1)*255).astype(np.uint8),cv.COLORMAP_INFERNO)
     output=image.copy();output[mask]=cv.addWeighted(image,.55,heat,.45,0)[mask] if mode=='Superposition' else heat[mask]
     return output
 
 class CloneDetectorsWidget(ToolWidget):
     def __init__(self,image,parent=None):
-        super().__init__(parent);self.image=image;self.result=None;self.closed=False;self.submitted=None;self._rebuilding=False;self.envelope=None
+        super().__init__(parent);self.image=image;self.result=None;self.raw_result=None;self.closed=False;self.submitted=None;self._rebuilding=False;self.envelope=None
         self.viewer=ImageViewer(image,image,view_class=SelectionView)
         self.variant=QComboBox();self.variant.addItems(VARIANTS);mark_combo(self.variant,[],green_items=VARIANTS)
         self.cpu=QCheckBox('CPU');self.view_mode=QComboBox();self.view_mode.addItems(['Superposition','Carte','Masque','Suggestions','Source','Cible'])
@@ -38,13 +41,22 @@ class CloneDetectorsWidget(ToolWidget):
         self.note=QLabel();self.note.setWordWrap(True);self.status=QLabel('Prêt.');self.status.setWordWrap(True);self.progress=QProgressBar()
         layout=QVBoxLayout(self);top=QHBoxLayout()
         for w in (self.variant,self.cpu,self.view_mode,self.search,self.compare,self.save):top.addWidget(w)
-        layout.addLayout(top);layout.addWidget(self.note);controls=QHBoxLayout()
+        layout.addLayout(top)
+        self.filter_controls=QWidget();filter_row=QHBoxLayout(self.filter_controls);filter_row.setContentsMargins(0,0,0,0)
+        self.minimum=QSlider(Qt.Horizontal);self.minimum.setRange(0,5000);self.minimum.setValue(500)
+        self.minimum_value=QSpinBox();self.minimum_value.setRange(0,5000);self.minimum_value.setValue(500)
+        filter_row.addWidget(QLabel('Minimum region size (448 × 448 grid)'));filter_row.addWidget(self.minimum,1);filter_row.addWidget(self.minimum_value)
+        filter_row.addWidget(QLabel('0 = no size filter'))
+        layout.addWidget(self.filter_controls);layout.addWidget(self.note);controls=QHBoxLayout()
         for w in (self.selection,self.auto,self.delete,self.clear):controls.addWidget(w)
         controls.addStretch();layout.addLayout(controls);body=QHBoxLayout();body.addWidget(self.viewer,1);zone_layout=QVBoxLayout();zone_layout.addWidget(QLabel('Zones'));zone_layout.addWidget(self.zones);body.addLayout(zone_layout);layout.addLayout(body,1);layout.addWidget(self.status);layout.addWidget(self.progress)
         self.job=ResearchJob(self,image,'clone_detectors');self.draw=LatestJob(self,render,delay=0);self.export_job=LatestJob(self,export,delay=0);self.auto_job=LatestJob(self,lambda im:detect_panels(im),delay=0)
         self.job.result.connect(self.complete);self.job.failed.connect(self.failed);self.job.busy.connect(self.state);self.job.progress.connect(lambda n,t:(self.progress.setValue(n),self.status.setText(t)))
         self.draw.result.connect(self.viewer.update_processed);self.draw.failed.connect(self.status.setText);self.export_job.failed.connect(self.status.setText);self.export_job.result.connect(lambda p:self.status.setText('Exporté : '+str(p)))
         self.auto_job.result.connect(self.auto_complete);self.auto_job.failed.connect(self.status.setText)
+        self.filter_job=LatestJob(self,refilter,delay=80)
+        self.filter_job.result.connect(self.filtered);self.filter_job.failed.connect(self.failed)
+        self.minimum.valueChanged.connect(self.filter_changed);self.minimum_value.valueChanged.connect(self.minimum.setValue)
         self.search.clicked.connect(lambda:self.start(False));self.compare.clicked.connect(lambda:self.start(True));self.save.clicked.connect(self.export_data)
         self.variant.currentIndexChanged.connect(self.variant_changed);self.cpu.toggled.connect(self.changed);self.view_mode.currentIndexChanged.connect(self.redraw)
         self.selection.currentIndexChanged.connect(lambda i:self.viewer.view.set_mode('Rectangle' if i else 'Pan'))
@@ -58,6 +70,7 @@ class CloneDetectorsWidget(ToolWidget):
         return dict(variant=choice(self.variant),regions=self.active(),selection_present=bool(self.viewer.view.snapshot()),compare=compare)
     def variant_changed(self,*_):
         variant=choice(self.variant);forced=variant=='MGCFDN VIG 16×16'
+        self.filter_controls.setVisible(variant=='D2PRL')
         with QSignalBlocker(self.cpu):self.cpu.setChecked(forced)
         self.cpu.setEnabled(not forced)
         self.view_mode.model().item(3).setEnabled(variant in FORGERYSCOPE)
@@ -93,18 +106,31 @@ class CloneDetectorsWidget(ToolWidget):
         if self._rebuilding:return
         self.auto_job.invalidate()
         if self.job.is_busy:self.job.cancel()
+        self.filter_job.invalidate();self.raw_result=None
         self.draw.invalidate();self.result=None;self.save.setEnabled(False);self.viewer.set_busy(True)
         self.viewer.view.enabled_regions={i for i in range(self.zones.count()) if self.zones.item(i).checkState()==Qt.Checked};self.viewer.view.viewport().update();self.state(False)
     def state(self,busy):
         self.search.setText('Annuler' if busy else 'Rechercher');self.compare.setEnabled(not busy and choice(self.variant) in FORGERYSCOPE and len(self.active())==2)
         self.compare.setToolTip('Compare exactement deux rectangles avec Forgeryscope.')
-        self.save.setEnabled(not busy and self.result is not None)
+        self.save.setEnabled(not busy and not self.filter_job.is_busy and self.result is not None)
     def start(self,compare):
         if self.job.is_busy:self.job.cancel();self.status.setText('Annulé.');return
         if self.viewer.view.snapshot() and not self.active():self.status.setText('Cocher au moins une zone.');return
+        self.filter_job.invalidate();self.raw_result=None
         self.draw.invalidate();self.result=None;self.save.setEnabled(False);self.submitted=self.params(compare);self.progress.setValue(0)
         self.job.request(self.submitted,'cpu' if self.cpu.isChecked() else 'mps')
     def complete(self,result):
+        self.raw_result=result
+        if result['metadata']['variant']=='D2PRL':
+            self.progress.setValue(100);self.state(False);self.filter_changed(self.minimum.value());return
+        self.filtered(result)
+    def filter_changed(self,value):
+        with QSignalBlocker(self.minimum_value):self.minimum_value.setValue(value)
+        if self.raw_result is None or self.raw_result['metadata']['variant']!='D2PRL':return
+        self.draw.invalidate();self.save.setEnabled(False)
+        self.filter_job.request((self.raw_result,value))
+    def filtered(self,result):
+        if result['metadata']['variant']=='D2PRL':self.raw_result=result
         self.result=result;self.progress.setValue(100);self.state(False);self.viewer.set_busy(False);self.redraw();m=result['metadata']
         messages={'insufficient_panels':'Aucune comparaison possible : chaque zone contient moins de deux panneaux adaptés. Activer Ensemble ou comparer deux rectangles ; pour les retouches internes, utiliser Copy-Move Forgery 2.', 'no_panels':'Aucun panneau adapté reconnu. Choisir deux rectangles pour comparer, ou une méthode de segmentation.','empty':'Aucune zone retenue par ce réglage.','candidates':'Suggestions à examiner ; aucune zone confirmée par la géométrie.','ok':'Analyse terminée.'}
         detail=''

@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "boundary_cases": 6,
+  "independent_zones": true,
+  "no_inference": true,
+  "last_slider_value_wins": true,
+  "invalidation": true,
+  "overlay_respects_mask": true,
+  "500": {
+    "mask_pixels": 0,
+    "seconds": 0.010755500000414031
+  },
+  "403": {
+    "mask_pixels": 3137,
+    "seconds": 0.010418374999972002
+  },
+  "100": {
+    "mask_pixels": 12202,
+    "seconds": 0.009632624999539985
+  },
+  "0": {
+    "mask_pixels": 17467,
+    "seconds": 0.006573374999788939
+  }
+}

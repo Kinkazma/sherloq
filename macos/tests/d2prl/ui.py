@@ -13,9 +13,10 @@ assert all(w.view_mode.model().item(i).isEnabled() for i in [4,5])
 assert not w.compare.isEnabled();assert not w.cpu.isChecked() and w.cpu.isEnabled()
 w.cpu.setChecked(False);w.start(False)
 end=time.monotonic()+180
-while w.job.is_busy or w.draw.is_busy:
+while w.job.is_busy or w.filter_job.is_busy or w.draw.is_busy:
  app.processEvents();time.sleep(.02);assert time.monotonic()<end,w.status.text();assert not errors,errors
 assert w.result is not None,w.status.text();assert w.result['metadata']['variant']=='D2PRL'
+assert w.minimum.value()==500 and w.result['metadata']['min_component']==500
 assert w.save.isEnabled();assert all(k in w.result for k in ('source','target','raw_probabilities'))
 w.view_mode.setCurrentIndex(4)
 while w.draw.is_busy:app.processEvents();time.sleep(.02)

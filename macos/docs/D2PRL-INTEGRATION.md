@@ -16,7 +16,7 @@ The four MAT filters and checkpoint are checked against the recorded SHA256s.
 
 The three raw maps are union probability, target residual and source residual,
 not class logits. Role thresholds are **> 0**, with removal of objects smaller
-than 500 model-grid pixels and the original 50 × 50 majority filter. Categorical
+than 500 model-grid pixels by default and the original 50 × 50 majority filter. Categorical
 masks are restored with nearest-neighbour interpolation; the continuous map uses
 bilinear interpolation. Raw maps remain available before display interpolation.
 
@@ -31,6 +31,10 @@ records adaptations of the original code. The
 [D2PRLu fork](https://github.com/nPr0nn/D2PRLu/tree/70b804a16575fe160695ec6c4740e6f10337d3b1)
 is an additional reference; its training preprocessing is not substituted for
 the original inference used here.
+
+The [interactive region-size filter](D2PRL-INTERACTIVE-FILTER.md) lets me adjust
+the minimum from 0 to 5,000 on the cached model grid, without rerunning inference.
+The default of 500 reproduces the original result.
 
 ## Recorded measurements
 
@@ -74,7 +78,7 @@ positive result. [Measurements](../tests/d2prl/user-images/results.json) and
 [component diagnostics](../tests/d2prl/user-images/diagnostics.json) are supplied
 without the images or private paths.
 
-## Installation and external files
+## Installation and model files
 
 Apply the [cumulative RC1 update](ADAPTIVE-MEMORY.md#install-the-cumulative-rc1-update)
 to the restored installation, or use the [source layout](../README.md#source-development).
@@ -82,7 +86,20 @@ The adapter uses PyTorch, torchvision, NumPy, SciPy, OpenCV, Pillow and
 scikit-image from the existing native environment; no new Python package is
 required beyond those dependencies.
 
-Place the separately obtained final model at this installation-relative path:
+The final checkpoint is available as a separate [GitHub Release asset](https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/d2prl.pth).
+It is kept outside Git history and outside the frozen six-part installation ZIP.
+From the current repository, install it into the restored installation with:
+
+```sh
+python3 macos/install_d2prl_model.py "/path/to/SHERLOQ-installation"
+```
+
+The installer verifies the 540,533,481-byte size and SHA256 before installing the
+file atomically. It reuses a verified existing file and refuses to overwrite an
+unknown checkpoint. Interrupted or invalid downloads are not installed. For a
+previously downloaded copy, add `--file "/path/to/d2prl.pth"`.
+
+The installation-relative destination is:
 
 ```text
 models/external/clone_detectors/01_d2prl/d2prl.pth
@@ -103,14 +120,18 @@ The following filters from the pinned original repository must be present under
 Their hashes are retained in the merged
 [file inventory](../integration/clone_detectors/files.sha256.json). The restored
 RC1 includes those filters; a fresh source export needs the external assets.
-The updater includes the adapter and merged inventories, but **does not contain
-or download the checkpoint**. The frozen six-part RC1 download predates this
-integration and does not include the D2PRL checkpoint.
+The cumulative source updater includes the adapter and merged inventories.
+The separate model installer downloads the checkpoint from GitHub; OSN is not
+needed. The frozen six-part RC1 ZIP predates this integration, so its contents
+and checksums remain unchanged. The supplemental model asset is separate.
 
-Code notices and checkpoint distribution rights are separate. The Apache-2.0
-notice of the reference D2PRLu fork does not relicense the original repository
-or its checkpoints. This publication contains no private download links,
-correspondence or checkpoint files. See [component attribution](ATTRIBUTION.md).
+Code notices and checkpoint terms are separate. The original repository
+publicly links pretrained weights, but the inspected repository does not supply
+a standalone checkpoint license. The Apache-2.0 notice of the reference D2PRLu
+fork does not relicense this checkpoint. This mirror grants no additional rights
+and does not claim that all third-party weights are GPL or Apache licensed.
+No private download links or correspondence are published.
+See [provenance and terms](D2PRL-MODEL-NOTICE.md).
 
 To repeat the checks from the staged layout:
 

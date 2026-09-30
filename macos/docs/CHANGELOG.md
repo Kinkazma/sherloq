@@ -5,6 +5,19 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 30 September 2026 — interactive D2PRL region filtering
+
+I added a 0–5,000 region-size slider and synchronized numeric field, measured on
+the 448 × 448 model grid. The default 500 preserves the original postprocessing;
+0 disables only small-component removal. Cached raw maps are refiltered without
+another inference. Masks, source/target views, overlays and exports follow the
+latest setting; export waits for filtering. The probability-map view stays raw.
+The inference checkpoint is also available as a separate GitHub Release asset,
+with a size/SHA256-verifying installer; it is not added to Git history or the
+frozen RC1 ZIP. [Model provenance and terms](D2PRL-MODEL-NOTICE.md).
+D2PRL overlays now respect the retained mask. Rapid changes and invalidation
+are covered by Qt tests. [Usage, measurements and checks](D2PRL-INTERACTIVE-FILTER.md).
+
 ## 30 September 2026 — D2PRL and four more bounded-memory engines
 
 I integrated the original D2PRL inference into Clone Detectors, with GPU as the

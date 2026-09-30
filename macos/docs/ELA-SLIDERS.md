@@ -35,7 +35,7 @@ For a fresh installation, run its `restore_installation.py` first. This cumulati
 update accepts original RC1 files and installations carrying earlier fixes.
 It now also includes the [PatchMatch memory correction](PATCHMATCH-MEMORY.md),
 validates 65 source/build/inventory files before changing them, and saves originals under
-`.updates/rc1-native-20260930/files/`. Earlier update backups are retained.
+`.updates/rc1-d2prl-filter-20260930/files/`. Earlier update backups are retained.
 Unknown local modifications are refused. Already updated files are left alone;
 the earlier `apply_whole_image_fix.py` command also applies this cumulative update
 when run from the current repository. Reopen the application to load the new code.

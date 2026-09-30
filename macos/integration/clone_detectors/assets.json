@@ -157,14 +157,16 @@
     {
       "id": "01_d2prl_pretrain",
       "kind": "weights",
-      "url": "https://pan.baidu.com/s/1m_FU5fqBl5J50uKs9Vu7Ng",
+      "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/d2prl.pth",
       "access_code": "xhwq",
       "access_code_source": "https://github.com/byc33/D2PRL/issues/3",
       "path": "models/external/clone_detectors/01_d2prl/d2prl.pth",
       "status": "downloaded",
       "size": 540533481,
       "sha256": "2749c7436169ce689deaeb197ce5dae3d1a4533999833928168ec0b0d703df36",
-      "original_filename": "d2prl.pth"
+      "original_filename": "d2prl.pth",
+      "upstream_url": "https://pan.baidu.com/s/1m_FU5fqBl5J50uKs9Vu7Ng",
+      "distribution": "Separate GitHub Release mirror; see macos/docs/D2PRL-MODEL-NOTICE.md"
     },
     {
       "id": "05_luc_pub_yolo",

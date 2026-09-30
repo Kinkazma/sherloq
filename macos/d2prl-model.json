@@ -1,0 +1,10 @@
+{
+  "name": "d2prl.pth",
+  "bytes": 540533481,
+  "sha256": "2749c7436169ce689deaeb197ce5dae3d1a4533999833928168ec0b0d703df36",
+  "path": "models/external/clone_detectors/01_d2prl/d2prl.pth",
+  "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/d2prl.pth",
+  "upstream": "https://github.com/byc33/D2PRL",
+  "upstream_revision": "a4314b614ea3186b4fac98e9e96939e37f275fc5",
+  "notice": "The upstream checkpoint has no separately stated license in the inspected repository. This mirror grants no additional rights and does not apply the Apache-2.0 license of the separate D2PRLu fork."
+}
