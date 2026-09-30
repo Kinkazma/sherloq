@@ -9,6 +9,7 @@ import numpy as np
 from PySide6.QtCore import QObject, Signal
 from .jobs import LatestJob,STAGING_POOL
 from .trufor_service import TruForCommand
+from .model_job import ModelJob
 from gui.sherloq_app.core.jpeg_curve import Cancelled
 from gui.sherloq_app.core.image_buffers import all_finite
 from gui.sherloq_app.core.memory_resources import require_disk_space
@@ -89,6 +90,10 @@ class TruForJob(QObject):
         self.preparer = LatestJob(self, _prepare, delay=0, pool=STAGING_POOL)
         self.loader = LatestJob(self, _load, delay=0)
         self.command = TruForCommand(self)
+        self.models = ModelJob(self)
+        self.models.ready.connect(self._models_ready)
+        self.models.failed.connect(self._failure)
+        self.models.progress.connect(self.progress)
         self.preparer.result.connect(self._prepared)
         self.loader.result.connect(self._loaded)
         self.command.waiting.connect(lambda waiting: self.progress.emit(0, 'En attente d’une autre analyse…') if waiting else None)
@@ -109,6 +114,10 @@ class TruForJob(QObject):
             self._loaded((device, self.results[device]))
         else:
             self.progress.emit(0, 'Préparation de l’image…')
+            self.models.request("trufor")
+
+    def _models_ready(self):
+        if not self.closed and self.current is not None:
             self.preparer.request(self.files)
 
     def _prepared(self, files):
@@ -164,6 +173,7 @@ class TruForJob(QObject):
 
     def invalidate(self):
         self.current = None
+        self.models.cancel()
         self.preparer.invalidate()
         self.loader.invalidate()
         self.command.shutdown()
@@ -178,6 +188,7 @@ class TruForJob(QObject):
     def shutdown(self):
         self.closed = True
         self.invalidate()
+        self.models.shutdown()
         self.preparer.shutdown()
         self.loader.shutdown()
         self.command.closed = True

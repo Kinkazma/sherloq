@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 4.657574374999967,
+  "automatic_zones": 3,
+  "text_boxes": 4,
+  "auto_pairs": 92,
+  "auto_biomes": 1,
+  "compare_biomes": 1,
+  "isolated_search": true,
+  "exclusions": true,
+  "cache": true,
+  "cancellation": true,
+  "intact_repeated_labels_biomes": 0
+}

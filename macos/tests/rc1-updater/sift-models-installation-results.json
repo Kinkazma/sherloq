@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "source_inventory_files": 156,
+  "real_isolated_native_build": true,
+  "cases": [
+    {
+      "base_commit": "fc08617fc3f98e134bfa27cc732e2670f60cd68f",
+      "files_changed": 158,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "b56f1d60109185e35cb7ded7a08de6ba48308198",
+      "files_changed": 158,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "0ea97f373dbf9cea41f8ee7d2c053839ef8a53e0",
+      "files_changed": 156,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "7992b90d2819261a23fc0e0c5dc1f3fcda45cf32",
+      "files_changed": 153,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "ea9727e4886fc8f6d12111dcdfb0b8f66ecdc8fc",
+      "files_changed": 120,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "07093f2031eeee2257e7d348dcd82ee172b64ace",
+      "files_changed": 102,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "4b7b9d4af08e23964705ba1d23126787b6e45caa",
+      "files_changed": 100,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "40bf829a8c7053f6b96d54d2572e1cd62af3f238",
+      "files_changed": 96,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    },
+    {
+      "base_commit": "acb005f7edfb05137fd810fcf8cf02cef5fec6b2",
+      "files_changed": 94,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    }
+  ]
+}

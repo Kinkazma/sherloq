@@ -1,0 +1,3383 @@
+{
+  "schema": 1,
+  "version": "2026.09.30-v1",
+  "source_archive_sha256": "f1cbdaedf5f287630eb0fdb6c06a161643e9b16614c65663e963afd33a5f427d",
+  "assets": {
+    "models/external/CAT_full_v2.pth.tar": {
+      "path": "models/external/CAT_full_v2.pth.tar",
+      "bytes": 915503873,
+      "sha256": "f82aaafdd1142775231feedcea0bb7027f7370561d9e8d107465454001865989",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part02",
+          "offset": 989113183,
+          "bytes": 852550068,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/safire.pth": {
+      "path": "models/external/safire.pth",
+      "bytes": 420798714,
+      "sha256": "65bdf6880380162d57f77d71b3fd367c3f16aebca316f942a821da16e9225b12",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 1712345256,
+          "bytes": 279949144,
+          "range": true
+        },
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 0,
+          "bytes": 107987139,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/AdaIFL_v0.pth": {
+      "path": "models/external/AdaIFL_v0.pth",
+      "bytes": 649660293,
+      "sha256": "da0a1e24a254ab4ce908e4fde8b00fb66c852796625cf2a85d4154cd39ee7b56",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part02",
+          "offset": 384690696,
+          "bytes": 604422381,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/FOCAL_ViT_weights.pth": {
+      "path": "models/external/FOCAL_ViT_weights.pth",
+      "bytes": 1249580537,
+      "sha256": "9de26b3f33c61c75da455181b88ef4befce5ffe2eaf70ee3118542877fecca89",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part02",
+          "offset": 1948224374,
+          "bytes": 44070026,
+          "range": true
+        },
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 0,
+          "bytes": 1120518555,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/FOCAL_HRNet_weights.pth": {
+      "path": "models/external/FOCAL_HRNet_weights.pth",
+      "bytes": 115010941,
+      "sha256": "693048dabb49f84f176dfb12c6a13f2204e31e57f2a74fee645675d08bba917f",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part02",
+          "offset": 1841663361,
+          "bytes": 106560905,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/TruFor_main/test_docker/weights/trufor-state.pt": {
+      "path": "source/gui/TruFor_main/test_docker/weights/trufor-state.pt",
+      "bytes": 275168069,
+      "sha256": "2845912ff57f33502abea6a2075eecacd093a553825515691598c04ca5e94c12",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 586243340,
+          "bytes": 255938537,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/pretrained.pt": {
+      "path": "models/external/pretrained.pt",
+      "bytes": 143144,
+      "sha256": "992dade71b8682a617f63e5a92e46292cd34e391f8b46dd050ce4c0f86e7745d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 1712221071,
+          "bytes": 124088,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/adapted_to_j95_database.pt": {
+      "path": "models/external/adapted_to_j95_database.pt",
+      "bytes": 143144,
+      "sha256": "4705e72f88c8c770cbfa763ae6c6866f316249ced456e2b8d1d1e91a273fafd2",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1120518668,
+          "bytes": 124253,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/adapted_to_nojpeg_database.pt": {
+      "path": "models/external/adapted_to_nojpeg_database.pt",
+      "bytes": 143144,
+      "sha256": "5cf541e11c0d6b06f860b9021f2e1ac144929cccbf0e0f1a634680c60c232bd3",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1120643037,
+          "bytes": 124277,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/xfeat.pt": {
+      "path": "models/external/xfeat.pt",
+      "bytes": 6247949,
+      "sha256": "0f5187fd7bedd26c7fe6acc9685444493a165a35ecc087b33c2db3627f3ea10b",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 510548562,
+          "bytes": 5795156,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/xfeat-lighterglue.pt": {
+      "path": "models/external/xfeat-lighterglue.pt",
+      "bytes": 10820795,
+      "sha256": "766102df37f11189efe5b0811d1f47c72b22629b79bfabfcfff9d2a2f84654b8",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 500538401,
+          "bytes": 10010066,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/aliked-n16.pth": {
+      "path": "models/external/aliked-n16.pth",
+      "bytes": 2738091,
+      "sha256": "5be8704840ed662d9d8c561bf7279c222092674e7eb05fd0feab94899e9d82f2",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1120767415,
+          "bytes": 2513544,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/aliked-n16rot.pth": {
+      "path": "models/external/aliked-n16rot.pth",
+      "bytes": 2738325,
+      "sha256": "ddf3abbf38e86f6a74540d214e1a9712c54b2d8551abc864542199f2347d7332",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1123281063,
+          "bytes": 2517145,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/aliked_lightglue.pth": {
+      "path": "models/external/aliked_lightglue.pth",
+      "bytes": 47632827,
+      "sha256": "d975e965b105311a6143194852297dff4f02aea5cc2e10cecfed966ca0e22503",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1125798315,
+          "bytes": 44210153,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/sift_lightglue.pth": {
+      "path": "models/external/sift_lightglue.pth",
+      "bytes": 47632573,
+      "sha256": "5b52b8d9982d43532dc042606b346bb9594c9f5a4bd6f64362c63866287b4ac0",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 456301196,
+          "bytes": 44237098,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/02_forgeryscope/yolo_panel_extractor.pt": {
+      "path": "models/external/clone_detectors/02_forgeryscope/yolo_panel_extractor.pt",
+      "bytes": 119075905,
+      "sha256": "f686674cfb06e73c0e95791cd5ba73823a2cccc918b0bd67f6418e41f88d057f",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 19447738,
+          "bytes": 110428673,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/02_forgeryscope/yolo_lane_extractor.pt": {
+      "path": "models/external/clone_detectors/02_forgeryscope/yolo_lane_extractor.pt",
+      "bytes": 19167194,
+      "sha256": "0061376bcb8895707ac8d052698c21849ee151c6c7bfc6d00de0939422571712",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 1755886,
+          "bytes": 17691710,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/02_forgeryscope/aliked_wblot.pth": {
+      "path": "models/external/clone_detectors/02_forgeryscope/aliked_wblot.pth",
+      "bytes": 151145298,
+      "sha256": "e9ddeb9e87b96555a6db4a4fbfb5b99b31c36371bf4171765dce8f1f9ef95022",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1170008864,
+          "bytes": 139499135,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/02_forgeryscope/wblot_duplicate_embedder.ckpt": {
+      "path": "models/external/clone_detectors/02_forgeryscope/wblot_duplicate_embedder.ckpt",
+      "bytes": 123301843,
+      "sha256": "87e62f05cba4127357097d2f15f1401aed017ac0f6a64c67a57246aa33bfb02e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1425467225,
+          "bytes": 114785825,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/02_forgeryscope/wblot_overlap_embedder.ckpt": {
+      "path": "models/external/clone_detectors/02_forgeryscope/wblot_overlap_embedder.ckpt",
+      "bytes": 123301843,
+      "sha256": "afc8c81fd829f356c51be7f6df357c3d258879342f2739d64595522f55497929",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1879266823,
+          "bytes": 113027577,
+          "range": true
+        },
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 0,
+          "bytes": 1755745,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/02_forgeryscope/wblot_lane_embedder.ckpt": {
+      "path": "models/external/clone_detectors/02_forgeryscope/wblot_lane_embedder.ckpt",
+      "bytes": 369457114,
+      "sha256": "6cee086eab4ead02a242cbcb584da1a7e30b84cfcfa43e97e466019e6f2f0849",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1540253193,
+          "bytes": 339013484,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/02_forgeryscope/micro_overlap_embedder.ckpt": {
+      "path": "models/external/clone_detectors/02_forgeryscope/micro_overlap_embedder.ckpt",
+      "bytes": 124354059,
+      "sha256": "b91f3923a93705898c864324b5c5d70589499e208c45f622b6a447a31225ae2a",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part03",
+          "offset": 1309508145,
+          "bytes": 115958932,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/01_d2prl/d2prl.pth": {
+      "path": "models/external/clone_detectors/01_d2prl/d2prl.pth",
+      "bytes": 540533481,
+      "sha256": "2749c7436169ce689deaeb197ce5dae3d1a4533999833928168ec0b0d703df36",
+      "encoding": "identity",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/d2prl.pth",
+          "bytes": 540533481
+        }
+      ],
+      "notice": "macos/docs/D2PRL-MODEL-NOTICE.md"
+    },
+    "models/external/clone_detectors/03_cmsegnet/predict_folder/weight/generalization.pth": {
+      "path": "models/external/clone_detectors/03_cmsegnet/predict_folder/weight/generalization.pth",
+      "bytes": 26192094,
+      "sha256": "a3351ae664fca9780c3ca56db708fe3fdc74878c07327dfdd6ed75f14537454b",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 167991065,
+          "bytes": 24216759,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/03_cmsegnet/predict_folder/weight/addnoise.pth": {
+      "path": "models/external/clone_detectors/03_cmsegnet/predict_folder/weight/addnoise.pth",
+      "bytes": 26192696,
+      "sha256": "0f549f213e67712791e2778f4df005532dabd563a9fea3bafc851d4d449fb1ba",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 143755090,
+          "bytes": 24235820,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN.pth": {
+      "path": "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN.pth",
+      "bytes": 88898591,
+      "sha256": "53920b1cefe1e8c1e8c78dfe2f43e80251529d9e5ccc7be31f899a636357f563",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 260499710,
+          "bytes": 82524284,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN_ST.pth": {
+      "path": "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN_ST.pth",
+      "bytes": 88900639,
+      "sha256": "95fa449ba33a4718b66ddcbe948ddc57abdfb34594c43bf47e49515bc63cec98",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 426482371,
+          "bytes": 82581787,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN_16x16.pth": {
+      "path": "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN_16x16.pth",
+      "bytes": 88959711,
+      "sha256": "d2657fac0191c54da090b8d0e44e24519bd9722b5b2b4b18fbe17cf00a7e4e65",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 343024130,
+          "bytes": 83458108,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/04_mgcfdn/weight/EffNet_MGCFDN_16x16.pth": {
+      "path": "models/external/clone_detectors/04_mgcfdn/weight/EffNet_MGCFDN_16x16.pth",
+      "bytes": 73550311,
+      "sha256": "98b7fc9dbe935c7840799acd8273bec6f27dd7d7f33761b5090918e2be988773",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 192207967,
+          "bytes": 68291613,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/04_mgcfdn/weight/MPDN_MGCFDN_16x16.pth": {
+      "path": "models/external/clone_detectors/04_mgcfdn/weight/MPDN_MGCFDN_16x16.pth",
+      "bytes": 24004611,
+      "sha256": "9cea785aaba1612c55218f52c6bbe8c1419f3a1065b368066e8e3869a194e6ee",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 509064299,
+          "bytes": 22302725,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/04_mgcfdn/weight/TNT_MGCFDN_16x16.pth": {
+      "path": "models/external/clone_detectors/04_mgcfdn/weight/TNT_MGCFDN_16x16.pth",
+      "bytes": 288819703,
+      "sha256": "c83f0d1a2840ebfdfafbf5c7ed842f8b5756c8975a6e6aff18cf73f95fbba56e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 531367164,
+          "bytes": 268100797,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "models/external/clone_detectors/04_mgcfdn/weight/VIG_MGCFDN_16x16.pth": {
+      "path": "models/external/clone_detectors/04_mgcfdn/weight/VIG_MGCFDN_16x16.pth",
+      "bytes": 370483043,
+      "sha256": "63996d687b29e49f5c78f8f055395bb196ce37e31f1918817c2f197a88f1e7e6",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part04",
+          "offset": 799468101,
+          "bytes": 345169565,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg51/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg51/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "e8ff582664261ed1b78b37d8d2481abf789fffd67e52327daa684248f310ca39",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1117244548,
+          "bytes": 2085828,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg51/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg51/model.index",
+      "bytes": 3051,
+      "sha256": "3b87e55b8857cba6561f437010e9324366792421a3387e3000d84dbc0d49852e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1119330495,
+          "bytes": 1147,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg51/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg51/model.meta",
+      "bytes": 1575487,
+      "sha256": "e95b2debca362b17964ad1a20c2074b5fb1d01aa778169638076b4774b189755",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1119331760,
+          "bytes": 112173,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg52/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg52/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "2f8d0dc56776048ddce1454c2e1a684c012214f649abfae28d5de5fa674b10c0",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1119444066,
+          "bytes": 2085774,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg52/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg52/model.index",
+      "bytes": 3051,
+      "sha256": "d0c7ed8d141aa81740a8c1e705d1a412a04da876c83e68c51af4a90d14b679de",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1121529959,
+          "bytes": 1145,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg52/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg52/model.meta",
+      "bytes": 1575487,
+      "sha256": "529ff5e344c7efb89750a6abe4869704ea9f9c3d4ff84ccd8fa7aac7083151ca",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1121531222,
+          "bytes": 112347,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg53/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg53/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "f005d717ba96bdf1aba4aaf81a0aac422f76ce188db0bc4d5130dc615b0a042e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1121643702,
+          "bytes": 2085761,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg53/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg53/model.index",
+      "bytes": 3051,
+      "sha256": "054e53416bfc2b88b3d66a5ca8abdfcb4c516ccd3d2357ce8dd1818e936c1962",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1123729582,
+          "bytes": 1147,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg53/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg53/model.meta",
+      "bytes": 1575487,
+      "sha256": "621974b607e5a048d4f2025af08f2ed8309621ec8e4206691f46c84486410b24",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1123730847,
+          "bytes": 112629,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg54/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg54/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "e3bef04a0a38c3bcf80ad147415016dcf5c17ea35d396814cc7a20e338a705f2",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1123843609,
+          "bytes": 2085759,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg54/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg54/model.index",
+      "bytes": 3051,
+      "sha256": "c21833e6b08266a574c66ec8cec71af4eccf56d34eeb2f5ee1951c46ee9334a1",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1125929487,
+          "bytes": 1140,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg54/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg54/model.meta",
+      "bytes": 1575487,
+      "sha256": "95484a07dc68e64f5d5fe58196848c4cd6abf3fe1bc3a7e96d096e3de0136627",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1125930745,
+          "bytes": 110139,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg55/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg55/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "762458a455dddcd91d36f94c70675d289628aca11f4b3599c91ed489164b3448",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1126041017,
+          "bytes": 2085916,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg55/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg55/model.index",
+      "bytes": 3051,
+      "sha256": "3d9f8f385fba45ea4f11f602442d12f7194e4519930f2cde6aea6667d47f433e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1128127052,
+          "bytes": 1144,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg55/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg55/model.meta",
+      "bytes": 1575487,
+      "sha256": "dc01b60a3944f796e0144c4e103efcb136c142be35c6abd88f117ffd26293063",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1128128314,
+          "bytes": 109582,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg56/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg56/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "3962071a64b890754372157afdf841eb611a842551da4c740e5a895707e56fb8",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1128238029,
+          "bytes": 2085858,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg56/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg56/model.index",
+      "bytes": 3051,
+      "sha256": "513ae7a8010931910a4242108219d0f8c69656084a908854d3fc626f88b67db4",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1130324006,
+          "bytes": 1147,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg56/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg56/model.meta",
+      "bytes": 1575487,
+      "sha256": "485d90673c2dfbe78fb92a1b7ad81606b38ebd3e44f6244fdef782cf2031b407",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1130325271,
+          "bytes": 111463,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg57/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg57/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "eabfb37509d460e464ae8af94d0473e405906bbe376b4132a96109d96f790170",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1130436867,
+          "bytes": 2085911,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg57/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg57/model.index",
+      "bytes": 3051,
+      "sha256": "20de72ec281e37631a32d33218c0e10192a7a53970df89369e140a28a63261b5",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1132522897,
+          "bytes": 1145,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg57/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg57/model.meta",
+      "bytes": 1575487,
+      "sha256": "0025e428ac7a9998897302ddfb8007da8639acf0016dfe935a0e29265c262bc5",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1132524160,
+          "bytes": 109802,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg58/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg58/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "aa15727b3779068d761ea40163d9ba6651ca2b1eeddd3e0480b871c61a51f736",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1132634095,
+          "bytes": 2085723,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg58/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg58/model.index",
+      "bytes": 3051,
+      "sha256": "c4a7664b9b7d6e3ddeaa3b999687eb7fda36043097d5e21d0f34cd780a31a242",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1134719937,
+          "bytes": 1148,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg58/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg58/model.meta",
+      "bytes": 1575487,
+      "sha256": "9dab3befc0c8c48f053f3f3a7cfe0bfa45a56d09d104256ab05a093d87e2f041",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1134721203,
+          "bytes": 110029,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg59/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg59/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "2c65c7458a64b1acfe288cb0a8b77203b74ff5bc7d64d16e867545ff8502bf33",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1134831365,
+          "bytes": 2085833,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg59/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg59/model.index",
+      "bytes": 3051,
+      "sha256": "24bae6e1754178df3e1503a84c17b167de581abf759c1de4460f2adf81a7a4a8",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1136917317,
+          "bytes": 1141,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg59/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg59/model.meta",
+      "bytes": 1575487,
+      "sha256": "a2d7fb5a8744424c6992ddfc76b1193f38b3ec306ee64c7777829d97779f2e9c",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1136918576,
+          "bytes": 107800,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg60/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg60/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "9d40b350c422f9e948841dcc0c086c80dee4aa86f0aea85777c44778110f492d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1137026509,
+          "bytes": 2085821,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg60/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg60/model.index",
+      "bytes": 3051,
+      "sha256": "e93cf9e28a55fd291d847cbf6b779b082a129b99e22fe97592dc464e042ab8dc",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1139112449,
+          "bytes": 1143,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg60/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg60/model.meta",
+      "bytes": 1575487,
+      "sha256": "5de1b1b08bf53cdf26c2e29a7970a027432917ebd9a9340d62b3cfdf5ee0c71b",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1139113710,
+          "bytes": 106437,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg61/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg61/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "074e7ca36682af844405a554c4c77597a876eea966f7eb4d18f8fb7e7708260d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1139220280,
+          "bytes": 2085824,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg61/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg61/model.index",
+      "bytes": 3051,
+      "sha256": "ac4c62dd315c98a0eb41524c91e133707122186bee0bed5abb5b8cf09c975453",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1141306223,
+          "bytes": 1147,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg61/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg61/model.meta",
+      "bytes": 1575487,
+      "sha256": "a158bcf127bc84a7464ab98c05a04938c4c4973a7c354818f61e2b9a70f31efe",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1141307488,
+          "bytes": 108976,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg62/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg62/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "78eee2fa5e9fcc376924153115baebc891543d515d804bd06f5694db9d1e4e19",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1141416597,
+          "bytes": 2085784,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg62/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg62/model.index",
+      "bytes": 3051,
+      "sha256": "603ca7f95a73be5443f641e5ef4e1dfca2c706fa901c58928ad1eed200016f37",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1143502500,
+          "bytes": 1144,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg62/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg62/model.meta",
+      "bytes": 1575487,
+      "sha256": "7575c822f5ff2fe7418e2d6c99016f957d5fd1391cffe95c5f3faf1f532856d6",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1143503762,
+          "bytes": 110671,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg63/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg63/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "bebce537b2ccb6f73971aab2d0c2a50a6a8db071271ab441977257379a4c878a",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1143614566,
+          "bytes": 2085766,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg63/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg63/model.index",
+      "bytes": 3051,
+      "sha256": "8d4b2aa96e51e04bac019ec2ef86aedb3380793f5291d01135859ad2bc7be777",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1145700451,
+          "bytes": 1143,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg63/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg63/model.meta",
+      "bytes": 1572125,
+      "sha256": "6347b0cf780725bf0d7aad4d38aa3de8449591acc1441f805ac14fd7e56eb9fe",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1145701712,
+          "bytes": 110154,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg64/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg64/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "3a264f24ce75f53302f2ef33532f1ebebbfabf9eae5a5d655dc19256472391fd",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1145811999,
+          "bytes": 2085757,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg64/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg64/model.index",
+      "bytes": 3051,
+      "sha256": "f6bba5e8fc2cd210cba713c719e062af97a0d0205aec781e8231ccd7e2864610",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1147897875,
+          "bytes": 1147,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg64/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg64/model.meta",
+      "bytes": 1575487,
+      "sha256": "9f87023b191c44a9365e069a5dd6529501dd169c416d7b94ab261ca7ea70dfe9",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1147899140,
+          "bytes": 112130,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg65/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg65/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "a7f1d696875076535ff9a019f81e2eab9433c6df5b7fd1e53b667ff503277fa4",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1148011403,
+          "bytes": 2085792,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg65/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg65/model.index",
+      "bytes": 3051,
+      "sha256": "698f2a61bdeaf502c99ee538b71086c969b8f5653cb0c47fcbafe2699591a715",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1150097314,
+          "bytes": 1136,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg65/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg65/model.meta",
+      "bytes": 1575487,
+      "sha256": "043c45c75308466fb2560434450414f126a123b2c927aeaec70abf90bdd1901e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1150098568,
+          "bytes": 112110,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg66/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg66/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "af7a2362fc05cc162fcb15673b1f5f973c0c559786a7d045c5f8311f3a01586f",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1150210811,
+          "bytes": 2085645,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg66/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg66/model.index",
+      "bytes": 3051,
+      "sha256": "cdba6ddae4688e06b81039d83769c7b68cec295eb2e07111113b9870cd19eb58",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1152296575,
+          "bytes": 1148,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg66/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg66/model.meta",
+      "bytes": 1575487,
+      "sha256": "3c9bf8db813509809aac3d81aaebc2955f04818980c3cb489b0e1cca79357c7f",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1152297841,
+          "bytes": 111924,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg67/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg67/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "340712fc10a755d175505cc979a647a12b1c01ef2d84e860679ab3a1fd1113e9",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1152409898,
+          "bytes": 2085808,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg67/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg67/model.index",
+      "bytes": 3051,
+      "sha256": "ba7a36bc1466da215713f5be6baac8b54cebd271ad3bd37666c63cd4d122297c",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1154495825,
+          "bytes": 1143,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg67/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg67/model.meta",
+      "bytes": 1575487,
+      "sha256": "5f0537765474a7e7f2a1b6bd60e854ae4f2df80cc350dfb188203db7155efa63",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1154497086,
+          "bytes": 110785,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg68/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg68/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "74554e97bec7e5df0fb542968ceeccffe2c5be92a38441c8350bbe823f4f56b0",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1154608004,
+          "bytes": 2085728,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg68/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg68/model.index",
+      "bytes": 3051,
+      "sha256": "3c83a04a6f90b0e017e2b8336cc8edbfb8475d7ed2884e3161363752a4e01226",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1156693851,
+          "bytes": 1143,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg68/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg68/model.meta",
+      "bytes": 1575487,
+      "sha256": "bfd5178c408882e6675fd579eea3db7f5e07e2d286ccbc9d868a7afb5bcfab45",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1156695112,
+          "bytes": 112121,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg69/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg69/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "38920114a366c8aa154b193d4b6959967eed3b3c0641b2fb676bd2d2265d6823",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1156807366,
+          "bytes": 2085803,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg69/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg69/model.index",
+      "bytes": 3051,
+      "sha256": "5401907011e10d4e58091b69df51a9f10076a518caeae885ade2d769f981f7bc",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1158893288,
+          "bytes": 1144,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg69/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg69/model.meta",
+      "bytes": 1575487,
+      "sha256": "d25329901fefea808a1a9ba11e4b214e03d80cf1466fe8009a55b1ca9a3d08c3",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1158894550,
+          "bytes": 111728,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg70/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg70/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "76f3e057f130ace3d08cf0d1ab8d9baa4d39de2f512f8c0888e3744c24d167d1",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1159006411,
+          "bytes": 2085604,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg70/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg70/model.index",
+      "bytes": 3051,
+      "sha256": "c26e225f86dff4af166eac414b507c9d4e7240563e72dafcb8d910bb71291034",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1161092134,
+          "bytes": 1143,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg70/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg70/model.meta",
+      "bytes": 1575487,
+      "sha256": "2913bbd93642596fe426f4d1f4f65d2ed63a4e212f893ee51313e675e12de8c5",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1161093395,
+          "bytes": 111297,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg71/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg71/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "a29bea975ca4083b86a53b4b917c3794d13ba853ebca6f219572fbe56f19b254",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1161204825,
+          "bytes": 2085921,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg71/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg71/model.index",
+      "bytes": 3051,
+      "sha256": "5fa7948efd218367f00bff7c3475a3daa34d99c33dc0a8ba53d2bc4e6784795d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1163290865,
+          "bytes": 1145,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg71/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg71/model.meta",
+      "bytes": 1575487,
+      "sha256": "a9e4d525eaafddfa1232f50d0fc994f775dbcce23551f2a09d3290b9af3d0993",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1163292128,
+          "bytes": 109203,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg72/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg72/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "8e0d2fd7834c0fa939a37fde13b1e280fb3ebf8219041946a86d219f7e79a257",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1163401464,
+          "bytes": 2085814,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg72/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg72/model.index",
+      "bytes": 3051,
+      "sha256": "5297ec8678cee5aa10c49ccddf2860878bc91956e867f88bcb661e6f08b45e31",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1165487397,
+          "bytes": 1142,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg72/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg72/model.meta",
+      "bytes": 1575487,
+      "sha256": "140e44aa7e1b7f97b98839c6339303a7cfe5884892d82f8b00d6313ade6cfc67",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1165488657,
+          "bytes": 105927,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg73/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg73/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "6bfdea9f00fa847da5ca6c510818ce5b2129dbdb1ae0c5111f536e311b334c6e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1165594717,
+          "bytes": 2085722,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg73/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg73/model.index",
+      "bytes": 3051,
+      "sha256": "8eb06bdcc127cf34c11d60eda8981829263e23a8078fe9fe7374d79b3841adf7",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1167680558,
+          "bytes": 1145,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg73/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg73/model.meta",
+      "bytes": 1575487,
+      "sha256": "4ce2c4d9178e58f5ccdd4b1be3b084a38a86e4bcf215982d4500d6df062c9697",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1167681821,
+          "bytes": 109369,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg74/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg74/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "43a8080312ddc326bb256e863e847bdc88f1c779f6c668fe4d2f230ea4809344",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1167791323,
+          "bytes": 2085966,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg74/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg74/model.index",
+      "bytes": 3051,
+      "sha256": "0e14158671d57f07f6aa07300d3085d8e5bdaf093acc4f063da33d16be42c5f3",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1169877408,
+          "bytes": 1146,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg74/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg74/model.meta",
+      "bytes": 1575487,
+      "sha256": "5c90f27cfb8309aee2353987adcb7b5fe345768c7e59931b20abf3b442eca50b",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1169878672,
+          "bytes": 106126,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg75/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg75/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "1b32a171ac47a7971b2eecb57de36644447b5ced969e653daee91f465a4ab94e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1169984931,
+          "bytes": 2085962,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg75/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg75/model.index",
+      "bytes": 3051,
+      "sha256": "38a7194bbbc505b28c45896dc28637d0804174fa93eb4db84fd71582ae002dcd",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1172071012,
+          "bytes": 1139,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg75/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg75/model.meta",
+      "bytes": 1575487,
+      "sha256": "5d4cea5d518c06f55cf9c24f01a3651b290d2dd3a6b0b1c194a7d8f676c59631",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1172072269,
+          "bytes": 109116,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg76/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg76/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "56639877c98064fcc79f284e544cf353c55c6aff53d2b578ef71591fc1fba0c8",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1172181518,
+          "bytes": 2085810,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg76/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg76/model.index",
+      "bytes": 3051,
+      "sha256": "bc3a08b9103476effe1e1124db7179d6d6703cf56b142d95a6208278c300639d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1174267447,
+          "bytes": 1141,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg76/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg76/model.meta",
+      "bytes": 1575487,
+      "sha256": "444f756800d01be47fea15012b525b8d02b0dd5485989f0de642b667f41ee9f1",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1174268706,
+          "bytes": 109120,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg77/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg77/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "a712aa9a439d049f159e29ef830088b9e0a4510473527e14f2ee42869570abb6",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1174377959,
+          "bytes": 2085887,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg77/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg77/model.index",
+      "bytes": 3051,
+      "sha256": "020f78bb7f61dabff8ed1303513c20834177a018e9e08bcfed8623515d85ee0d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1176463965,
+          "bytes": 1144,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg77/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg77/model.meta",
+      "bytes": 1575487,
+      "sha256": "546856c5f1d6881cd643133555214c72b8a2649e819fdfd32be6b5b59257c54f",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1176465227,
+          "bytes": 105963,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg78/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg78/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "f96ca4e54c1a3f0c177f8b9a2e59ee33d6410c899dc0959696ab04a67b70288c",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1176571323,
+          "bytes": 2085835,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg78/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg78/model.index",
+      "bytes": 3051,
+      "sha256": "50f2dcaf3644c0d77e90136a873c73e4979bfef967d0d81e41dde7ad6508e00b",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1178657277,
+          "bytes": 1144,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg78/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg78/model.meta",
+      "bytes": 1575487,
+      "sha256": "25c839dd2c602a56c7b589b5c758f29c3ee77356ec87b42218bcc8922c217bd3",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1178658539,
+          "bytes": 106340,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg79/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg79/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "d5ec9aac6456c1bde05c9a4037997eab3685c9b33b6c16e6faa42c9b5953f166",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1178765012,
+          "bytes": 2085783,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg79/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg79/model.index",
+      "bytes": 3051,
+      "sha256": "b95dea2a36f287bb5e32ce3921e71b242e5d11c838d016eed2b028378a79c1bc",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1180850914,
+          "bytes": 1144,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg79/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg79/model.meta",
+      "bytes": 1575487,
+      "sha256": "1ee7bf209e96266316ecfb299edcf434980aa6df28df22d6101ec9902f559994",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1180852176,
+          "bytes": 110264,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg80/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg80/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "c37a287e342d6d8973562fbb3c5b9b6bdf791ad24e84a248b9b6eb564cba0f0b",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1180962573,
+          "bytes": 2085830,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg80/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg80/model.index",
+      "bytes": 3051,
+      "sha256": "7374745ce2d4011517c5748ee3e45eac7f0ad727b5b8789fb90d6f786bd1ded3",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1183048522,
+          "bytes": 1143,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg80/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg80/model.meta",
+      "bytes": 1575487,
+      "sha256": "0b49bbef276a5e12927f1bb47a3c7c269624f1f3d62ce71404a2267ccb76f6b9",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1183049783,
+          "bytes": 109148,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg81/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg81/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "eedd121fb24a709ea7895bf289e32923e49800e488e2c340e0cc43a33f6ff535",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1183159064,
+          "bytes": 2085747,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg81/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg81/model.index",
+      "bytes": 3051,
+      "sha256": "b2632683506b27cfc01cb09a7328c1e705c4bbf242ac1057850184ef7f351362",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1185244930,
+          "bytes": 1147,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg81/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg81/model.meta",
+      "bytes": 1575487,
+      "sha256": "71aa3f9e6ecc77dae97936d6709d9c66cf5c615428de7076b2ec37d22eca00cc",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1185246195,
+          "bytes": 109036,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg82/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg82/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "d07bcc8f7c9e0ae29a9256927441a14482cf3f444abc415f013d5369fd6a46f3",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1185355364,
+          "bytes": 2085825,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg82/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg82/model.index",
+      "bytes": 3051,
+      "sha256": "56708a5cdb0db41ca9092d041eadefb9988aa523d5806f75b77c810aca834e27",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1187441308,
+          "bytes": 1141,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg82/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg82/model.meta",
+      "bytes": 1575487,
+      "sha256": "0e0326295fc000348a7f2574bd4c04865e98d66f4ae77557a0ef53a10ba78328",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1187442567,
+          "bytes": 110174,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg83/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg83/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "a13d75b9e3bf1e2823682118091b5b5acf8fb334a37e5c593867b2fc93161e06",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1187552874,
+          "bytes": 2085818,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg83/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg83/model.index",
+      "bytes": 3051,
+      "sha256": "4171eb9b715dba3b68781783dce02ce02362a13148cbcac42a0d2c569304ce8e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1189638811,
+          "bytes": 1138,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg83/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg83/model.meta",
+      "bytes": 1575487,
+      "sha256": "8d3eb1c120d80596ace4eb1901ada8e6a3ab16a5fd73212e480bfb371df235fe",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1189640067,
+          "bytes": 112065,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg84/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg84/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "8c9a9c76f625692eae9a3196fe79b8b2d9fa9fc16aad7efae6db6d4973bd1679",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1189752265,
+          "bytes": 2085831,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg84/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg84/model.index",
+      "bytes": 3051,
+      "sha256": "546d46ff47e367b3cb3170e7ece065e38806c8c92b303b5ec1441e6c0c2a339d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1191838215,
+          "bytes": 1144,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg84/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg84/model.meta",
+      "bytes": 1575487,
+      "sha256": "7f433ef79f18604e916d86a662e8475acb502482574ace11b7a355bf3385feea",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1191839477,
+          "bytes": 109270,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg85/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg85/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "d82a221d90d6efc3a0835f290fc86010b15d4a8d494a5a2a26e0c8dbfb885a28",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1191948880,
+          "bytes": 2085674,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg85/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg85/model.index",
+      "bytes": 3051,
+      "sha256": "a1527f58b455c0646ae263c643179ea4c0709dbffa6ce1f01593907e65eaf90d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1194034673,
+          "bytes": 1147,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg85/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg85/model.meta",
+      "bytes": 1575487,
+      "sha256": "e7eddc1da3952c6be3ccb41fb0ca9b9e1fe51e755d7c50b49a8c15a58a9b8625",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1194035938,
+          "bytes": 108924,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg86/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg86/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "ab6e24a2d793431acecd9781b7df2011f48f80f0f74cd78dad19669b25596565",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1194144995,
+          "bytes": 2085977,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg86/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg86/model.index",
+      "bytes": 3051,
+      "sha256": "1210d4813ef2eb4b3338d96313b4ace7e8b53cc20c8eea099c1ec0e17cbbe65f",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1196231091,
+          "bytes": 1143,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg86/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg86/model.meta",
+      "bytes": 1575487,
+      "sha256": "a580c3952e13295829ebd0af9c30f58c16f024dc37f825e5a4cc4b775d11b401",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1196232352,
+          "bytes": 112193,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg87/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg87/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "df2195ef408f5792451d5bc612eab46024e318d163f6846dbdc095ab030341c4",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1196344678,
+          "bytes": 2085724,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg87/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg87/model.index",
+      "bytes": 3051,
+      "sha256": "6078e546710337f33fb1bcfcff115638c78f2ed9c8fd01fdf58605078399f7fe",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1198430521,
+          "bytes": 1143,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg87/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg87/model.meta",
+      "bytes": 1575487,
+      "sha256": "81cb2ff481a5b9f0019daa4ad07be22633b5e3ef87973ebbfc4c3ba30ecff206",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1198431782,
+          "bytes": 108988,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg88/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg88/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "588c547c049b0f2259515122172d6c950377005ef7415ef8e4cb0277e5a36600",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1198540903,
+          "bytes": 2086020,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg88/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg88/model.index",
+      "bytes": 3051,
+      "sha256": "a7d7ef30b1acc9cb54d090df85268303c3503fe71794d6499206daadd14cdf3b",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1200627042,
+          "bytes": 1146,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg88/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg88/model.meta",
+      "bytes": 1575487,
+      "sha256": "1f0f5d5a8b0466860fe4bfc427d69c96804aa7e1a87e4ec69236e3422ddcd2d3",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1200628306,
+          "bytes": 109154,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg89/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg89/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "f2f8ae0e7b0e2140fff1a6b740430f9f918f23d3b8c83c5bd6df394da4a9041d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1200737593,
+          "bytes": 2085916,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg89/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg89/model.index",
+      "bytes": 3051,
+      "sha256": "6bf7561682c2b400cf1ce318a51be875cbc2d71c8ceafaabfca973d82030335e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1202823628,
+          "bytes": 1140,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg89/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg89/model.meta",
+      "bytes": 1575487,
+      "sha256": "b165cdc4cfd6faa6925d7c4cbabdde1f048083084fe26a308d72cbe6fb6bbf9a",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1202824886,
+          "bytes": 112177,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg90/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg90/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "fb97bd47f04f22d0364ddb879c2c0dbda9439d2042715dbdaf99f5ccc616e877",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1202937196,
+          "bytes": 2085896,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg90/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg90/model.index",
+      "bytes": 3051,
+      "sha256": "eef0f6300d5831b29ed8f9f4d7f50840d2657d83d57a3c2d8c8586973531a49f",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1205023211,
+          "bytes": 1142,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg90/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg90/model.meta",
+      "bytes": 1575487,
+      "sha256": "c6a821f6f8bff2818dfb6aaec33554fce27077349045a7e09c7883590a449b8a",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1205024471,
+          "bytes": 112201,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg91/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg91/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "a2e6cf94a5af4f92b7a178c88453e804a664f764bba59317624d2342c9a65869",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1205136805,
+          "bytes": 2085883,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg91/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg91/model.index",
+      "bytes": 3051,
+      "sha256": "38fe058c636c54f1d1d15500135c7965411922cff3f9ed6365884cdd43cd600d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1207222807,
+          "bytes": 1142,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg91/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg91/model.meta",
+      "bytes": 1575487,
+      "sha256": "f911ffe9874d6d8dee589a07be5335ee3a4e31d5a05e60fad836192c0cb35c35",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1207224067,
+          "bytes": 112266,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg92/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg92/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "f577e883ddc064b14d78a42d15c1f3bbf72f293e880f9f080b4b5487de9544ae",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1207336466,
+          "bytes": 2085810,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg92/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg92/model.index",
+      "bytes": 3051,
+      "sha256": "075e49cd40ae8a774258b3351851e87ac008f216692d760d044f84438c210d16",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1209422395,
+          "bytes": 1144,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg92/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg92/model.meta",
+      "bytes": 1575487,
+      "sha256": "81f9144ae50c0bbfc80cbd7c14a24732b339c59c83c6472e7ecb88a937b7c34c",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1209423657,
+          "bytes": 111807,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg93/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg93/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "73a2bf58f6669760cc4a19ab5539455d6a1213fac13e52bb66102ec839a7df12",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1209535597,
+          "bytes": 2085925,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg93/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg93/model.index",
+      "bytes": 3051,
+      "sha256": "4ce173bf428457bf5366adeb47d3f958e9da771f2421d9a2b2bf41e49c1d349d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1211621641,
+          "bytes": 1141,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg93/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg93/model.meta",
+      "bytes": 1575487,
+      "sha256": "128e2acfb6b40efc0f94bbc77864576fb2b0d3681ee48f50fb35c6249efc1908",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1211622900,
+          "bytes": 112286,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg94/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg94/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "733fdf11036b8d10bb11f2c2a1566fadeb96e5a1d2c312390022d4529e873775",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1211735319,
+          "bytes": 2085746,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg94/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg94/model.index",
+      "bytes": 3051,
+      "sha256": "436f0083e031455628a6ce5aad900fd8631287f59160cd8f5af9d8d8bf4bad4c",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1213821184,
+          "bytes": 1143,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg94/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg94/model.meta",
+      "bytes": 1575487,
+      "sha256": "b5c30f4b86fe0c6588fbc5c360ed12e8daeecda52baef4a0b32a3f7ed214137d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1213822445,
+          "bytes": 111905,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg95/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg95/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "fcbdcb447627da623f53b58129776eb2793fc0e8ec4fba68c5dd085901ed3d29",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1213934483,
+          "bytes": 2085862,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg95/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg95/model.index",
+      "bytes": 3051,
+      "sha256": "47f2cafe9e7d62cf2c00fae020a149f51a617603b0ff5b29b05bb11c49732e1b",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1216020464,
+          "bytes": 1141,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg95/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg95/model.meta",
+      "bytes": 1575487,
+      "sha256": "3a2c0b3f205079f6bc09538698c5836708a0f968e6f970306e05b6aa63729a09",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1216021723,
+          "bytes": 111927,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg96/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg96/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "2bd4da52c0d3ccc4e1cccf2cce973deab0e2edb4ba5fd58db82d43e3d78b4e5f",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1216133783,
+          "bytes": 2085864,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg96/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg96/model.index",
+      "bytes": 3051,
+      "sha256": "ff0fee7b5276d0fd5a562e98f9eb991243ec31b466bd7045b7bdbf11090b694c",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1218219766,
+          "bytes": 1145,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg96/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg96/model.meta",
+      "bytes": 1575487,
+      "sha256": "181b09e6cffe28124285ea7dbb9eacd069d8be3047b97f809f687611bbea9c31",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1218221029,
+          "bytes": 111947,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg97/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg97/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "f933efd1c40ca60e1979b8b58728bed95e0a402d5f5f2e033f62fdba89003b8e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1218333109,
+          "bytes": 2085812,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg97/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg97/model.index",
+      "bytes": 3051,
+      "sha256": "a24739014d7a0c772baea9360be3f7ce90bfd97218e2c4f948adf07314e0764d",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1220419040,
+          "bytes": 1142,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg97/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg97/model.meta",
+      "bytes": 1575487,
+      "sha256": "85095d887b0e59c3d71e78927b617ef476c1ed05497b495c8c89db2902cfe073",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1220420300,
+          "bytes": 112618,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg98/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg98/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "3ec248f4864221d57c059fb4e659d50d2f6ec0694f9abe891325fabd69193e29",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1220533051,
+          "bytes": 2085915,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg98/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg98/model.index",
+      "bytes": 3051,
+      "sha256": "3ea8709d5422574d0bcf4d8412701b5641469cd84b6b259d70ceccb4b59993dc",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1222619085,
+          "bytes": 1142,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg98/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg98/model.meta",
+      "bytes": 1575487,
+      "sha256": "91f038ab3542b3c5aed7f9d208396cf3b4f109f5e48ed4d72694da35cd5c2a85",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1222620345,
+          "bytes": 111726,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg99/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg99/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "424f1c012664cc4e73960e9f22ce0f63949061143783f7771db46099c3ff07d5",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1222732204,
+          "bytes": 2085825,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg99/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg99/model.index",
+      "bytes": 3051,
+      "sha256": "3bff58b4fc658a95cb7c2063d7c6667ddd03741edb5087ca6b27358568aa6e09",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1224818148,
+          "bytes": 1142,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg99/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg99/model.meta",
+      "bytes": 1575487,
+      "sha256": "76c5da01f6ba6a9acc63f4dc090776d13a381844230232a9373cd95df8cf193e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1224819408,
+          "bytes": 112672,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg100/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg100/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "eca42fb67f44211be8cdf516eace44713ce79e8c22f3affc12cefd2ba5b41f32",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1112848363,
+          "bytes": 2085872,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg100/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg100/model.index",
+      "bytes": 3051,
+      "sha256": "aa6e924196ad464e80f11f1e64637f39384fc5f2456d8d7ceb7f625f15a3a394",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1114934355,
+          "bytes": 1142,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg100/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg100/model.meta",
+      "bytes": 1575487,
+      "sha256": "73c5efedc7fca5ae52e09174367e734eeb816ce2f7dde0c026b014a5b57d743e",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1114935616,
+          "bytes": 112184,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg101/model.data-00000-of-00001": {
+      "path": "source/gui/noiseprint/nets/net_jpg101/model.data-00000-of-00001",
+      "bytes": 2232080,
+      "sha256": "e5b813ac87b2972991766c8a10195f464ed276593eaaf157a1bd297228ba70d6",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1115047934,
+          "bytes": 2085951,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg101/model.index": {
+      "path": "source/gui/noiseprint/nets/net_jpg101/model.index",
+      "bytes": 3051,
+      "sha256": "d28b09038156b15ed438bae3242df33c4e75b21bb79a93024a4923b7f467a77a",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1117134005,
+          "bytes": 1141,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    },
+    "source/gui/noiseprint/nets/net_jpg101/model.meta": {
+      "path": "source/gui/noiseprint/nets/net_jpg101/model.meta",
+      "bytes": 1570935,
+      "sha256": "940467a4384c0fe916829f80d83816eead5b8b951d26e06b07f54f2d8b3943d5",
+      "encoding": "deflate",
+      "parts": [
+        {
+          "url": "https://github.com/Kinkazma/sherloq/releases/download/native-macos-arm64-2026.09.29-rc1/SHERLOQ-installation-macos-arm64.zip.part05",
+          "offset": 1117135265,
+          "bytes": 109150,
+          "range": true
+        }
+      ],
+      "notice": "macos/docs/ATTRIBUTION.md"
+    }
+  },
+  "features": {
+    "none": {
+      "assets": []
+    },
+    "catnet": {
+      "assets": [
+        "models/external/CAT_full_v2.pth.tar"
+      ],
+      "requires": []
+    },
+    "safire": {
+      "assets": [
+        "models/external/safire.pth"
+      ],
+      "requires": []
+    },
+    "adaifl": {
+      "assets": [
+        "models/external/AdaIFL_v0.pth"
+      ],
+      "requires": []
+    },
+    "focal": {
+      "assets": [
+        "models/external/FOCAL_ViT_weights.pth",
+        "models/external/FOCAL_HRNet_weights.pth"
+      ],
+      "requires": []
+    },
+    "trufor": {
+      "assets": [
+        "source/gui/TruFor_main/test_docker/weights/trufor-state.pt"
+      ],
+      "requires": []
+    },
+    "cfa:Original": {
+      "assets": [
+        "models/external/pretrained.pt"
+      ],
+      "requires": []
+    },
+    "cfa:JPEG 95": {
+      "assets": [
+        "models/external/adapted_to_j95_database.pt"
+      ],
+      "requires": []
+    },
+    "cfa:Sans JPEG": {
+      "assets": [
+        "models/external/adapted_to_nojpeg_database.pt"
+      ],
+      "requires": []
+    },
+    "xfeat": {
+      "assets": [
+        "models/external/xfeat.pt"
+      ],
+      "requires": []
+    },
+    "xfeat-lighter": {
+      "assets": [
+        "models/external/xfeat-lighterglue.pt"
+      ],
+      "requires": [
+        "xfeat"
+      ]
+    },
+    "aliked": {
+      "assets": [
+        "models/external/aliked-n16.pth"
+      ],
+      "requires": []
+    },
+    "aliked-rotation": {
+      "assets": [
+        "models/external/aliked-n16rot.pth"
+      ],
+      "requires": []
+    },
+    "aliked-glue": {
+      "assets": [
+        "models/external/aliked_lightglue.pth"
+      ],
+      "requires": [
+        "aliked"
+      ]
+    },
+    "aliked-rotation-glue": {
+      "assets": [
+        "models/external/aliked_lightglue.pth"
+      ],
+      "requires": [
+        "aliked-rotation"
+      ]
+    },
+    "sift-glue": {
+      "assets": [
+        "models/external/sift_lightglue.pth"
+      ],
+      "requires": []
+    },
+    "forgeryscope": {
+      "assets": [
+        "models/external/clone_detectors/02_forgeryscope/yolo_panel_extractor.pt",
+        "models/external/clone_detectors/02_forgeryscope/yolo_lane_extractor.pt",
+        "models/external/clone_detectors/02_forgeryscope/aliked_wblot.pth",
+        "models/external/clone_detectors/02_forgeryscope/wblot_duplicate_embedder.ckpt",
+        "models/external/clone_detectors/02_forgeryscope/wblot_overlap_embedder.ckpt",
+        "models/external/clone_detectors/02_forgeryscope/wblot_lane_embedder.ckpt",
+        "models/external/clone_detectors/02_forgeryscope/micro_overlap_embedder.ckpt"
+      ],
+      "requires": [
+        "aliked-glue",
+        "sift-glue"
+      ]
+    },
+    "clone:D2PRL": {
+      "assets": [
+        "models/external/clone_detectors/01_d2prl/d2prl.pth"
+      ],
+      "requires": []
+    },
+    "clone:CMSeg-Net generalization": {
+      "assets": [
+        "models/external/clone_detectors/03_cmsegnet/predict_folder/weight/generalization.pth"
+      ],
+      "requires": []
+    },
+    "clone:CMSeg-Net addnoise": {
+      "assets": [
+        "models/external/clone_detectors/03_cmsegnet/predict_folder/weight/addnoise.pth"
+      ],
+      "requires": []
+    },
+    "clone:MGCFDN": {
+      "assets": [
+        "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN.pth"
+      ],
+      "requires": []
+    },
+    "clone:MGCFDN source/cible": {
+      "assets": [
+        "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN_ST.pth"
+      ],
+      "requires": []
+    },
+    "clone:MGCFDN 16×16": {
+      "assets": [
+        "models/external/clone_detectors/04_mgcfdn/weight/MGCFDN_16x16.pth"
+      ],
+      "requires": []
+    },
+    "clone:MGCFDN EffNet 16×16": {
+      "assets": [
+        "models/external/clone_detectors/04_mgcfdn/weight/EffNet_MGCFDN_16x16.pth"
+      ],
+      "requires": []
+    },
+    "clone:MGCFDN MPDN 16×16": {
+      "assets": [
+        "models/external/clone_detectors/04_mgcfdn/weight/MPDN_MGCFDN_16x16.pth"
+      ],
+      "requires": []
+    },
+    "clone:MGCFDN TNT 16×16": {
+      "assets": [
+        "models/external/clone_detectors/04_mgcfdn/weight/TNT_MGCFDN_16x16.pth"
+      ],
+      "requires": []
+    },
+    "clone:MGCFDN VIG 16×16": {
+      "assets": [
+        "models/external/clone_detectors/04_mgcfdn/weight/VIG_MGCFDN_16x16.pth"
+      ],
+      "requires": []
+    },
+    "noiseprint:51": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg51/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg51/model.index",
+        "source/gui/noiseprint/nets/net_jpg51/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:52": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg52/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg52/model.index",
+        "source/gui/noiseprint/nets/net_jpg52/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:53": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg53/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg53/model.index",
+        "source/gui/noiseprint/nets/net_jpg53/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:54": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg54/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg54/model.index",
+        "source/gui/noiseprint/nets/net_jpg54/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:55": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg55/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg55/model.index",
+        "source/gui/noiseprint/nets/net_jpg55/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:56": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg56/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg56/model.index",
+        "source/gui/noiseprint/nets/net_jpg56/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:57": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg57/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg57/model.index",
+        "source/gui/noiseprint/nets/net_jpg57/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:58": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg58/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg58/model.index",
+        "source/gui/noiseprint/nets/net_jpg58/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:59": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg59/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg59/model.index",
+        "source/gui/noiseprint/nets/net_jpg59/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:60": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg60/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg60/model.index",
+        "source/gui/noiseprint/nets/net_jpg60/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:61": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg61/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg61/model.index",
+        "source/gui/noiseprint/nets/net_jpg61/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:62": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg62/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg62/model.index",
+        "source/gui/noiseprint/nets/net_jpg62/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:63": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg63/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg63/model.index",
+        "source/gui/noiseprint/nets/net_jpg63/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:64": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg64/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg64/model.index",
+        "source/gui/noiseprint/nets/net_jpg64/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:65": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg65/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg65/model.index",
+        "source/gui/noiseprint/nets/net_jpg65/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:66": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg66/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg66/model.index",
+        "source/gui/noiseprint/nets/net_jpg66/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:67": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg67/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg67/model.index",
+        "source/gui/noiseprint/nets/net_jpg67/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:68": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg68/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg68/model.index",
+        "source/gui/noiseprint/nets/net_jpg68/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:69": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg69/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg69/model.index",
+        "source/gui/noiseprint/nets/net_jpg69/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:70": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg70/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg70/model.index",
+        "source/gui/noiseprint/nets/net_jpg70/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:71": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg71/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg71/model.index",
+        "source/gui/noiseprint/nets/net_jpg71/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:72": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg72/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg72/model.index",
+        "source/gui/noiseprint/nets/net_jpg72/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:73": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg73/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg73/model.index",
+        "source/gui/noiseprint/nets/net_jpg73/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:74": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg74/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg74/model.index",
+        "source/gui/noiseprint/nets/net_jpg74/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:75": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg75/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg75/model.index",
+        "source/gui/noiseprint/nets/net_jpg75/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:76": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg76/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg76/model.index",
+        "source/gui/noiseprint/nets/net_jpg76/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:77": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg77/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg77/model.index",
+        "source/gui/noiseprint/nets/net_jpg77/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:78": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg78/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg78/model.index",
+        "source/gui/noiseprint/nets/net_jpg78/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:79": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg79/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg79/model.index",
+        "source/gui/noiseprint/nets/net_jpg79/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:80": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg80/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg80/model.index",
+        "source/gui/noiseprint/nets/net_jpg80/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:81": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg81/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg81/model.index",
+        "source/gui/noiseprint/nets/net_jpg81/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:82": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg82/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg82/model.index",
+        "source/gui/noiseprint/nets/net_jpg82/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:83": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg83/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg83/model.index",
+        "source/gui/noiseprint/nets/net_jpg83/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:84": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg84/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg84/model.index",
+        "source/gui/noiseprint/nets/net_jpg84/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:85": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg85/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg85/model.index",
+        "source/gui/noiseprint/nets/net_jpg85/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:86": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg86/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg86/model.index",
+        "source/gui/noiseprint/nets/net_jpg86/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:87": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg87/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg87/model.index",
+        "source/gui/noiseprint/nets/net_jpg87/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:88": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg88/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg88/model.index",
+        "source/gui/noiseprint/nets/net_jpg88/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:89": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg89/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg89/model.index",
+        "source/gui/noiseprint/nets/net_jpg89/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:90": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg90/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg90/model.index",
+        "source/gui/noiseprint/nets/net_jpg90/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:91": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg91/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg91/model.index",
+        "source/gui/noiseprint/nets/net_jpg91/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:92": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg92/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg92/model.index",
+        "source/gui/noiseprint/nets/net_jpg92/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:93": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg93/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg93/model.index",
+        "source/gui/noiseprint/nets/net_jpg93/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:94": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg94/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg94/model.index",
+        "source/gui/noiseprint/nets/net_jpg94/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:95": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg95/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg95/model.index",
+        "source/gui/noiseprint/nets/net_jpg95/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:96": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg96/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg96/model.index",
+        "source/gui/noiseprint/nets/net_jpg96/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:97": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg97/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg97/model.index",
+        "source/gui/noiseprint/nets/net_jpg97/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:98": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg98/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg98/model.index",
+        "source/gui/noiseprint/nets/net_jpg98/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:99": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg99/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg99/model.index",
+        "source/gui/noiseprint/nets/net_jpg99/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:100": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg100/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg100/model.index",
+        "source/gui/noiseprint/nets/net_jpg100/model.meta"
+      ],
+      "requires": []
+    },
+    "noiseprint:101": {
+      "assets": [
+        "source/gui/noiseprint/nets/net_jpg101/model.data-00000-of-00001",
+        "source/gui/noiseprint/nets/net_jpg101/model.index",
+        "source/gui/noiseprint/nets/net_jpg101/model.meta"
+      ],
+      "requires": []
+    }
+  }
+}

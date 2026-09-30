@@ -13,8 +13,8 @@ The upstream labels are retained to make the comparison explicit. “Inherited�
 | Colors | RGB/HSV Plots; Space Conversion; PCA Projection; Pixel Statistics | — |
 | Noise | Signal Separation; Min/Max Deviation; Bit Plane Values; Wavelet Blocking; PRNU Identification | Noisesniffer |
 | JPEG | Quality Estimation; Error Level Analysis; Multiple Compression; JPEG Ghost Maps | ZERO JPEG Grids |
-| Tampering | Contrast Enhancement; Copy-Move Forgery; Composite Splicing; Image Resampling | Copy-Move Forgery 2; Adaptive CFA; Clone Detectors; Automatic Clone Search |
-| AI Solutions | TruFor | CAT-Net v2; SAFIRE; FOCAL; AdaIFL |
+| Tampering | Contrast Enhancement; Copy-Move Forgery; Composite Splicing; Image Resampling | Copy-Move Forgery 2; Adaptive CFA; Automatic Clone Search |
+| AI Solutions | TruFor | CAT-Net v2; SAFIRE; FOCAL; AdaIFL; AI Clone Detection |
 | Various | Median Filtering; Illuminant Map; Dead/Hot Pixels; Stereogram Decoder | — |
 
 ## Adaptations to existing entries
@@ -28,6 +28,6 @@ The upstream labels are retained to make the comparison explicit. “Inherited�
 
 The colored outlines in the interface group additions and extensions, so an outlined entry is not necessarily a newly added tool. Neither entry counts nor outline colors establish validation or authorship of the underlying algorithms. See [changes](CHANGELOG.md), [component attribution](ATTRIBUTION.md) and [installation/validation limits](../README.md).
 
-D2PRL is an additional backend inside **Clone Detectors**, so it does not change
+D2PRL is an additional backend inside **AI Clone Detection**, so it does not change
 the 50-entry menu count. It provides GPU/CPU selection and union/source/target
 views with external model files. [Protocol and requirements](D2PRL-INTEGRATION.md).

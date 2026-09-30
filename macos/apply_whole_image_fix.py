@@ -15,7 +15,7 @@ import sys
 import tempfile
 
 SUPPORT = Path(__file__).resolve().parent
-BACKUP_ROOT = '.updates/rc1-forgeryscope-combined-20260930/'
+BACKUP_ROOT = '.updates/rc1-sift-models-20260930/'
 RECEIPT = BACKUP_ROOT + 'native-build.json'
 NATIVE_FILES = ('native/runtime/libsherloq_patchmatch.dylib',
                 'native/runtime/libsherloq_dense_stream.dylib')
@@ -119,7 +119,7 @@ def apply(installation):
         if before_hash not in (*accepted, hashes['after']):
             raise ValueError(f'Unrecognized installed file; left untouched: {destination}')
         if before_hash != hashes['after']:
-            plan.append(planned_file(root, destination, source, before))
+            plan.append(planned_file(root, destination, source, before, hashes.get('mode', 0o644)))
     receipt_data = None
     if any(entry.get('native_build') for entry in manifest.values()):
         # Check this path even if an invalid receipt needs to be regenerated.

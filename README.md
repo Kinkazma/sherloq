@@ -63,11 +63,11 @@ The current source defines **50 distinct tool entries: 38 inherited labels and 1
 | C2PA Validation | Interface for checking signed provenance, asset integrity and local trust |
 | Noisesniffer | Integration of the existing research implementation for noise inconsistencies |
 | ZERO JPEG Grids | Integration of the existing ZERO method for JPEG-grid analysis |
-| Copy-Move Forgery 2 | Additional matching workflow with regions, dense descriptors, geometric controls and grouped results |
+| Copy-Move Forgery 2 | Additional matching workflow with regions, dense descriptors and geometric controls; SIFT Panels + Text excludes labels and separates disconnected groups after RANSAC |
 | Adaptive CFA | Integration of an existing colour-filter-array analysis method |
-| Clone Detectors | Additional research backends, including Forgeryscope Auto for microscopy, western blots and lanes, and D2PRL with GPU/CPU selection and union/source/target views; external weights are required |
+| AI Clone Detection | Additional research backends, including Forgeryscope Auto for microscopy, western blots and lanes, and D2PRL with GPU/CPU selection and union/source/target views; external weights are required |
 | Automatic Clone Search | Combined clone-search workflow with Forgeryscope Auto microscopy/blot/lane branches and extended PatchMatch mirror/scale matching |
-| Complete Automatic Analysis | Combined workflow with clone-search results and ELA/JPEG-ghost views |
+| Complete Automatic Analysis | Combined workflow with clone-search results, an independent SIFT Panels + Text layer, and ELA/JPEG-ghost views |
 | CAT-Net v2, SAFIRE, FOCAL, AdaIFL | Four additional research-method integrations, with original component credits and licenses |
 
 See the [complete inventory](macos/docs/TOOLS.md) for all inherited and added entries and their current categories. Dependencies and model availability vary; optional missing checkpoints are recorded in the installation's `MISSING-WEIGHTS.md`.
@@ -82,7 +82,7 @@ GPU can produce different results; this is not a general accuracy or speed claim
 [Protocol, measurements, limits and required external files](macos/docs/D2PRL-INTEGRATION.md).
 
 I added [Forgeryscope Auto](macos/docs/FORGERYSCOPE-AUTO.md) as a green choice in
-Clone Detectors. It follows the public upstream pipeline for microscopy, western
+AI Clone Detection. It follows the public upstream pipeline for microscopy, western
 blots and lanes, with separate branch views and NPZ exports. Geometric matches
 remain distinguishable from similarity-based candidates. It reuses the seven
 existing Forgeryscope weights and shared matching dependencies.
@@ -131,6 +131,21 @@ This is the result I exported from my application, displayed unchanged.
 
 [D2PRL integration and controls](macos/docs/D2PRL-INTEGRATION.md) ·
 [Example details](examples/README.md#d2prl-on-the-microscopy-figure).
+
+</details>
+
+<details>
+<summary>My examples — SIFT + G2NN + RANSAC + Panels + Text</summary>
+
+I ran this Copy-Move Forgery 2 profile on the same microscopy figure. The view
+shows two large red envelopes, smaller coloured groups and matches in the lower
+strips. Colours distinguish groups of geometric correspondences; envelopes show
+their extent. This is the image I exported from my application, displayed unchanged.
+
+![SIFT Panels and Text result on the microscopy figure](screenshots/fork/sift-panels-text.png)
+
+[Method, controls and validation](macos/docs/SIFT-PANELS-TEXT.md) ·
+[Example details](examples/README.md#sift-panels-and-text-on-the-microscopy-figure).
 
 </details>
 

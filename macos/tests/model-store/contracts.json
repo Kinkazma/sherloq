@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "cases": [
+    "cancel",
+    "range-resume",
+    "local-reuse",
+    "dependency-deduplication",
+    "unknown-file-preserved",
+    "identity-verified",
+    "deflate-verified",
+    "wrong-range-refused",
+    "bad-hash-no-install",
+    "symlink-refused",
+    "concurrent-download-reused",
+    "deflate-across-release-parts",
+    "ignored-range-safe-restart"
+  ]
+}

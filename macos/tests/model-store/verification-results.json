@@ -1,0 +1,15 @@
+{
+  "light": {
+    "sha256": "daba6036f02e6425a272fedd019cf486439839e7a2d798de463ae0ddd4964535",
+    "bytes": 4140989903,
+    "checked_model_hashes": 0,
+    "seconds": 21.40833079100048
+  },
+  "complete": {
+    "sha256": "6e313e817e1bc1cd8bd8f6fc19b6813c120e88c7c6a63354c3264731924612d8",
+    "bytes": 11398713737,
+    "checked_model_hashes": 185,
+    "seconds": 25.86623162500109
+  },
+  "shared_files_identical": 54430
+}

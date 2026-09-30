@@ -6,6 +6,8 @@ import numpy as np
 from PySide6.QtCore import QObject,Signal
 from .trufor_job import _Files,_prepare
 from .research_service import ResearchCommand
+from .model_job import ModelJob
+from ..core.model_store import feature_for
 from .jobs import LatestJob,STAGING_POOL
 from ..core.interactive import ArrayCache
 from ..core.image_buffers import all_finite
@@ -39,7 +41,8 @@ class ResearchJob(QObject):
     result=Signal(object);failed=Signal(str);busy=Signal(bool);progress=Signal(int,str)
     def __init__(self,parent,image,method,filename=None):
         super().__init__(parent);self.files=_Files(image);self.cache=ArrayCache(384);self.closed=self.is_busy=False;self.current=None;self.offset=0
-        self.files.source_filename=filename
+        self.files.source_filename=filename;self.method=method
+        self.models=ModelJob(self);self.models.ready.connect(self._models_ready);self.models.failed.connect(self._failure);self.models.progress.connect(self.progress)
         self.preparer=LatestJob(self,prepare,delay=0,pool=STAGING_POOL);self.loader=LatestJob(self,read_result,delay=0);self.command=ResearchCommand(self,method)
         self.preparer.result.connect(self._prepared);self.loader.result.connect(self._loaded);self.command.result.connect(self._finished)
         for job in (self.preparer,self.loader,self.command):job.failed.connect(self._failure)
@@ -50,7 +53,9 @@ class ResearchJob(QObject):
         key=hashlib.sha256(json.dumps([params,device],sort_keys=True).encode()).hexdigest();self.current=(key,params,device);self.is_busy=True;self.busy.emit(True)
         cached=self.cache.get(key)
         if cached is not None:self._loaded((key,cached));return
-        self.preparer.request(self.files)
+        self.models.request(feature_for(self.method,params.get("variant")))
+    def _models_ready(self):
+        if not self.closed and self.current is not None:self.preparer.request(self.files)
     def _prepared(self,files):
         if self.closed or self.current is None:return
         key,params,device=self.current
@@ -75,7 +80,7 @@ class ResearchJob(QObject):
         if self.closed:return
         self.is_busy=False;self.busy.emit(False);self.failed.emit(error)
     def cancel(self):
-        self.current=None;self.preparer.invalidate();self.loader.invalidate();self.command.cancel();self.is_busy=False;self.busy.emit(False)
+        self.current=None;self.models.cancel();self.preparer.invalidate();self.loader.invalidate();self.command.cancel();self.is_busy=False;self.busy.emit(False)
     def shutdown(self):
         if self.closed:return
-        self.closed=True;self.cancel();self.preparer.shutdown();self.loader.shutdown();self.command.shutdown();self.files.retire();self.cache.clear()
+        self.closed=True;self.cancel();self.models.shutdown();self.preparer.shutdown();self.loader.shutdown();self.command.shutdown();self.files.retire();self.cache.clear()

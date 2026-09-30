@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "seconds": 0.13352462500006368,
+  "before": 26,
+  "after": 41,
+  "parents_split": 9,
+  "large_matches": 313,
+  "large_geometry_and_colour_exact": true,
+  "all_retained_correspondences_preserved": true
+}

@@ -44,6 +44,8 @@ def main():
             raise ValueError(f'Estimated quality {quality} has no installed Noiseprint model. Choose a model explicitly (51–100, or 101 for uncompressed).')
         info=dict(model=int(quality),automatic=requested==0,backend=backend)
         write_json(metadata,info)
+    from gui.sherloq_app.core.model_store import Store,feature_for
+    Store().ensure(feature_for('noiseprint',quality),progress=lambda n,total,text:progress(100*n//max(1,total),text))
     info.setdefault('backend',backend)
     gray_path=folder/'gray.npy'
     if not gray_path.exists():

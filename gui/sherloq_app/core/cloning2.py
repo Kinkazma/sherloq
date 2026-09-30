@@ -9,6 +9,7 @@ import numpy as np
 from scipy.spatial import cKDTree
 from .interactive import ArrayCache
 from .cloning import pack_keypoints,check
+from .sift_panels import NAME as PANELS_TEXT
 
 POPCOUNT=np.unpackbits(np.arange(256,dtype=np.uint8)[:,None],axis=1).sum(axis=1)
 ALGORITHMS=('SIFT','RootSIFT','AKAZE','BRISK','ORB','PatchMatch Zernike','PatchMatch SIFT','XFeat','XFeat + LighterGlue','ALIKED','ALIKED rotation','ALIKED + LightGlue','ALIKED rotation + LightGlue','SIFT + LightGlue')
@@ -16,7 +17,7 @@ COMBINED='PatchMatch Zernike + PatchMatch SIFT'
 EXTENDED='Extended: '+COMBINED
 SYMMETRIC=COMBINED+' + Mirror'
 EXTENDED_SYMMETRIC='Extended: '+SYMMETRIC
-ALGORITHMS=(*ALGORITHMS,COMBINED,'SIFT + G2NN + RANSAC',EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC)
+ALGORITHMS=(*ALGORITHMS,COMBINED,'SIFT + G2NN + RANSAC',PANELS_TEXT,EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC)
 MAX_PAIRS=100_000
 
 
@@ -195,6 +196,9 @@ def render(image,result,style,cancel=lambda:False):
             if circles:
                 cv.circle(out,pa,max(2,round(keypoints[a,2]/2)),rgb,1,cv.LINE_AA);cv.circle(out,pb,max(2,round(keypoints[b,2]/2)),rgb,1,cv.LINE_AA)
             if points:cv.circle(out,pa,2,rgb,-1,cv.LINE_AA);cv.circle(out,pb,2,rgb,-1,cv.LINE_AA)
+    if len(style)>9 and style[9]:
+        for polygon in result.get('preprocessing',{}).get('text_exclusions',()):
+            cv.polylines(out,[np.asarray(polygon,np.int32)],True,(0,165,255),1,cv.LINE_AA)
     return out,visible,legend
 
 
@@ -210,6 +214,9 @@ class Cloning2Engine:
         if len(geometry)!=3:raise ValueError('Invalid geometry settings.')
         if algorithm not in ALGORITHMS or not 100<=limit<=20000 or not 0<radius or not 0<=minimum<=radius or not 0<threshold<=1 or tolerance<=0:raise ValueError('Invalid analysis settings.')
         if compare and len(regions)!=2:raise ValueError('Compare requires exactly two zones.')
+        if algorithm==PANELS_TEXT:
+            from .sift_panels import analyze
+            return analyze(self,params,regions,compare,cancel,progress)
         from .auto_zones import distance_policy
         radius,radii,gap=distance_policy(params,regions,compare)
         from .auto_zones import compact_axes

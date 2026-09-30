@@ -34,10 +34,11 @@ regions=(((0,0),(110,0),(110,127),(0,127)),((130,0),(255,0),(255,127),(130,127))
 pm=dict(points=np.empty((0,2),np.float32),pairs=np.empty((0,4)),groups=[],group_algorithms=[])
 def settle(w):
  end=time.monotonic()+10
- while any(j.is_busy for j in (w.prepare,w.draw,w.export_job)):
+ while any(j.is_busy for j in ((w.prepare,w.draw,w.export_job,w.sift_job) if hasattr(w,'sift_job') else (w.prepare,w.draw,w.export_job))):
   app.processEvents();time.sleep(.005);assert time.monotonic()<end and not errors,errors
 for cls in (AutomaticClonesWidget,CompleteAnalysisWidget):
  w=cls(image,autostart=False)
+ if hasattr(w,'sift_job'):w.sift_job.compute=lambda _:dict(groups=())
  with patch.object(w,'start'):w.auto_ready(regions)
  with patch.object(w.job,'request') as p,patch.object(w.forge,'request') as f:
   if hasattr(w,'queue_ela'):

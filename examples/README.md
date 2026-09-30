@@ -22,6 +22,19 @@ region-size setting were not recorded with the image.
 [D2PRL controls and model](../macos/docs/D2PRL-INTEGRATION.md) ·
 [Interactive region-size filter](../macos/docs/D2PRL-INTERACTIVE-FILTER.md).
 
+## SIFT Panels and Text on the microscopy figure
+
+I supplied this export from **SIFT + G2NN + RANSAC + Panels + Text** in Copy-Move
+Forgery 2. It uses the same microscopy figure as the D2PRL example above.
+The PNG is displayed unchanged at 3226 × 936 pixels.
+
+![My SIFT Panels and Text result](../screenshots/fork/sift-panels-text.png)
+
+The two large red envelopes and the smaller coloured groups show the extent of
+retained geometric correspondences. The method details explain panel selection,
+text exclusion and regrouping after RANSAC. No inference settings beyond the named
+profile were supplied with this image. [Method and controls](../macos/docs/SIFT-PANELS-TEXT.md).
+
 ## Individual tool views
 
 The four additional illustrations are actual SHERLOQ tool widgets rendered

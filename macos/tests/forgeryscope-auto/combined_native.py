@@ -23,8 +23,8 @@ while True:
  if state!=last:print(w.states,flush=True);last=state
  assert not errors and not w.errors,(errors,w.errors)
  assert time.monotonic()<deadline,w.states
- if all(v=='Complete' for v in state) and not any(j.is_busy for j in (w.job,w.forge,w.ela_job,w.prepare,w.draw)):break
-assert set(w.results)=={'patchmatch','forgeryscope','ela'}
+ if all(v=='Complete' for v in state) and not any(j.is_busy for j in (w.job,w.forge,w.sift_job,w.ela_job,w.prepare,w.draw)):break
+assert set(w.results)=={'patchmatch','forgeryscope','ela','sift'}
 assert w.results['forgeryscope']['metadata']['variant']=='Forgeryscope Auto'
 assert len(w.results['forgeryscope']['metadata']['zones'])==1
 pm=w.results['patchmatch']
@@ -36,7 +36,7 @@ with tempfile.TemporaryDirectory() as folder:
  with np.load(path,allow_pickle=False) as saved:
   assert np.array_equal(saved['root_results_forgeryscope_mask'],w.results['forgeryscope']['mask'])
   assert np.array_equal(saved['root_results_patchmatch_pairs'],pm['pairs'])
-report=dict(passed=True,real_patchmatch=True,real_forgeryscope_auto=True,real_ela_ghosts=True,
+report=dict(passed=True,real_patchmatch=True,real_forgeryscope_auto=True,real_ela_ghosts=True,real_sift_panels=True,
  seconds=time.perf_counter()-start,shape=list(image.shape),mirror_scales=True,export_exact=True,
  patchmatch_pairs=len(pm['pairs']),forgeryscope_status=w.results['forgeryscope']['metadata']['status'])
 w.close();_POOL.waitForDone(10000);app.processEvents();assert not errors,errors

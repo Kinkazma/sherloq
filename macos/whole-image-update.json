@@ -10,18 +10,20 @@
     "before": [
       "6520442f8c5fea0abe9c36b6ef3cc75bbf45de96564ea89ea343b64139e49e15",
       "8a3f10af6d8b4138fd37f943c7a3fd0a7773fb3a69e911f62a757264bc23f68a",
-      "6449d27f7b4680bcea9291c76ccea9952b24c510f7dcec9b2242b1d6a4e998c9"
+      "6449d27f7b4680bcea9291c76ccea9952b24c510f7dcec9b2242b1d6a4e998c9",
+      "9fa2cf589fdfeab92ac763d1a1595a0bc08bdf76369e0980be2f611d490bf5a1"
     ],
-    "after": "9fa2cf589fdfeab92ac763d1a1595a0bc08bdf76369e0980be2f611d490bf5a1"
+    "after": "aa7922d3c3ae45a4f14aaab75a9fcd375e254b4438035d5de8177be6808f31d9"
   },
   "gui/sherloq_app/ui/locales/fr.json": {
     "before": [
       "f0db26bbb86bae7bd308ede21bc62b9ca295438641486f4132feace1eaa77e6d",
       "ecab56f64b2ba78819b7c7c1ea5beb57a2ec559391e5bef089a54b49d3a06f93",
       "f6d68e47e9e72405dbb9e8866fdb487c3f5fa6c795a5e3864609900c02bbd9ee",
-      "94c2162ef70ea9f2dc10344781028acc466ef25480a28de7b83f8d6565eaf377"
+      "94c2162ef70ea9f2dc10344781028acc466ef25480a28de7b83f8d6565eaf377",
+      "1b0db9d868557f4f0d7d0e0ac4307cf76a09b9be2d538d78c018b323c1984c37"
     ],
-    "after": "1b0db9d868557f4f0d7d0e0ac4307cf76a09b9be2d538d78c018b323c1984c37"
+    "after": "10c4523e03489e1f8a2df8801b811aa25eef09a1b97f9be3429e6d50fe5d24e7"
   },
   "gui/sherloq_app/ui/ela_profiles.py": {
     "before": "dbe28231d9489b51ccf25be27b6fa887f7527b90f75178cf42f669e0b44d564e",
@@ -170,16 +172,22 @@
     "after": "03b7d919c9fa2dca7b105b297c7aeac95a058255018d7f82e67ab2ad39ae9505"
   },
   "gui/sherloq_app/ui/research_job.py": {
-    "before": "da04927f62b68ff6a5763b1f11c81a3396072ec3bb5aa6f29eedf72a21a93383",
-    "after": "574604a69ac5efe07cf874c27ca5d8ff1312003da18362648f3305d9333152e6"
+    "before": [
+      "da04927f62b68ff6a5763b1f11c81a3396072ec3bb5aa6f29eedf72a21a93383",
+      "574604a69ac5efe07cf874c27ca5d8ff1312003da18362648f3305d9333152e6"
+    ],
+    "after": "1cf41858d86f0967857e9e4bdb179fe96ed5f12edf83fffa26345c49ddc74a65"
   },
   "gui/sherloq_app/ui/tiled_image.py": {
     "before": null,
     "after": "1d2af49c69db178e8727ff5c72441ab6295170968eb1711b5d8bba880fe51f15"
   },
   "gui/sherloq_app/ui/trufor_job.py": {
-    "before": "009c67f83365d4cabb41a97375ad9d5b7f697f46dbad30d65bad96fada92db4c",
-    "after": "f973eceec6a6e80ec9a3a6a5b6cba47c3c1f58c0f96b524513404c8d4b51571e"
+    "before": [
+      "009c67f83365d4cabb41a97375ad9d5b7f697f46dbad30d65bad96fada92db4c",
+      "f973eceec6a6e80ec9a3a6a5b6cba47c3c1f58c0f96b524513404c8d4b51571e"
+    ],
+    "after": "3d44eebb5c642c585422dac57bfa0b70f5eec9b2ec7c9f2fbbe2bd8c110870ed"
   },
   "gui/sherloq_app/ui/viewer.py": {
     "before": "97cca6cedbb9d207bffb840f00bfe475bc49bbc516c9066208c8294fb2eae35e",
@@ -328,8 +336,458 @@
   },
   "gui/sherloq_app/core/automatic_clones.py": {
     "before": [
-      "35fb23a5cadcc898b0ad46748c8c3efbc9ff568d749e25fd655e002e060f0318"
+      "35fb23a5cadcc898b0ad46748c8c3efbc9ff568d749e25fd655e002e060f0318",
+      "976c7c1ed200461cfb100518bc4e01387be206d66b6e8ed13e2107e0749f72da"
     ],
-    "after": "976c7c1ed200461cfb100518bc4e01387be206d66b6e8ed13e2107e0749f72da"
+    "after": "f8cce7602c7a59149a671815fb091f79bcd44ae4360c63e0f0192e753782ada9"
+  },
+  "gui/sherloq_app/core/cloning2.py": {
+    "before": "3fc14d9ce6d6708ffcbdd5ddf539fed3f7be3d32f19bbdd66b19829093e648e5",
+    "after": "4f8b2c278ad2e0eb29aac3868d241b6c171add46b8a8928ab5c2c6dcf7d67552"
+  },
+  "gui/sherloq_app/core/complete_analysis.py": {
+    "before": "8992b3bc606c96e932c5629077608d34515442b479fb09b0e141ec78737370a1",
+    "after": "e870839c38d6cdccf673f440133e84fecdd417bbe7861ad2a1fb2535aa4b92f9"
+  },
+  "gui/sherloq_app/core/copy_subbiomes.py": {
+    "before": null,
+    "after": "31cd01f2e65bd1bdbfc7dab490ea0a1474eb5994aaffd9d4c5fa47f2bb508e04"
+  },
+  "gui/sherloq_app/core/model_catalog.json": {
+    "before": null,
+    "after": "7f968efdf4b676d71263c083a1c5fba54ffe16b90f4430b670e28b22081f9e6d"
+  },
+  "gui/sherloq_app/core/model_store.py": {
+    "before": null,
+    "after": "ad16dfaf6671aa8aafc9875b75a44adc70ced77a1eea38619e5ec2e47a3afd57"
+  },
+  "gui/sherloq_app/core/sift_panels.py": {
+    "before": null,
+    "after": "6ff50c0a17aacf25259954a8710f23739ddb564530903d15a8270b7bd43778a0"
+  },
+  "gui/sherloq_app/core/splicing_worker.py": {
+    "before": "44b7d687896043944e44cf344d50647a847e88137885e62eb138ef54c418848c",
+    "after": "e6fbffd50e7a870bb2117ab477cd4d56c821f5996a194a4c18888c9fe7068ec1"
+  },
+  "gui/sherloq_app/core/text_regions.py": {
+    "before": null,
+    "after": "0812b1f3e54966a08cf0017b45609f080e78c448c8a2ba429c2e79d60cc31b6f"
+  },
+  "gui/sherloq_app/tools/tampering/cloning2.py": {
+    "before": "869f7de90df58ac5bad8f6362a66ebaa15ad2c5d3f43b9b69a269c8a3a112669",
+    "after": "9f85b78d271129482213d8469da6348631f7645fcd60f0df0d622b644d0bb104"
+  },
+  "gui/sherloq_app/tools/various/trufor.py": {
+    "before": "f031e1bbbc1a27a997d0572ae82528d4ec14b1dad3992cbe9f5739ff38266bd2",
+    "after": "9fa78ec776feec78ee40010268ad0d2503561a5244dcac8f1cad9e3d7a38fd8d"
+  },
+  "gui/sherloq_app/ui/model_job.py": {
+    "before": null,
+    "after": "2f2b53a41de394ea4b6caeeb7ddcd84403375e5b44f53ae2b27b85be38af56b4"
+  },
+  "gui/sherloq_app/ui/tools.py": {
+    "before": "ceb1891ac88181ca899a97749b50f36c1e485b1a3d260b0ff03d20d90b6d4da2",
+    "after": "82eedbccac568b493e4ff3f63dc1d2c785dea08d079ebd0467139d0aaf087db5"
+  },
+  "macos/install_models.py": {
+    "before": null,
+    "after": "e1f583ba5d1ef1dbadc5d25cd4234d0e3ddf55c4b410f2b48baa5fa59b69fa5b",
+    "target": "packaging/install_models.py"
+  },
+  "macos/runtime/tesseract/native/bin/tesseract": {
+    "before": null,
+    "after": "b76998aba6caf125b0964f5a4f9a38814f6aab75c26dd5ef5065f32ec5c602a5",
+    "target": "native/bin/tesseract",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libarchive.13.dylib": {
+    "before": null,
+    "after": "ad4aec160746f8b4308447f1539b529f6c477378c23b683726b847a9062d9888",
+    "target": "native/lib/libarchive.13.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libb2.1.dylib": {
+    "before": null,
+    "after": "c3d5c6e44013a1ddd2cf4b67768335b78c851c77dd779cb7cd78cb427b98bc90",
+    "target": "native/lib/libb2.1.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libgif.7.2.0.dylib": {
+    "before": null,
+    "after": "f3bf33693fdacc7a418e339c6fb8556716bb0d39dd69238626d5080f90cbf268",
+    "target": "native/lib/libgif.7.2.0.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libjpeg.8.3.2.dylib": {
+    "before": null,
+    "after": "268a485ad4054d7eaa7798841e4df9db95933390277c58d074a38ce9b7534a4c",
+    "target": "native/lib/libjpeg.8.3.2.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libleptonica.6.dylib": {
+    "before": null,
+    "after": "898deb200d94f7e52781a06b39edd1cd0194957cedc75da4d62a720d258f7a79",
+    "target": "native/lib/libleptonica.6.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/liblz4.1.10.0.dylib": {
+    "before": null,
+    "after": "c04f554eeec0c68f3ded0a932d86eb1e7bac4fd0d3e207b8d2517896c94d216b",
+    "target": "native/lib/liblz4.1.10.0.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/liblzma.5.dylib": {
+    "before": null,
+    "after": "adbea8c11257442ff2ecf2baa775dc1721258dd265256ed0ccb822baaa5f5d3d",
+    "target": "native/lib/liblzma.5.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libopenjp2.2.5.4.dylib": {
+    "before": null,
+    "after": "c974a770ddf29d52830248c23f02633b86dc396544ae46cfb9af79b7df11d473",
+    "target": "native/lib/libopenjp2.2.5.4.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libpng16.16.dylib": {
+    "before": null,
+    "after": "e782fdc794748b967b69e413273882d3a6f9e1cf9ed5c757d4ab9e37ac9f1456",
+    "target": "native/lib/libpng16.16.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libsharpyuv.0.1.2.dylib": {
+    "before": null,
+    "after": "6c02bc47ce31f6f575da26098a666dfb4dc26ec782e7f923c5e8d2e1d7ff262d",
+    "target": "native/lib/libsharpyuv.0.1.2.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libtesseract.5.dylib": {
+    "before": null,
+    "after": "ba1347f665022ee8909ca13e7350808c41f86dc0db37de3c87659d0740939f62",
+    "target": "native/lib/libtesseract.5.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libtiff.6.dylib": {
+    "before": null,
+    "after": "215a332e8d0f531d8fba7957bdd760d411c36529782395e3ced95cac384c0389",
+    "target": "native/lib/libtiff.6.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libwebp.7.2.0.dylib": {
+    "before": null,
+    "after": "3bcaa7a64f92222d690a599ead6af097ad55fc1aae6034a46fd754c0535ae9c0",
+    "target": "native/lib/libwebp.7.2.0.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libwebpmux.3.1.2.dylib": {
+    "before": null,
+    "after": "723a4760c1c91ee6472a86a212603ccd2711783dbd1c7edfa264ae9b02ec83b6",
+    "target": "native/lib/libwebpmux.3.1.2.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/lib/libzstd.1.5.7.dylib": {
+    "before": null,
+    "after": "cf06b459ff92afbdd8d2227a6ad5a106d466e531232225f70d4e7b02364bfe1f",
+    "target": "native/lib/libzstd.1.5.7.dylib",
+    "mode": 493
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/giflib/6.1.3/COPYING": {
+    "before": null,
+    "after": "ed5d90cb4a041bddad679470a071302ab05ae5d0ec2cf8f9c97ad7b2708751e6",
+    "target": "native/notices/tesseract/giflib/6.1.3/COPYING"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/jpeg-turbo/3.2.0/LICENSE.md": {
+    "before": null,
+    "after": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+    "target": "native/notices/tesseract/jpeg-turbo/3.2.0/LICENSE.md"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/LICENSE.md": {
+    "before": null,
+    "after": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+    "target": "native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/LICENSE.md"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/leptonica/1.87.0/LICENSE-from-allheaders.txt": {
+    "before": null,
+    "after": "ef6a840d7749d2d4a59175b7a9517c64a2a4dcbec164fe59c275a720f80f465a",
+    "target": "native/notices/tesseract/leptonica/1.87.0/LICENSE-from-allheaders.txt"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/libarchive/3.8.9/COPYING": {
+    "before": null,
+    "after": "30e556b3959e3985d66efefec5eaac51d4995053caa1d3cffe6eb916f146f229",
+    "target": "native/notices/tesseract/libarchive/3.8.9/COPYING"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/libb2/0.98.1/COPYING": {
+    "before": null,
+    "after": "6a1ee543e5282cd9061881edf462e6fdab181f328da71fc2c9a6950a80e94d01",
+    "target": "native/notices/tesseract/libb2/0.98.1/COPYING"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/libpng/1.6.58/AUTHORS": {
+    "before": null,
+    "after": "0c777e9f2a67bd4058ab91050eb7a56106c92ed038ba8fe5f54c83344f2d93ca",
+    "target": "native/notices/tesseract/libpng/1.6.58/AUTHORS"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/libpng/1.6.58/LICENSE": {
+    "before": null,
+    "after": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526",
+    "target": "native/notices/tesseract/libpng/1.6.58/LICENSE"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/libtiff/4.7.2/LICENSE.md": {
+    "before": null,
+    "after": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade",
+    "target": "native/notices/tesseract/libtiff/4.7.2/LICENSE.md"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/LICENSE.md": {
+    "before": null,
+    "after": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade",
+    "target": "native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/LICENSE.md"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/_sources/project/license.rst.txt": {
+    "before": null,
+    "after": "02e86af3b805e0f2075ebb5ac512831f6ab2a97ddeb186de076c418956418ba1",
+    "target": "native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/_sources/project/license.rst.txt"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/project/license.html": {
+    "before": null,
+    "after": "6c9436f8e9f58a79e044949e360291b9c910715fad31cdaed66bc61b0dcf33e6",
+    "target": "native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/project/license.html"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/lz4/1.10.0/LICENSE": {
+    "before": null,
+    "after": "4bc9c403f6b679cc076dee210e0e21c27b4e8f6d3fb43d85364c76657bfaaac5",
+    "target": "native/notices/tesseract/lz4/1.10.0/LICENSE"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/openjpeg/2.5.4/AUTHORS.md": {
+    "before": null,
+    "after": "cf22e984f9fbb9be7550e9a94120595ba8c4a7de0d63f47d3725f4b2e28a4387",
+    "target": "native/notices/tesseract/openjpeg/2.5.4/AUTHORS.md"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/openjpeg/2.5.4/LICENSE": {
+    "before": null,
+    "after": "a6af136f3e15038a666b61f376612a07d9a4e48cb7c01adbf3e33b3f14ab49b6",
+    "target": "native/notices/tesseract/openjpeg/2.5.4/LICENSE"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/tesseract/5.5.3/AUTHORS": {
+    "before": null,
+    "after": "720862b7253993b348fe15f37ed6e0d4feb0fc8df8324284d75975d54dd29923",
+    "target": "native/notices/tesseract/tesseract/5.5.3/AUTHORS"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/tesseract/5.5.3/LICENSE": {
+    "before": null,
+    "after": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "target": "native/notices/tesseract/tesseract/5.5.3/LICENSE"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/webp/1.6.0/AUTHORS": {
+    "before": null,
+    "after": "f251be89fd442bd9d701360730aea163cc8e2076ff03528f59267dc2c4f8b60a",
+    "target": "native/notices/tesseract/webp/1.6.0/AUTHORS"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/webp/1.6.0/COPYING": {
+    "before": null,
+    "after": "5aec868f669e384a22372a4e8a1a6cd7d44c64cd451f960ca69cc170d1e13acf",
+    "target": "native/notices/tesseract/webp/1.6.0/COPYING"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/AUTHORS": {
+    "before": null,
+    "after": "01e6df90d71d591f4307db3f397a5a4fac93b18533f5a3862156f1a0a7dc8610",
+    "target": "native/notices/tesseract/xz/5.8.4/AUTHORS"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING": {
+    "before": null,
+    "after": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8",
+    "target": "native/notices/tesseract/xz/5.8.4/COPYING"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING.0BSD": {
+    "before": null,
+    "after": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1",
+    "target": "native/notices/tesseract/xz/5.8.4/COPYING.0BSD"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING.GPLv2": {
+    "before": null,
+    "after": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+    "target": "native/notices/tesseract/xz/5.8.4/COPYING.GPLv2"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING.GPLv3": {
+    "before": null,
+    "after": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "target": "native/notices/tesseract/xz/5.8.4/COPYING.GPLv3"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/COPYING.LGPLv2.1": {
+    "before": null,
+    "after": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+    "target": "native/notices/tesseract/xz/5.8.4/COPYING.LGPLv2.1"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/share/doc/xz/AUTHORS": {
+    "before": null,
+    "after": "01e6df90d71d591f4307db3f397a5a4fac93b18533f5a3862156f1a0a7dc8610",
+    "target": "native/notices/tesseract/xz/5.8.4/share/doc/xz/AUTHORS"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING": {
+    "before": null,
+    "after": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8",
+    "target": "native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.0BSD": {
+    "before": null,
+    "after": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1",
+    "target": "native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.0BSD"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.GPLv2": {
+    "before": null,
+    "after": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+    "target": "native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.GPLv2"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/zstd/1.5.7_1/COPYING": {
+    "before": null,
+    "after": "f9c375a1be4a41f7b70301dd83c91cb89e41567478859b77eef375a52d782505",
+    "target": "native/notices/tesseract/zstd/1.5.7_1/COPYING"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/zstd/1.5.7_1/LICENSE": {
+    "before": null,
+    "after": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8",
+    "target": "native/notices/tesseract/zstd/1.5.7_1/LICENSE"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/alto": {
+    "before": null,
+    "after": "23a038ff290c7471a1a8aa4b5d23e310b0bf49f718480dad6b619a7d06eca330",
+    "target": "native/share/tessdata/configs/alto"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/ambigs.train": {
+    "before": null,
+    "after": "717e534fd4330ed3f9bdb006f0465aa2633cca866786a8f8d469dbd4b01c10c2",
+    "target": "native/share/tessdata/configs/ambigs.train"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/api_config": {
+    "before": null,
+    "after": "2929bc0f1d2ba77f28cfc230f7b835b2b54038c0f9d2e8e4c5ada43803c999fd",
+    "target": "native/share/tessdata/configs/api_config"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/bigram": {
+    "before": null,
+    "after": "65e6583abc617a34d4091285181f2493d312c296a85629ac3c092d3b93b6e554",
+    "target": "native/share/tessdata/configs/bigram"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/box.train": {
+    "before": null,
+    "after": "a421355e3488bf3fdfc14a1bdcca08c6f6414ec92c53f0eea22317c868c1a623",
+    "target": "native/share/tessdata/configs/box.train"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/box.train.stderr": {
+    "before": null,
+    "after": "3e62cd37d2383abf0c6dfa5ba39fd1187fcff6856c4f4f27ea1554cb4c1874d2",
+    "target": "native/share/tessdata/configs/box.train.stderr"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/digits": {
+    "before": null,
+    "after": "e757d95bb1e51444860ea10d7f2c8bb8a0c9c4ccc58a0e8c67e8dc2933a56e2e",
+    "target": "native/share/tessdata/configs/digits"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/get.images": {
+    "before": null,
+    "after": "28c774c157a2f48d835a1d58f5a35dd70106c136e176572ee43bbf46f3d65c92",
+    "target": "native/share/tessdata/configs/get.images"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/hocr": {
+    "before": null,
+    "after": "d6a7ec7c5143317a59fce2393054f6b7a8261824b934e7426fdd24febc929ad6",
+    "target": "native/share/tessdata/configs/hocr"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/inter": {
+    "before": null,
+    "after": "46303bf83668e446f4966d1ebf7418ad9f0c5e08836bc59d98cae3bbfc3aee9d",
+    "target": "native/share/tessdata/configs/inter"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/kannada": {
+    "before": null,
+    "after": "7d34fec99283142a3a22d157dc5cc8824b93ee923e576e6bfd1b026039c2e8f0",
+    "target": "native/share/tessdata/configs/kannada"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/linebox": {
+    "before": null,
+    "after": "eb0279527b009a53432a9e1dde85bf42814901393546bc365bb61837f83355c9",
+    "target": "native/share/tessdata/configs/linebox"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/logfile": {
+    "before": null,
+    "after": "5eed5e41e5fbbf0862836c0e4cda7821f8e08441645858ec6821ab41d926e195",
+    "target": "native/share/tessdata/configs/logfile"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/lstm.train": {
+    "before": null,
+    "after": "3d1f8e5ab4e41467fdd938dc4d266eea081b477f8d74ab6b198dd1d854b5301c",
+    "target": "native/share/tessdata/configs/lstm.train"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/lstmbox": {
+    "before": null,
+    "after": "61255d1b7c9df76b673ff43d2d91cda7f4c3c2e7d7f0643a71b212739833017e",
+    "target": "native/share/tessdata/configs/lstmbox"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/lstmdebug": {
+    "before": null,
+    "after": "62d40d7a7d80315e10cdca2561d2ddf2981f53dfdbd567513b04d36f3add7f4e",
+    "target": "native/share/tessdata/configs/lstmdebug"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/makebox": {
+    "before": null,
+    "after": "a8fe20a2bc9ff1e9e8ed06d56845336c978627b8e965600abd63f1f412c18ffe",
+    "target": "native/share/tessdata/configs/makebox"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/page": {
+    "before": null,
+    "after": "6e4b43f27a77124e66c87fce8de518ff81e918d3cc36fe71a3d01179c1856a07",
+    "target": "native/share/tessdata/configs/page"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/pdf": {
+    "before": null,
+    "after": "54d56e81dfefe289b0d2e4c7bc9bbe662711f5b8255c128b73bcd66efb6bba1a",
+    "target": "native/share/tessdata/configs/pdf"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/quiet": {
+    "before": null,
+    "after": "8a93fad8251f61b5f17b8628203a0e068c71e0907cd63012ab22afb7b560fce3",
+    "target": "native/share/tessdata/configs/quiet"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/rebox": {
+    "before": null,
+    "after": "73ca35d7d71084fb88e2eb9a5c53ad91682754b3aecb918dece7591ec22a0b26",
+    "target": "native/share/tessdata/configs/rebox"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/strokewidth": {
+    "before": null,
+    "after": "ffb140aadd3e26d0d9b3b355d592b50cff8b2c3ce0394b4a6de4fabc1c0942c9",
+    "target": "native/share/tessdata/configs/strokewidth"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/tsv": {
+    "before": null,
+    "after": "59d079bb75d8b3d7c839a3564580cb559e362c93a9d70f234e421c0c3e767e04",
+    "target": "native/share/tessdata/configs/tsv"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/txt": {
+    "before": null,
+    "after": "9bcbdbe285fd3a024be563cb237751ceb3435d86610e231f08894023321af5d7",
+    "target": "native/share/tessdata/configs/txt"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/unlv": {
+    "before": null,
+    "after": "1b02e7801de71f0757a26ba6d749e9182a0d9971929966bebb67f99db8733f40",
+    "target": "native/share/tessdata/configs/unlv"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/configs/wordstrbox": {
+    "before": null,
+    "after": "9d1787cdce085ad36dc9d6ba6b2702ac262beaf06a0bb4a0b84355f6458261e5",
+    "target": "native/share/tessdata/configs/wordstrbox"
+  },
+  "macos/runtime/tesseract/native/share/tessdata/eng.traineddata": {
+    "before": null,
+    "after": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+    "target": "native/share/tessdata/eng.traineddata"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/jpeg-turbo/3.2.0/README.ijg": {
+    "before": null,
+    "after": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6",
+    "target": "native/notices/tesseract/jpeg-turbo/3.2.0/README.ijg"
+  },
+  "macos/runtime/tesseract/native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/README.ijg": {
+    "before": null,
+    "after": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6",
+    "target": "native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/README.ijg"
   }
 }

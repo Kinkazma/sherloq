@@ -3,7 +3,8 @@
   "real_patchmatch": true,
   "real_forgeryscope_auto": true,
   "real_ela_ghosts": true,
-  "seconds": 8.649643499999911,
+  "real_sift_panels": true,
+  "seconds": 9.68907929099987,
   "shape": [
     128,
     256,

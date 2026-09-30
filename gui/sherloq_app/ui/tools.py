@@ -239,7 +239,7 @@ class ToolTree(QTreeWidget):
                 self.tr("Image Resampling"),
                 self.tr("Copy-Move Forgery 2"),
                 self.tr("Adaptive CFA"),
-                self.tr("Clone Detectors"),
+                self.tr("AI Clone Detection"),
                 self.tr("Automatic Clone Search"),
                 self.tr("Complete Automatic Analysis"),
             ]
@@ -344,6 +344,10 @@ class ToolTree(QTreeWidget):
         previous_group = complete_analysis.parent()
         previous_group.takeChild(previous_group.indexOfChild(complete_analysis))
         self.tool_item(2, 0).parent().addChild(complete_analysis)
+        ai_clones = self.tool_item(7, 6)
+        previous_group = ai_clones.parent()
+        previous_group.takeChild(previous_group.indexOfChild(ai_clones))
+        self.tool_item(8, 0).parent().addChild(ai_clones)
         self.favorites_group = QTreeWidgetItem([self.tr('[Favorites]')])
         modify_font(self.favorites_group, bold=True)
         self.favorites_group.setIcon(0, themed_icon('8.svg'))

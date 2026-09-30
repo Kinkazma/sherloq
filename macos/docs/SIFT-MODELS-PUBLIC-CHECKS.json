@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "ocr_portable": true,
+  "homebrew_libraries_loaded": false,
+  "cases": [
+    {
+      "test": "sift-subbiomes/contracts.py",
+      "passed": true,
+      "seconds": 0.5796107080004731
+    },
+    {
+      "test": "sift-panels/ui.py",
+      "passed": true,
+      "seconds": 2.1436016250008834
+    },
+    {
+      "test": "sift-subbiomes/complete_ui.py",
+      "passed": true,
+      "seconds": 4.621155083001213
+    },
+    {
+      "test": "complete-analysis/contracts.py",
+      "passed": true,
+      "seconds": 5.271750333000455
+    },
+    {
+      "test": "forgeryscope-auto/automatic.py",
+      "passed": true,
+      "seconds": 1.5165177910002967
+    },
+    {
+      "test": "forgeryscope-auto/combined_native.py",
+      "passed": true,
+      "seconds": 11.023379457999908
+    },
+    {
+      "test": "model-store/contracts.py",
+      "passed": true,
+      "seconds": 0.21154891600053816
+    },
+    {
+      "test": "model-store/ui_cancel.py",
+      "passed": true,
+      "seconds": 0.23743083299996215
+    }
+  ],
+  "combined_native": {
+    "passed": true,
+    "real_patchmatch": true,
+    "real_forgeryscope_auto": true,
+    "real_ela_ghosts": true,
+    "real_sift_panels": true,
+    "seconds": 9.68907929099987,
+    "shape": [
+      128,
+      256,
+      3
+    ],
+    "mirror_scales": true,
+    "export_exact": true,
+    "patchmatch_pairs": 806,
+    "forgeryscope_status": "empty"
+  },
+  "menu": {
+    "passed": true,
+    "canonical_id": [
+      7,
+      6
+    ],
+    "green_marker": true,
+    "ai_category_after_adaifl": true,
+    "french": true,
+    "persisted_favorite": true,
+    "menu_entries": 50
+  }
+}

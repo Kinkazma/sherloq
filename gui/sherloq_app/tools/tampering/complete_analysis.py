@@ -7,7 +7,9 @@ import numpy as np
 from PySide6.QtCore import QTimer,Qt,QSignalBlocker
 from PySide6.QtWidgets import QComboBox,QDoubleSpinBox,QSpinBox,QLabel,QHBoxLayout,QFileDialog,QCheckBox,QTabBar
 from .automatic_clones import AutomaticClonesWidget
-from ...core.complete_analysis import SOURCES, ELA_SOURCE, prepare, render, CompletePreparation
+from ...core.complete_analysis import SOURCES, ELA_SOURCE, SIFT_SOURCE, prepare, render, CompletePreparation
+from ...core.cloning2 import Cloning2Engine
+from .cloning2 import analyze as analyze_clones, Progress
 from ...core.automatic_clones import visible
 from ...core.ela_biomes import ElaBiomeEngine,DEFAULT_BLOCK,DEFAULT_THRESHOLD,DEFAULT_MINIMUM_CELLS
 from ...ui.ela_biomes import analyze,energy_controls,histogram_controls,apply_automatic
@@ -25,6 +27,12 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.ela_cancel=Event();self.ela_base=None;self.ela_key=None
         super().__init__(image,parent,autostart=False)
         self.ela_engine=ElaBiomeEngine(image,filename)
+        self.sift_engine=Cloning2Engine(image);self.sift_updates=Progress()
+        self.sift_job=LatestJob(self,partial(analyze_clones,self.sift_engine,self.sift_updates),delay=0)
+        self.sift_job.result.connect(lambda result:self.complete('sift',result))
+        self.sift_job.failed.connect(lambda error:self.failed('sift',error))
+        self.sift_updates.changed.connect(lambda event,value,message:self.progress('sift',value)
+                                         if event is self.cancel and not event.is_set() else None)
         self.ela_job=LatestJob(self,partial(analyze,self.ela_engine),delay=120)
         self.ela_job.result.connect(self.ela_complete)
         self.ela_job.failed.connect(lambda error:self.failed('ela',error))
@@ -144,20 +152,27 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.redraw()
 
     def initial_states(self):
-        return {**super().initial_states(),'ela':'Waiting'}
+        return {**super().initial_states(),'sift':'Waiting','ela':'Waiting'}
 
     def state_labels(self):
-        return {**super().state_labels(),'ela':ELA_SOURCE}
+        return {**super().state_labels(),'sift':t(SIFT_SOURCE),'ela':ELA_SOURCE}
 
     def cancel_work(self):
         super().cancel_work()
         self.ela_cancel.set()
         if hasattr(self,'ela_job'):self.ela_job.invalidate()
+        if hasattr(self,'sift_job'):self.sift_job.invalidate()
 
     def ela_params(self):return int(choice(self.ela_block)),0,self.ela_ghost.isChecked(),self.ela_grids.isChecked(),self.ela_background.isChecked(),self.ela_histogram_low.value()/1000,self.ela_histogram_high.value()/1000,self.ela_auto_thresholds.isChecked(),compute_profile(self.ela_auto_profile)
 
     def start(self):
         super().start()
+        if not self.closed and self.states.get('sift')=='Running':
+            p=list(self.submitted['patchmatch_parameters']);p[0]=SIFT_SOURCE;p[3]=10.;p[4]=.725
+            p[6:9]=['Affine',5.,10];p[11]=False;p[15]=False
+            zones=tuple(r for i,r in enumerate(self.submitted['zones']) if i not in self.submitted['disabled_zones'])
+            self.submitted['sift_parameters']=tuple(p)
+            self.sift_job.request((tuple(p),zones,False,self.cancel))
         if not self.closed and self.states.get('ela')=='Running':self.queue_ela()
 
     def ela_profile_changed(self,*_):
@@ -205,7 +220,7 @@ class CompleteAnalysisWidget(AutomaticClonesWidget):
         self.prepare.request((self.results.get('patchmatch'),self.results.get('forgeryscope'),base,
             self.minimum.value(),self.maximum.value(),self.overlap.value()/100,
             self.ela_threshold.value(),self.ela_minimum.value(),active,excluded,self.image.shape,
-            (self.ela_shadow_threshold.value()/10,self.ela_highlight_threshold.value()/10)))
+            (self.ela_shadow_threshold.value()/10,self.ela_highlight_threshold.value()/10),self.results.get('sift')))
 
     def biomes_ready(self,answer):
         biomes,ela=answer

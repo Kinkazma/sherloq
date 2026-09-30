@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "cancel_reaches_transfer": true,
+  "stale_completion_ignored": true,
+  "stale_progress_ignored": true,
+  "large_byte_counts": true
+}

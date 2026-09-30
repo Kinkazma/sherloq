@@ -6,9 +6,28 @@ import numpy as np
 from .automatic_clones import SOURCES as CLONE_SOURCES, entries as clone_entries, render as render_clones
 from .ela_biomes import segment
 from .ela_energy import energy_color
+from .sift_panels import NAME as SIFT_SOURCE
 
 ELA_SOURCE = 'ELA biomes'
-SOURCES = (*CLONE_SOURCES, ELA_SOURCE)
+SOURCES = (*CLONE_SOURCES, SIFT_SOURCE, ELA_SOURCE)
+
+
+def sift_entries(result, low, high, maximum_overlap):
+    if result is None:return ()
+    from .automatic_clones import _entry
+    from .cloning2 import biome_sides, supported_selection
+    from .copy_overlap import overlap
+    entries=[]
+    for index,group in enumerate(result['groups']):
+        selected=supported_selection(result,group,low,high,3,maximum_overlap=maximum_overlap)
+        if not len(selected):continue
+        item=_entry(SIFT_SOURCE,biome_sides(result['points'],result['pairs'],selected),len(selected),
+                    dict(group=index,partition=result.get('biome_partitions',())[index] if result.get('biome_partitions') else None))
+        original=_entry(SIFT_SOURCE,biome_sides(result['points'],result['pairs'],group),len(group),dict(group=index))
+        if item and original and overlap(*item['polygons'])<maximum_overlap:
+            item.update(id=original['id'],color=result['bases'][index])
+            entries.append(item)
+    return tuple(entries)
 
 
 def ela_entries(base, threshold, minimum, regions, excluded, image_shape, energy_thresholds=None):
@@ -56,7 +75,8 @@ def prepare(request):
     energy_thresholds=request[11] if len(request)>11 else None
     clones=clone_entries(patch,forge,low,high,overlap)
     ela,result=ela_entries(base,threshold,minimum,regions,excluded,shape,energy_thresholds)
-    return clones+ela,result
+    sift=request[12] if len(request)>12 else None
+    return clones+sift_entries(sift,low,high,overlap)+ela,result
 
 
 class CompletePreparation:
@@ -69,6 +89,7 @@ class CompletePreparation:
         self.clone_key=None;self.clone_inputs=None;self.clones=()
         self.ela_key=None;self.ela_base=None;self.ela=((),None)
         self.counts=dict(clones=0,ela=0)
+        self.sift_key=None;self.sift_input=None;self.sift=()
     def __call__(self,request):
         patch,forge,base,low,high,overlap,threshold,minimum,regions,excluded,shape=request[:11]
         energy=request[11] if len(request)>11 else None
@@ -82,7 +103,11 @@ class CompletePreparation:
             value=ela_entries(base,threshold,minimum,regions,excluded,shape,energy)
             self.ela_base=base;self.ela=value;self.ela_key=key;self.counts['ela']+=1
         entries,result=self.ela
-        return self.clones+entries,result
+        sift=request[12] if len(request)>12 else None
+        key=(id(sift),low,high,overlap)
+        if key!=self.sift_key:
+            self.sift=sift_entries(sift,low,high,overlap);self.sift_input=sift;self.sift_key=key
+        return self.clones+self.sift+entries,result
 
 
 def render(request):

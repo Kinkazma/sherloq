@@ -1,6 +1,6 @@
 # D2PRL — interactive region-size filter
 
-I added a slider and synchronized numeric field to D2PRL in Clone Detectors.
+I added a slider and synchronized numeric field to D2PRL in AI Clone Detection.
 They select the minimum connected-region size from **0 to 5,000 pixels on the
 448 × 448 model grid**, with **500** as the default. These are model-grid pixels,
 not pixels of the original photograph.

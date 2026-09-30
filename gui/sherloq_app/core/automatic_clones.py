@@ -43,7 +43,7 @@ def _entry(source, polygons, count, provenance):
     identity=[source,canonical]
     if 'branch' in provenance:identity.append(provenance['branch'])
     key = hashlib.sha256(json.dumps(identity).encode()).hexdigest()[:24]
-    hue = (int(key[:8], 16) / 2**32 + SOURCES.index(source) / 3) % 1
+    hue = (int(key[:8], 16) / 2**32 + (SOURCES.index(source) if source in SOURCES else 3) / 3) % 1
     color = tuple(round(v * 255) for v in colorsys.hsv_to_rgb(hue, .8, .95)[::-1])
     return dict(id=key, source=source, polygons=[p.tolist() for p in polygons],
                 count=int(count), color=color, provenance=provenance)

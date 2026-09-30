@@ -5,6 +5,21 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 30 September 2026 — SIFT panels/text, model acquisition and AI category
+
+I added SIFT + G2NN + RANSAC + Panels + Text to Copy-Move Forgery 2 and as a separate
+layer in Complete Automatic Analysis. Surviving RANSAC links are regrouped to split
+disconnected envelopes without losing links or imposing a size cap. Portable
+Tesseract and English data are included with the cumulative source update.
+[Method and checks](SIFT-PANELS-TEXT.md).
+
+I added cancellable, resumable first-use model downloads with size/hash verification,
+local reuse and dependency deduplication. [Supported jobs and offline preparation](MODEL-DOWNLOADS.md).
+
+I renamed Clone Detectors to **AI Clone Detection** and moved it to **AI Solutions**,
+after AdaIFL. Its internal identity, saved favorites and green marker are preserved.
+The French label is **Détection de clones par IA**. The menu still has 50 entries.
+
 ## 30 September 2026 — Forgeryscope Auto in both automatic analyses
 
 I connected the validated Auto pipeline to Automatic Clone Search and Complete

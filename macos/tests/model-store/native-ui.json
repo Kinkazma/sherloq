@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "download_in_native_job": true,
+  "real_adaptive_cfa_inference": true,
+  "progress_visible": true,
+  "model_verified_before_inference": true
+}

@@ -8,7 +8,7 @@ import numpy as np
 from PySide6.QtCore import Qt,QObject,Signal,QEvent,QAbstractListModel,QModelIndex,QItemSelectionModel,QSignalBlocker
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import (QLabel,QPushButton,QComboBox,QSpinBox,QDoubleSpinBox,QCheckBox,QSlider,QListView,QAbstractItemView,QVBoxLayout,QHBoxLayout,QGridLayout,QSplitter,QWidget,QProgressBar,QFileDialog,QTabWidget)
-from gui.sherloq_app.core.cloning2 import Cloning2Engine,ALGORITHMS,COMBINED,EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC,render
+from gui.sherloq_app.core.cloning2 import Cloning2Engine,ALGORITHMS,COMBINED,EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC,PANELS_TEXT,render
 from gui.sherloq_app.core.jpeg_curve import Cancelled
 from gui.sherloq_app.ui.viewer import ImageViewer
 from gui.sherloq_app.ui.selection_view import SelectionView
@@ -24,7 +24,13 @@ class Progress(QObject):
 
 def analyze(engine,updates,request):
     params,regions,compare,event=request
-    try:return engine.analyze(params,regions,compare,event.is_set,lambda n,s:updates.changed.emit(event,n,s))
+    from gui.sherloq_app.core.model_store import Store,feature_for,Cancelled as DownloadCancelled
+    try:
+        feature=feature_for('copy_move',params[0])
+        if feature!='none':
+            Store().ensure(feature,event.is_set,lambda n,total,text:updates.changed.emit(event,100*n//max(1,total),text))
+        return engine.analyze(params,regions,compare,event.is_set,lambda n,s:updates.changed.emit(event,n,s))
+    except DownloadCancelled:return None
     except Cancelled:return None
 
 
@@ -42,7 +48,7 @@ def write_export(request):
               image_shape=image.shape,decoded_bgr8_sha256=hashlib.sha256(memoryview(np.ascontiguousarray(image))).hexdigest(),
               points=r['points'].tolist(),pairs=r['pairs'].tolist(),pair_columns=['point_a','point_b','descriptor_distance','length_px'],
               biomes=[g.tolist() for g in r['groups']],colors_bgr=r['colors'].tolist(),biome_colors_bgr=r['bases'],geometric_models=r.get('models',()),source_algorithms=r.get('source_algorithms'),group_algorithms=r.get('group_algorithms'),pair_algorithms=r.get('pair_algorithms',np.empty(0,np.uint8)).tolist(),workers_per_algorithm=r.get('workers_per_algorithm'),display=style,visible_biomes=visible,
-              distance_policy=r.get('distance_policy'),zone_configuration=r.get('zone_configuration'),
+              distance_policy=r.get('distance_policy'),zone_configuration=r.get('zone_configuration'),preprocessing=r.get('preprocessing'),biome_partitions=r.get('biome_partitions'),
               self_match_filter=r.get('self_match_filter'),rejected_biomes=r.get('rejected_biomes',()),
               feature_policy=r.get('feature_policy'),backend=r.get('backend','cpu'),descriptor_backend=r.get('descriptor_backend'),descriptor_backends=r.get('descriptor_backends'),dense_correspondences=r.get('dense_count'),dense_consistent_correspondences=r.get('dense_consistent_count'),
               limits='Potential correspondences, not proof of forgery. Biome hulls are not exact segmentations.')
@@ -133,7 +139,7 @@ class Cloning2Widget(ToolWidget):
         self.algorithm=QComboBox();self.algorithm.addItems(ALGORITHMS)
         self.algorithm.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon);self.algorithm.setMinimumContentsLength(16)
         from gui.sherloq_app.ui.extensions import mark_combo
-        mark_combo(self.algorithm,[name for name in ALGORITHMS if name not in ('AKAZE','BRISK','ORB')],green_items=['SIFT + G2NN + RANSAC',EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC])
+        mark_combo(self.algorithm,[name for name in ALGORITHMS if name not in ('AKAZE','BRISK','ORB')],green_items=['SIFT + G2NN + RANSAC',PANELS_TEXT,EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC])
         self.limit=QSpinBox();self.limit.setRange(100,20000);self.limit.setValue(6000);self.limit.setSingleStep(500)
         self.radius=QDoubleSpinBox();self.radius.setRange(.01,self.diagonal);self.radius.setDecimals(2);self.radius.setValue(min(600,self.diagonal))
         self.auto_radius=QCheckBox('Automatique par zone');self.auto_radius.setChecked(True)
@@ -172,6 +178,7 @@ class Cloning2Widget(ToolWidget):
         self.lines=QCheckBox('Lignes');self.lines.setChecked(False)
         self.points=QCheckBox('Points centraux');self.areas=QCheckBox('Biomes');self.areas.setChecked(True)
         self.show_zones=QCheckBox('Zones de recherche');self.show_zones.setChecked(True)
+        self.show_text=QCheckBox('Text exclusions');self.show_text.setChecked(False)
         self.show_zones.toggled.connect(self.toggle_zones)
         self.preset=QPushButton('Biomes seuls');self.preset.clicked.connect(self.biomes_only)
         self.low=QSlider(Qt.Horizontal);self.high=QSlider(Qt.Horizontal)
@@ -202,7 +209,7 @@ class Cloning2Widget(ToolWidget):
         for control in (self.limit,self.radius,self.minimum,self.threshold,self.tolerance):control.valueChanged.connect(self.invalidate)
         self.algorithm.currentIndexChanged.connect(self.algorithm_changed);self.units.currentIndexChanged.connect(self.unit_changed)
         self.support.valueChanged.connect(self.redraw)
-        for box in (self.circles,self.lines,self.points,self.areas):box.toggled.connect(self.redraw)
+        for box in (self.circles,self.lines,self.points,self.areas,self.show_text):box.toggled.connect(self.redraw)
         settings=QGridLayout();settings.setVerticalSpacing(2)
         radius_controls=QWidget();radius_layout=QHBoxLayout(radius_controls);radius_layout.setContentsMargins(0,0,0,0);radius_layout.addWidget(self.radius);radius_layout.addWidget(self.units)
         self.units.setToolTip('Unit: pixels or percentage of the image diagonal.')
@@ -227,7 +234,7 @@ class Cloning2Widget(ToolWidget):
             for w in widgets:row.addWidget(w)
             selections.addLayout(row)
         styles=QHBoxLayout()
-        for w in (self.circles,self.lines,self.points,self.areas,self.preset,self.show_zones):styles.addWidget(w)
+        for w in (self.circles,self.lines,self.points,self.areas,self.preset,self.show_zones,self.show_text):styles.addWidget(w)
         styles.addStretch()
         lengths=QGridLayout();lengths.addWidget(QLabel('Longueur affichée minimum'),0,0);lengths.addWidget(self.low,0,1);lengths.addWidget(self.low_spin,0,2);lengths.addWidget(QLabel('maximum'),0,3);lengths.addWidget(self.high,0,4);lengths.addWidget(self.high_spin,0,5)
         side=QWidget();side_layout=QVBoxLayout(side);self.side_tabs=QTabWidget()
@@ -282,6 +289,7 @@ class Cloning2Widget(ToolWidget):
         self._previous_algorithm=algorithm
         self.reflection.setEnabled(dense and algorithm not in (SYMMETRIC,EXTENDED_SYMMETRIC))
         self.independent_sift.setVisible(algorithm=='SIFT + G2NN + RANSAC')
+        self.show_text.setVisible(algorithm==PANELS_TEXT)
         self.patch.setMinimum(3 if algorithm in ('PatchMatch SIFT',COMBINED,EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC) else 2)
         previous_default=getattr(self,'_spacing_default',10)
         self._spacing_default=5 if algorithm in ('PatchMatch Zernike',COMBINED,EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC) else 10
@@ -293,7 +301,7 @@ class Cloning2Widget(ToolWidget):
         if self.low_spin.value()==previous_display:self.low_spin.setValue(self._display_spacing_default)
         with QSignalBlocker(self.cpu):self.cpu.setChecked(False)
         from gui.sherloq_app.core.metal_dense import sift_enabled
-        self.cpu.setEnabled(algorithm in ('PatchMatch Zernike',COMBINED,EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC,'SIFT + G2NN + RANSAC') or (algorithm=='PatchMatch SIFT' and sift_enabled()) or algorithm.startswith(('XFeat','ALIKED')) or 'Glue' in algorithm)
+        self.cpu.setEnabled(algorithm in ('PatchMatch Zernike',COMBINED,EXTENDED,SYMMETRIC,EXTENDED_SYMMETRIC,'SIFT + G2NN + RANSAC',PANELS_TEXT) or (algorithm=='PatchMatch SIFT' and sift_enabled()) or algorithm.startswith(('XFeat','ALIKED')) or 'Glue' in algorithm)
         self.algorithm.setToolTip('Extended: adds quarter-turn and multiple-scale SIFT passes to the existing duo. More computation; arbitrary rotations are not covered.' if algorithm==EXTENDED else '')
         if algorithm==SYMMETRIC:self.algorithm.setToolTip('Keeps the normal duo and adds reflected copies, with geometric and pixel-detail checks.')
         if algorithm==EXTENDED_SYMMETRIC:self.algorithm.setToolTip('Keeps the extended duo and adds reflected copies at multiple scales, with geometric and pixel-detail checks.')
@@ -308,6 +316,12 @@ class Cloning2Widget(ToolWidget):
             self.geometry.setCurrentIndex(2);self.geometry_support.setValue(10);self.geometry_error.setValue(5.)
             self.support.setValue(2);self.low_spin.setValue(0);self.high_spin.setValue(self.high_spin.maximum())
             self.threshold.setToolTip('G2NN : rapport de rupture entre les voisins autorisés (défaut 0,725). Profil classique, sans YOLO.')
+        if algorithm==PANELS_TEXT:
+            self.limit.setValue(6000);self.minimum.setValue(10);self.threshold.setValue(.725);self.tolerance.setValue(50)
+            self.auto_radius.setChecked(True);self.ignore_gap.setChecked(False)
+            self.geometry.setCurrentIndex(2);self.geometry_support.setValue(10);self.geometry_error.setValue(5.)
+            self.support.setValue(2);self.low_spin.setValue(10);self.high_spin.setValue(self.high_spin.maximum())
+            self.algorithm.setToolTip('SHERLOQ alternative: automatic panels when no zones are selected, text exclusion, per-zone SIFT and geometric verification. Not the luc_pub competition ensemble.')
         self.invalidate()
 
     def unit_changed(self,index):
@@ -399,6 +413,10 @@ class Cloning2Widget(ToolWidget):
 
     def ready(self,result):
         if result is None:return
+        prep=result.get('preprocessing',{})
+        if prep.get('automatic_panels') and result['regions'] and not self.viewer.view.regions:
+            self.envelope=prep['envelope'];self.zone_model.disabled.clear()
+            self.viewer.view.set_regions(result['regions'])
         self.result={**result,'zone_configuration':dict(regions=self.viewer.view.snapshot(),disabled=sorted(self.zone_model.disabled),envelope=self.envelope)};self.dirty=False;self.chosen=set();self.model.hidden.clear();self.redraw()
 
     def length_changed(self,lower,value):
@@ -421,7 +439,7 @@ class Cloning2Widget(ToolWidget):
         self.circles.setChecked(False);self.lines.setChecked(False);self.points.setChecked(False);self.areas.setChecked(True)
 
     def style(self):
-        return (self.low_spin.value(),self.high_spin.value(),self.support.value(),tuple(sorted(self.chosen)),self.circles.isChecked(),self.lines.isChecked(),self.points.isChecked(),self.areas.isChecked(),tuple(sorted(self.model.hidden)))
+        return (self.low_spin.value(),self.high_spin.value(),self.support.value(),tuple(sorted(self.chosen)),self.circles.isChecked(),self.lines.isChecked(),self.points.isChecked(),self.areas.isChecked(),tuple(sorted(self.model.hidden)),self.show_text.isChecked())
 
     def redraw(self,*_):
         if self.result is None or self.dirty:return
@@ -440,6 +458,7 @@ class Cloning2Widget(ToolWidget):
         r=self.result
         prefix=f"Champ dense : {r['dense_count']:,} liens, {r['dense_consistent_count']:,} cohérents ; aperçu {len(r['pairs']):,}. " if 'dense_count' in r else ''
         if r.get('rejected_biomes'):prefix+=f"{len(r['rejected_biomes'])} biomes auto-superposés écartés. "
+        if r.get('preprocessing'):prefix+=t('Text exclusions: {0}. ').format(len(r['preprocessing']['text_boxes']))
         self.status.setText(prefix+f"{len(r['points'])}/{r['total_features']} points · {r['candidate_comparisons']:,} comparaisons locales · {len(r['pairs']):,} liens candidats · {len(visible)} biomes affichés ({sum(n for _,n in visible)} liens). Analyse {self.job.seconds:.2f} s ; affichage {self.render_job.seconds:.3f} s.")
 
     def export_data(self):

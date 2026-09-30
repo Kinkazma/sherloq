@@ -55,3 +55,12 @@ outside Git history and is absent from the frozen RC1 ZIP. It is supplied as a
 separate GitHub Release asset; the [model notice](D2PRL-MODEL-NOTICE.md) records
 the distinction between the original weights and the reference fork license.
 [Runtime requirements, protocol and measurements](D2PRL-INTEGRATION.md).
+
+
+## Portable OCR runtime
+
+The native update bundles Tesseract 5.5.3 and English language data for text-region exclusion. Its ARM64 libraries use relative loader paths and are ad-hoc signed. Original component notices are retained in [the runtime notice directory](../runtime/tesseract/native/notices/tesseract); [the inventory](../runtime/tesseract/manifest.json) records exact files, versions, sizes and SHA256.
+
+Included packages: giflib/6.1.3, jpeg-turbo/3.2.0, leptonica/1.87.0, libarchive/3.8.9, libb2/0.98.1, libpng/1.6.58, libtiff/4.7.2, lz4/1.10.0, openjpeg/2.5.4, tesseract/5.5.3, webp/1.6.0, xz/5.8.4, zstd/1.5.7_1. System libraries remain supplied by macOS.
+
+This software is based in part on the work of the Independent JPEG Group.

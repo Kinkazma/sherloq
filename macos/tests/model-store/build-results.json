@@ -1,0 +1,16 @@
+{
+  "light": {
+    "file": "SHERLOQ-macos-arm64-light-review.zip",
+    "bytes": 4140989903,
+    "seconds": 3.194247624998752,
+    "manifest_files": 54431,
+    "model_assets_present": 0
+  },
+  "complete": {
+    "file": "SHERLOQ-macos-arm64-complete-review.zip",
+    "bytes": 11398713737,
+    "seconds": 24.12593095900047,
+    "manifest_files": 54623,
+    "model_assets_present": 185
+  }
+}

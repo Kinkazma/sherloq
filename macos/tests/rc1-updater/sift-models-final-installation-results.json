@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "source_inventory_files": 158,
+  "real_isolated_native_build": true,
+  "cases": [
+    {
+      "base_commit": "acb005f7edfb05137fd810fcf8cf02cef5fec6b2",
+      "files_changed": 96,
+      "repeated_changes": 0,
+      "all_source_hashes_match": true,
+      "native_signatures_valid": true,
+      "previous_backups_preserved": true
+    }
+  ]
+}

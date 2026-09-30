@@ -1,0 +1,89 @@
+{
+  "files": [
+    {
+      "path": "gui/sherloq_app/ui/model_job.py",
+      "sha256": "2f2b53a41de394ea4b6caeeb7ddcd84403375e5b44f53ae2b27b85be38af56b4",
+      "source": "model-delivery-v1"
+    },
+    {
+      "path": "gui/sherloq_app/ui/research_job.py",
+      "sha256": "1cf41858d86f0967857e9e4bdb179fe96ed5f12edf83fffa26345c49ddc74a65",
+      "source": "model-delivery-v1"
+    },
+    {
+      "path": "gui/sherloq_app/ui/trufor_job.py",
+      "sha256": "3d44eebb5c642c585422dac57bfa0b70f5eec9b2ec7c9f2fbbe2bd8c110870ed",
+      "source": "model-delivery-v1"
+    },
+    {
+      "path": "gui/sherloq_app/tools/various/trufor.py",
+      "sha256": "9fa78ec776feec78ee40010268ad0d2503561a5244dcac8f1cad9e3d7a38fd8d",
+      "source": "model-delivery-v1"
+    },
+    {
+      "path": "gui/sherloq_app/core/model_catalog.json",
+      "sha256": "7f968efdf4b676d71263c083a1c5fba54ffe16b90f4430b670e28b22081f9e6d",
+      "source": "model-delivery-v1"
+    },
+    {
+      "path": "gui/sherloq_app/core/model_store.py",
+      "sha256": "ad16dfaf6671aa8aafc9875b75a44adc70ced77a1eea38619e5ec2e47a3afd57",
+      "source": "model-delivery-v1"
+    },
+    {
+      "path": "gui/sherloq_app/core/splicing_worker.py",
+      "sha256": "e6fbffd50e7a870bb2117ab477cd4d56c821f5996a194a4c18888c9fe7068ec1",
+      "source": "model-delivery-v1"
+    },
+    {
+      "path": "gui/sherloq_app/tools/tampering/cloning2.py",
+      "sha256": "9f85b78d271129482213d8469da6348631f7645fcd60f0df0d622b644d0bb104",
+      "source": "sift-subbiomes-complete-v1 + model acquisition hook"
+    },
+    {
+      "path": "gui/sherloq_app/core/cloning2.py",
+      "sha256": "4f8b2c278ad2e0eb29aac3868d241b6c171add46b8a8928ab5c2c6dcf7d67552",
+      "source": "sift-panels-text-v1"
+    },
+    {
+      "path": "gui/sherloq_app/core/sift_panels.py",
+      "sha256": "6ff50c0a17aacf25259954a8710f23739ddb564530903d15a8270b7bd43778a0",
+      "source": "sift-subbiomes-complete-v1"
+    },
+    {
+      "path": "gui/sherloq_app/core/text_regions.py",
+      "sha256": "0812b1f3e54966a08cf0017b45609f080e78c448c8a2ba429c2e79d60cc31b6f",
+      "source": "sift-panels-text-v1"
+    },
+    {
+      "path": "gui/sherloq_app/tools/tampering/complete_analysis.py",
+      "sha256": "aa7922d3c3ae45a4f14aaab75a9fcd375e254b4438035d5de8177be6808f31d9",
+      "source": "sift-subbiomes-complete-v1"
+    },
+    {
+      "path": "gui/sherloq_app/core/copy_subbiomes.py",
+      "sha256": "31cd01f2e65bd1bdbfc7dab490ea0a1474eb5994aaffd9d4c5fa47f2bb508e04",
+      "source": "sift-subbiomes-complete-v1"
+    },
+    {
+      "path": "gui/sherloq_app/core/complete_analysis.py",
+      "sha256": "e870839c38d6cdccf673f440133e84fecdd417bbe7861ad2a1fb2535aa4b92f9",
+      "source": "sift-subbiomes-complete-v1"
+    },
+    {
+      "path": "gui/sherloq_app/core/automatic_clones.py",
+      "sha256": "f8cce7602c7a59149a671815fb091f79bcd44ae4360c63e0f0192e753782ada9",
+      "source": "sift-subbiomes-complete-v1"
+    },
+    {
+      "path": "gui/sherloq_app/ui/tools.py",
+      "sha256": "82eedbccac568b493e4ff3f63dc1d2c785dea08d079ebd0467139d0aaf087db5",
+      "source": "ai-clones-label-v1"
+    }
+  ],
+  "merges": [
+    "French catalog merged without removing prior entries",
+    "CM2 model acquisition applied to the latest subbiome UI source"
+  ],
+  "patchmatch_unchanged": true
+}

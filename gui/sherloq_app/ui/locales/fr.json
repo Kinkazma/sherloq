@@ -939,5 +939,12 @@
   "Forgeryscope Auto · Western blots · Geometry": "Forgeryscope Auto · Western blots · Géométrie",
   "Forgeryscope Auto · Western blots · Similarity": "Forgeryscope Auto · Western blots · Similarité",
   "Forgeryscope Auto · Lanes · Geometry": "Forgeryscope Auto · Pistes · Géométrie",
-  "Forgeryscope Auto · Lanes · Similarity": "Forgeryscope Auto · Pistes · Similarité"
+  "Forgeryscope Auto · Lanes · Similarity": "Forgeryscope Auto · Pistes · Similarité",
+  "SIFT + G2NN + RANSAC + Panels + Text": "SIFT + G2NN + RANSAC + Panneaux + Texte",
+  "Text exclusions": "Exclusions de texte",
+  "Text exclusions: {0}. ": "Exclusions de texte : {0}. ",
+  "Locating panels and text": "Localisation des panneaux et du texte",
+  "Locating text": "Localisation du texte",
+  "SHERLOQ alternative: automatic panels when no zones are selected, text exclusion, per-zone SIFT and geometric verification. Not the luc_pub competition ensemble.": "Variante SHERLOQ : panneaux automatiques en absence de zones, exclusion du texte, SIFT par zone et vérification géométrique. Ce profil ne reproduit pas la chaîne du concours luc_pub.",
+  "AI Clone Detection": "Détection de clones par IA"
 }

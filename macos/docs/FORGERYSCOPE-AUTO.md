@@ -1,6 +1,6 @@
-# Forgeryscope Auto in Clone Detectors
+# Forgeryscope Auto in AI Clone Detection
 
-I added **Forgeryscope Auto** as a green choice in **Clone Detectors**, alongside
+I added **Forgeryscope Auto** as a green choice in **AI Clone Detection**, alongside
 the four specialized Forgeryscope profiles. Select it and use **Search** to
 classify panels and run the microscopy, western-blot and lane branches.
 GPU is selected by default; CPU remains available explicitly.

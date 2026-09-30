@@ -66,9 +66,10 @@ class TruForWidget(ToolWidget):
         self.cpu_button.toggled.connect(self.change_device)
         self.map_combo.currentIndexChanged.connect(self.show_map)
         self.export_button.clicked.connect(self.export_data)
-        self.model_available=(TRUFOR_DIR/'test_docker/weights/trufor-state.pt').is_file()
+        self.model_available=True
         self.set_busy()
-        if not self.model_available:self.output_label.setText('Le modèle TruFor n’est pas installé.')
+        if not (TRUFOR_DIR/'test_docker/weights/trufor-state.pt').is_file():
+            self.output_label.setText('Le modèle TruFor sera téléchargé au lancement de l’analyse.')
 
     @property
     def device(self):return 'cpu' if self.cpu_button.isChecked() else 'mps'

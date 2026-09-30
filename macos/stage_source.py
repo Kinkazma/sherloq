@@ -34,6 +34,8 @@ def stage(destination):
             shutil.copytree(source, target, ignore=ignored)
         else:
             shutil.copy2(source, target)
+    shutil.copytree(support / 'runtime/tesseract/native', destination / 'native', dirs_exist_ok=True)
+    shutil.copy2(support / 'install_models.py', destination / 'packaging/install_models.py')
     (destination / 'native/runtime').mkdir(parents=True, exist_ok=True)
     return destination
 

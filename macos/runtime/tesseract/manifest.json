@@ -1,0 +1,513 @@
+{
+  "tesseract_version": "tesseract 5.5.3",
+  "binaries": 16,
+  "packages": [
+    "giflib/6.1.3",
+    "jpeg-turbo/3.2.0",
+    "leptonica/1.87.0",
+    "libarchive/3.8.9",
+    "libb2/0.98.1",
+    "libpng/1.6.58",
+    "libtiff/4.7.2",
+    "lz4/1.10.0",
+    "openjpeg/2.5.4",
+    "tesseract/5.5.3",
+    "webp/1.6.0",
+    "xz/5.8.4",
+    "zstd/1.5.7_1"
+  ],
+  "notices": [
+    "native/notices/tesseract/giflib/6.1.3/COPYING",
+    "native/notices/tesseract/jpeg-turbo/3.2.0/LICENSE.md",
+    "native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/LICENSE.md",
+    "native/notices/tesseract/leptonica/1.87.0/LICENSE-from-allheaders.txt",
+    "native/notices/tesseract/libarchive/3.8.9/COPYING",
+    "native/notices/tesseract/libb2/0.98.1/COPYING",
+    "native/notices/tesseract/libpng/1.6.58/LICENSE",
+    "native/notices/tesseract/libpng/1.6.58/AUTHORS",
+    "native/notices/tesseract/libtiff/4.7.2/LICENSE.md",
+    "native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/LICENSE.md",
+    "native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/_sources/project/license.rst.txt",
+    "native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/project/license.html",
+    "native/notices/tesseract/lz4/1.10.0/LICENSE",
+    "native/notices/tesseract/openjpeg/2.5.4/AUTHORS.md",
+    "native/notices/tesseract/openjpeg/2.5.4/LICENSE",
+    "native/notices/tesseract/tesseract/5.5.3/LICENSE",
+    "native/notices/tesseract/tesseract/5.5.3/AUTHORS",
+    "native/notices/tesseract/webp/1.6.0/AUTHORS",
+    "native/notices/tesseract/webp/1.6.0/COPYING",
+    "native/notices/tesseract/xz/5.8.4/AUTHORS",
+    "native/notices/tesseract/xz/5.8.4/COPYING.LGPLv2.1",
+    "native/notices/tesseract/xz/5.8.4/COPYING",
+    "native/notices/tesseract/xz/5.8.4/COPYING.0BSD",
+    "native/notices/tesseract/xz/5.8.4/COPYING.GPLv2",
+    "native/notices/tesseract/xz/5.8.4/COPYING.GPLv3",
+    "native/notices/tesseract/xz/5.8.4/share/doc/xz/AUTHORS",
+    "native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING",
+    "native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.0BSD",
+    "native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.GPLv2",
+    "native/notices/tesseract/zstd/1.5.7_1/LICENSE",
+    "native/notices/tesseract/zstd/1.5.7_1/COPYING",
+    "native/notices/tesseract/jpeg-turbo/3.2.0/README.ijg",
+    "native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/README.ijg"
+  ],
+  "files": [
+    {
+      "path": "native/bin/tesseract",
+      "bytes": 86800,
+      "sha256": "b76998aba6caf125b0964f5a4f9a38814f6aab75c26dd5ef5065f32ec5c602a5",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libarchive.13.dylib",
+      "bytes": 703440,
+      "sha256": "ad4aec160746f8b4308447f1539b529f6c477378c23b683726b847a9062d9888",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libb2.1.dylib",
+      "bytes": 85584,
+      "sha256": "c3d5c6e44013a1ddd2cf4b67768335b78c851c77dd779cb7cd78cb427b98bc90",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libgif.7.2.0.dylib",
+      "bytes": 72656,
+      "sha256": "f3bf33693fdacc7a418e339c6fb8556716bb0d39dd69238626d5080f90cbf268",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libjpeg.8.3.2.dylib",
+      "bytes": 472240,
+      "sha256": "268a485ad4054d7eaa7798841e4df9db95933390277c58d074a38ce9b7534a4c",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libleptonica.6.dylib",
+      "bytes": 2208432,
+      "sha256": "898deb200d94f7e52781a06b39edd1cd0194957cedc75da4d62a720d258f7a79",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/liblz4.1.10.0.dylib",
+      "bytes": 176032,
+      "sha256": "c04f554eeec0c68f3ded0a932d86eb1e7bac4fd0d3e207b8d2517896c94d216b",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/liblzma.5.dylib",
+      "bytes": 184560,
+      "sha256": "adbea8c11257442ff2ecf2baa775dc1721258dd265256ed0ccb822baaa5f5d3d",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libopenjp2.2.5.4.dylib",
+      "bytes": 324160,
+      "sha256": "c974a770ddf29d52830248c23f02633b86dc396544ae46cfb9af79b7df11d473",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libpng16.16.dylib",
+      "bytes": 208272,
+      "sha256": "e782fdc794748b967b69e413273882d3a6f9e1cf9ed5c757d4ab9e37ac9f1456",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libsharpyuv.0.1.2.dylib",
+      "bytes": 69568,
+      "sha256": "6c02bc47ce31f6f575da26098a666dfb4dc26ec782e7f923c5e8d2e1d7ff262d",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libtesseract.5.dylib",
+      "bytes": 2804304,
+      "sha256": "ba1347f665022ee8909ca13e7350808c41f86dc0db37de3c87659d0740939f62",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libtiff.6.dylib",
+      "bytes": 543488,
+      "sha256": "215a332e8d0f531d8fba7957bdd760d411c36529782395e3ced95cac384c0389",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libwebp.7.2.0.dylib",
+      "bytes": 352320,
+      "sha256": "3bcaa7a64f92222d690a599ead6af097ad55fc1aae6034a46fd754c0535ae9c0",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libwebpmux.3.1.2.dylib",
+      "bytes": 73232,
+      "sha256": "723a4760c1c91ee6472a86a212603ccd2711783dbd1c7edfa264ae9b02ec83b6",
+      "mode": 493
+    },
+    {
+      "path": "native/lib/libzstd.1.5.7.dylib",
+      "bytes": 649648,
+      "sha256": "cf06b459ff92afbdd8d2227a6ad5a106d466e531232225f70d4e7b02364bfe1f",
+      "mode": 493
+    },
+    {
+      "path": "native/notices/tesseract/giflib/6.1.3/COPYING",
+      "bytes": 1039,
+      "sha256": "ed5d90cb4a041bddad679470a071302ab05ae5d0ec2cf8f9c97ad7b2708751e6",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/jpeg-turbo/3.2.0/LICENSE.md",
+      "bytes": 6077,
+      "sha256": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/LICENSE.md",
+      "bytes": 6077,
+      "sha256": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/leptonica/1.87.0/LICENSE-from-allheaders.txt",
+      "bytes": 1515,
+      "sha256": "ef6a840d7749d2d4a59175b7a9517c64a2a4dcbec164fe59c275a720f80f465a",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/libarchive/3.8.9/COPYING",
+      "bytes": 3089,
+      "sha256": "30e556b3959e3985d66efefec5eaac51d4995053caa1d3cffe6eb916f146f229",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/libb2/0.98.1/COPYING",
+      "bytes": 6556,
+      "sha256": "6a1ee543e5282cd9061881edf462e6fdab181f328da71fc2c9a6950a80e94d01",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/libpng/1.6.58/AUTHORS",
+      "bytes": 1773,
+      "sha256": "0c777e9f2a67bd4058ab91050eb7a56106c92ed038ba8fe5f54c83344f2d93ca",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/libpng/1.6.58/LICENSE",
+      "bytes": 5345,
+      "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/libtiff/4.7.2/LICENSE.md",
+      "bytes": 2416,
+      "sha256": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/LICENSE.md",
+      "bytes": 2416,
+      "sha256": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/_sources/project/license.rst.txt",
+      "bytes": 1181,
+      "sha256": "02e86af3b805e0f2075ebb5ac512831f6ab2a97ddeb186de076c418956418ba1",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/project/license.html",
+      "bytes": 5663,
+      "sha256": "6c9436f8e9f58a79e044949e360291b9c910715fad31cdaed66bc61b0dcf33e6",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/lz4/1.10.0/LICENSE",
+      "bytes": 646,
+      "sha256": "4bc9c403f6b679cc076dee210e0e21c27b4e8f6d3fb43d85364c76657bfaaac5",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/openjpeg/2.5.4/AUTHORS.md",
+      "bytes": 712,
+      "sha256": "cf22e984f9fbb9be7550e9a94120595ba8c4a7de0d63f47d3725f4b2e28a4387",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/openjpeg/2.5.4/LICENSE",
+      "bytes": 2112,
+      "sha256": "a6af136f3e15038a666b61f376612a07d9a4e48cb7c01adbf3e33b3f14ab49b6",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/tesseract/5.5.3/AUTHORS",
+      "bytes": 787,
+      "sha256": "720862b7253993b348fe15f37ed6e0d4feb0fc8df8324284d75975d54dd29923",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/tesseract/5.5.3/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/webp/1.6.0/AUTHORS",
+      "bytes": 3279,
+      "sha256": "f251be89fd442bd9d701360730aea163cc8e2076ff03528f59267dc2c4f8b60a",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/webp/1.6.0/COPYING",
+      "bytes": 1496,
+      "sha256": "5aec868f669e384a22372a4e8a1a6cd7d44c64cd451f960ca69cc170d1e13acf",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/AUTHORS",
+      "bytes": 2146,
+      "sha256": "01e6df90d71d591f4307db3f397a5a4fac93b18533f5a3862156f1a0a7dc8610",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/COPYING",
+      "bytes": 3119,
+      "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/COPYING.0BSD",
+      "bytes": 607,
+      "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/COPYING.GPLv2",
+      "bytes": 17984,
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/COPYING.GPLv3",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/COPYING.LGPLv2.1",
+      "bytes": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/share/doc/xz/AUTHORS",
+      "bytes": 2146,
+      "sha256": "01e6df90d71d591f4307db3f397a5a4fac93b18533f5a3862156f1a0a7dc8610",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING",
+      "bytes": 3119,
+      "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.0BSD",
+      "bytes": 607,
+      "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/xz/5.8.4/share/doc/xz/COPYING.GPLv2",
+      "bytes": 17984,
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/zstd/1.5.7_1/COPYING",
+      "bytes": 18091,
+      "sha256": "f9c375a1be4a41f7b70301dd83c91cb89e41567478859b77eef375a52d782505",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/zstd/1.5.7_1/LICENSE",
+      "bytes": 1549,
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/alto",
+      "bytes": 23,
+      "sha256": "23a038ff290c7471a1a8aa4b5d23e310b0bf49f718480dad6b619a7d06eca330",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/ambigs.train",
+      "bytes": 146,
+      "sha256": "717e534fd4330ed3f9bdb006f0465aa2633cca866786a8f8d469dbd4b01c10c2",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/api_config",
+      "bytes": 26,
+      "sha256": "2929bc0f1d2ba77f28cfc230f7b835b2b54038c0f9d2e8e4c5ada43803c999fd",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/bigram",
+      "bytes": 129,
+      "sha256": "65e6583abc617a34d4091285181f2493d312c296a85629ac3c092d3b93b6e554",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/box.train",
+      "bytes": 311,
+      "sha256": "a421355e3488bf3fdfc14a1bdcca08c6f6414ec92c53f0eea22317c868c1a623",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/box.train.stderr",
+      "bytes": 311,
+      "sha256": "3e62cd37d2383abf0c6dfa5ba39fd1187fcff6856c4f4f27ea1554cb4c1874d2",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/digits",
+      "bytes": 37,
+      "sha256": "e757d95bb1e51444860ea10d7f2c8bb8a0c9c4ccc58a0e8c67e8dc2933a56e2e",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/get.images",
+      "bytes": 24,
+      "sha256": "28c774c157a2f48d835a1d58f5a35dd70106c136e176572ee43bbf46f3d65c92",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/hocr",
+      "bytes": 40,
+      "sha256": "d6a7ec7c5143317a59fce2393054f6b7a8261824b934e7426fdd24febc929ad6",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/inter",
+      "bytes": 59,
+      "sha256": "46303bf83668e446f4966d1ebf7418ad9f0c5e08836bc59d98cae3bbfc3aee9d",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/kannada",
+      "bytes": 101,
+      "sha256": "7d34fec99283142a3a22d157dc5cc8824b93ee923e576e6bfd1b026039c2e8f0",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/linebox",
+      "bytes": 70,
+      "sha256": "eb0279527b009a53432a9e1dde85bf42814901393546bc365bb61837f83355c9",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/logfile",
+      "bytes": 25,
+      "sha256": "5eed5e41e5fbbf0862836c0e4cda7821f8e08441645858ec6821ab41d926e195",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/lstm.train",
+      "bytes": 282,
+      "sha256": "3d1f8e5ab4e41467fdd938dc4d266eea081b477f8d74ab6b198dd1d854b5301c",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/lstmbox",
+      "bytes": 26,
+      "sha256": "61255d1b7c9df76b673ff43d2d91cda7f4c3c2e7d7f0643a71b212739833017e",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/lstmdebug",
+      "bytes": 98,
+      "sha256": "62d40d7a7d80315e10cdca2561d2ddf2981f53dfdbd567513b04d36f3add7f4e",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/makebox",
+      "bytes": 26,
+      "sha256": "a8fe20a2bc9ff1e9e8ed06d56845336c978627b8e965600abd63f1f412c18ffe",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/page",
+      "bytes": 67,
+      "sha256": "6e4b43f27a77124e66c87fce8de518ff81e918d3cc36fe71a3d01179c1856a07",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/pdf",
+      "bytes": 22,
+      "sha256": "54d56e81dfefe289b0d2e4c7bc9bbe662711f5b8255c128b73bcd66efb6bba1a",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/quiet",
+      "bytes": 21,
+      "sha256": "8a93fad8251f61b5f17b8628203a0e068c71e0907cd63012ab22afb7b560fce3",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/rebox",
+      "bytes": 65,
+      "sha256": "73ca35d7d71084fb88e2eb9a5c53ad91682754b3aecb918dece7591ec22a0b26",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/strokewidth",
+      "bytes": 377,
+      "sha256": "ffb140aadd3e26d0d9b3b355d592b50cff8b2c3ce0394b4a6de4fabc1c0942c9",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/tsv",
+      "bytes": 22,
+      "sha256": "59d079bb75d8b3d7c839a3564580cb559e362c93a9d70f234e421c0c3e767e04",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/txt",
+      "bytes": 166,
+      "sha256": "9bcbdbe285fd3a024be563cb237751ceb3435d86610e231f08894023321af5d7",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/unlv",
+      "bytes": 45,
+      "sha256": "1b02e7801de71f0757a26ba6d749e9182a0d9971929966bebb67f99db8733f40",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/configs/wordstrbox",
+      "bytes": 29,
+      "sha256": "9d1787cdce085ad36dc9d6ba6b2702ac262beaf06a0bb4a0b84355f6458261e5",
+      "mode": 420
+    },
+    {
+      "path": "native/share/tessdata/eng.traineddata",
+      "bytes": 4113088,
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/jpeg-turbo/3.2.0/README.ijg",
+      "bytes": 12799,
+      "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6",
+      "mode": 420
+    },
+    {
+      "path": "native/notices/tesseract/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/README.ijg",
+      "bytes": 12799,
+      "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6",
+      "mode": 420
+    }
+  ],
+  "english_data_source": "https://github.com/tesseract-ocr/tessdata_fast/tree/4.1.0"
+}

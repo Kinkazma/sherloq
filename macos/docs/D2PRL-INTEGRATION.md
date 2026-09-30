@@ -1,7 +1,7 @@
 # D2PRL — native integration
 
 I integrated [the original D2PRL inference](https://github.com/byc33/D2PRL/tree/a4314b614ea3186b4fac98e9e96939e37f275fc5)
-into Clone Detectors. The GPU is selected by default; CPU remains an explicit
+into AI Clone Detection. The GPU is selected by default; CPU remains an explicit
 choice. The panel provides union, source and target views, raw-map exports and
 cancellation. Each selected region is processed independently. This segmentation
 model does not perform a correspondence search between two selected regions.
