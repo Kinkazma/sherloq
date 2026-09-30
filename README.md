@@ -120,6 +120,21 @@ For this example, I modified the texture shown below and ran Complete Automatic 
 </details>
 
 <details>
+<summary>My examples — D2PRL</summary>
+
+I ran D2PRL on the same microscopy figure shown in the Complete Automatic
+Analysis gallery above. The yellow overlay highlights two large neuron panels
+and several regions in the lower strip, with smaller highlighted areas elsewhere.
+This is the result I exported from my application, displayed unchanged.
+
+![D2PRL overlay on the microscopy figure](screenshots/fork/D2PRL.png)
+
+[D2PRL integration and controls](macos/docs/D2PRL-INTEGRATION.md) ·
+[Example details](examples/README.md#d2prl-on-the-microscopy-figure).
+
+</details>
+
+<details>
 <summary>My examples — histogram, noise, frequencies and bit planes</summary>
 
 These views use the actual SHERLOQ tools, with the source image shown where useful. The microscopy image comes from BBBC039 via RSIID; the texture is the original shown above. [Sources, settings and reproduction instructions](examples/README.md).

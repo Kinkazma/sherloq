@@ -7,6 +7,21 @@ figure shows the combined analysis overlays. The texture example shows the
 analysis of a version I edited, with the original before my edits alongside
 it for visual comparison. These supplied exports are displayed unchanged.
 
+## D2PRL on the microscopy figure
+
+I supplied this D2PRL export from my application using the same input figure as
+the [Complete Automatic Analysis example](../screenshots/fork/automatic-analysis-microscopy.png).
+The yellow overlay highlights two large neuron panels and several regions in
+the lower strip, as well as smaller areas elsewhere.
+
+![My D2PRL result on the microscopy figure](../screenshots/fork/D2PRL.png)
+
+The supplied PNG is retained unchanged at 3226 × 936 pixels. This is a supplied
+result, not a newly computed analysis for the gallery. Its inference device and
+region-size setting were not recorded with the image.
+[D2PRL controls and model](../macos/docs/D2PRL-INTEGRATION.md) ·
+[Interactive region-size filter](../macos/docs/D2PRL-INTERACTIVE-FILTER.md).
+
 ## Individual tool views
 
 The four additional illustrations are actual SHERLOQ tool widgets rendered
