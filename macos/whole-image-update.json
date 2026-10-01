@@ -386,8 +386,11 @@
     "after": "6e596d894cf51b21b4d3585b0773639e85793c568c62e955e63f6c9e730b8141"
   },
   "gui/sherloq_app/core/splicing_worker.py": {
-    "before": "44b7d687896043944e44cf344d50647a847e88137885e62eb138ef54c418848c",
-    "after": "e6fbffd50e7a870bb2117ab477cd4d56c821f5996a194a4c18888c9fe7068ec1"
+    "before": [
+      "44b7d687896043944e44cf344d50647a847e88137885e62eb138ef54c418848c",
+      "e6fbffd50e7a870bb2117ab477cd4d56c821f5996a194a4c18888c9fe7068ec1"
+    ],
+    "after": "3219ca972d41ad0c12826a04eaa5cb77ed599af677b60a54980b78bd1f4770be"
   },
   "gui/sherloq_app/core/text_regions.py": {
     "before": null,
@@ -844,5 +847,21 @@
   "gui/sherloq_app/ui/extensions.py": {
     "before": "44f3bb22f722602e42d9e425e833bfdcc33e7550b96009069c135cda96073718",
     "after": "5920c9c8099a9b8b474bd556a6d06c2ca6c0a46a63db2138b0f2cfad065668f8"
+  },
+  "gui/noiseprint/post_em.py": {
+    "before": "00b7646f8044c6d21b80bc70f4aef4f35fed41842b28ae94509eafc6cd523c88",
+    "after": "077e8ffc07b5cd417da00a86d930988f882e1d9a42df069539131c8a2e6225a7"
+  },
+  "gui/noiseprint/utility/gaussianMixture.py": {
+    "before": "e5254faa40e1ffdf6785f2b026ee74a12f8dbf5b3b12ec969e45a4058b225bea",
+    "after": "dde56a574d80e2f07b5a97ab08fa1b7109ff4cc8a072a62ed0ac0fc3a90c7356"
+  },
+  "gui/noiseprint/utility/stable_covariance.py": {
+    "before": null,
+    "after": "53e4f734022907b17a48322e9d4bacb854b5adf39899487cff94eca45d8ea7aa"
+  },
+  "gui/sherloq_app/ui/splicing_job.py": {
+    "before": "2574dac546b567418ddd78250aa241cc04c00318b637ebde8daebed799d04920",
+    "after": "c157f903e5aee8e0a788c36de2725af67efcf18720b4a7556811f9d39c5a549e"
   }
 }

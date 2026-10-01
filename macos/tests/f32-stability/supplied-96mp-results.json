@@ -1,0 +1,582 @@
+{
+  "passed": true,
+  "pixels": 96000000,
+  "image_shape": [
+    8000,
+    12000,
+    3
+  ],
+  "backend": "mps",
+  "full_noise_inference": true,
+  "global_statistics": true,
+  "features_shape": [
+    988,
+    1488,
+    512
+  ],
+  "valid_cells": 719643,
+  "full_resolution_render": true,
+  "export_exact": true,
+  "worker_seconds": 115.48590591699758,
+  "total_seconds": 118.10907808400225,
+  "peak_worker_rss_bytes": 19783778304,
+  "statistics": {
+    "statistics_policy": "covariance-floor-v1",
+    "covariance_regularizations": 0,
+    "pca_regularized_components": 0,
+    "outliersProb": 0.8869983208656271
+  },
+  "stages": [
+    {
+      "seconds": 0.503874750007526,
+      "progress": 20,
+      "text": "Loading Noiseprint model 101"
+    },
+    {
+      "seconds": 9.343697000003885,
+      "progress": 20,
+      "text": "Noiseprint tile 1/96"
+    },
+    {
+      "seconds": 9.908616542001255,
+      "progress": 21,
+      "text": "Noiseprint tile 2/96"
+    },
+    {
+      "seconds": 10.424588584006415,
+      "progress": 21,
+      "text": "Noiseprint tile 3/96"
+    },
+    {
+      "seconds": 10.922529333998682,
+      "progress": 22,
+      "text": "Noiseprint tile 4/96"
+    },
+    {
+      "seconds": 11.424182250004378,
+      "progress": 23,
+      "text": "Noiseprint tile 5/96"
+    },
+    {
+      "seconds": 11.940154084004462,
+      "progress": 23,
+      "text": "Noiseprint tile 6/96"
+    },
+    {
+      "seconds": 12.432315958998515,
+      "progress": 24,
+      "text": "Noiseprint tile 7/96"
+    },
+    {
+      "seconds": 12.886183125010575,
+      "progress": 25,
+      "text": "Noiseprint tile 8/96"
+    },
+    {
+      "seconds": 13.335623500010115,
+      "progress": 25,
+      "text": "Noiseprint tile 9/96"
+    },
+    {
+      "seconds": 13.789469374998589,
+      "progress": 26,
+      "text": "Noiseprint tile 10/96"
+    },
+    {
+      "seconds": 14.247158708996722,
+      "progress": 26,
+      "text": "Noiseprint tile 11/96"
+    },
+    {
+      "seconds": 14.59093054200639,
+      "progress": 27,
+      "text": "Noiseprint tile 12/96"
+    },
+    {
+      "seconds": 15.105581292009447,
+      "progress": 28,
+      "text": "Noiseprint tile 13/96"
+    },
+    {
+      "seconds": 15.65979945899744,
+      "progress": 28,
+      "text": "Noiseprint tile 14/96"
+    },
+    {
+      "seconds": 16.138850458999514,
+      "progress": 29,
+      "text": "Noiseprint tile 15/96"
+    },
+    {
+      "seconds": 16.6110629169998,
+      "progress": 30,
+      "text": "Noiseprint tile 16/96"
+    },
+    {
+      "seconds": 17.073204708998674,
+      "progress": 30,
+      "text": "Noiseprint tile 17/96"
+    },
+    {
+      "seconds": 17.536021459003678,
+      "progress": 31,
+      "text": "Noiseprint tile 18/96"
+    },
+    {
+      "seconds": 18.02502258399909,
+      "progress": 31,
+      "text": "Noiseprint tile 19/96"
+    },
+    {
+      "seconds": 18.493984209009795,
+      "progress": 32,
+      "text": "Noiseprint tile 20/96"
+    },
+    {
+      "seconds": 18.95980475000397,
+      "progress": 33,
+      "text": "Noiseprint tile 21/96"
+    },
+    {
+      "seconds": 19.422904542007018,
+      "progress": 33,
+      "text": "Noiseprint tile 22/96"
+    },
+    {
+      "seconds": 19.88654462499835,
+      "progress": 34,
+      "text": "Noiseprint tile 23/96"
+    },
+    {
+      "seconds": 20.27483791700797,
+      "progress": 35,
+      "text": "Noiseprint tile 24/96"
+    },
+    {
+      "seconds": 20.78108537499793,
+      "progress": 35,
+      "text": "Noiseprint tile 25/96"
+    },
+    {
+      "seconds": 21.262797625007806,
+      "progress": 36,
+      "text": "Noiseprint tile 26/96"
+    },
+    {
+      "seconds": 21.75474299999769,
+      "progress": 36,
+      "text": "Noiseprint tile 27/96"
+    },
+    {
+      "seconds": 22.243830709005124,
+      "progress": 37,
+      "text": "Noiseprint tile 28/96"
+    },
+    {
+      "seconds": 22.713683417008724,
+      "progress": 38,
+      "text": "Noiseprint tile 29/96"
+    },
+    {
+      "seconds": 23.179223875005846,
+      "progress": 38,
+      "text": "Noiseprint tile 30/96"
+    },
+    {
+      "seconds": 23.64215820899699,
+      "progress": 39,
+      "text": "Noiseprint tile 31/96"
+    },
+    {
+      "seconds": 24.105214334005723,
+      "progress": 40,
+      "text": "Noiseprint tile 32/96"
+    },
+    {
+      "seconds": 24.569179042009637,
+      "progress": 40,
+      "text": "Noiseprint tile 33/96"
+    },
+    {
+      "seconds": 25.032591750001302,
+      "progress": 41,
+      "text": "Noiseprint tile 34/96"
+    },
+    {
+      "seconds": 25.50469279200479,
+      "progress": 41,
+      "text": "Noiseprint tile 35/96"
+    },
+    {
+      "seconds": 25.8771735420014,
+      "progress": 42,
+      "text": "Noiseprint tile 36/96"
+    },
+    {
+      "seconds": 26.388585749999038,
+      "progress": 43,
+      "text": "Noiseprint tile 37/96"
+    },
+    {
+      "seconds": 26.874286334001226,
+      "progress": 43,
+      "text": "Noiseprint tile 38/96"
+    },
+    {
+      "seconds": 27.37212641700171,
+      "progress": 44,
+      "text": "Noiseprint tile 39/96"
+    },
+    {
+      "seconds": 27.858149417006643,
+      "progress": 45,
+      "text": "Noiseprint tile 40/96"
+    },
+    {
+      "seconds": 28.3220115419972,
+      "progress": 45,
+      "text": "Noiseprint tile 41/96"
+    },
+    {
+      "seconds": 28.786095959003433,
+      "progress": 46,
+      "text": "Noiseprint tile 42/96"
+    },
+    {
+      "seconds": 29.251995291997446,
+      "progress": 46,
+      "text": "Noiseprint tile 43/96"
+    },
+    {
+      "seconds": 29.720722209007363,
+      "progress": 47,
+      "text": "Noiseprint tile 44/96"
+    },
+    {
+      "seconds": 30.193702083997778,
+      "progress": 48,
+      "text": "Noiseprint tile 45/96"
+    },
+    {
+      "seconds": 30.662724709007307,
+      "progress": 48,
+      "text": "Noiseprint tile 46/96"
+    },
+    {
+      "seconds": 31.12919387500733,
+      "progress": 49,
+      "text": "Noiseprint tile 47/96"
+    },
+    {
+      "seconds": 31.50043000000005,
+      "progress": 50,
+      "text": "Noiseprint tile 48/96"
+    },
+    {
+      "seconds": 32.005137583997566,
+      "progress": 50,
+      "text": "Noiseprint tile 49/96"
+    },
+    {
+      "seconds": 32.488106042001164,
+      "progress": 51,
+      "text": "Noiseprint tile 50/96"
+    },
+    {
+      "seconds": 32.97567012500076,
+      "progress": 51,
+      "text": "Noiseprint tile 51/96"
+    },
+    {
+      "seconds": 33.45344383400516,
+      "progress": 52,
+      "text": "Noiseprint tile 52/96"
+    },
+    {
+      "seconds": 33.929085249998025,
+      "progress": 53,
+      "text": "Noiseprint tile 53/96"
+    },
+    {
+      "seconds": 34.4031257500028,
+      "progress": 53,
+      "text": "Noiseprint tile 54/96"
+    },
+    {
+      "seconds": 34.86795570900722,
+      "progress": 54,
+      "text": "Noiseprint tile 55/96"
+    },
+    {
+      "seconds": 35.33350395900197,
+      "progress": 55,
+      "text": "Noiseprint tile 56/96"
+    },
+    {
+      "seconds": 35.79723779200867,
+      "progress": 55,
+      "text": "Noiseprint tile 57/96"
+    },
+    {
+      "seconds": 36.26109420901048,
+      "progress": 56,
+      "text": "Noiseprint tile 58/96"
+    },
+    {
+      "seconds": 36.72664999999688,
+      "progress": 56,
+      "text": "Noiseprint tile 59/96"
+    },
+    {
+      "seconds": 37.09080183399783,
+      "progress": 57,
+      "text": "Noiseprint tile 60/96"
+    },
+    {
+      "seconds": 37.59631808400445,
+      "progress": 58,
+      "text": "Noiseprint tile 61/96"
+    },
+    {
+      "seconds": 38.086215000002994,
+      "progress": 58,
+      "text": "Noiseprint tile 62/96"
+    },
+    {
+      "seconds": 38.57982654200168,
+      "progress": 59,
+      "text": "Noiseprint tile 63/96"
+    },
+    {
+      "seconds": 39.06087754199689,
+      "progress": 60,
+      "text": "Noiseprint tile 64/96"
+    },
+    {
+      "seconds": 39.52527858399844,
+      "progress": 60,
+      "text": "Noiseprint tile 65/96"
+    },
+    {
+      "seconds": 39.9885330840043,
+      "progress": 61,
+      "text": "Noiseprint tile 66/96"
+    },
+    {
+      "seconds": 40.45315225000377,
+      "progress": 61,
+      "text": "Noiseprint tile 67/96"
+    },
+    {
+      "seconds": 40.9191251250013,
+      "progress": 62,
+      "text": "Noiseprint tile 68/96"
+    },
+    {
+      "seconds": 41.3811127920053,
+      "progress": 63,
+      "text": "Noiseprint tile 69/96"
+    },
+    {
+      "seconds": 41.85236416700354,
+      "progress": 63,
+      "text": "Noiseprint tile 70/96"
+    },
+    {
+      "seconds": 42.3252190839994,
+      "progress": 64,
+      "text": "Noiseprint tile 71/96"
+    },
+    {
+      "seconds": 42.69043395899644,
+      "progress": 65,
+      "text": "Noiseprint tile 72/96"
+    },
+    {
+      "seconds": 43.21171258400136,
+      "progress": 65,
+      "text": "Noiseprint tile 73/96"
+    },
+    {
+      "seconds": 43.69328291701095,
+      "progress": 66,
+      "text": "Noiseprint tile 74/96"
+    },
+    {
+      "seconds": 44.17648841699702,
+      "progress": 66,
+      "text": "Noiseprint tile 75/96"
+    },
+    {
+      "seconds": 44.66099495900562,
+      "progress": 67,
+      "text": "Noiseprint tile 76/96"
+    },
+    {
+      "seconds": 45.12769529200159,
+      "progress": 68,
+      "text": "Noiseprint tile 77/96"
+    },
+    {
+      "seconds": 45.591861792010604,
+      "progress": 68,
+      "text": "Noiseprint tile 78/96"
+    },
+    {
+      "seconds": 46.06565400000545,
+      "progress": 69,
+      "text": "Noiseprint tile 79/96"
+    },
+    {
+      "seconds": 46.53422387500177,
+      "progress": 70,
+      "text": "Noiseprint tile 80/96"
+    },
+    {
+      "seconds": 47.000260792003246,
+      "progress": 70,
+      "text": "Noiseprint tile 81/96"
+    },
+    {
+      "seconds": 47.46315345900075,
+      "progress": 71,
+      "text": "Noiseprint tile 82/96"
+    },
+    {
+      "seconds": 47.9259350420034,
+      "progress": 71,
+      "text": "Noiseprint tile 83/96"
+    },
+    {
+      "seconds": 48.29022954200627,
+      "progress": 72,
+      "text": "Noiseprint tile 84/96"
+    },
+    {
+      "seconds": 48.70085295900935,
+      "progress": 73,
+      "text": "Noiseprint tile 85/96"
+    },
+    {
+      "seconds": 49.09629979199963,
+      "progress": 73,
+      "text": "Noiseprint tile 86/96"
+    },
+    {
+      "seconds": 49.48447820900765,
+      "progress": 74,
+      "text": "Noiseprint tile 87/96"
+    },
+    {
+      "seconds": 49.89745212500566,
+      "progress": 75,
+      "text": "Noiseprint tile 88/96"
+    },
+    {
+      "seconds": 50.286022708998644,
+      "progress": 75,
+      "text": "Noiseprint tile 89/96"
+    },
+    {
+      "seconds": 50.660508917004336,
+      "progress": 76,
+      "text": "Noiseprint tile 90/96"
+    },
+    {
+      "seconds": 51.033012708998285,
+      "progress": 76,
+      "text": "Noiseprint tile 91/96"
+    },
+    {
+      "seconds": 51.40114633399935,
+      "progress": 77,
+      "text": "Noiseprint tile 92/96"
+    },
+    {
+      "seconds": 51.76884275001066,
+      "progress": 78,
+      "text": "Noiseprint tile 93/96"
+    },
+    {
+      "seconds": 52.137446417007595,
+      "progress": 78,
+      "text": "Noiseprint tile 94/96"
+    },
+    {
+      "seconds": 52.505172167002456,
+      "progress": 79,
+      "text": "Noiseprint tile 95/96"
+    },
+    {
+      "seconds": 52.82142091699643,
+      "progress": 80,
+      "text": "Noiseprint tile 96/96"
+    },
+    {
+      "seconds": 53.54235962500388,
+      "progress": 82,
+      "text": "Computing local noise statistics"
+    },
+    {
+      "seconds": 96.14303483400727,
+      "progress": 90,
+      "text": "Fitting the statistical model"
+    },
+    {
+      "seconds": 109.42102341700229,
+      "progress": 90,
+      "text": "Statistical fit 1/10"
+    },
+    {
+      "seconds": 109.42109141701076,
+      "progress": 91,
+      "text": "Statistical fit 2/10"
+    },
+    {
+      "seconds": 109.42110712500289,
+      "progress": 92,
+      "text": "Statistical fit 3/10"
+    },
+    {
+      "seconds": 109.42140175000532,
+      "progress": 93,
+      "text": "Statistical fit 4/10"
+    },
+    {
+      "seconds": 110.94157395900402,
+      "progress": 94,
+      "text": "Statistical fit 5/10"
+    },
+    {
+      "seconds": 111.37049391699838,
+      "progress": 95,
+      "text": "Statistical fit 6/10"
+    },
+    {
+      "seconds": 112.4071578340081,
+      "progress": 96,
+      "text": "Statistical fit 7/10"
+    },
+    {
+      "seconds": 112.56687700000475,
+      "progress": 97,
+      "text": "Statistical fit 8/10"
+    },
+    {
+      "seconds": 113.843964959,
+      "progress": 98,
+      "text": "Statistical fit 9/10"
+    },
+    {
+      "seconds": 114.30346691700106,
+      "progress": 99,
+      "text": "Statistical fit 10/10"
+    },
+    {
+      "seconds": 115.48590591699758,
+      "progress": 100,
+      "text": "Noiseprint analysis ready"
+    }
+  ],
+  "scope": "96 MP noisy synthetic image with copied region; capacity/lifecycle, not a forensic accuracy benchmark."
+}

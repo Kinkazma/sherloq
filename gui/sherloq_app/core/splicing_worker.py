@@ -6,7 +6,8 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[3]))
 os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL','3')
 # Accelerated mode avoids oversubscribing tiny BLAS solves. This may change
-# float64 values by roundoff; the CPU reference mode keeps original threading.
+# float64 values by roundoff; CPU keeps original threading. Both backends use
+# the same stabilized statistical policy; CPU selects the Noiseprint network.
 if len(sys.argv)>4 and sys.argv[4]=='mps':
     os.environ['OPENBLAS_NUM_THREADS']='1'
     import threading
@@ -14,6 +15,7 @@ if len(sys.argv)>4 and sys.argv[4]=='mps':
 import numpy as np
 import cv2 as cv
 from gui.sherloq_app.core.splicing import estimate_model,noise_display
+from gui.noiseprint.utility.stable_covariance import STATISTICS_POLICY
 
 
 def save(path,array):
@@ -66,6 +68,17 @@ def main():
         noise=np.load(noise_path,mmap_mode='r',allow_pickle=False)
     if not (folder/'noise-display.npy').exists():
         save(folder/'noise-display.npy',noise_display(noise))
+    if stage=='map':
+        # Reuse the expensive residual/SPAM after a policy change, never an old
+        # unstable heatmap. Write the marker only after both map files succeed.
+        marker=folder/'map-statistics.json'
+        try:
+            cached_policy=json.loads(marker.read_text()).get('statistics_policy')
+        except (OSError,ValueError):
+            cached_policy=None
+        if cached_policy!=STATISTICS_POLICY:
+            for name in ('map.npy','map-display.npy','map-statistics.json'):
+                (folder/name).unlink(missing_ok=True)
     if stage=='map' and not (folder/'map-display.npy').exists():
         if min(gray.shape)<100:
             raise ValueError('Too few valid blocks: the heatmap needs at least 100 × 100 pixels.')
@@ -85,7 +98,7 @@ def main():
             imgsize=tuple(json.loads((folder/'spam-complete.json').read_text())['imgsize'])
         if np.sum(valid)<50:
             raise ValueError('Too few valid blocks for a splicing map. The noise estimate remains available.')
-        progress(90,'Fitting the original statistical model')
+        progress(90,'Fitting the statistical model')
         mapp,other=EMgu_img(spam,valid,extFeat=range(32),seed=0,maxIter=100,replicates=10,outliersNlogl=42,
             workers=4 if backend=='mps' else 1,
             progress=lambda done,total:progress(90+done*9//total,f'Statistical fit {done}/{total}'))
@@ -94,6 +107,12 @@ def main():
         save(folder/'map.npy',mapp)
         render=cv.applyColorMap(genMappUint8(mapp,valid,r0,r1,imgsize),cv.COLORMAP_JET)
         save(folder/'map-display.npy',render)
+        write_json(folder/'map-statistics.json',{
+            key:other[key] for key in ('statistics_policy','covariance_regularizations',
+                                      'pca_regularized_components','outliersProb')
+        })
+    if stage=='map':
+        info['statistics_policy']=STATISTICS_POLICY
     write_json(folder/'result.json',dict(info,stage=stage))
     progress(100,'Noiseprint analysis ready')
 

@@ -9,6 +9,7 @@ import numpy as np
 from PySide6.QtCore import QObject, Signal
 from .jobs import LatestJob
 from .process import ProcessJob
+from gui.noiseprint.utility.stable_covariance import STATISTICS_POLICY
 
 
 def prepare(context):
@@ -57,7 +58,13 @@ class SplicingJob(QObject):
         self.context.stage=stage
         self.is_busy=True;self.cancelled=False;self.busy.emit(True)
         folder=Path(self.context.folder.name)
-        if (folder/(stage+'-display.npy')).exists() and (folder/'result.json').exists():
+        policy_matches=True
+        if stage=='map':
+            try:
+                policy_matches=json.loads((folder/'map-statistics.json').read_text()).get('statistics_policy')==STATISTICS_POLICY
+            except (OSError,ValueError):
+                policy_matches=False
+        if policy_matches and (folder/(stage+'-display.npy')).exists() and (folder/'result.json').exists():
             self._finish();return
         self.preparer.request(self.context)
 

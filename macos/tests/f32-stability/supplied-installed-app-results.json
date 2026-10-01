@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "native_launcher": true,
+  "gpu_default": true,
+  "cpu_button": true,
+  "noise_and_map_and_png_exact_to_mps_reference": true,
+  "seconds": 8.923355499995523,
+  "max_heartbeat_seconds": 0.12449229200137779,
+  "noise_seconds": 4.39384908300417
+}

@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "workers": [
+    {
+      "backend": "cpu",
+      "normalized_error": 2.326550951892159e-09,
+      "old_cache_recomputed": true,
+      "residual_and_spam_reused": true,
+      "stable_map_reused": true
+    },
+    {
+      "backend": "mps",
+      "normalized_error": 4.748383353181396e-09,
+      "old_cache_recomputed": true,
+      "residual_and_spam_reused": true,
+      "stable_map_reused": true
+    }
+  ],
+  "qt_panel": true,
+  "stale_cache_rejected": true,
+  "cached_policy_reused": true,
+  "exported_png_exact": true,
+  "backend_invalidation": true,
+  "default_gpu": true
+}

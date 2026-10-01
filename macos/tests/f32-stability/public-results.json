@@ -1,0 +1,206 @@
+{
+  "policy": "covariance-floor-v1",
+  "relative_variance_floor": 1.4901161193847656e-08,
+  "cases": [
+    {
+      "name": "singular-small",
+      "legacy_stored_map_exact": true,
+      "runs": [
+        {
+          "threads": 1,
+          "workers": 1,
+          "seconds": 0.056968416000017896,
+          "normalized_thread_error": 0.0,
+          "raster_thread_error": 0,
+          "raw_thread_error": 0.0,
+          "raster_old_error": 18,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 2,
+          "workers": 1,
+          "seconds": 0.09776654200686608,
+          "normalized_thread_error": 3.1124440802443587e-09,
+          "raster_thread_error": 1,
+          "raw_thread_error": 1.4399452209472656,
+          "raster_old_error": 18,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 4,
+          "workers": 1,
+          "seconds": 0.05274733300029766,
+          "normalized_thread_error": 5.261910129839009e-09,
+          "raster_thread_error": 1,
+          "raw_thread_error": 3.4055150151252747,
+          "raster_old_error": 18,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 8,
+          "workers": 1,
+          "seconds": 0.18608275000588037,
+          "normalized_thread_error": 3.882017707290686e-09,
+          "raster_thread_error": 1,
+          "raw_thread_error": 2.4994539618492126,
+          "raster_old_error": 18,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 1,
+          "workers": 4,
+          "seconds": 0.09251325001241639,
+          "normalized_thread_error": 0.0,
+          "raster_thread_error": 0,
+          "raw_thread_error": 0.0,
+          "raster_old_error": 18,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        }
+      ]
+    },
+    {
+      "name": "singular-chain",
+      "legacy_stored_map_exact": true,
+      "runs": [
+        {
+          "threads": 1,
+          "workers": 1,
+          "seconds": 0.06576466700062156,
+          "normalized_thread_error": 0.0,
+          "raster_thread_error": 0,
+          "raw_thread_error": 0.0,
+          "raster_old_error": 211,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 2,
+          "workers": 1,
+          "seconds": 0.04492795901023783,
+          "normalized_thread_error": 4.748383575226001e-09,
+          "raster_thread_error": 0,
+          "raw_thread_error": 2.3888017535209656,
+          "raster_old_error": 211,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 4,
+          "workers": 1,
+          "seconds": 0.03406525000173133,
+          "normalized_thread_error": 3.4630321943396325e-09,
+          "raster_thread_error": 1,
+          "raw_thread_error": 1.6322032809257507,
+          "raster_old_error": 211,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 8,
+          "workers": 1,
+          "seconds": 0.08650512500025798,
+          "normalized_thread_error": 4.642221163031479e-09,
+          "raster_thread_error": 0,
+          "raw_thread_error": 1.972091555595398,
+          "raster_old_error": 211,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 1,
+          "workers": 4,
+          "seconds": 0.08995454201067332,
+          "normalized_thread_error": 0.0,
+          "raster_thread_error": 0,
+          "raw_thread_error": 0.0,
+          "raster_old_error": 211,
+          "covariance_regularizations": 3,
+          "pca_regularized_components": 0
+        }
+      ]
+    },
+    {
+      "name": "well-conditioned",
+      "legacy_stored_map_exact": true,
+      "runs": [
+        {
+          "threads": 1,
+          "workers": 1,
+          "seconds": 0.22491087501111906,
+          "normalized_thread_error": 0.0,
+          "raster_thread_error": 0,
+          "raw_thread_error": 0.0,
+          "raster_old_error": 0,
+          "covariance_regularizations": 0,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 2,
+          "workers": 1,
+          "seconds": 0.17026404199714307,
+          "normalized_thread_error": 1.2101430968414206e-14,
+          "raster_thread_error": 0,
+          "raw_thread_error": 3.092281986027956e-11,
+          "raster_old_error": 0,
+          "covariance_regularizations": 0,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 4,
+          "workers": 1,
+          "seconds": 0.13453829199715983,
+          "normalized_thread_error": 1.4765966227514582e-14,
+          "raster_thread_error": 0,
+          "raw_thread_error": 2.2964741219766438e-11,
+          "raster_old_error": 0,
+          "covariance_regularizations": 0,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 8,
+          "workers": 1,
+          "seconds": 0.6001052080100635,
+          "normalized_thread_error": 1.4099832412739488e-14,
+          "raster_thread_error": 0,
+          "raw_thread_error": 2.1600499167107046e-11,
+          "raster_old_error": 0,
+          "covariance_regularizations": 0,
+          "pca_regularized_components": 0
+        },
+        {
+          "threads": 1,
+          "workers": 4,
+          "seconds": 0.2558746249997057,
+          "normalized_thread_error": 0.0,
+          "raster_thread_error": 0,
+          "raw_thread_error": 0.0,
+          "raster_old_error": 0,
+          "covariance_regularizations": 0,
+          "pca_regularized_components": 0
+        }
+      ]
+    },
+    {
+      "name": "known-residual-anomaly",
+      "old_auc": 1.0,
+      "new_auc": 1.0,
+      "old_seconds": 0.8638665829930687,
+      "new_seconds": 0.797746249998454,
+      "raw_exact": true
+    }
+  ],
+  "low_rank_whitening_stable": true,
+  "zero_variation_rejected": true,
+  "scale_equivariance": true,
+  "passed": true,
+  "sources": {
+    "source/gui/noiseprint/post_em.py": "077e8ffc07b5cd417da00a86d930988f882e1d9a42df069539131c8a2e6225a7",
+    "source/gui/noiseprint/utility/gaussianMixture.py": "dde56a574d80e2f07b5a97ab08fa1b7109ff4cc8a072a62ed0ac0fc3a90c7356",
+    "source/gui/noiseprint/utility/stable_covariance.py": "53e4f734022907b17a48322e9d4bacb854b5adf39899487cff94eca45d8ea7aa"
+  }
+}

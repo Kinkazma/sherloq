@@ -12,6 +12,7 @@ import numpy as np
 from scipy.linalg import eigvalsh
 from numpy.linalg import cholesky
 from numpy.linalg import eigh
+from .stable_covariance import floor_covariance
 
 
 class gm:
@@ -39,6 +40,7 @@ class gm:
         outliersProb=-1,
         outliersNlogl=0,
         dtype=np.float32,
+        covariance_floor=None,
     ):
         K = len(listSigmaInds)
         S = len(listSigmaType)
@@ -50,6 +52,9 @@ class gm:
         self.prioriProb = (1.0 - self.outliersProb) * np.ones((K, 1), dtype=dtype) / K
         self.mu = np.zeros((K, dim), dtype=dtype)
         self.listSigma = [None] * S
+        self.covariance_floor = covariance_floor
+        self.covariance_reference_scale = 0.0
+        self.covariance_regularizations = 0
 
         for s in range(S):
             sigmaType = self.listSigmaType[s]
@@ -76,6 +81,7 @@ class gm:
         inds = randomState.random_integers(low=0, high=(N - 1), size=(K,))
         self.mu = X[inds, :]
         varX = np.var(X, axis=0, keepdims=True)
+        self.covariance_reference_scale = float(np.max(varX))
         if regularizer > 0:
             varX = varX + regularizer
         elif regularizer < 0:
@@ -89,7 +95,19 @@ class gm:
                 self.listSigma[s] = varX
             else:
                 self.listSigma[s] = np.mean(varX)
+        self._stabilize_covariances()
         return inds
+
+    def _stabilize_covariances(self):
+        if self.covariance_floor is None:
+            return
+        for s, sigma_type in enumerate(self.listSigmaType):
+            if sigma_type == 2:
+                self.listSigma[s], changed = floor_covariance(
+                    self.listSigma[s], self.covariance_reference_scale,
+                    self.covariance_floor,
+                )
+                self.covariance_regularizations += int(changed)
 
     def setRandomParamsW(
         self,
@@ -115,6 +133,7 @@ class gm:
         varX = np.mean(weights * ((X - avrX) ** 2), axis=0, keepdims=True) / np.mean(
             weights
         )
+        self.covariance_reference_scale = float(np.max(varX))
 
         indsW = np.sum(weights) * randomState.random_sample(size=(K,))
         inds = [None] * K
@@ -139,6 +158,7 @@ class gm:
                 self.listSigma[s] = varX
             else:
                 self.listSigma[s] = np.mean(varX)
+        self._stabilize_covariances()
         return inds
 
     def getNlogl(self, X):
@@ -293,6 +313,7 @@ class gm:
                 elif regularizer < 0:
                     sigma = sigma + np.abs(regularizer * np.spacing(sigma))
             self.listSigma[s] = sigma
+        self._stabilize_covariances()
 
         # normalize PComponents
         if self.outliersProb < 0:

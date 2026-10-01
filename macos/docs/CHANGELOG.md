@@ -5,6 +5,21 @@ The patch is an exact source transfer, not a claim that every feature has passed
 scientific or end-user validation. Private changelogs and test images are omitted.
 For an exact inherited/added comparison, see [the 50-entry tool inventory](TOOLS.md).
 
+## 1 October 2026 — Composite covariance stability
+
+I added the explicit `covariance-floor-v1` policy to Composite's global PCA/EM
+statistics on CPU and GPU. It stabilizes nearly singular cases without removing
+features or replicates. Old maps are invalidated while residual/SPAM stages are
+reused. The new covariance module, worker cache marker and callers are included
+in the cumulative update; model weights and download support are preserved.
+
+On the two supplied singular controls, changing BLAS threads now changes the
+rendered map by at most 1/255; corrected maps intentionally differ from the old
+defect by up to 211/255. Stable controls remain exact. A supplied real 96 MP native
+run includes global statistics and exact PNG export. These are scoped numerical,
+capacity and lifecycle checks, not a general forensic accuracy claim.
+[Policy, recorded measurements and validation](COMPOSITE-STABILITY.md).
+
 ## 30 September 2026 — optional new-feature outlines
 
 I hid red, green and blue new-feature outlines by default and added **View >

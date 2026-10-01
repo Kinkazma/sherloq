@@ -20,6 +20,7 @@ import cv2 as cv
 
 from .feat_spam.spam_np_opt import getSpamRes
 from .utility.gaussianMixture import gm
+from .utility.stable_covariance import STATISTICS_POLICY, RELATIVE_VARIANCE_FLOOR
 
 paramSpam_default = {
     "resTranspose": False,
@@ -39,14 +40,21 @@ win_v = 5
 win_z = 35
 
 
-def faetReduce(feat_list, inds, whiteningFlag=False):
+def faetReduce(feat_list, inds, whiteningFlag=False, *, numerical_policy=STATISTICS_POLICY):
+    if numerical_policy not in (STATISTICS_POLICY, "legacy"):
+        raise ValueError("Unknown Composite statistics policy.")
     cov_mtx = np.cov(feat_list, rowvar=False, bias=True)
     w, v = np.linalg.eigh(cov_mtx)
     w = w[::-1]
     v = v[:, ::-1]
     v = v[:, inds]
     if whiteningFlag:
-        v = v / np.sqrt(w[inds])
+        selected = w[inds]
+        if numerical_policy != "legacy":
+            if not np.isfinite(w).all() or w[0] <= 0:
+                raise ValueError("Insufficient finite variation for the statistical model.")
+            selected = np.maximum(selected, RELATIVE_VARIANCE_FLOOR * w[0])
+        v = v / np.sqrt(selected)
     return v, w
 
 
@@ -150,12 +158,14 @@ def EMgu(feats, seed=0, maxIter=100, replicates=10, outliersNlogl=42):
 
 
 def EMgu_img(
-    spam, valid, extFeat=range(32), seed=0, maxIter=100, replicates=10, outliersNlogl=42, workers=1, progress=None
+    spam, valid, extFeat=range(32), seed=0, maxIter=100, replicates=10, outliersNlogl=42, workers=1, progress=None,
+    *, numerical_policy=STATISTICS_POLICY,
 ):
     shape_spam = spam.shape
     list_spam = spam.reshape([shape_spam[0] * shape_spam[1], shape_spam[2]])
     list_valid = list_spam[valid.flatten(), :]
-    L, eigs = faetReduce(list_valid, extFeat, True)
+    L, eigs = faetReduce(list_valid, extFeat, True, numerical_policy=numerical_policy)
+    covariance_floor = None if numerical_policy == "legacy" else RELATIVE_VARIANCE_FLOOR
     list_spam = np.matmul(list_spam, L)
     list_valid = list_spam[valid.flatten(), :]
 
@@ -168,7 +178,8 @@ def EMgu_img(
         models = []
         for index in range(replicates):
             model = gm(shape_spam[2], [0], [2], outliersProb=0.01,
-                       outliersNlogl=outliersNlogl, dtype=list_valid.dtype)
+                       outliersNlogl=outliersNlogl, dtype=list_valid.dtype,
+                       covariance_floor=covariance_floor)
             model.setRandomParams(list_valid, regularizer=-1.0,
                                   randomState=randomState)
             models.append(model)
@@ -192,6 +203,7 @@ def EMgu_img(
             outliersProb=0.01,
             outliersNlogl=outliersNlogl,
             dtype=list_valid.dtype,
+            covariance_floor=covariance_floor,
         )
         gm_data.setRandomParams(list_valid, regularizer=-1.0, randomState=randomState)
         avrLogl, _, _ = gm_data.EM(list_valid, maxIter=maxIter, regularizer=-1.0)
@@ -204,6 +216,7 @@ def EMgu_img(
                 outliersProb=0.01,
                 outliersNlogl=outliersNlogl,
                 dtype=list_valid.dtype,
+                covariance_floor=covariance_floor,
             )
             gm_data_1.setRandomParams(list_valid, regularizer=-1.0, randomState=randomState)
             avrLogl_1, _, _ = gm_data_1.EM(list_valid, maxIter=maxIter, regularizer=-1.0)
@@ -220,4 +233,9 @@ def EMgu_img(
     other["eigs"] = eigs
     other["outliersNlogl"] = outliersNlogl
     other["outliersProb"] = gm_data.outliersProb
+    other["statistics_policy"] = numerical_policy
+    other["covariance_regularizations"] = gm_data.covariance_regularizations
+    other["pca_regularized_components"] = int(np.count_nonzero(
+        eigs[extFeat] < RELATIVE_VARIANCE_FLOOR * eigs[0]
+    )) if numerical_policy != "legacy" else 0
     return mahal, other
