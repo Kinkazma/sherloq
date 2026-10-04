@@ -5,18 +5,19 @@
     1254
   ],
   "reference_used_for_inference": false,
-  "reference_encoding": "Lossless PNG of the supplied TIFF decoded BGR8 pixels.",
+  "reference_encoding": "Lossless PNG of the supplied WebP decoded BGR8 pixels.",
   "files": {
-    "spiral-reference.png": "24486c8c55fc48c4b553e6f653234c001511a25f36018414a69dda6b0ca11baf",
+    "spiral-reference.png": "e83682aee9507916870a33542f1034a403bfe7f577ca73eafa2ce0bc307fd9c0",
     "copy-move-output.png": "5c4e299a89af7d6b566458cc31c69f2d8e87eb9cc45f17bfc9497be9732ee33c",
     "ela-output.png": "7fad4b517b2ed425edec352ab4dad84d48f11b899a9d306494d5007253acb189",
-    "comparison-clones.png": "739b11bef498b2d9f18aa4cf08ae1fc50afb35c5370902e12f9a57794cd2500c",
-    "comparison-ela.png": "9bb33d1716d2e0bfabf50d782a062a7d4f533bb555bb858255c51fd72422f010",
+    "comparison-clones.png": "fa15ce0ef4f2d6568c183414cef1354c318283c6ebd13a9d0341defe01afdae5",
+    "comparison-ela.png": "2f55c312b4691a57b27936231337ae65af62de73bd258dcca34711664f4566aa",
     "comparison-crops.json": "38d220d1130afd72c2d623be8931af9011812dbcbbb9fff792ec427acd84efe1",
     "analysis-records.json": "54f8da453c129b75cb49bc9788c3a46399e117c6138bec6d04005f5b84979eef"
   },
   "processed_views": {
     "copy-move-output.png": "Cloning2Widget ImageViewer 0",
     "ela-output.png": "ElaWidget classic ImageViewer 1 (ImageViewer 0 is the layers view)"
-  }
+  },
+  "reference_source_sha256": "6269205bbcd28a09915e197ec124fa920b9af2da33f51c5bbe03d6442cc3d52f"
 }

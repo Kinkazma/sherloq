@@ -1,8 +1,8 @@
 # Spiral — original, edited input and my edit reference
 
-I supplied the original spiral, my edited TIFF and a second TIFF showing the
+I supplied the original spiral, my edited TIFF and a WebP reference showing the
 areas I changed. The three images share the same 1254 × 1254 pixel coordinates.
-`spiral-reference.png` preserves the decoded colour pixels of my reference TIFF
+`spiral-reference.png` preserves the decoded colour pixels of my reference WebP
 without additional compression loss. It is not a SHERLOQ result and was never
 supplied to a detector.
 
