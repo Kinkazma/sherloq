@@ -2,8 +2,6 @@
 
 ## [▶ Try SHERLOQ online](https://gaeldauchy.com/sherloq/)
 
-**Open the web workspace on [gaeldauchy.com/sherloq](https://gaeldauchy.com/sherloq/).**
-
 **SHERLOQ is the work of [Guido Bartoli and the original contributors](https://github.com/GuidoBartoli/sherloq).** Start with the [original project](https://github.com/GuidoBartoli/sherloq) for its introduction, history, research references and upstream development.
 
 I started this fork to get SHERLOQ running on my Apple Silicon Mac. With help from AI tools, I then worked through installation problems, bugs, slow or blocking operations, and tools that were listed but not usable. I have also added analysis workflows and integrated additional research methods.
