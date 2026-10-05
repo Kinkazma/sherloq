@@ -109,6 +109,8 @@ to show the red, green and blue markers; the application remembers this choice.
 
 ## Screenshots
 
+WebP previews are limited to 500 kB each. Click an image to open its original.
+
 The galleries below show results and tool views from my version of SHERLOQ, followed by the screenshots from [Guido Bartoli’s original repository](https://github.com/GuidoBartoli/sherloq#screenshots), credited separately.
 
 <details>
@@ -118,7 +120,7 @@ The galleries below show results and tool views from my version of SHERLOQ, foll
 
 An exported result from Complete Automatic Analysis, with the analysis overlays displayed across the figure.
 
-![Complete Automatic Analysis result on a microscopy figure](screenshots/fork/automatic-analysis-microscopy.png)
+[![Complete Automatic Analysis result on a microscopy figure](screenshots/readme-webp/screenshots/fork/automatic-analysis-microscopy.webp)](screenshots/fork/automatic-analysis-microscopy.png)
 
 ### Edited texture
 
@@ -126,11 +128,11 @@ For this example, I modified the texture shown below and ran Complete Automatic 
 
 **Analysis of my edited version**
 
-![Complete Automatic Analysis result on my edited texture](screenshots/fork/automatic-analysis-texture.png)
+[![Complete Automatic Analysis result on my edited texture](screenshots/readme-webp/screenshots/fork/automatic-analysis-texture.webp)](screenshots/fork/automatic-analysis-texture.png)
 
 **Original before my edits**
 
-![Original texture before my edits](screenshots/fork/texture-original.png)
+[![Original texture before my edits](screenshots/readme-webp/screenshots/fork/texture-original.webp)](screenshots/fork/texture-original.png)
 
 </details>
 
@@ -142,7 +144,7 @@ Analysis gallery above. The yellow overlay highlights two large neuron panels
 and several regions in the lower strip, with smaller highlighted areas elsewhere.
 This is the result I exported from my application, displayed unchanged.
 
-![D2PRL overlay on the microscopy figure](screenshots/fork/D2PRL.png)
+[![D2PRL overlay on the microscopy figure](screenshots/readme-webp/screenshots/fork/D2PRL.webp)](screenshots/fork/D2PRL.png)
 
 [D2PRL integration and controls](macos/docs/D2PRL-INTEGRATION.md) ·
 [Example details](examples/README.md#d2prl-on-the-microscopy-figure).
@@ -157,7 +159,7 @@ shows two large red envelopes, smaller coloured groups and matches in the lower
 strips. Colours distinguish groups of geometric correspondences; envelopes show
 their extent. This is the image I exported from my application, displayed unchanged.
 
-![SIFT Panels and Text result on the microscopy figure](screenshots/fork/sift-panels-text.png)
+[![SIFT Panels and Text result on the microscopy figure](screenshots/readme-webp/screenshots/fork/sift-panels-text.webp)](screenshots/fork/sift-panels-text.png)
 
 [Method, controls and validation](macos/docs/SIFT-PANELS-TEXT.md) ·
 [Example details](examples/README.md#sift-panels-and-text-on-the-microscopy-figure).
@@ -173,15 +175,15 @@ cover each pixel. Its colours show corroboration counts, not probabilities.
 
 **Within zones**
 
-![Corroboration map within zones](screenshots/fork/corroboration-within.png)
+[![Corroboration map within zones](screenshots/readme-webp/screenshots/fork/corroboration-within.webp)](screenshots/fork/corroboration-within.png)
 
 **Between zones**
 
-![Corroboration map between zones](screenshots/fork/corroboration-between.png)
+[![Corroboration map between zones](screenshots/readme-webp/screenshots/fork/corroboration-between.webp)](screenshots/fork/corroboration-between.png)
 
 **All relations**
 
-![Corroboration map with all relations](screenshots/fork/corroboration-all.png)
+[![Corroboration map with all relations](screenshots/readme-webp/screenshots/fork/corroboration-all.webp)](screenshots/fork/corroboration-all.png)
 
 </details>
 
@@ -194,15 +196,15 @@ can appear in the Biomes view, but does not contribute to corroboration maps.
 
 **Within zones**
 
-![Biomes within zones](screenshots/fork/biomes-within.png)
+[![Biomes within zones](screenshots/readme-webp/screenshots/fork/biomes-within.webp)](screenshots/fork/biomes-within.png)
 
 **Between zones**
 
-![Biomes between zones](screenshots/fork/biomes-between.png)
+[![Biomes between zones](screenshots/readme-webp/screenshots/fork/biomes-between.webp)](screenshots/fork/biomes-between.png)
 
 **All relations**
 
-![Biomes with all relations](screenshots/fork/biomes-all.png)
+[![Biomes with all relations](screenshots/readme-webp/screenshots/fork/biomes-all.webp)](screenshots/fork/biomes-all.png)
 
 [View controls and counting rules](macos/docs/AUTOMATIC-ANALYSIS-V2.md) ·
 [Example details](examples/README.md#corroboration-and-biomes-on-the-microscopy-figure).
@@ -218,25 +220,25 @@ These views use the actual SHERLOQ tools, with the source image shown where usef
 
 Intensity distribution and pixel statistics for a fluorescence microscopy image.
 
-![Channel Histogram with the microscopy source and intensity statistics](screenshots/fork/histogram-microscopy.png)
+[![Channel Histogram with the microscopy source and intensity statistics](screenshots/readme-webp/screenshots/fork/histogram-microscopy.webp)](screenshots/fork/histogram-microscopy.png)
 
 ### Noise Separation
 
 Median-filter residuals, with equalization enabled to make their spatial structure visible.
 
-![Noise Separation with the microscopy source and equalized residual](screenshots/fork/noise-microscopy.png)
+[![Noise Separation with the microscopy source and equalized residual](screenshots/readme-webp/screenshots/fork/noise-microscopy.webp)](screenshots/fork/noise-microscopy.png)
 
 ### Frequency Split
 
 Low and high frequencies, Fourier magnitude and phase on the original texture.
 
-![Frequency Split showing four complementary views of the texture](screenshots/fork/frequency-texture.png)
+[![Frequency Split showing four complementary views of the texture](screenshots/readme-webp/screenshots/fork/frequency-texture.webp)](screenshots/fork/frequency-texture.png)
 
 ### Bit Planes Values
 
 Bit 5 of the luminance channel, alongside the original texture.
 
-![Bit Planes Values showing luminance bit 5 and the source texture](screenshots/fork/bit-planes-texture.png)
+[![Bit Planes Values showing luminance bit 5 and the source texture](screenshots/readme-webp/screenshots/fork/bit-planes-texture.webp)](screenshots/fork/bit-planes-texture.png)
 
 </details>
 
@@ -247,15 +249,15 @@ I supplied the original spiral, my edited image and a separate reference showing
 
 | Original | Edited input | My edit reference |
 | --- | --- | --- |
-| ![Original texture](screenshots/fork/texture-original.png) | ![Edited texture without analysis annotations](examples/advanced/texture-edited.png) | ![My spiral edit reference](examples/spiral/spiral-reference.png) |
+| [![Original texture](screenshots/readme-webp/screenshots/fork/texture-original.webp)](screenshots/fork/texture-original.png) | [![Edited texture without analysis annotations](screenshots/readme-webp/examples/advanced/texture-edited.webp)](examples/advanced/texture-edited.png) | [![My spiral edit reference](screenshots/readme-webp/examples/spiral/spiral-reference.webp)](examples/spiral/spiral-reference.png) |
 
 **Same coordinates, four views:** compare the original, edited input and my reference with the actual Copy-Move Forgery 2 output. The shared colours connect matching regions; they do not distinguish a copied destination from its source.
 
-![Spiral edits and copy-move results at matching coordinates](examples/spiral/comparison-clones.png)
+[![Spiral edits and copy-move results at matching coordinates](screenshots/readme-webp/examples/spiral/comparison-clones.webp)](examples/spiral/comparison-clones.png)
 
 The softened areas are easier to compare with ELA: they appear darker than the surrounding detailed texture. This response describes recompression differences, not the editing operation itself.
 
-![Spiral edits and ELA results at matching coordinates](examples/spiral/comparison-ela.png)
+[![Spiral edits and ELA results at matching coordinates](screenshots/readme-webp/examples/spiral/comparison-ela.webp)](examples/spiral/comparison-ela.png)
 
 [Reference, detailed comparisons and reproduction](examples/spiral/README.md).
 
@@ -263,25 +265,25 @@ The softened areas are easier to compare with ELA: they appear darker than the s
 
 Matching areas share a colour. Compare the paired shapes on the left and near the top with the repeated details in the edited texture.
 
-![Copy-Move Forgery 2 on my edited texture](screenshots/fork/advanced/cloning2-texture.png)
+[![Copy-Move Forgery 2 on my edited texture](screenshots/readme-webp/screenshots/fork/advanced/cloning2-texture.webp)](screenshots/fork/advanced/cloning2-texture.png)
 
 ### Automatic Clone Search
 
 The combined search brings together the matching regions found by its different methods. Here the displayed matches come from the PatchMatch branches; Forgeryscope returns no supported pair.
 
-![Automatic Clone Search on my edited texture](screenshots/fork/advanced/automatic_clones-texture.png)
+[![Automatic Clone Search on my edited texture](screenshots/readme-webp/screenshots/fork/advanced/automatic_clones-texture.webp)](screenshots/fork/advanced/automatic_clones-texture.png)
 
 ### ELA — compression differences
 
 The softened areas at the lower left and on the right produce darker residuals than the surrounding detailed texture. ELA displays recompression differences; it does not identify the editing operation by itself.
 
-![Classic ELA on my edited texture](screenshots/fork/advanced/ela-texture.png)
+[![Classic ELA on my edited texture](screenshots/readme-webp/screenshots/fork/advanced/ela-texture.webp)](screenshots/fork/advanced/ela-texture.png)
 
 ### ELA — layers over the image
 
 The layered view places the unusual profiles back onto the texture. In particular, the broad areas at the lower left and on the right can be compared directly with the classic ELA view above.
 
-![ELA layers on my edited texture](screenshots/fork/advanced/ela-texture-layers.png)
+[![ELA layers on my edited texture](screenshots/readme-webp/screenshots/fork/advanced/ela-texture-layers.webp)](screenshots/fork/advanced/ela-texture-layers.png)
 
 [Inputs, recorded settings and reproduction script](examples/advanced/README.md).
 
@@ -294,13 +296,13 @@ I supplied the original photograph, my edited version and a separate image showi
 
 | Original | Edited input | My edit reference |
 | --- | --- | --- |
-| ![Original city photograph](examples/street/street-original-preview.jpg) | ![Edited city photograph](examples/street/street-edited-preview.png) | ![My reference of touched areas](examples/street/street-reference-preview.jpg) |
+| [![Original city photograph](screenshots/readme-webp/examples/street/street-original-preview.webp)](examples/street/street-original-preview.jpg) | [![Edited city photograph](screenshots/readme-webp/examples/street/street-edited-preview.webp)](examples/street/street-edited-preview.png) | [![My reference of touched areas](screenshots/readme-webp/examples/street/street-reference-preview.webp)](examples/street/street-reference-preview.jpg) |
 
 ### Street Photo
 
 **Same coordinates, four views:** original, edited input, my edit reference, and the actual CAT-Net output. Look at the removed clouds, signs and pedestrian.
 
-![Aligned comparisons of clouds, signs and pedestrian](examples/street/comparison-details.png)
+[![Aligned comparisons of clouds, signs and pedestrian](screenshots/readme-webp/examples/street/comparison-details.webp)](examples/street/comparison-details.png)
 
 [Full-resolution inputs, all 21 tool views, settings and reproduction](examples/street/README.md).
 
@@ -313,26 +315,26 @@ I supplied the original photograph, my edited version and a separate image showi
 
 Several strong responses coincide with the edited sky patches, removed signs and removed pedestrian. There are also responses elsewhere. The PNG input is analysed with a quality-100 JPEG companion generated by the integration.
 
-![CAT-Net on my edited city photograph](examples/street/catnet.png)
+[![CAT-Net on my edited city photograph](screenshots/readme-webp/examples/street/catnet.webp)](examples/street/catnet.png)
 
 ### SAFIRE
 
 The green source-consistency group isolates the large retouched sky patch. The other colours are clusters, not authenticity labels.
 
-![SAFIRE source-consistency groups](examples/street/safire.png)
+[![SAFIRE source-consistency groups](screenshots/readme-webp/examples/street/safire.webp)](examples/street/safire.png)
 
 ### ZERO — zoom at the removed pedestrian
 
 The red foreign-grid response falls within the pedestrian's former location. Blue missing-grid responses are widespread and do not trace the edits. This is a display zoom of a full-resolution analysis.
 
-![ZERO at the removed pedestrian](examples/street/zero-pedestrian.png)
+[![ZERO at the removed pedestrian](screenshots/readme-webp/examples/street/zero-pedestrian.webp)](examples/street/zero-pedestrian.png)
 
 ### ELA and layers
 
 The central sky edit is visible among the legacy cell-layer responses. Natural scene structure produces other responses as well.
 
-![Classic ELA on my edited city photograph](examples/street/ela.png)
-![Layered ELA on my edited city photograph](examples/street/ela-layers.png)
+[![Classic ELA on my edited city photograph](screenshots/readme-webp/examples/street/ela.webp)](examples/street/ela.png)
+[![Layered ELA on my edited city photograph](screenshots/readme-webp/examples/street/ela-layers.webp)](examples/street/ela-layers.png)
 
 </details>
 
@@ -343,44 +345,44 @@ The central sky edit is visible among the legacy cell-layer responses. Natural s
 
 The central sky edit is marked, along with many other sky and building regions. The 107 regions do not cleanly delineate all retouches.
 
-![Noisesniffer on the city photograph](examples/street/noisesniffer.png)
+[![Noisesniffer on the city photograph](screenshots/readme-webp/examples/street/noisesniffer.webp)](examples/street/noisesniffer.png)
 
 ### Adaptive CFA
 
 The distributed map does not isolate the reference edits in this example.
 
-![Adaptive CFA on the city photograph](examples/street/adaptive_cfa.png)
+[![Adaptive CFA on the city photograph](screenshots/readme-webp/examples/street/adaptive_cfa.webp)](examples/street/adaptive_cfa.png)
 
 ### TruFor
 
 The image score is 0.0560 in this run; the map responds around lights and edges without clearly recovering the edit reference.
 
-![TruFor anomaly map](examples/street/trufor.png)
+[![TruFor anomaly map](screenshots/readme-webp/examples/street/trufor.webp)](examples/street/trufor.png)
 
 ### FOCAL and AdaIFL
 
 FOCAL mainly selects a region on the left. AdaIFL's overlay remains weak. Neither displayed result closely matches the supplied reference here.
 
-![FOCAL selected region](examples/street/focal.png)
-![AdaIFL result](examples/street/adaifl.png)
+[![FOCAL selected region](screenshots/readme-webp/examples/street/focal.webp)](examples/street/focal.png)
+[![AdaIFL result](screenshots/readme-webp/examples/street/adaifl.webp)](examples/street/adaifl.png)
 
 ### Multiple Compression — original JPEG
 
 This view analyses the original JPEG; the edited TIFF has no stored JPEG coefficients. The double-JPEG result is inconclusive, with 0 of 9 supporting frequencies.
 
-![Double-JPEG analysis of the original photograph](examples/street/multiple-double-jpeg.png)
+[![Double-JPEG analysis of the original photograph](screenshots/readme-webp/examples/street/multiple-double-jpeg.webp)](examples/street/multiple-double-jpeg.png)
 
 ### Illuminant Map — original photograph
 
 Local colour estimates make the blue sky and warm lighting easy to compare. Scene colours affect these estimates; this is not an edit mask.
 
-![Illuminant Map on the original photograph](examples/street/illuminant.png)
+[![Illuminant Map on the original photograph](screenshots/readme-webp/examples/street/illuminant.webp)](examples/street/illuminant.png)
 
 ### Dead / Hot Pixels — original photograph
 
 The tool finds 36 isolated-pixel candidates. This magnified view shows one among tree details; it does not diagnose a sensor defect.
 
-![Magnified isolated-pixel candidate](examples/street/defect_pixels-detail.png)
+[![Magnified isolated-pixel candidate](screenshots/readme-webp/examples/street/defect_pixels-detail.webp)](examples/street/defect_pixels-detail.png)
 
 [All views, settings, source files and interpretation](examples/street/README.md).
 
@@ -393,35 +395,35 @@ These inherited captures illustrate the original interface, not this fork's comp
 
 ### General
 
-![Original image, hex editor, digest and similarity search](screenshots/0_general.png)
+[![Original image, hex editor, digest and similarity search](screenshots/readme-webp/screenshots/0_general.webp)](screenshots/0_general.png)
 
 ### Metadata
 
-![EXIF and header structure](screenshots/1_metadata.png)
+[![EXIF and header structure](screenshots/readme-webp/screenshots/1_metadata.webp)](screenshots/1_metadata.png)
 
 ### Inspection
 
-![Magnifier, histogram and comparison](screenshots/2_inspection.png)
+[![Magnifier, histogram and comparison](screenshots/readme-webp/screenshots/2_inspection.webp)](screenshots/2_inspection.png)
 
 ### Detail
 
-![Gradient, echo, wavelet and frequency tools](screenshots/3_detail.png)
+[![Gradient, echo, wavelet and frequency tools](screenshots/readme-webp/screenshots/3_detail.webp)](screenshots/3_detail.png)
 
 ### Colors
 
-![Plots, conversion, PCA and statistics](screenshots/4_colors.png)
+[![Plots, conversion, PCA and statistics](screenshots/readme-webp/screenshots/4_colors.webp)](screenshots/4_colors.png)
 
 ### Noise
 
-![Signal, min/max, bit planes and wavelet tools](screenshots/5_noise.png)
+[![Signal, min/max, bit planes and wavelet tools](screenshots/readme-webp/screenshots/5_noise.webp)](screenshots/5_noise.png)
 
 ### JPEG
 
-![Quality estimation and ELA](screenshots/6_jpeg.png)
+[![Quality estimation and ELA](screenshots/readme-webp/screenshots/6_jpeg.webp)](screenshots/6_jpeg.png)
 
 ### Tampering
 
-![Contrast, copy-move, splicing and median filtering](screenshots/7_tampering.png)
+[![Contrast, copy-move, splicing and median filtering](screenshots/readme-webp/screenshots/7_tampering.webp)](screenshots/7_tampering.png)
 
 </details>
 

@@ -1,0 +1,822 @@
+{
+  "maxPreviewBytes": 500000,
+  "scope": "Lossy WebP presentation previews only. Original images and scientific outputs are unchanged.",
+  "images": [
+    {
+      "source": "screenshots/fork/automatic-analysis-microscopy.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/automatic-analysis-microscopy.webp",
+      "sourceBytes": 4459344,
+      "previewBytes": 486050,
+      "sourceSha256": "342091da5248236ac9f190889b8f0f8b6f7877288a9446b81db8ad2d5509ec7e",
+      "previewSha256": "d2aa320a62458f637edcbd69433036c855c71b193ff3732141fbe81a25931c2c",
+      "sourceDimensions": [
+        3226,
+        936
+      ],
+      "previewDimensions": [
+        3226,
+        936
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/automatic-analysis-texture.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/automatic-analysis-texture.webp",
+      "sourceBytes": 3550074,
+      "previewBytes": 403144,
+      "sourceSha256": "1783cc1c3d8256a6c24971658953c4bbc32ec91ec03d8d0b753741a40db295ee",
+      "previewSha256": "f4e9155708222b9a8aac7379287650619265d024edf9f8bc4e077a844791863d",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "previewDimensions": [
+        1254,
+        1254
+      ],
+      "quality": 82
+    },
+    {
+      "source": "screenshots/fork/texture-original.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/texture-original.webp",
+      "sourceBytes": 3488657,
+      "previewBytes": 405666,
+      "sourceSha256": "8c20ac9ab35b2eb22adb50a8b926392652f3ea9455fe7193aa363586c250767b",
+      "previewSha256": "83c73249a34d7d8afe7ca8d6c02434251af1529bfdb1d5067548756c86c6274c",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "previewDimensions": [
+        1254,
+        1254
+      ],
+      "quality": 82
+    },
+    {
+      "source": "screenshots/fork/D2PRL.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/D2PRL.webp",
+      "sourceBytes": 4487989,
+      "previewBytes": 426284,
+      "sourceSha256": "af86ef820c5f0d79e0a481cbdd94c90d19e42f225d5dcb57bc106e39882bdc20",
+      "previewSha256": "1903cedb76522bdc35846801698134ecc5003eb5c99c1acd8fe93d39666a579a",
+      "sourceDimensions": [
+        3226,
+        936
+      ],
+      "previewDimensions": [
+        3226,
+        936
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/sift-panels-text.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/sift-panels-text.webp",
+      "sourceBytes": 4525663,
+      "previewBytes": 437492,
+      "sourceSha256": "97abd351a550f691676c44143d646545f2f06135d58f2151c74f6280c528ff0b",
+      "previewSha256": "ee49c290a46fa8ac6c97efab4b5f542f0011d44b3c56b11e9349225cb293c756",
+      "sourceDimensions": [
+        3226,
+        936
+      ],
+      "previewDimensions": [
+        3226,
+        936
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/corroboration-within.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/corroboration-within.webp",
+      "sourceBytes": 4249432,
+      "previewBytes": 414842,
+      "sourceSha256": "9c0b566ad12ce049bec00b8330c17345e145be0501d261a3d2dc875439fa864b",
+      "previewSha256": "5dfd359a1aabfc7296717bc00962a38065450eac71e1faafc64a363ec4155dcd",
+      "sourceDimensions": [
+        3226,
+        936
+      ],
+      "previewDimensions": [
+        3226,
+        936
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/corroboration-between.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/corroboration-between.webp",
+      "sourceBytes": 4408183,
+      "previewBytes": 474676,
+      "sourceSha256": "bf321ffc389ac28928eeeb759e02bd94af843be51c1197db5df2d08bbb5bcd59",
+      "previewSha256": "ad3314fe75d5fa8a930f65f475a53cce00148f3ceae59be4b99c793ff66cdd69",
+      "sourceDimensions": [
+        3226,
+        936
+      ],
+      "previewDimensions": [
+        3226,
+        936
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/corroboration-all.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/corroboration-all.webp",
+      "sourceBytes": 4434230,
+      "previewBytes": 491220,
+      "sourceSha256": "9dddaaedb669e337a9cdd73402209dcb5103d7e8b4414a7a65197b74b43905f6",
+      "previewSha256": "e8f580e91ce73d74fe821479cbeaf6a0ba8c30fbe92e44c243a38bf28bcb930b",
+      "sourceDimensions": [
+        3226,
+        936
+      ],
+      "previewDimensions": [
+        3226,
+        936
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/biomes-within.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/biomes-within.webp",
+      "sourceBytes": 4467275,
+      "previewBytes": 455232,
+      "sourceSha256": "0cac9eaf5196b337c5e9d27955031a5da8d40c801aae42dde944a7426b849b66",
+      "previewSha256": "b4f868151640141b61885294a1bc5e4a5966ea0f15f552f67e3259ea2834ded6",
+      "sourceDimensions": [
+        3226,
+        936
+      ],
+      "previewDimensions": [
+        3226,
+        936
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/biomes-between.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/biomes-between.webp",
+      "sourceBytes": 4500071,
+      "previewBytes": 487904,
+      "sourceSha256": "602f4a3f5c6cc017b1b4b0a8308c455c54930aec075f709b191c5068cd92758d",
+      "previewSha256": "7d2d90488985948ac11c9380f18f8a316c03ece5a4843b129726e8d4cd4842f5",
+      "sourceDimensions": [
+        3226,
+        936
+      ],
+      "previewDimensions": [
+        3226,
+        936
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/biomes-all.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/biomes-all.webp",
+      "sourceBytes": 4514575,
+      "previewBytes": 398612,
+      "sourceSha256": "5588f2b4997088f3fd495b5f214518acdc17207e4956a15bb913d885177fc5bc",
+      "previewSha256": "3a6afaa22411f825a12cc559f265b41098eed29c4ab61e36416a7a7775d43546",
+      "sourceDimensions": [
+        3226,
+        936
+      ],
+      "previewDimensions": [
+        3226,
+        936
+      ],
+      "quality": 82
+    },
+    {
+      "source": "screenshots/fork/histogram-microscopy.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/histogram-microscopy.webp",
+      "sourceBytes": 163474,
+      "previewBytes": 46202,
+      "sourceSha256": "722d5f0892ec61a5a749c7638667249876a5a574f15841e602b40da7783021a2",
+      "previewSha256": "5b7bc0a075de1a5137a7e5798079d65fbb1ebd1a6876684cdbb77b18f27fe265",
+      "sourceDimensions": [
+        1400,
+        900
+      ],
+      "previewDimensions": [
+        1400,
+        900
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/noise-microscopy.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/noise-microscopy.webp",
+      "sourceBytes": 181493,
+      "previewBytes": 87582,
+      "sourceSha256": "c583e64abe9fb1ac7cfe7fded8739704d67da0ddcf539080573dc92135d9701c",
+      "previewSha256": "dec8da48f10d5439414fa17ca2b3a06a27818b2adeb7d84a80e4dda2b25f5143",
+      "sourceDimensions": [
+        1400,
+        900
+      ],
+      "previewDimensions": [
+        1400,
+        900
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/frequency-texture.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/frequency-texture.webp",
+      "sourceBytes": 399331,
+      "previewBytes": 98218,
+      "sourceSha256": "83c35735b8fca71e3e6bb9bfadfd57a5c1eef3b7ab166a4d784766182bde28a7",
+      "previewSha256": "177fc9a1db7ca56f4590d1574c581e5d45fa8dd655a2f2624afb2a4f5d190cdf",
+      "sourceDimensions": [
+        1400,
+        900
+      ],
+      "previewDimensions": [
+        1400,
+        900
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/bit-planes-texture.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/bit-planes-texture.webp",
+      "sourceBytes": 707175,
+      "previewBytes": 462254,
+      "sourceSha256": "ce4c318cb844439bbc942f97906571e9aea5cda0eb99f717b1afd3f25cddc327",
+      "previewSha256": "60cb2e2989030eb65ba2430ac5aa04ea7fec3aee7df3a53a931226bef0c70342",
+      "sourceDimensions": [
+        1400,
+        900
+      ],
+      "previewDimensions": [
+        1400,
+        900
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/advanced/texture-edited.png",
+      "preview": "screenshots/readme-webp/examples/advanced/texture-edited.webp",
+      "sourceBytes": 3565615,
+      "previewBytes": 394462,
+      "sourceSha256": "8553df70ebaa7c5dfc2757fc5fa01ef2b2b7d2b8e521489f237f65bc596a664f",
+      "previewSha256": "a6f0a76fceb5911a1ee877cee9b34b67c4b47c64c52fe91de61e64d0be144e29",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "previewDimensions": [
+        1254,
+        1254
+      ],
+      "quality": 82
+    },
+    {
+      "source": "examples/spiral/spiral-reference.png",
+      "preview": "screenshots/readme-webp/examples/spiral/spiral-reference.webp",
+      "sourceBytes": 2899310,
+      "previewBytes": 337154,
+      "sourceSha256": "e83682aee9507916870a33542f1034a403bfe7f577ca73eafa2ce0bc307fd9c0",
+      "previewSha256": "e95cefe4955390d97114fd6b7b6ad9ae9174a5f946e5428b27b300a2b8cb3ddb",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "previewDimensions": [
+        1254,
+        1254
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/spiral/comparison-clones.png",
+      "preview": "screenshots/readme-webp/examples/spiral/comparison-clones.webp",
+      "sourceBytes": 2456704,
+      "previewBytes": 372802,
+      "sourceSha256": "fa15ce0ef4f2d6568c183414cef1354c318283c6ebd13a9d0341defe01afdae5",
+      "previewSha256": "2b8128eae526367fce4c69150df137a672e689014acf22d71d889137411f9027",
+      "sourceDimensions": [
+        2080,
+        1716
+      ],
+      "previewDimensions": [
+        2080,
+        1716
+      ],
+      "quality": 82
+    },
+    {
+      "source": "examples/spiral/comparison-ela.png",
+      "preview": "screenshots/readme-webp/examples/spiral/comparison-ela.webp",
+      "sourceBytes": 3203459,
+      "previewBytes": 390550,
+      "sourceSha256": "2f55c312b4691a57b27936231337ae65af62de73bd258dcca34711664f4566aa",
+      "previewSha256": "5574ff0ad4127fa8a73be8463ab0cc5b0c50747923ce2cda5501791fd7c23441",
+      "sourceDimensions": [
+        2080,
+        1144
+      ],
+      "previewDimensions": [
+        2080,
+        1144
+      ],
+      "quality": 82
+    },
+    {
+      "source": "screenshots/fork/advanced/cloning2-texture.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/advanced/cloning2-texture.webp",
+      "sourceBytes": 897474,
+      "previewBytes": 204156,
+      "sourceSha256": "a5778b1d93b03ebfb655c353a211dc28680aa30aa47a4fdd68291179fcd9b565",
+      "previewSha256": "5fe593bbe9216cb7569cc5d23304164159663c30cc4e9f747870db41a738f2b7",
+      "sourceDimensions": [
+        1600,
+        1050
+      ],
+      "previewDimensions": [
+        1600,
+        1050
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/advanced/automatic_clones-texture.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/advanced/automatic_clones-texture.webp",
+      "sourceBytes": 1721329,
+      "previewBytes": 339124,
+      "sourceSha256": "dc16c303e925993749525f3ad728dc27313db31dcb874634fc0746af28a5ee21",
+      "previewSha256": "344dc4a688fa9a85d88a4f06efe74e92996a584c9ee197c80805b8ef90955ec1",
+      "sourceDimensions": [
+        1600,
+        1100
+      ],
+      "previewDimensions": [
+        1600,
+        1100
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/advanced/ela-texture.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/advanced/ela-texture.webp",
+      "sourceBytes": 1791195,
+      "previewBytes": 404214,
+      "sourceSha256": "37cab4e6355903d67efb4f4e57720d6440ef3f514c66ffdbf80d9d0ce75fbe23",
+      "previewSha256": "a660acde7259ea0fb92931c926efdab854c01ee9dd43df10d278f89cd617a01b",
+      "sourceDimensions": [
+        1600,
+        1050
+      ],
+      "previewDimensions": [
+        1600,
+        1050
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/fork/advanced/ela-texture-layers.png",
+      "preview": "screenshots/readme-webp/screenshots/fork/advanced/ela-texture-layers.webp",
+      "sourceBytes": 1193897,
+      "previewBytes": 244604,
+      "sourceSha256": "e75c026b05d89831229b4efa75563475ef330e0b4422694171dfd9282d7e4f8d",
+      "previewSha256": "59648833e9fc18da69d0d36079a7e0930bdc91068082ba861ff1d64b8149a545",
+      "sourceDimensions": [
+        1600,
+        1050
+      ],
+      "previewDimensions": [
+        1600,
+        1050
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/street-original-preview.jpg",
+      "preview": "screenshots/readme-webp/examples/street/street-original-preview.webp",
+      "sourceBytes": 705661,
+      "previewBytes": 222660,
+      "sourceSha256": "dfc1447ba98047c609770a0f3fae50248d1fb383641216aa0820a71d5c977fa0",
+      "previewSha256": "081914aa70f88ca212427851693d953be3f123d41d10659f19afd5b977f1cfae",
+      "sourceDimensions": [
+        1755,
+        1404
+      ],
+      "previewDimensions": [
+        1755,
+        1404
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/street-edited-preview.png",
+      "preview": "screenshots/readme-webp/examples/street/street-edited-preview.webp",
+      "sourceBytes": 3865837,
+      "previewBytes": 204972,
+      "sourceSha256": "d94f43fcb07c28ffde6bb27ef818450f3bc03c7e0a53c2b58051151ac4d57242",
+      "previewSha256": "d42808ded7d01e968c268affb486f684cf3264bea840bf68d17fe5cbc7d54577",
+      "sourceDimensions": [
+        1755,
+        1404
+      ],
+      "previewDimensions": [
+        1755,
+        1404
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/street-reference-preview.jpg",
+      "preview": "screenshots/readme-webp/examples/street/street-reference-preview.webp",
+      "sourceBytes": 96617,
+      "previewBytes": 35704,
+      "sourceSha256": "f364b91442e7cfb81c09042b12732406f5ad568134da83ea69eea3215c39b16e",
+      "previewSha256": "63c5b4338a2b613935cd2af5eef50f619acc322991f5237a5fb5bea46f80f7a9",
+      "sourceDimensions": [
+        1755,
+        1404
+      ],
+      "previewDimensions": [
+        1755,
+        1404
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/comparison-details.png",
+      "preview": "screenshots/readme-webp/examples/street/comparison-details.webp",
+      "sourceBytes": 2463210,
+      "previewBytes": 275204,
+      "sourceSha256": "f94170b1e8377b5b6b496a4fa4687353d787dba8def33d0b48f97ada1db95914",
+      "previewSha256": "2ee3bf74f6a4ca6e4c88bed64bed6ffc88addc00dc752b088d3a6acd653ee96c",
+      "sourceDimensions": [
+        2080,
+        1580
+      ],
+      "previewDimensions": [
+        2080,
+        1580
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/catnet.png",
+      "preview": "screenshots/readme-webp/examples/street/catnet.webp",
+      "sourceBytes": 1265639,
+      "previewBytes": 95310,
+      "sourceSha256": "e55ff58e828e9c33e968cda61fdbf5a383782766ee278f491c5215fda90564fe",
+      "previewSha256": "23e3281ff910e9a2df93015054d943cd0e91319fa47392b5191d859c6466e502",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/safire.png",
+      "preview": "screenshots/readme-webp/examples/street/safire.webp",
+      "sourceBytes": 1153331,
+      "previewBytes": 95188,
+      "sourceSha256": "874a0ec92893a1c53d7be62d8a625fa8bb1a2c913ead4dc087a61cf731ac2a09",
+      "previewSha256": "8d028eb8a49df0496f7d55ce69910290fb33db3cce119673a244f5eb91ae856c",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/zero-pedestrian.png",
+      "preview": "screenshots/readme-webp/examples/street/zero-pedestrian.webp",
+      "sourceBytes": 455128,
+      "previewBytes": 79626,
+      "sourceSha256": "1b3d30015c36697e999a198b880103085070e419e48d46ca99b9d474ef7fab47",
+      "previewSha256": "267351246936cb6ac3a7f6a59a75d1d75e27e8e9fdcce388079b9eb1f77040e1",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/ela.png",
+      "preview": "screenshots/readme-webp/examples/street/ela.webp",
+      "sourceBytes": 2020654,
+      "previewBytes": 439216,
+      "sourceSha256": "62f575595e8a5c3e612cc46f87fb3d33dc41b966370010ccecf85bddd6fb3fed",
+      "previewSha256": "bf655a14ae09e9ba576bd99f3248260e1636600e09db1e5a30542a9a306d3123",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/ela-layers.png",
+      "preview": "screenshots/readme-webp/examples/street/ela-layers.webp",
+      "sourceBytes": 1175558,
+      "previewBytes": 217232,
+      "sourceSha256": "18a1145ed97d2677b2f995bb12d38b735cb3c6b3c331f2ac575fd65fb671e553",
+      "previewSha256": "628950a01b5673113b65db76ade27ded3d58ebbfbcadae67e1451eafb9acdfe4",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/noisesniffer.png",
+      "preview": "screenshots/readme-webp/examples/street/noisesniffer.webp",
+      "sourceBytes": 1491382,
+      "previewBytes": 175122,
+      "sourceSha256": "856bae3844fa5ee1473f42a7feafe4117e56cbb95ac56d6e131c60d21f9614e0",
+      "previewSha256": "9bb81b6bcc2edc3ab5d08d1e484549f34e034243472fe90d991703a8ad187ace",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/adaptive_cfa.png",
+      "preview": "screenshots/readme-webp/examples/street/adaptive_cfa.webp",
+      "sourceBytes": 1300991,
+      "previewBytes": 220756,
+      "sourceSha256": "3ee22208598422d84743208ae393165c0b431c950d8ccbad4c8bda233559becc",
+      "previewSha256": "a6fc145a187432a74e97237d52d54d944e7b9d61a08ecd6d44e5ebd54380b92b",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/trufor.png",
+      "preview": "screenshots/readme-webp/examples/street/trufor.webp",
+      "sourceBytes": 470270,
+      "previewBytes": 68448,
+      "sourceSha256": "40d3f3b42a8a32476634834633923ce284dcad76b9b2b22b85fdc294516fab1f",
+      "previewSha256": "0add9036a725aec738ed190b9d51667373f88352c19f0d00996d6ff32e971f21",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/focal.png",
+      "preview": "screenshots/readme-webp/examples/street/focal.webp",
+      "sourceBytes": 1229227,
+      "previewBytes": 86582,
+      "sourceSha256": "efeaef86bc8c9137b713e1c6a53436c12e57ac0e839337b39a6cde1ebd8a77cd",
+      "previewSha256": "6b2ad797adf01157ad9b6588563b6bbe05c01a14cc4acc7c3e796c3804dbd8f6",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/adaifl.png",
+      "preview": "screenshots/readme-webp/examples/street/adaifl.webp",
+      "sourceBytes": 1229384,
+      "previewBytes": 86808,
+      "sourceSha256": "272feab57c489b01c1262e5051a7d482a5cc5a6ed305ed2f716ee6b9bcf1c2ae",
+      "previewSha256": "a4abb6fb2220bf96c9c17b97178c887ab1f153c97f271c9cf58e96677403cc01",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/multiple-double-jpeg.png",
+      "preview": "screenshots/readme-webp/examples/street/multiple-double-jpeg.webp",
+      "sourceBytes": 68457,
+      "previewBytes": 59572,
+      "sourceSha256": "df0d3e3948efab79031e69724d93de06b4b36b02b8117ba9c072261ad6f1e660",
+      "previewSha256": "57deabb4d7decd3d37639ce2c7d5f8ae7185ed3d4a2b20dd3d3e6b63a1344d4c",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/illuminant.png",
+      "preview": "screenshots/readme-webp/examples/street/illuminant.webp",
+      "sourceBytes": 83290,
+      "previewBytes": 70346,
+      "sourceSha256": "2e246534483a2cf865569b852539b8cbd85adcffeea678dc3cb7a0da6411bd79",
+      "previewSha256": "e41cde9564e70a7f77320e9c24205994c447bb714afb5cdc7add32649caddff3",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "examples/street/defect_pixels-detail.png",
+      "preview": "screenshots/readme-webp/examples/street/defect_pixels-detail.webp",
+      "sourceBytes": 202497,
+      "previewBytes": 151228,
+      "sourceSha256": "d357e09d17db0ff176bd9095623cd85e23996bf8ddc0985d12cb1d76a1e06e97",
+      "previewSha256": "0db2a24b4cb7c18b8b12846d21a7f1554c7e48d543b53623e2dab093a055aab6",
+      "sourceDimensions": [
+        1600,
+        1016
+      ],
+      "previewDimensions": [
+        1600,
+        1016
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/0_general.png",
+      "preview": "screenshots/readme-webp/screenshots/0_general.webp",
+      "sourceBytes": 843215,
+      "previewBytes": 207380,
+      "sourceSha256": "197c37b7f777f2285b076c955d4e4bbfd29c681d4423df0016bb645a46460aa0",
+      "previewSha256": "9efaac12234a65c8e6910ab95a911a2586e5886032ef7167d666726256103098",
+      "sourceDimensions": [
+        1920,
+        1131
+      ],
+      "previewDimensions": [
+        1920,
+        1131
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/1_metadata.png",
+      "preview": "screenshots/readme-webp/screenshots/1_metadata.webp",
+      "sourceBytes": 529547,
+      "previewBytes": 320640,
+      "sourceSha256": "7f0854bfbfa5ac6becd1469470b9af1ad2ca194ddc7f602eb8560fbcf75c7bae",
+      "previewSha256": "616720a625eb3fe5922a1453c643a4752fc01128cafcc1f15f030bdd181de4a6",
+      "sourceDimensions": [
+        1920,
+        1131
+      ],
+      "previewDimensions": [
+        1920,
+        1131
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/2_inspection.png",
+      "preview": "screenshots/readme-webp/screenshots/2_inspection.webp",
+      "sourceBytes": 1693084,
+      "previewBytes": 338678,
+      "sourceSha256": "0543bf8c4aa171b68a0d3c87b1a50ad3adb54d73ca797b61ffea0d04ac828fdf",
+      "previewSha256": "5d3fdf531a7a4bd71bd59e7b88578777805ce30bdc843da2b1ea78f2d92ebb35",
+      "sourceDimensions": [
+        1920,
+        1134
+      ],
+      "previewDimensions": [
+        1920,
+        1134
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/3_detail.png",
+      "preview": "screenshots/readme-webp/screenshots/3_detail.webp",
+      "sourceBytes": 1248078,
+      "previewBytes": 359004,
+      "sourceSha256": "5814d1ff61eabc79ccec9883ba78af2bd320290e5ce6669f818c45e3818069fa",
+      "previewSha256": "406cfebd181ffe4ae82f492bead6e26eb8de38a58ec2a75dd1a7d43967eb8ee7",
+      "sourceDimensions": [
+        1920,
+        1132
+      ],
+      "previewDimensions": [
+        1920,
+        1132
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/4_colors.png",
+      "preview": "screenshots/readme-webp/screenshots/4_colors.webp",
+      "sourceBytes": 958228,
+      "previewBytes": 249932,
+      "sourceSha256": "6b254002776c9252d76eff7836a3c3861f71ffe3b7362bc3fe02717c1e800513",
+      "previewSha256": "ffde367d6ea84535ea164bc4b30a2487fbc0a085efb2ea0c8025e3abfce19501",
+      "sourceDimensions": [
+        1920,
+        1132
+      ],
+      "previewDimensions": [
+        1920,
+        1132
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/5_noise.png",
+      "preview": "screenshots/readme-webp/screenshots/5_noise.webp",
+      "sourceBytes": 1830123,
+      "previewBytes": 465794,
+      "sourceSha256": "9b600599ceee0cefaf4e3675cf685ff234eba9c9afa68c35a7feb9506e22d183",
+      "previewSha256": "95ed61fb0c8e92356db59a09284c6965725220bb6498e0e3586ded36056cae91",
+      "sourceDimensions": [
+        1920,
+        1133
+      ],
+      "previewDimensions": [
+        1920,
+        1133
+      ],
+      "quality": 82
+    },
+    {
+      "source": "screenshots/6_jpeg.png",
+      "preview": "screenshots/readme-webp/screenshots/6_jpeg.webp",
+      "sourceBytes": 841028,
+      "previewBytes": 298946,
+      "sourceSha256": "d4bc8686ac45d9579492f9a114fe3b8db83d2a17ae8f009b9222c53a91e44c02",
+      "previewSha256": "9620c1399abb6cc73965772b3ff05b0ddfee4b28519d63f1b013b81a8933cffd",
+      "sourceDimensions": [
+        1920,
+        1133
+      ],
+      "previewDimensions": [
+        1920,
+        1133
+      ],
+      "quality": 88
+    },
+    {
+      "source": "screenshots/7_tampering.png",
+      "preview": "screenshots/readme-webp/screenshots/7_tampering.webp",
+      "sourceBytes": 952763,
+      "previewBytes": 241760,
+      "sourceSha256": "6a808853e9d4fd93102fe90b6920518f3ea138d3a47c035fdf3f74ba84eed50c",
+      "previewSha256": "e52f164ab2ce7ce40e85c31b9320bafbda104002a8ad8ddacb8ccee6e26c407c",
+      "sourceDimensions": [
+        1920,
+        1133
+      ],
+      "previewDimensions": [
+        1920,
+        1133
+      ],
+      "quality": 88
+    }
+  ]
+}
