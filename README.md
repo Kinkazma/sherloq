@@ -8,6 +8,8 @@ Here I share the version I use, its source code and its complete macOS installat
 
 [Download the complete macOS installation](https://github.com/Kinkazma/sherloq/releases/tag/native-macos-arm64-2026.09.29-rc1) · [Installation guide](macos/README.md) · [Full tool inventory](macos/docs/TOOLS.md) · [Changes](macos/docs/CHANGELOG.md) · [Credits and licenses](macos/docs/ATTRIBUTION.md)
 
+The [web adaptation and browser engine](https://github.com/Kinkazma/sherloq-web) have their own repository, with web-specific source, examples and validation records.
+
 ## What I have changed
 
 I have worked on three areas: making existing tools usable, improving correctness and responsiveness, and adding new analysis workflows. The comparison baseline is [upstream revision `3fe95fc`](https://github.com/GuidoBartoli/sherloq/tree/3fe95fcb56037e47e2eefbc2d3785804a31a74f5).
